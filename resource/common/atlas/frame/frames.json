@@ -1,0 +1,8 @@
+{"file":"frames.png","frames":{
+"frame_bg_03":{"x":1,"y":1,"w":681,"h":798,"offX":0,"offY":0,"sourceW":681,"sourceH":798},
+"frame_currency":{"x":684,"y":1,"w":192,"h":51,"offX":0,"offY":0,"sourceW":192,"sourceH":51},
+"frame_01":{"x":878,"y":1,"w":84,"h":79,"offX":0,"offY":0,"sourceW":84,"sourceH":79},
+"frame_03":{"x":603,"y":801,"w":341,"h":136,"offX":0,"offY":0,"sourceW":341,"sourceH":136},
+"frame_04":{"x":603,"y":939,"w":356,"h":85,"offX":0,"offY":0,"sourceW":356,"sourceH":85},
+"frame_bg_01":{"x":1,"y":801,"w":600,"h":796,"offX":0,"offY":0,"sourceW":600,"sourceH":796},
+"frame_bg_02":{"x":1,"y":1599,"w":534,"h":409,"offX":0,"offY":0,"sourceW":534,"sourceH":409}}}

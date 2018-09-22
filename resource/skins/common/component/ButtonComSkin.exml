@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ButtonComSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="btn_click" height="96" width="96" left="0" top="0" name="btn_click_1#1" touchChildren="false">
+		<e:Image id="iconImg" source="hallIcons_json.more_icon" x="0" y="0"/>
+	</e:Group>
+</e:Skin>

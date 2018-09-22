@@ -1,0 +1,50 @@
+{
+	"groups": [
+		{
+			"keys": "buttons_json,frames_json",
+			"name": "common"
+		},
+		{
+			"keys": "global",
+			"name": "global"
+		},
+		{
+			"keys": "loadingBg",
+			"name": "loading"
+		},
+		{
+			"keys": "roles_json",
+			"name": "role"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/global.json",
+			"type": "json",
+			"name": "global"
+		},
+		{
+			"url": "common/atlas/button/buttons.json",
+			"type": "sheet",
+			"name": "buttons_json",
+			"subkeys": "btn_back,btn_beige,btn_blue,btn_close,btn_red"
+		},
+		{
+			"url": "common/atlas/frame/frames.json",
+			"type": "sheet",
+			"name": "frames_json",
+			"subkeys": "frame_01,frame_03,frame_04,frame_bg_01,frame_bg_02,frame_bg_03,frame_currency"
+		},
+		{
+			"url": "common/atlas/loadingBg.png",
+			"type": "image",
+			"name": "loadingBg"
+		},
+		{
+			"url": "common/atlas/role/roles.json",
+			"type": "sheet",
+			"name": "roles_json",
+			"subkeys": "role_0,role_1,role_2,role_3,role_4,role_5,role_6,role_7,role_8,role_9"
+		}
+	]
+}

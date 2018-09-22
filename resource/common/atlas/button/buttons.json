@@ -1,0 +1,6 @@
+{"file":"buttons.png","frames":{
+"btn_close":{"x":401,"y":1,"w":71,"h":72,"offX":0,"offY":0,"sourceW":71,"sourceH":72},
+"btn_red":{"x":1,"y":281,"w":308,"h":133,"offX":0,"offY":0,"sourceW":308,"sourceH":133},
+"btn_back":{"x":311,"y":1,"w":88,"h":89,"offX":0,"offY":0,"sourceW":88,"sourceH":89},
+"btn_beige":{"x":1,"y":141,"w":308,"h":138,"offX":0,"offY":0,"sourceW":308,"sourceH":138},
+"btn_blue":{"x":1,"y":1,"w":308,"h":138,"offX":0,"offY":0,"sourceW":308,"sourceH":138}}}

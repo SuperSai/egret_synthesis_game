@@ -1,0 +1,41 @@
+{
+	"groups": [
+		{
+			"keys": "login_json",
+			"name": "login"
+		},
+		{
+			"keys": "battle_json",
+			"name": "battle"
+		},
+		{
+			"keys": "hall_bg,hallIcons_json",
+			"name": "hall"
+		}
+	],
+	"resources": [
+		{
+			"url": "cn/asset/atlas/login/login.json",
+			"type": "sheet",
+			"name": "login_json",
+			"subkeys": "login_name_icon,login_saizi,login_startBtn"
+		},
+		{
+			"url": "cn/asset/atlas/battle/battle.json",
+			"type": "sheet",
+			"name": "battle_json",
+			"subkeys": "btn_function_back,build_spell,camp_shadow,create_soldier_remind,move remind arrow,post"
+		},
+		{
+			"url": "cn/asset/atlas/hall/hall_bg.png",
+			"type": "image",
+			"name": "hall_bg"
+		},
+		{
+			"url": "cn/asset/atlas/hall/hallIcons.json",
+			"type": "sheet",
+			"name": "hallIcons_json",
+			"subkeys": "activity_icon,bag_icon,battle_icon,black_icon,copy_icon,firstCharge_icon,heros_icon,jade_icon,luckDraw_icon,more_icon,rank_icon,recharge_icon,shop_icon,sign_icon,task_icon"
+		}
+	]
+}

@@ -1,0 +1,46 @@
+/**
+ * 战斗界面
+ */
+class BattleView extends BaseEuiView {
+
+	public map: BattleMap;	// 地图
+	public btn_hall: eui.Button; // 返回大厅按钮
+	public btn_buy: eui.Group;	// 购买角色按钮
+	public txt_money: eui.Label; // 角色价格
+
+	public constructor($controller: BaseController, $layer: number) {
+		super($controller, $layer);
+		this.skinName = SkinName.BattleViewSkin;
+	}
+
+	/** 对面板进行显示初始化，用于子类继承 */
+	public initUI(): void {
+		super.initUI();
+		let self = this;
+	}
+
+	/** 对面板数据的初始化，用于子类继承 */
+	public initData(): void {
+		super.initData();
+	}
+
+	/** 面板开启执行函数，用于子类继承 */
+	public open(...param: any[]): void {
+		super.open(param);
+		let self = this;
+		let model: HallModel = param[0];
+	}
+
+	public addEvents(): void {
+		super.addEvents();
+		let self = this;
+		// self.btn_checkpoint.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
+		self.setBtnEffect(["btn_checkpoint"]);
+	}
+
+	public removeEvents(): void {
+		super.removeEvents();
+		let self = this;
+		// self.btn_checkpoint.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
+	}
+}

@@ -1,0 +1,16 @@
+{"file":"hallIcons.png","frames":{
+"task_icon":{"x":213,"y":182,"w":81,"h":86,"offX":7,"offY":6,"sourceW":96,"sourceH":96},
+"activity_icon":{"x":0,"y":226,"w":79,"h":87,"offX":9,"offY":4,"sourceW":96,"sourceH":96},
+"bag_icon":{"x":0,"y":137,"w":81,"h":87,"offX":7,"offY":5,"sourceW":96,"sourceH":96},
+"battle_icon":{"x":0,"y":0,"w":128,"h":135,"offX":0,"offY":4,"sourceW":128,"sourceH":140},
+"black_icon":{"x":403,"y":0,"w":86,"h":89,"offX":0,"offY":0,"sourceW":86,"sourceH":89},
+"copy_icon":{"x":379,"y":183,"w":81,"h":85,"offX":7,"offY":7,"sourceW":96,"sourceH":96},
+"firstCharge_icon":{"x":130,"y":92,"w":81,"h":90,"offX":7,"offY":2,"sourceW":96,"sourceH":96},
+"heros_icon":{"x":403,"y":91,"w":81,"h":90,"offX":7,"offY":2,"sourceW":96,"sourceH":96},
+"jade_icon":{"x":130,"y":0,"w":91,"h":90,"offX":2,"offY":2,"sourceW":96,"sourceH":96},
+"luckDraw_icon":{"x":313,"y":0,"w":88,"h":91,"offX":4,"offY":1,"sourceW":96,"sourceH":96},
+"more_icon":{"x":296,"y":183,"w":81,"h":85,"offX":7,"offY":7,"sourceW":96,"sourceH":96},
+"rank_icon":{"x":83,"y":184,"w":81,"h":85,"offX":7,"offY":7,"sourceW":96,"sourceH":96},
+"recharge_icon":{"x":213,"y":93,"w":83,"h":87,"offX":7,"offY":5,"sourceW":96,"sourceH":96},
+"shop_icon":{"x":223,"y":0,"w":88,"h":91,"offX":4,"offY":1,"sourceW":96,"sourceH":96},
+"sign_icon":{"x":298,"y":93,"w":81,"h":88,"offX":7,"offY":4,"sourceW":96,"sourceH":96}}}
