@@ -5,7 +5,7 @@ class MessageManger extends BaseClass {
     private _maxNum: number = 5;
 
     private _creatOneTextDisplay(): eui.Label {
-        let label: eui.Label = new eui.Label();
+        let label: eui.Label = ObjectPool.pop(eui.Label, "eui.Label");
         label.textColor = 0xFFFFFF;
         label.stroke = 3;
         label.strokeColor = 0x401303;
@@ -32,12 +32,13 @@ class MessageManger extends BaseClass {
     private startAnimation(message: string, label: eui.Label): void {
         App.LayerManager.addToLayer(label, LayerManager.GAME_POP_LAYER);
         label.alpha = 1;
-        egret.Tween.get(label).to({ verticalCenter: -100 }, 3000).call(() => {
+        egret.Tween.get(label).wait(1000).to({ alpha: 0 }, 1000);
+        egret.Tween.get(label).to({ verticalCenter: -100 }, 2000).call(() => {
             egret.Tween.removeTweens(label);
-            label.parent && label.parent.removeChild(label);
+            ObjectPool.push(label);
             label.alpha = 1;
             label.verticalCenter = 0;
-            delete label.$children;
+            App.DisplayUtils.removeFromParent(label);
             this.onAnimationComplete(message);
         })
     }

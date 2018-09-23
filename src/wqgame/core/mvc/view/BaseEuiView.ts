@@ -173,4 +173,8 @@ class BaseEuiView extends eui.Component implements IBaseView {
     public setVisible(value: boolean): void {
         this.visible = value;
     }
+
+    get controller(): BaseController {
+        return this._controller;
+    }
 }

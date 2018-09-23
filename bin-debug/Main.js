@@ -122,11 +122,14 @@ var Main = (function (_super) {
         }
     };
     /** 开始运行游戏 */
-    Main.prototype.runGame = function () {
+    Main.prototype.runGame = function ($root) {
+        if ($root === void 0) { $root = "resource/"; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadResource()];
+                    case 0:
+                        PathConfig.Root = $root;
+                        return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
                         this.createGameScene();
@@ -209,7 +212,7 @@ var Main = (function (_super) {
             //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
             var theme = new eui.Theme(PathConfig.ThemePath, _this.stage);
             theme.addEventListener(eui.UIEvent.COMPLETE, function () {
-                GlobleData.getInstance.setup();
+                GlobleVOData.getInstance.setup();
                 RES.getResByUrl(PathConfig.Language, function (data, url) {
                     App.LanguageManager.setup(data);
                     resolve();

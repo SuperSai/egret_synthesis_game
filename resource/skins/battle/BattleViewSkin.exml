@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="BattleViewSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<ns1:BattleMap id="map" skinName="BattleMapSkin" horizontalCenter="0" verticalCenter="0"/>
-	<e:Button id="btn_hall" label="" left="0" bottom="0">
+	<e:Button id="btn_hall" label="" left="0" bottom="0" name="btn_hall_1#1" touchChildren="false">
 		<e:skinName>
 		<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="battle_json.btn_function_back" source.down="battle_json.btn_function_back" source.disabled="battle_json.btn_function_back"/>
@@ -9,7 +9,7 @@
 		</e:Skin>
 		</e:skinName>
 	</e:Button>
-	<e:Group id="btn_buy" right="18" bottom="14">
+	<e:Group id="btn_buyRole" right="18" bottom="14" name="btn_buyRole_1#1" touchChildren="false">
 		<e:Image source="buttons_json.btn_beige" scaleX="0.6" scaleY="0.6"/>
 		<e:Label id="txt_money" text="100" horizontalCenter="0" verticalCenter="0" textAlign="center" textColor="0xFFFFFF" stroke="2" strokeColor="0x57E9ED" size="35"/>
 	</e:Group>

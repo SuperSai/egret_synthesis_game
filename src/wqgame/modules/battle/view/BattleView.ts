@@ -4,13 +4,18 @@
 class BattleView extends BaseEuiView {
 
 	public map: BattleMap;	// 地图
+	public btn_buyRole: eui.Group;
 	public btn_hall: eui.Button; // 返回大厅按钮
 	public btn_buy: eui.Group;	// 购买角色按钮
 	public txt_money: eui.Label; // 角色价格
 
+	private _model: BattleModel;
+
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
-		this.skinName = SkinName.BattleViewSkin;
+		let self = this;
+		self.skinName = SkinName.BattleViewSkin;
+		self.setResources(["battle_json", "roles_json"]);
 	}
 
 	/** 对面板进行显示初始化，用于子类继承 */
@@ -28,19 +33,35 @@ class BattleView extends BaseEuiView {
 	public open(...param: any[]): void {
 		super.open(param);
 		let self = this;
-		let model: HallModel = param[0];
+		self._model = param[0];
+		//初始化地图数据
+		self.map.open(self._model, self.controller);
 	}
 
 	public addEvents(): void {
 		super.addEvents();
 		let self = this;
-		// self.btn_checkpoint.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
-		self.setBtnEffect(["btn_checkpoint"]);
+		self.btn_hall.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onBackHallHandler, self);
+		self.btn_buyRole.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onBuyRoleHandler, self);
+		self.setBtnEffect(["btn_buyRole", "btn_hall"]);
 	}
 
 	public removeEvents(): void {
 		super.removeEvents();
 		let self = this;
-		// self.btn_checkpoint.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
+		self.btn_hall.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onBackHallHandler, self);
+		self.btn_buyRole.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onBuyRoleHandler, self);
+	}
+
+	/** 购买角色 */
+	private onBuyRoleHandler(): void {
+		let self = this;
+		let roleId: number = App.RandomUtils.randrange(1, 3);
+		self.applyFunc(BattleConst.CREATE_ROLE, roleId);
+	}
+
+	/** 返回大厅界面 */
+	private onBackHallHandler(): void {
+		App.SceneManager.runScene(SceneConsts.HALL);
 	}
 }

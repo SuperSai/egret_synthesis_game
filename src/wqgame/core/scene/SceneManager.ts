@@ -14,7 +14,7 @@ class SceneManager extends BaseClass {
 	}
 
     /**
-     * 清空当前处理
+     * 清除当前场景
      */
 	public clear(): void {
 		var nowScene: BaseScene = this._scenes.TryGetValue(this._currScene);
@@ -37,6 +37,7 @@ class SceneManager extends BaseClass {
     /**
      * 切换场景
      * @param key 场景唯一标识
+	 * @param isClear 是否清除上一个场景
      */
 	public runScene(key: number, ...param: any[]): void {
 		var nowScene: BaseScene = this._scenes.TryGetValue(key);
@@ -45,10 +46,10 @@ class SceneManager extends BaseClass {
 			return;
 		}
 
-		var oldScene: BaseScene = this._scenes.TryGetValue(this._currScene);
-		if (oldScene) {
-			oldScene.onExit();
-		}
+		// var oldScene: BaseScene = this._scenes.TryGetValue(this._currScene);
+		// if (oldScene) {
+		// 	oldScene.onExit();
+		// }
 
 		nowScene.onEnter.apply(nowScene, param);
 		this._currScene = key;

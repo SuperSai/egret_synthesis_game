@@ -18,6 +18,7 @@
 	"exmls": [
 		"resource/skins/battle/BattleMapSkin.exml",
 		"resource/skins/battle/BattleViewSkin.exml",
+		"resource/skins/battle/item/BaseItemSkin.exml",
 		"resource/skins/common/component/ButtonComSkin.exml",
 		"resource/skins/common/component/CurrencyComSkin.exml",
 		"resource/skins/eui_skins/ButtonSkin.exml",

@@ -16,7 +16,7 @@ class BattleScene extends BaseScene {
 		super.onEnter();
 		//参数
 		var mapId: number = param[0];
-		// App.ControllerManager.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT, mapId);
+		App.ControllerManager.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT, mapId);
 	}
 
     /**
@@ -24,6 +24,5 @@ class BattleScene extends BaseScene {
      */
 	public onExit(): void {
 		super.onExit();
-
 	}
 }

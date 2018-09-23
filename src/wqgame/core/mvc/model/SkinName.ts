@@ -10,8 +10,8 @@ class SkinName {
 	public static ButtonComSkin: string = "resource/skins/common/component/ButtonComSkin.exml";
 
 	public static BattleMapSkin: string = "resource/skins/battle/BattleMapSkin.exml";
-	
+
 	public static BattleViewSkin: string = "resource/skins/battle/BattleViewSkin.exml";
 
-
+	public static BaseItemSkin: string = "resource/skins/battle/item/BaseItemSkin.exml";
 }
