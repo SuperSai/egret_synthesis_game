@@ -38,9 +38,9 @@ var BattleView = (function (_super) {
         }
         _super.prototype.open.call(this, param);
         var self = this;
-        self._model = param[0];
+        self._model = self.controller.getModel();
         //初始化地图数据
-        self.map.open(self._model, self.controller);
+        self.map.open(self.controller);
     };
     BattleView.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);

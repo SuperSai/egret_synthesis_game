@@ -12,6 +12,7 @@ class BattleController extends BaseController {
 		App.ViewManager.register(ViewConst.Battle, self._battleView);
 
 		self._battleModel = new BattleModel(self);
+		self.setModel(self._battleModel);
 
 		self._battleProxy = new BattleProxy(self);
 
@@ -21,8 +22,22 @@ class BattleController extends BaseController {
 
 	private onBattleInit(param: any[]): void {
 		let self = this;
-		self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
-		App.ViewManager.open(ViewConst.Battle, self._battleModel);
+		self._battleModel.LevelVo = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+		App.ViewManager.open(ViewConst.Battle);
+		App.TimerManager.doFrame(0, 0, self.onBattleUpdate, self);
+	}
+
+	/** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
+	private onBattleUpdate(): void {
+		//生成怪物
+		this._battleView.map.updateMonster(egret.getTimer());
+		//怪物移动
+		if (this._battleModel.MonsterDic.GetLenght() > 0) {
+			let monsters: Monster[] = this._battleModel.MonsterDic.getValues();
+			for (let i: number = 0; i < monsters.length; i++) {
+				monsters[i].update(egret.getTimer());
+			}
+		}
 	}
 
 	/** 获取所有底座的状态 */
@@ -51,7 +66,7 @@ class BattleController extends BaseController {
 		let roleX: number = pos.x + (baseItem.width / 2) - (role.roleImg.width / 2);
 		let roleY: number = pos.y + 10;
 		role.setPosition(roleX, roleY);
-		self._battleModel.roleDic.Add(baseItem, role);
+		self._battleModel.RoleDic.Add(baseItem, role);
 	}
 
 }

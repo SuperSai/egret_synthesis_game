@@ -34,8 +34,9 @@ var BattleModel = (function (_super) {
     BattleModel.prototype.init = function () {
         var self = this;
         self._roleDic = new TSDictionary();
+        self._monsterDic = new TSDictionary();
     };
-    Object.defineProperty(BattleModel.prototype, "levelVO", {
+    Object.defineProperty(BattleModel.prototype, "LevelVo", {
         /** 关卡模板信息 */
         get: function () {
             return this._levelVO;
@@ -46,13 +47,24 @@ var BattleModel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BattleModel.prototype, "roleDic", {
+    Object.defineProperty(BattleModel.prototype, "RoleDic", {
         /** 出战的角色字典 */
         get: function () {
             return this._roleDic;
         },
         set: function (value) {
             this._roleDic = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BattleModel.prototype, "MonsterDic", {
+        /** 出战中的怪物字典 */
+        get: function () {
+            return this._monsterDic;
+        },
+        set: function (value) {
+            this._monsterDic = value;
         },
         enumerable: true,
         configurable: true
@@ -70,4 +82,16 @@ var BASE_STATE;
     /** 拥有角色状态 */
     BASE_STATE[BASE_STATE["HAVE"] = 2] = "HAVE";
 })(BASE_STATE || (BASE_STATE = {}));
+/** 怪物的方向 */
+var MONSTER_DIR;
+(function (MONSTER_DIR) {
+    /** 朝下 */
+    MONSTER_DIR[MONSTER_DIR["DOWN"] = 0] = "DOWN";
+    /** 朝上 */
+    MONSTER_DIR[MONSTER_DIR["UP"] = 1] = "UP";
+    /** 朝左 */
+    MONSTER_DIR[MONSTER_DIR["RIGHT"] = 2] = "RIGHT";
+    /** 朝右 */
+    MONSTER_DIR[MONSTER_DIR["LEFT"] = 3] = "LEFT";
+})(MONSTER_DIR || (MONSTER_DIR = {}));
 //# sourceMappingURL=BattleModel.js.map

@@ -6,6 +6,11 @@ class CommonUtils extends BaseClass {
 		super();
 	}
 
+	private _token: number = 0;
+	public get Token(): number {
+		return this._token++;
+	}
+
     /**
      * 给字体添加描边
      * @param lable      文字
@@ -90,5 +95,28 @@ class CommonUtils extends BaseClass {
      */
 	public int64ToNumber(obj) {
 		return parseInt(obj.toString());
+	}
+
+	/** 获取2点之间的移动速度 */
+	public getSpeed(targetP2: egret.Point, currentP1: egret.Point, SpeedNum: number): egret.Point {
+
+		var speed: egret.Point = new egret.Point();
+		var hypotenuse: number = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+		if (hypotenuse == 0) {
+			speed.x = 0;
+			speed.y = 0;
+			return speed;
+		}
+		speed.x = SpeedNum * (targetP2.x - currentP1.x) / hypotenuse;
+		speed.y = SpeedNum * (targetP2.y - currentP1.y) / hypotenuse;
+		return speed;
+	}
+
+	public numPrecentage(cint: number, mint: number, countCop: number): number {
+		var value: number = Math.floor(cint / mint * countCop);
+		if (value > countCop) {
+			value = countCop;
+		}
+		return value;
 	}
 }

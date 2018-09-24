@@ -12,6 +12,7 @@ class BattleMap extends BaseEuiView {
 	private _arrColl: eui.ArrayCollection;
 	private _model: BattleModel;
 	private _battleController: BattleController;
+	private _starMonsterTime: number;
 	private _selectRole: Role;
 	// 选中的底座上角色的原始X坐标
 	private _oX: number;
@@ -27,8 +28,8 @@ class BattleMap extends BaseEuiView {
 	public open(...param: any[]): void {
 		super.open(param);
 		let self = this;
-		self._model = param[0];
-		self._battleController = param[1];
+		self._battleController = param[0];
+		self._model = <BattleModel>self._battleController.getModel();
 		self.init();
 		self.initMap();
 		self.addEvents();
@@ -40,13 +41,13 @@ class BattleMap extends BaseEuiView {
 		self._arrColl = new eui.ArrayCollection();
 		self.lists.itemRenderer = BaseItem;
 		self.lists.dataProvider = self._arrColl;
-
+		self._starMonsterTime = egret.getTimer();
 		self.heroBase.onAwake(self._battleController);
 	}
 	/** 初始化地图 */
 	private initMap(): void {
 		let self = this;
-		let path: string = PathConfig.MapPath.replace("{0}", self._model.levelVO.icon + "");
+		let path: string = PathConfig.MapPath.replace("{0}", self._model.LevelVo.icon + "");
 		App.DisplayUtils.addAsyncBitmapToImage(path, self.mapImg);
 	}
 
@@ -56,6 +57,7 @@ class BattleMap extends BaseEuiView {
 		self.btn_open.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
 		self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
 		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		// App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);
 		self.setBtnEffect(["btn_open"]);
 	}
 
@@ -64,6 +66,10 @@ class BattleMap extends BaseEuiView {
 		let self = this;
 		self.btn_open.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
 		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+	}
+
+	private onTestHandler(evt: egret.TouchEvent): void {
+		Log.trace("x:" + evt.stageX + " -- y:" + evt.stageY);
 	}
 
 	/** 开放新的底座 */
@@ -84,13 +90,13 @@ class BattleMap extends BaseEuiView {
 	private onCreateRole(roleId: number): void {
 		let self = this;
 		if (roleId < 0) return Log.traceError("角色ID错误：" + roleId);
-		let len: number = self._model.roleDic.GetLenght();
+		let len: number = self._model.RoleDic.GetLenght();
 		if (len >= self._model.openBaseCount) return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
 		while (len < self._model.openBaseCount) {
 			//在可以放置的底座中随机一个
 			let random: number = App.RandomUtils.randrange(self._model.maxBaseCount - self._model.openBaseCount, self._model.maxBaseCount);
 			let baseItem: BaseItem = self.lists.getChildAt(random) as BaseItem;
-			if (!self._model.roleDic.ContainsKey(baseItem) && baseItem.state == BASE_STATE.OPEN) {
+			if (!self._model.RoleDic.ContainsKey(baseItem) && baseItem.state == BASE_STATE.OPEN) {
 				self.updateHeroBase(roleId);
 				self._battleController.pushRoleToMap(roleId, baseItem);
 				break;
@@ -120,7 +126,7 @@ class BattleMap extends BaseEuiView {
 		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
 		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
 		App.StageUtils.getStage().once(egret.TouchEvent.TOUCH_END, self.onTouchEnd, self, true);
-		self._selectRole = self._model.roleDic.TryGetValue(evt.target);
+		self._selectRole = self._model.RoleDic.TryGetValue(evt.target);
 		self._oX = self._selectRole.x;
 		self._oY = self._selectRole.y;
 		self._selectRole.x = evt.stageX;
@@ -149,10 +155,10 @@ class BattleMap extends BaseEuiView {
 		if (baseItem.state == BASE_STATE.OPEN) {
 			self.createRole(self._selectRole, baseItem, self._selectRole.roleId);
 		} else if (baseItem.state == BASE_STATE.HAVE) {
-			let role: Role = self._model.roleDic.TryGetValue(baseItem);
-			let moveRole: Role = self._model.roleDic.TryGetValue(self._selectRole.baseItem);
+			let role: Role = self._model.RoleDic.TryGetValue(baseItem);
+			let moveRole: Role = self._model.RoleDic.TryGetValue(self._selectRole.baseItem);
 			if (role.roleId == moveRole.roleId) {
-				self._model.roleDic.Remove(moveRole.baseItem);
+				self._model.RoleDic.Remove(moveRole.baseItem);
 				moveRole.baseItem.state = BASE_STATE.OPEN;
 				moveRole.reset();
 				ObjectPool.push(moveRole);
@@ -168,7 +174,7 @@ class BattleMap extends BaseEuiView {
 	/** 创建普通角色 */
 	private createRole(selectRole: Role, baseItem: BaseItem, roleId: number): void {
 		let self = this;
-		self._model.roleDic.Remove(selectRole.baseItem);
+		self._model.RoleDic.Remove(selectRole.baseItem);
 		selectRole.reset();
 		ObjectPool.push(selectRole);
 		App.DisplayUtils.removeFromParent(selectRole);
@@ -182,5 +188,23 @@ class BattleMap extends BaseEuiView {
 		if (roleId < self._model.maxRoleId) return;
 		self._model.maxRoleId = roleId;
 		self.heroBase.updateHeroStyle(self._model.maxRoleId);
+	}
+	private _lastTime: number = 0;
+
+	public updateMonster(passTime: number): void {
+		if (this.isInit && passTime > this._lastTime) {
+			this.createMonster();
+			this._lastTime = passTime + 1500;
+		}
+	}
+
+	private createMonster(): void {
+		if (this._starMonsterTime <= egret.getTimer()) {
+			let monster: Monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
+			monster.addToParent();
+			let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
+			monster.Parse(info);
+			this._model.MonsterDic.Add(monster.ID, monster);
+		}
 	}
 }

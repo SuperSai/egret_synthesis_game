@@ -36,9 +36,9 @@ class BattleView extends BaseEuiView {
 	public open(...param: any[]): void {
 		super.open(param);
 		let self = this;
-		self._model = param[0];
+		self._model = <BattleModel>self.controller.getModel();
 		//初始化地图数据
-		self.map.open(self._model, self.controller);
+		self.map.open(self.controller);
 	}
 
 	public addEvents(): void {

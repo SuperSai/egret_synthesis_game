@@ -15,6 +15,7 @@ var CommonUtils = (function (_super) {
     __extends(CommonUtils, _super);
     function CommonUtils() {
         var _this = _super.call(this) || this;
+        _this._token = 0;
         /**
          * 万字的显示
          * @param label
@@ -35,6 +36,13 @@ var CommonUtils = (function (_super) {
         };
         return _this;
     }
+    Object.defineProperty(CommonUtils.prototype, "Token", {
+        get: function () {
+            return this._token++;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * 给字体添加描边
      * @param lable      文字
@@ -96,6 +104,26 @@ var CommonUtils = (function (_super) {
      */
     CommonUtils.prototype.int64ToNumber = function (obj) {
         return parseInt(obj.toString());
+    };
+    /** 获取2点之间的移动速度 */
+    CommonUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
+        var speed = new egret.Point();
+        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+        if (hypotenuse == 0) {
+            speed.x = 0;
+            speed.y = 0;
+            return speed;
+        }
+        speed.x = SpeedNum * (targetP2.x - currentP1.x) / hypotenuse;
+        speed.y = SpeedNum * (targetP2.y - currentP1.y) / hypotenuse;
+        return speed;
+    };
+    CommonUtils.prototype.numPrecentage = function (cint, mint, countCop) {
+        var value = Math.floor(cint / mint * countCop);
+        if (value > countCop) {
+            value = countCop;
+        }
+        return value;
     };
     return CommonUtils;
 }(BaseClass));

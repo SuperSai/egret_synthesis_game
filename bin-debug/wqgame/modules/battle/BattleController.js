@@ -16,6 +16,7 @@ var BattleController = (function (_super) {
         self._battleView = new BattleView(self, LayerManager.GAME_MAP_LAYER);
         App.ViewManager.register(ViewConst.Battle, self._battleView);
         self._battleModel = new BattleModel(self);
+        self.setModel(self._battleModel);
         self._battleProxy = new BattleProxy(self);
         //注册模块消息
         self.registerFunc(BattleConst.BATTLE_INIT, self.onBattleInit, self);
@@ -23,8 +24,21 @@ var BattleController = (function (_super) {
     }
     BattleController.prototype.onBattleInit = function (param) {
         var self = this;
-        self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
-        App.ViewManager.open(ViewConst.Battle, self._battleModel);
+        self._battleModel.LevelVo = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+        App.ViewManager.open(ViewConst.Battle);
+        App.TimerManager.doFrame(0, 0, self.onBattleUpdate, self);
+    };
+    /** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
+    BattleController.prototype.onBattleUpdate = function () {
+        //生成怪物
+        this._battleView.map.updateMonster(egret.getTimer());
+        //怪物移动
+        if (this._battleModel.MonsterDic.GetLenght() > 0) {
+            var monsters = this._battleModel.MonsterDic.getValues();
+            for (var i = 0; i < monsters.length; i++) {
+                monsters[i].update(egret.getTimer());
+            }
+        }
     };
     /** 获取所有底座的状态 */
     BattleController.prototype.getAllBaseState = function () {
@@ -52,7 +66,7 @@ var BattleController = (function (_super) {
         var roleX = pos.x + (baseItem.width / 2) - (role.roleImg.width / 2);
         var roleY = pos.y + 10;
         role.setPosition(roleX, roleY);
-        self._battleModel.roleDic.Add(baseItem, role);
+        self._battleModel.RoleDic.Add(baseItem, role);
     };
     return BattleController;
 }(BaseController));

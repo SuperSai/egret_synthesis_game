@@ -79,7 +79,7 @@ class DisplayUtils extends BaseClass {
     public setBoxLayout(beginNode: egret.DisplayObject, targetNode: egret.DisplayObject, endNode: egret.DisplayObject, gap: number): void {
         var userH: number = endNode.y - (beginNode.y + beginNode.height);
         if (userH > 0) {
-            targetNode.scaleY
+            targetNode.scaleY;
         }
     }
 

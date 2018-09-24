@@ -4,9 +4,12 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var BattleConst = (function () {
     function BattleConst() {
     }
+    /** 战斗初始化 */
     BattleConst.BATTLE_INIT = 10000;
     /** 创建角色 */
     BattleConst.CREATE_ROLE = 10001;
+    /** 怪物已经达到终点 */
+    BattleConst.MONSTER_MOVE_END = 10002;
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");
