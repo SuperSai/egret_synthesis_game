@@ -29,38 +29,30 @@ class Monster extends BaseRole {
 		this.move(passTime);
 	}
 
+	/** 怪物移动 */
 	private move(passTime: number): void {
-
 		if (this._path.length == 0) return;
-
 		var point: egret.Point = this._path[0];  //下一个节点
-
 		var targetSpeed: egret.Point = App.CommonUtils.getSpeed(point, new egret.Point(this.x, this.y), this.moveSpeed);
 		var xDistance: number = 10 * targetSpeed.x;
 		var yDistance: number = 10 * targetSpeed.y;
 
 		if (Math.abs(point.x - this.x) <= Math.abs(xDistance) && Math.abs(point.y - this.y) <= Math.abs(yDistance)) {
-
 			this.x = point.x;
 			this.y = point.y;
 			this._path.shift();
-
+			//已经达到终点
 			if (this._path.length == 0) {
 				this._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
-				(<BattleModel>this._battleController.getModel()).MonsterDic.Remove(this._id);
-				ObjectPool.push(this);
-				App.DisplayUtils.removeFromParent(this);
+				this.removeSelf();
 				return;
 			}
-			else {
-				this.setDirection(this._path[0]);
-			}
+			this.setDirection(this._path[0]);
 		}
 		else {
 			this.x = this.x + xDistance;
 			this.y = this.y + yDistance;
 		}
-
 	}
 
 	/**
@@ -122,7 +114,24 @@ class Monster extends BaseRole {
 		this.setDirection(this._path[1]);
 	}
 
+	/** 移除自己 */
+	private removeSelf(): void {
+		let self = this;
+		(<BattleModel>self._battleController.getModel()).MonsterDic.Remove(self._id);
+		ObjectPool.push(self);
+		App.DisplayUtils.removeFromParent(self);
+	}
+
 	get ID(): number {
 		return this._id;
 	}
+
+	set HP(value: number) {
+		this._hp = value;
+		if (this._hp <= 0) {
+			this._battleController.applyFunc(BattleConst.MONSTER_DIE);
+			this.removeSelf();
+		}
+	}
+
 }

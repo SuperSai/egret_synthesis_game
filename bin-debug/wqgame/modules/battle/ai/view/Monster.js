@@ -22,6 +22,7 @@ var Monster = (function (_super) {
     Monster.prototype.update = function (passTime) {
         this.move(passTime);
     };
+    /** 怪物移动 */
     Monster.prototype.move = function (passTime) {
         if (this._path.length == 0)
             return;
@@ -33,16 +34,13 @@ var Monster = (function (_super) {
             this.x = point.x;
             this.y = point.y;
             this._path.shift();
+            //已经达到终点
             if (this._path.length == 0) {
                 this._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
-                this._battleController.getModel().MonsterDic.Remove(this._id);
-                ObjectPool.push(this);
-                App.DisplayUtils.removeFromParent(this);
+                this.removeSelf();
                 return;
             }
-            else {
-                this.setDirection(this._path[0]);
-            }
+            this.setDirection(this._path[0]);
         }
         else {
             this.x = this.x + xDistance;
@@ -94,16 +92,34 @@ var Monster = (function (_super) {
             var pos = info.path[i].split(",");
             this._path.push(new egret.Point(parseInt(pos[0]), parseInt(pos[1])));
         }
-        var num = App.RandomUtils.randrange(0, 10);
+        var num = App.RandomUtils.randrange(0, 6);
         var img = new eui.Image("role_" + num);
         this.addChild(img);
         this.x = this._path[0].x;
         this.y = this._path[0].y;
         this.setDirection(this._path[1]);
     };
+    /** 移除自己 */
+    Monster.prototype.removeSelf = function () {
+        var self = this;
+        self._battleController.getModel().MonsterDic.Remove(self._id);
+        ObjectPool.push(self);
+        App.DisplayUtils.removeFromParent(self);
+    };
     Object.defineProperty(Monster.prototype, "ID", {
         get: function () {
             return this._id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Monster.prototype, "HP", {
+        set: function (value) {
+            this._hp = value;
+            if (this._hp <= 0) {
+                this._battleController.applyFunc(BattleConst.MONSTER_DIE);
+                this.removeSelf();
+            }
         },
         enumerable: true,
         configurable: true

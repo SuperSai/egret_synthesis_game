@@ -5,11 +5,13 @@ var BattleConst = (function () {
     function BattleConst() {
     }
     /** 战斗初始化 */
-    BattleConst.BATTLE_INIT = 10000;
+    BattleConst.BATTLE_INIT = 11000;
     /** 创建角色 */
-    BattleConst.CREATE_ROLE = 10001;
+    BattleConst.CREATE_ROLE = 11001;
     /** 怪物已经达到终点 */
-    BattleConst.MONSTER_MOVE_END = 10002;
+    BattleConst.MONSTER_MOVE_END = 11002;
+    /** 怪物死了 */
+    BattleConst.MONSTER_DIE = 11003;
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");
