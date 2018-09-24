@@ -6,10 +6,17 @@ class BattleMap extends BaseEuiView {
 	public mapImg: eui.Image;
 	public pos_boss: eui.Image;
 	public lists: eui.List;	// 所有底座列表
+	public heroBase: HeroBaseItem;	// 英雄底座
+	public btn_open: eui.Group;	// 开放新底座
 
 	private _arrColl: eui.ArrayCollection;
 	private _model: BattleModel;
 	private _battleController: BattleController;
+	private _selectRole: Role;
+	// 选中的底座上角色的原始X坐标
+	private _oX: number;
+	// 选中的底座上角色的原始Y坐标
+	private _oY: number;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -33,6 +40,8 @@ class BattleMap extends BaseEuiView {
 		self._arrColl = new eui.ArrayCollection();
 		self.lists.itemRenderer = BaseItem;
 		self.lists.dataProvider = self._arrColl;
+
+		self.heroBase.onAwake(self._battleController);
 	}
 	/** 初始化地图 */
 	private initMap(): void {
@@ -44,15 +53,31 @@ class BattleMap extends BaseEuiView {
 	public addEvents(): void {
 		super.addEvents();
 		let self = this;
-		self.lists.addEventListener(eui.ItemTapEvent.ITEM_TAP, self.onItemTapHandler, self);
+		self.btn_open.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
 		self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
 		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		self.setBtnEffect(["btn_open"]);
 	}
 
 	public removeEvents(): void {
 		super.removeEvents();
 		let self = this;
-		self.lists.removeEventListener(eui.ItemTapEvent.ITEM_TAP, self.onItemTapHandler, self);
+		self.btn_open.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
+		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+	}
+
+	/** 开放新的底座 */
+	private onOpenNewBase(): void {
+		let self = this;
+		self._model.openBaseCount += self._model.hBaseItemCount;
+		if (self._model.openBaseCount >= self._model.maxBaseCount) {
+			self._model.openBaseCount = self._model.maxBaseCount;
+			self.btn_open.visible = self.btn_open.touchEnabled = false;
+			self.doNeedUpdateBaseItem();
+			return;
+		}
+		self.btn_open.y -= ((self._model.maxBaseCount - self._model.openBaseCount) / self._model.hBaseItemCount * self._model.baseH);
+		self.doNeedUpdateBaseItem();
 	}
 
 	/** 创建角色 */
@@ -66,6 +91,7 @@ class BattleMap extends BaseEuiView {
 			let random: number = App.RandomUtils.randrange(self._model.maxBaseCount - self._model.openBaseCount, self._model.maxBaseCount);
 			let baseItem: BaseItem = self.lists.getChildAt(random) as BaseItem;
 			if (!self._model.roleDic.ContainsKey(baseItem) && baseItem.state == BASE_STATE.OPEN) {
+				self.updateHeroBase(roleId);
 				self._battleController.pushRoleToMap(roleId, baseItem);
 				break;
 			}
@@ -78,23 +104,14 @@ class BattleMap extends BaseEuiView {
 		self._arrColl.replaceAll(self._battleController.getAllBaseState());
 	}
 
-	/** 更新单个底座数据 */
-	private updateSingleBaseItem(): void {
+	/** 处理需要更新的底座 */
+	private doNeedUpdateBaseItem(): void {
 		let self = this;
-	}
-	private _selectRole: Role;
-	private _oX: number;
-	private _oY: number;
-	/** 点击单个底座处理 */
-	private onItemTapHandler(itemTap: eui.ItemTapEvent): void {
-		let self = this;
-		if (!itemTap) return;
-		//当前点击的底座
-		let baseItem: BaseItem = itemTap.itemRenderer as BaseItem;
-		//不存在字典中，说明当前点击的底座上没有角色的存在
-		if (!self._model.roleDic.ContainsKey(baseItem)) return;
-		self._selectRole = self._model.roleDic.TryGetValue(baseItem);
-		if (!self._selectRole) return Log.traceError("onItemTapHandler -- role在字典中获取错误，baseItemIndex:" + baseItem.itemIndex);
+		let startI: number = self._model.maxBaseCount - self._model.openBaseCount;
+		let len: number = startI + self._model.hBaseItemCount;
+		for (let i: number = startI; i < len; i++) {
+			(self.lists.getChildAt(i) as BaseItem).state = BASE_STATE.OPEN;
+		}
 	}
 
 	private onTouchBegin(evt: egret.TouchEvent): void {
@@ -148,12 +165,22 @@ class BattleMap extends BaseEuiView {
 		}
 	}
 
+	/** 创建普通角色 */
 	private createRole(selectRole: Role, baseItem: BaseItem, roleId: number): void {
 		let self = this;
 		self._model.roleDic.Remove(selectRole.baseItem);
 		selectRole.reset();
 		ObjectPool.push(selectRole);
 		App.DisplayUtils.removeFromParent(selectRole);
+		self.updateHeroBase(roleId);
 		self._battleController.pushRoleToMap(roleId, baseItem);
+	}
+
+	/** 更新英雄底座上的英雄角色 */
+	private updateHeroBase(roleId: number): void {
+		let self = this;
+		if (roleId < self._model.maxRoleId) return;
+		self._model.maxRoleId = roleId;
+		self.heroBase.updateHeroStyle(self._model.maxRoleId);
 	}
 }

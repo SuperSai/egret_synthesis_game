@@ -8,6 +8,8 @@ class BattleView extends BaseEuiView {
 	public btn_hall: eui.Button; // 返回大厅按钮
 	public btn_buy: eui.Group;	// 购买角色按钮
 	public txt_money: eui.Label; // 角色价格
+	public txt_level: eui.Label; // 当前关卡数
+	public currency: CurrencyCom; // 货币组件
 
 	private _model: BattleModel;
 
@@ -22,6 +24,7 @@ class BattleView extends BaseEuiView {
 	public initUI(): void {
 		super.initUI();
 		let self = this;
+		self.currency.initUI();
 	}
 
 	/** 对面板数据的初始化，用于子类继承 */

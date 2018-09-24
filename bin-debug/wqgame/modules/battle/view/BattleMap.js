@@ -39,6 +39,7 @@ var BattleMap = (function (_super) {
         self._arrColl = new eui.ArrayCollection();
         self.lists.itemRenderer = BaseItem;
         self.lists.dataProvider = self._arrColl;
+        self.heroBase.onAwake(self._battleController);
     };
     /** 初始化地图 */
     BattleMap.prototype.initMap = function () {
@@ -49,14 +50,29 @@ var BattleMap = (function (_super) {
     BattleMap.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
         var self = this;
-        self.lists.addEventListener(eui.ItemTapEvent.ITEM_TAP, self.onItemTapHandler, self);
+        self.btn_open.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
         self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
         App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+        self.setBtnEffect(["btn_open"]);
     };
     BattleMap.prototype.removeEvents = function () {
         _super.prototype.removeEvents.call(this);
         var self = this;
-        self.lists.removeEventListener(eui.ItemTapEvent.ITEM_TAP, self.onItemTapHandler, self);
+        self.btn_open.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
+        App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+    };
+    /** 开放新的底座 */
+    BattleMap.prototype.onOpenNewBase = function () {
+        var self = this;
+        self._model.openBaseCount += self._model.hBaseItemCount;
+        if (self._model.openBaseCount >= self._model.maxBaseCount) {
+            self._model.openBaseCount = self._model.maxBaseCount;
+            self.btn_open.visible = self.btn_open.touchEnabled = false;
+            self.doNeedUpdateBaseItem();
+            return;
+        }
+        self.btn_open.y -= ((self._model.maxBaseCount - self._model.openBaseCount) / self._model.hBaseItemCount * self._model.baseH);
+        self.doNeedUpdateBaseItem();
     };
     /** 创建角色 */
     BattleMap.prototype.onCreateRole = function (roleId) {
@@ -71,6 +87,7 @@ var BattleMap = (function (_super) {
             var random = App.RandomUtils.randrange(self._model.maxBaseCount - self._model.openBaseCount, self._model.maxBaseCount);
             var baseItem = self.lists.getChildAt(random);
             if (!self._model.roleDic.ContainsKey(baseItem) && baseItem.state == BASE_STATE.OPEN) {
+                self.updateHeroBase(roleId);
                 self._battleController.pushRoleToMap(roleId, baseItem);
                 break;
             }
@@ -81,23 +98,14 @@ var BattleMap = (function (_super) {
         var self = this;
         self._arrColl.replaceAll(self._battleController.getAllBaseState());
     };
-    /** 更新单个底座数据 */
-    BattleMap.prototype.updateSingleBaseItem = function () {
+    /** 处理需要更新的底座 */
+    BattleMap.prototype.doNeedUpdateBaseItem = function () {
         var self = this;
-    };
-    /** 点击单个底座处理 */
-    BattleMap.prototype.onItemTapHandler = function (itemTap) {
-        var self = this;
-        if (!itemTap)
-            return;
-        //当前点击的底座
-        var baseItem = itemTap.itemRenderer;
-        //不存在字典中，说明当前点击的底座上没有角色的存在
-        if (!self._model.roleDic.ContainsKey(baseItem))
-            return;
-        self._selectRole = self._model.roleDic.TryGetValue(baseItem);
-        if (!self._selectRole)
-            return Log.traceError("onItemTapHandler -- role在字典中获取错误，baseItemIndex:" + baseItem.itemIndex);
+        var startI = self._model.maxBaseCount - self._model.openBaseCount;
+        var len = startI + self._model.hBaseItemCount;
+        for (var i = startI; i < len; i++) {
+            self.lists.getChildAt(i).state = BASE_STATE.OPEN;
+        }
     };
     BattleMap.prototype.onTouchBegin = function (evt) {
         var self = this;
@@ -111,6 +119,7 @@ var BattleMap = (function (_super) {
         self._oY = self._selectRole.y;
         self._selectRole.x = evt.stageX;
         self._selectRole.y = evt.stageY;
+        //设置拿起来的角色层级一定是最高的
         var layer = App.LayerManager.getLayerByType(LayerManager.GAME_MAP_LAYER);
         layer.setChildIndex(self._selectRole, layer.numChildren);
     };
@@ -149,13 +158,23 @@ var BattleMap = (function (_super) {
             }
         }
     };
+    /** 创建普通角色 */
     BattleMap.prototype.createRole = function (selectRole, baseItem, roleId) {
         var self = this;
         self._model.roleDic.Remove(selectRole.baseItem);
         selectRole.reset();
         ObjectPool.push(selectRole);
         App.DisplayUtils.removeFromParent(selectRole);
+        self.updateHeroBase(roleId);
         self._battleController.pushRoleToMap(roleId, baseItem);
+    };
+    /** 更新英雄底座上的英雄角色 */
+    BattleMap.prototype.updateHeroBase = function (roleId) {
+        var self = this;
+        if (roleId < self._model.maxRoleId)
+            return;
+        self._model.maxRoleId = roleId;
+        self.heroBase.updateHeroStyle(self._model.maxRoleId);
     };
     return BattleMap;
 }(BaseEuiView));

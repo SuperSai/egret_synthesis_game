@@ -129,6 +129,7 @@
 		"bin-debug/wqgame/modules/battle/view/BattleMap.js",
 		"bin-debug/wqgame/modules/battle/view/BattleView.js",
 		"bin-debug/wqgame/modules/battle/view/item/BaseItem.js",
+		"bin-debug/wqgame/modules/battle/view/item/HeroBaseItem.js",
 		"bin-debug/wqgame/modules/common/component/BtnEffectComponent.js",
 		"bin-debug/wqgame/modules/common/component/ButtonCom.js",
 		"bin-debug/wqgame/modules/common/component/CurrencyCom.js",

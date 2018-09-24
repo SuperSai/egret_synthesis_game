@@ -22,19 +22,19 @@ var CurrencyCom = (function (_super) {
     CurrencyCom.prototype.initUI = function () {
         _super.prototype.initUI.call(this);
         var self = this;
+        self.addEvents();
     };
-    /** 对面板数据的初始化，用于子类继承 */
-    CurrencyCom.prototype.initData = function () {
-        _super.prototype.initData.call(this);
+    /**
+     * 添加监听事件
+     */
+    CurrencyCom.prototype.addEvents = function () {
+        _super.prototype.addEvents.call(this);
     };
-    /** 面板开启执行函数，用于子类继承 */
-    CurrencyCom.prototype.open = function () {
-        var param = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            param[_i] = arguments[_i];
-        }
-        _super.prototype.open.call(this, param);
-        var self = this;
+    /**
+     * 移除监听事件
+     */
+    CurrencyCom.prototype.removeEvents = function () {
+        _super.prototype.removeEvents.call(this);
     };
     return CurrencyCom;
 }(BaseEuiView));

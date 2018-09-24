@@ -24,6 +24,7 @@ var BattleView = (function (_super) {
     BattleView.prototype.initUI = function () {
         _super.prototype.initUI.call(this);
         var self = this;
+        self.currency.initUI();
     };
     /** 对面板数据的初始化，用于子类继承 */
     BattleView.prototype.initData = function () {

@@ -18,6 +18,14 @@ var BattleModel = (function (_super) {
         _this.openBaseCount = 6;
         /** 最大的底座数量 */
         _this.maxBaseCount = 12;
+        /** 当前游戏中最高级的角色ID */
+        _this.maxRoleId = 0;
+        /** 一排的底座数量 */
+        _this.hBaseItemCount = 3;
+        /** 底座的宽度 */
+        _this.baseW = 120;
+        /** 底座的高度 */
+        _this.baseH = 120;
         var self = _this;
         self.init();
         return _this;

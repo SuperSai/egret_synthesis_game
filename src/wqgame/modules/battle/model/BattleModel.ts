@@ -11,6 +11,14 @@ class BattleModel extends BaseModel {
 	public openBaseCount: number = 6;
 	/** 最大的底座数量 */
 	public maxBaseCount: number = 12;
+	/** 当前游戏中最高级的角色ID */
+	public maxRoleId: number = 0;
+	/** 一排的底座数量 */
+	public hBaseItemCount: number = 3;
+	/** 底座的宽度 */
+	public baseW: number = 120;
+	/** 底座的高度 */
+	public baseH: number = 120;
 
 	public constructor($controller: BaseController) {
 		super($controller)

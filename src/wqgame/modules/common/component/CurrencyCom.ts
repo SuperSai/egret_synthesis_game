@@ -15,18 +15,22 @@ class CurrencyCom extends BaseEuiView {
 	public initUI(): void {
 		super.initUI();
 		let self = this;
+		self.addEvents();
+	}
+
+    /**
+     * 添加监听事件
+     */
+	public addEvents(): void {
+		super.addEvents();
 
 	}
 
-	/** 对面板数据的初始化，用于子类继承 */
-	public initData(): void {
-		super.initData();
-	}
-
-	/** 面板开启执行函数，用于子类继承 */
-	public open(...param: any[]): void {
-		super.open(param);
-		let self = this;
+    /**
+     * 移除监听事件
+     */
+	public removeEvents(): void {
+		super.removeEvents();
 	}
 
 }

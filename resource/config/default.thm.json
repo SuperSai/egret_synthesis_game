@@ -16,11 +16,12 @@
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/skins/battle/item/HeroBaseItemSkin.exml",
 		"resource/skins/battle/BattleMapSkin.exml",
+		"resource/skins/common/component/CurrencyComSkin.exml",
 		"resource/skins/battle/BattleViewSkin.exml",
 		"resource/skins/battle/item/BaseItemSkin.exml",
 		"resource/skins/common/component/ButtonComSkin.exml",
-		"resource/skins/common/component/CurrencyComSkin.exml",
 		"resource/skins/eui_skins/ButtonSkin.exml",
 		"resource/skins/eui_skins/CheckBoxSkin.exml",
 		"resource/skins/eui_skins/HScrollBarSkin.exml",

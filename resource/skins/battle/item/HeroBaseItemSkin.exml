@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="HeroBaseItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="pos_boss" source="battle_json.post" scaleX="0.8" scaleY="0.8" anchorOffsetY="0" left="0" top="0" locked="true"/>
+	<e:Group id="pos" y="38" x="74"/>
+</e:Skin>

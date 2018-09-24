@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BattleMapSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="BattleMapSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image id="mapImg" left="0" right="0" top="0" bottom="0" source=""/>
-	<e:Image id="pos_boss" source="battle_json.post" scaleX="0.8" scaleY="0.8" verticalCenter="-264.5" anchorOffsetX="95" anchorOffsetY="31.67" horizontalCenter="7.5"/>
-	<e:Image id="pos_0" source="battle_json.camp_shadow" horizontalCenter="-121" verticalCenter="-129" anchorOffsetX="61" anchorOffsetY="49" visible="false"/>
-	<e:Image id="pos_1" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="8" verticalCenter="-129" visible="false"/>
-	<e:Image id="pos_2" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="139" verticalCenter="-129" visible="false"/>
-	<e:Image id="pos_3" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="-121" verticalCenter="-18" visible="false"/>
-	<e:Image id="pos_4" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="8" verticalCenter="-18" x="10" y="10" visible="false"/>
-	<e:Image id="pos_5" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="139" verticalCenter="-18" x="10" y="10" visible="false"/>
-	<e:Image id="pos_6" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="-121" verticalCenter="98" visible="false"/>
-	<e:Image id="pos_7" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="8" verticalCenter="98" x="20" y="20" visible="false"/>
-	<e:Image id="pos_8" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="139" verticalCenter="98" x="20" y="20" visible="false"/>
-	<e:Image id="pos_9" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="-121" verticalCenter="212" visible="false"/>
-	<e:Image id="pos_10" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="8" verticalCenter="212" x="30" y="30" visible="false"/>
-	<e:Image id="pos_11" source="battle_json.camp_shadow" anchorOffsetX="61" anchorOffsetY="49" horizontalCenter="139" verticalCenter="212" x="30" y="30" visible="false"/>
 	<e:Image source="battle_json.build_spell" horizontalCenter="5" top="0"/>
 	<e:Image source="battle_json.create_soldier_remind" horizontalCenter="70" bottom="64"/>
+	<ns1:HeroBaseItem id="heroBase" skinName="HeroBaseItemSkin" horizontalCenter="9.5" verticalCenter="-269"/>
 	<e:List id="lists" verticalCenter="55" horizontalCenter="0">
 		<e:layout>
 			<e:TileLayout requestedRowCount="4" requestedColumnCount="3" rowHeight="120" columnWidth="120" horizontalAlign="center" verticalAlign="middle" verticalGap="0" horizontalGap="0"/>
 		</e:layout>
 	</e:List>
+	<e:Group id="btn_open" x="452" y="567.64" name="btn_open_1#1" touchChildren="false">
+		<e:Image source="battle_json.btn_open_level" scaleX="1" scaleY="1"/>
+	</e:Group>
 </e:Skin>
