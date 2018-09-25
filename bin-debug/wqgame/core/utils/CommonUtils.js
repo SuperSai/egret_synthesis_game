@@ -108,7 +108,7 @@ var CommonUtils = (function (_super) {
     /** 获取2点之间的移动速度 */
     CommonUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
         var speed = new egret.Point();
-        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+        var hypotenuse = egret.Point.distance(targetP2, currentP1); // App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
         if (hypotenuse == 0) {
             speed.x = 0;
             speed.y = 0;

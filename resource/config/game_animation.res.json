@@ -3,6 +3,10 @@
 		{
 			"keys": "ui_bao01_tex_png,ui_bao01_tex_json,ui_bao01_ske_json",
 			"name": "ui_bao01"
+		},
+		{
+			"keys": "chr_unit_330301_tex_png,chr_unit_330301_tex_json,chr_unit_330301_ske_json",
+			"name": "chr_unit_330301"
 		}
 	],
 	"resources": [
@@ -20,6 +24,21 @@
 			"url": "common/animation/bone/ui_bao01/ui_bao01_ske.json",
 			"type": "json",
 			"name": "ui_bao01_ske_json"
+		},
+		{
+			"url": "common/animation/monster/chr_unit_330301/chr_unit_330301_tex.png",
+			"type": "image",
+			"name": "chr_unit_330301_tex_png"
+		},
+		{
+			"url": "common/animation/monster/chr_unit_330301/chr_unit_330301_tex.json",
+			"type": "json",
+			"name": "chr_unit_330301_tex_json"
+		},
+		{
+			"url": "common/animation/monster/chr_unit_330301/chr_unit_330301_ske.json",
+			"type": "json",
+			"name": "chr_unit_330301_ske_json"
 		}
 	]
 }

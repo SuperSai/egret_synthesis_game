@@ -50,20 +50,33 @@ class MathUtils extends BaseClass {
 		startPoint.y = resultY;
 	}
 
-	public getAngle(point1: egret.Point, point2: egret.Point): number {
-		let vx = point2.x - point1.x;
-		let vy = point2.y - point1.y;
-		let hyp = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
-		let rad = Math.acos(vx / hyp);
+	public getAngle(starPos: egret.Point, endPos: egret.Point): number {
+		// let vx = endPos.x - starPos.x;
+		// let vy = endPos.y - starPos.y;
+		// let hyp = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
+		// let rad = Math.acos(vx / hyp);
+		// let deg = 180 / (Math.PI / rad);
+		// //得到了一个角度“rad”，不过是以弧度为单位的
+		// //把它转换成角度 
+		// if (vy < 0) {
+		// 	deg = (-deg);
+		// } else if ((vy == 0) && (vx < 0)) {
+		// 	deg = 180;
+		// }
+		// return deg;
+		let vx = starPos.x - endPos.x;
+		let vy = starPos.y - endPos.y;
+		let hyp = Math.sqrt(Math.pow(vy, 2) + Math.pow(vx, 2));
+		let rad = Math.acos(vy / hyp);
 		let deg = 180 / (Math.PI / rad);
 		//得到了一个角度“rad”，不过是以弧度为单位的
 		//把它转换成角度 
-		if (vy < 0) {
+		if (vx < 0) {
 			deg = (-deg);
-		} else if ((vy == 0) && (vx < 0)) {
+		} else if ((vx == 0) && (vy < 0)) {
 			deg = 180;
 		}
-		return deg;
+		return -deg;
 	}
 
 	public getNewAngle(point1: egret.Point, point2: egret.Point): number {

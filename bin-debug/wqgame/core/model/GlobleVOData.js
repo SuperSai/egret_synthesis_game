@@ -38,6 +38,10 @@ var GlobleVOData = (function (_super) {
         self._totalStepCsvList.Add(GlobleVOData.LevelVO, LevelVO);
         self._totalStepCsvList.Add(GlobleVOData.BoneAnimationVO, BoneAnimationVO);
         self._totalStepCsvList.Add(GlobleVOData.SoundVO, SoundVO);
+        self._totalStepCsvList.Add(GlobleVOData.MonsterVO, MonsterVO);
+        self._totalStepCsvList.Add(GlobleVOData.ServerConfigVO, ServerConfigVO);
+        self._totalStepCsvList.Add(GlobleVOData.HeroVO, HeroVO);
+        self._totalStepCsvList.Add(GlobleVOData.BulletVO, BulletVO);
     };
     // 解析初始数据表
     GlobleVOData.prototype.initStep = function () {
@@ -119,6 +123,9 @@ var GlobleVOData = (function (_super) {
     GlobleVOData.BoneAnimationVO = "BoneAnimation_json";
     GlobleVOData.LevelVO = "Level_json";
     GlobleVOData.SoundVO = "Sound_json";
+    GlobleVOData.MonsterVO = "Monster_json";
+    GlobleVOData.HeroVO = "Hero_json";
+    GlobleVOData.BulletVO = "Bullet_json";
     return GlobleVOData;
 }(egret.DisplayObject));
 __reflect(GlobleVOData.prototype, "GlobleVOData");

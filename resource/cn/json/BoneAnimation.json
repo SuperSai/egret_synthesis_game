@@ -1,4 +1,5 @@
 ﻿{
 "titles":["id","skename","des","timeScale","currentAnimationName","playTimes","removeAtLastFrame","isPauseAtLastFrame","removeWhenRemoveFromStage","positionString","detectFrameEvent"],
-"data":[[1,"ui_bao01","球的爆炸动画",1,"0",0,1,0,1,"0",0]]
+"data":[[1,"ui_bao01","球的爆炸动画",1,"0",0,1,0,1,"0",0],
+[2,"chr_unit_330301","怪物",1,"move",0,0,0,1,"0",0]]
 }

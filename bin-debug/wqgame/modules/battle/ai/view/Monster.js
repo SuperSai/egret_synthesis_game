@@ -14,37 +14,41 @@ var Monster = (function (_super) {
         var _this = _super.call(this, $controller, $layer) || this;
         /** 方向 -- 默认朝上*/
         _this._direction = MONSTER_DIR.UP;
+        _this._isMove = false;
         _this._id = App.CommonUtils.Token;
         _this._battleController = $controller;
         return _this;
     }
     /** 更新数据 */
-    Monster.prototype.update = function (passTime) {
+    Monster.prototype.onUpdate = function (passTime) {
+        if (!this._isMove)
+            return;
         this.move(passTime);
     };
     /** 怪物移动 */
     Monster.prototype.move = function (passTime) {
-        if (this._path.length == 0)
+        var self = this;
+        if (self._path.length == 0)
             return;
-        var point = this._path[0]; //下一个节点
-        var targetSpeed = App.CommonUtils.getSpeed(point, new egret.Point(this.x, this.y), this.moveSpeed);
+        var point = self._path[0]; //下一个节点
+        var targetSpeed = App.CommonUtils.getSpeed(point, new egret.Point(self.x, self.y), self._monsterVO.speed);
         var xDistance = 10 * targetSpeed.x;
         var yDistance = 10 * targetSpeed.y;
-        if (Math.abs(point.x - this.x) <= Math.abs(xDistance) && Math.abs(point.y - this.y) <= Math.abs(yDistance)) {
-            this.x = point.x;
-            this.y = point.y;
-            this._path.shift();
+        if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
+            self.x = point.x;
+            self.y = point.y;
+            self._path.shift();
             //已经达到终点
-            if (this._path.length == 0) {
-                this._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
-                this.removeSelf();
+            if (self._path.length == 0) {
+                self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
+                self.removeSelf();
                 return;
             }
-            this.setDirection(this._path[0]);
+            self.setDirection(self._path[0]);
         }
         else {
-            this.x = this.x + xDistance;
-            this.y = this.y + yDistance;
+            self.x = self.x + xDistance;
+            self.y = self.y + yDistance;
         }
     };
     /**
@@ -83,27 +87,32 @@ var Monster = (function (_super) {
     };
     /** 解析数据 */
     Monster.prototype.Parse = function (info) {
-        this._hp = info.hp;
-        this.hpMax = info.hp;
-        this.moveSpeed = info.moveSpeed;
-        this.type = info.type;
-        this._path = [];
+        var self = this;
+        self._monsterInfo = info;
+        self._monsterVO = self._monsterInfo.monsterVO;
+        self._hp = self._monsterVO.maxHp;
+        self._path = [];
         for (var i = 0; i < info.path.length; i++) {
             var pos = info.path[i].split(",");
-            this._path.push(new egret.Point(parseInt(pos[0]), parseInt(pos[1])));
+            self._path.push(new egret.Point(Number(pos[0]), Number(pos[1])));
         }
-        var num = App.RandomUtils.randrange(0, 6);
-        var img = new eui.Image("role_" + num);
-        this.addChild(img);
-        this.x = this._path[0].x;
-        this.y = this._path[0].y;
-        this.setDirection(this._path[1]);
+        self._bone = ResourcePool.Intance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+        self._bone.play();
+        self.addChild(self._bone);
+        self.x = self._path[0].x;
+        self.y = self._path[0].y;
+        self.setDirection(self._path[1]);
+        self._isMove = true;
     };
     /** 移除自己 */
     Monster.prototype.removeSelf = function () {
         var self = this;
-        self._battleController.getModel().MonsterDic.Remove(self._id);
+        self._battleController.getModel().monsterDic.Remove(self._id);
+        self._isMove = false;
+        self._path = [];
+        ObjectPool.push(self._monsterInfo);
         ObjectPool.push(self);
+        ResourcePool.Intance.push(self._bone, ResourcePool.SKE);
         App.DisplayUtils.removeFromParent(self);
     };
     Object.defineProperty(Monster.prototype, "ID", {
@@ -114,12 +123,23 @@ var Monster = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Monster.prototype, "HP", {
+        get: function () {
+            return this._hp;
+        },
         set: function (value) {
-            this._hp = value;
-            if (this._hp <= 0) {
-                this._battleController.applyFunc(BattleConst.MONSTER_DIE);
-                this.removeSelf();
+            var self = this;
+            self._hp = value;
+            if (self._hp <= 0) {
+                self.removeSelf();
+                self._battleController.applyFunc(BattleConst.MONSTER_DIE);
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Monster.prototype, "point", {
+        get: function () {
+            return new egret.Point(this.x, this.y);
         },
         enumerable: true,
         configurable: true

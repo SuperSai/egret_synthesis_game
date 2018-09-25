@@ -14,18 +14,12 @@ var BattleModel = (function (_super) {
         var _this = _super.call(this, $controller) || this;
         /** 当前的关卡等级 */
         _this.currMission = 1;
-        /** 开放的底座数量 */
-        _this.openBaseCount = 6;
-        /** 最大的底座数量 */
-        _this.maxBaseCount = 12;
         /** 当前游戏中最高级的角色ID */
         _this.maxRoleId = 0;
         /** 一排的底座数量 */
         _this.hBaseItemCount = 3;
-        /** 底座的宽度 */
-        _this.baseW = 120;
-        /** 底座的高度 */
-        _this.baseH = 120;
+        /** 当前在第几波 */
+        _this.currwaveNum = 1;
         var self = _this;
         self.init();
         return _this;
@@ -35,9 +29,36 @@ var BattleModel = (function (_super) {
         var self = this;
         self._roleDic = new TSDictionary();
         self._monsterDic = new TSDictionary();
+        self._bulletDic = new TSDictionary();
     };
-    Object.defineProperty(BattleModel.prototype, "LevelVo", {
-        /** 关卡模板信息 */
+    Object.defineProperty(BattleModel.prototype, "monsterWaveNumCount", {
+        /** 获取当前波数的怪物数量 */
+        get: function () {
+            return App.RandomUtils.randrange(this._levelVO.monsterNumRange[0], this._levelVO.monsterNumRange[1]);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BattleModel.prototype, "allBaseState", {
+        /** 获取所有底座的状态 */
+        get: function () {
+            var self = this;
+            var lists = [];
+            for (var i = self._levelVO.maxBaseCount; i > 0; i--) {
+                if (i > self._levelVO.openBaseCount) {
+                    lists.push(BASE_STATE.CLOSE);
+                }
+                else {
+                    lists.push(BASE_STATE.OPEN);
+                }
+            }
+            return lists;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BattleModel.prototype, "levelVO", {
+        /** 关卡表模板数据 */
         get: function () {
             return this._levelVO;
         },
@@ -47,7 +68,7 @@ var BattleModel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BattleModel.prototype, "RoleDic", {
+    Object.defineProperty(BattleModel.prototype, "roleDic", {
         /** 出战的角色字典 */
         get: function () {
             return this._roleDic;
@@ -58,13 +79,24 @@ var BattleModel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BattleModel.prototype, "MonsterDic", {
+    Object.defineProperty(BattleModel.prototype, "monsterDic", {
         /** 出战中的怪物字典 */
         get: function () {
             return this._monsterDic;
         },
         set: function (value) {
             this._monsterDic = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BattleModel.prototype, "bulletDic", {
+        /** 子弹的字典 */
+        get: function () {
+            return this._bulletDic;
+        },
+        set: function (value) {
+            this._bulletDic = value;
         },
         enumerable: true,
         configurable: true

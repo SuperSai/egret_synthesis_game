@@ -1,26 +1,26 @@
 class BattleModel extends BaseModel {
 
-	//关卡模板数据
+	//关卡表模板数据
 	private _levelVO: LevelVO;
 	//出战的角色字典
 	private _roleDic: TSDictionary<BaseItem, Role>;
 	//出战的怪物字典
 	private _monsterDic: TSDictionary<number, Monster>;
+	//子弹的字典
+	private _bulletDic: TSDictionary<number, BaseBullet>;
 
 	/** 当前的关卡等级 */
 	public currMission: number = 1;
-	/** 开放的底座数量 */
-	public openBaseCount: number = 6;
-	/** 最大的底座数量 */
-	public maxBaseCount: number = 12;
 	/** 当前游戏中最高级的角色ID */
 	public maxRoleId: number = 0;
 	/** 一排的底座数量 */
 	public hBaseItemCount: number = 3;
-	/** 底座的宽度 */
-	public baseW: number = 120;
-	/** 底座的高度 */
-	public baseH: number = 120;
+	/** 当前在第几波 */
+	public currwaveNum: number = 1;
+	/** 当前波数的怪物数量 */
+	public currMonsterCount: number;
+	/** 最大波数的怪物数量 */
+	public maxMonsterCount: number;
 
 	public constructor($controller: BaseController) {
 		super($controller)
@@ -32,31 +32,60 @@ class BattleModel extends BaseModel {
 		let self = this;
 		self._roleDic = new TSDictionary<BaseItem, Role>();
 		self._monsterDic = new TSDictionary<number, Monster>();
+		self._bulletDic = new TSDictionary<number, BaseBullet>();
 	}
 
-	set LevelVo(value: LevelVO) {
+	/** 获取当前波数的怪物数量 */
+	get monsterWaveNumCount(): number {
+		return App.RandomUtils.randrange(this._levelVO.monsterNumRange[0], this._levelVO.monsterNumRange[1]);
+	}
+
+	/** 获取所有底座的状态 */
+	get allBaseState(): any[] {
+		let self = this;
+		let lists: any[] = [];
+		for (let i: number = self._levelVO.maxBaseCount; i > 0; i--) {
+			if (i > self._levelVO.openBaseCount) {
+				lists.push(BASE_STATE.CLOSE);
+			} else {
+				lists.push(BASE_STATE.OPEN);
+			}
+		}
+		return lists;
+	}
+
+	set levelVO(value: LevelVO) {
 		this._levelVO = value;
 	}
-	/** 关卡模板信息 */
-	get LevelVo(): LevelVO {
+	/** 关卡表模板数据 */
+	get levelVO(): LevelVO {
 		return this._levelVO;
 	}
 
-	set RoleDic(value: TSDictionary<BaseItem, Role>) {
+	set roleDic(value: TSDictionary<BaseItem, Role>) {
 		this._roleDic = value;
 	}
 	/** 出战的角色字典 */
-	get RoleDic(): TSDictionary<BaseItem, Role> {
+	get roleDic(): TSDictionary<BaseItem, Role> {
 		return this._roleDic;
 	}
 
-	set MonsterDic(value: TSDictionary<number, Monster>) {
+	set monsterDic(value: TSDictionary<number, Monster>) {
 		this._monsterDic = value;
 	}
 	/** 出战中的怪物字典 */
-	get MonsterDic(): TSDictionary<number, Monster> {
+	get monsterDic(): TSDictionary<number, Monster> {
 		return this._monsterDic;
 	}
+
+	set bulletDic(value: TSDictionary<number, BaseBullet>) {
+		this._bulletDic = value;
+	}
+	/** 子弹的字典 */
+	get bulletDic(): TSDictionary<number, BaseBullet> {
+		return this._bulletDic;
+	}
+
 }
 
 /** 底座的状态 */

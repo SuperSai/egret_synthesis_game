@@ -27,6 +27,8 @@ var HeroBaseItem = (function (_super) {
         var self = this;
         self._heroRole = new Role(self._battleController, LayerManager.GAME_MAP_LAYER);
         self._heroRole.addToParent();
+        self._heroRole.isMove = true;
+        self._battleController.getModel().roleDic.Add(self, self._heroRole);
     };
     /** 更新英雄角色样式 */
     HeroBaseItem.prototype.updateHeroStyle = function (roleId) {
@@ -34,9 +36,11 @@ var HeroBaseItem = (function (_super) {
         if (!self._heroRole)
             return Log.traceError("HeroBaseItem -- updateHeroStyle -- 英雄角色初始化后再赋值!");
         self._heroRole.open(roleId);
+        self._heroRole.heroVO.distance = 9999;
         var gPos = self.pos.localToGlobal();
         self._heroRole.x = gPos.x - self._heroRole.roleImg.width / 2;
         self._heroRole.y = gPos.y - self._heroRole.roleImg.height;
+        self._heroRole.isMove = false;
     };
     return HeroBaseItem;
 }(BaseEuiItem));

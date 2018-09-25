@@ -12,6 +12,10 @@ var BattleConst = (function () {
     BattleConst.MONSTER_MOVE_END = 11002;
     /** 怪物死了 */
     BattleConst.MONSTER_DIE = 11003;
+    /** 每波完成后派发 */
+    BattleConst.MONSTER_WAVENUM_COMPLETE = 11004;
+    /** 角色攻击 */
+    BattleConst.ROLE_ATTACK = 11005;
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");

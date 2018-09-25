@@ -7,4 +7,8 @@ class BattleConst {
 	public static MONSTER_MOVE_END: number = 11002;
 	/** 怪物死了 */
 	public static MONSTER_DIE: number = 11003;
+	/** 每波完成后派发 */
+	public static MONSTER_WAVENUM_COMPLETE: number = 11004;
+	/** 角色攻击 */
+	public static ROLE_ATTACK: number = 11005;
 }

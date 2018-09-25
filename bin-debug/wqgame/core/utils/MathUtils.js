@@ -57,21 +57,34 @@ var MathUtils = (function (_super) {
         startPoint.x = resultX;
         startPoint.y = resultY;
     };
-    MathUtils.prototype.getAngle = function (point1, point2) {
-        var vx = point2.x - point1.x;
-        var vy = point2.y - point1.y;
-        var hyp = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
-        var rad = Math.acos(vx / hyp);
+    MathUtils.prototype.getAngle = function (starPos, endPos) {
+        // let vx = endPos.x - starPos.x;
+        // let vy = endPos.y - starPos.y;
+        // let hyp = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
+        // let rad = Math.acos(vx / hyp);
+        // let deg = 180 / (Math.PI / rad);
+        // //得到了一个角度“rad”，不过是以弧度为单位的
+        // //把它转换成角度 
+        // if (vy < 0) {
+        // 	deg = (-deg);
+        // } else if ((vy == 0) && (vx < 0)) {
+        // 	deg = 180;
+        // }
+        // return deg;
+        var vx = starPos.x - endPos.x;
+        var vy = starPos.y - endPos.y;
+        var hyp = Math.sqrt(Math.pow(vy, 2) + Math.pow(vx, 2));
+        var rad = Math.acos(vy / hyp);
         var deg = 180 / (Math.PI / rad);
         //得到了一个角度“rad”，不过是以弧度为单位的
         //把它转换成角度 
-        if (vy < 0) {
+        if (vx < 0) {
             deg = (-deg);
         }
-        else if ((vy == 0) && (vx < 0)) {
+        else if ((vx == 0) && (vy < 0)) {
             deg = 180;
         }
-        return deg;
+        return -deg;
     };
     MathUtils.prototype.getNewAngle = function (point1, point2) {
         var angle = 180 + Math.atan2(point1.x - point2.x, point1.y - point2.y) * 180 / Math.PI;

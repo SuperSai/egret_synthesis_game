@@ -15,6 +15,10 @@
 		{
 			"keys": "roles_json",
 			"name": "role"
+		},
+		{
+			"keys": "100_1",
+			"name": "bullet"
 		}
 	],
 	"resources": [
@@ -45,6 +49,11 @@
 			"type": "sheet",
 			"name": "roles_json",
 			"subkeys": "role_0,role_1,role_2,role_3,role_4,role_5,role_6,role_7,role_8,role_9"
+		},
+		{
+			"url": "common/bullet/100_1.png",
+			"type": "image",
+			"name": "100_1"
 		}
 	]
 }

@@ -101,7 +101,7 @@ class CommonUtils extends BaseClass {
 	public getSpeed(targetP2: egret.Point, currentP1: egret.Point, SpeedNum: number): egret.Point {
 
 		var speed: egret.Point = new egret.Point();
-		var hypotenuse: number = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+		var hypotenuse: number = egret.Point.distance(targetP2, currentP1);// App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
 		if (hypotenuse == 0) {
 			speed.x = 0;
 			speed.y = 0;

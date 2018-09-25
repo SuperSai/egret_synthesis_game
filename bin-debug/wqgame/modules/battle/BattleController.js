@@ -24,7 +24,8 @@ var BattleController = (function (_super) {
     }
     BattleController.prototype.onBattleInit = function (param) {
         var self = this;
-        self._battleModel.LevelVo = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+        self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+        self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
         App.ViewManager.open(ViewConst.Battle);
         App.TimerManager.doFrame(0, 0, self.onBattleUpdate, self);
     };
@@ -33,26 +34,26 @@ var BattleController = (function (_super) {
         //生成怪物
         this._battleView.map.updateMonster(egret.getTimer());
         //怪物移动
-        if (this._battleModel.MonsterDic.GetLenght() > 0) {
-            var monsters = this._battleModel.MonsterDic.getValues();
+        if (this._battleModel.monsterDic.GetLenght() > 0) {
+            var monsters = this._battleModel.monsterDic.getValues();
             for (var i = 0; i < monsters.length; i++) {
-                monsters[i].update(egret.getTimer());
+                monsters[i].onUpdate(egret.getTimer());
             }
         }
-    };
-    /** 获取所有底座的状态 */
-    BattleController.prototype.getAllBaseState = function () {
-        var self = this;
-        var lists = [];
-        for (var i = self._battleModel.maxBaseCount; i > 0; i--) {
-            if (i > self._battleModel.openBaseCount) {
-                lists.push(BASE_STATE.CLOSE);
-            }
-            else {
-                lists.push(BASE_STATE.OPEN);
+        //子弹移动
+        if (this._battleModel.bulletDic.GetLenght() > 0) {
+            var bullets = this._battleModel.bulletDic.getValues();
+            for (var i = 0; i < bullets.length; i++) {
+                bullets[i].onUpdate();
             }
         }
-        return lists;
+        //角色攻击
+        if (this._battleModel.monsterDic.GetLenght() > 0 && this._battleModel.roleDic.GetLenght() > 0) {
+            var roles = this._battleModel.roleDic.getValues();
+            for (var i = 0; i < roles.length; i++) {
+                roles[i].onUpdate(egret.getTimer());
+            }
+        }
     };
     /** 添加角色在地图上 */
     BattleController.prototype.pushRoleToMap = function (roleId, baseItem) {
@@ -60,13 +61,14 @@ var BattleController = (function (_super) {
         var role = ObjectPool.pop(Role, "Role", self, LayerManager.GAME_MAP_LAYER);
         role.addToParent();
         role.open(roleId);
+        role.isMove = false;
         baseItem.state = BASE_STATE.HAVE;
         role.baseItem = baseItem;
         var pos = baseItem.localToGlobal();
         var roleX = pos.x + (baseItem.width / 2) - (role.roleImg.width / 2);
         var roleY = pos.y + 10;
         role.setPosition(roleX, roleY);
-        self._battleModel.RoleDic.Add(baseItem, role);
+        self._battleModel.roleDic.Add(baseItem, role);
     };
     return BattleController;
 }(BaseController));

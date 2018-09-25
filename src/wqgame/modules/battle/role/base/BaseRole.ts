@@ -7,4 +7,7 @@ class BaseRole extends BaseSpriteView {
 		super($controller, $layer);
 	}
 
+	public onUpdate(passTime: number): void {
+
+	}
 }

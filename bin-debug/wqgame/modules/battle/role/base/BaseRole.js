@@ -16,6 +16,8 @@ var BaseRole = (function (_super) {
     function BaseRole($controller, $layer) {
         return _super.call(this, $controller, $layer) || this;
     }
+    BaseRole.prototype.onUpdate = function (passTime) {
+    };
     return BaseRole;
 }(BaseSpriteView));
 __reflect(BaseRole.prototype, "BaseRole");

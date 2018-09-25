@@ -2,10 +2,6 @@ class Monster extends BaseRole {
 
 	/** 怪物唯一ID */
 	private _id: number;
-	/** 怪物类型 */
-	public type: number;
-	/** 移动速度 */
-	public moveSpeed: number;
 	/** 血量 */
 	private _hp: number;
 	/** 最大血量 */
@@ -17,6 +13,10 @@ class Monster extends BaseRole {
 	/** 行走路径 */
 	private _path: egret.Point[];
 	private _battleController: BattleController;
+	private _bone: BoneAnimation;
+	private _isMove: boolean = false;
+	private _monsterVO: MonsterVO;
+	private _monsterInfo: MonsterInfo;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -25,33 +25,34 @@ class Monster extends BaseRole {
 	}
 
 	/** 更新数据 */
-	public update(passTime: number): void {
+	public onUpdate(passTime: number): void {
+		if (!this._isMove) return;
 		this.move(passTime);
 	}
 
 	/** 怪物移动 */
 	private move(passTime: number): void {
-		if (this._path.length == 0) return;
-		var point: egret.Point = this._path[0];  //下一个节点
-		var targetSpeed: egret.Point = App.CommonUtils.getSpeed(point, new egret.Point(this.x, this.y), this.moveSpeed);
-		var xDistance: number = 10 * targetSpeed.x;
-		var yDistance: number = 10 * targetSpeed.y;
-
-		if (Math.abs(point.x - this.x) <= Math.abs(xDistance) && Math.abs(point.y - this.y) <= Math.abs(yDistance)) {
-			this.x = point.x;
-			this.y = point.y;
-			this._path.shift();
+		let self = this;
+		if (self._path.length == 0) return;
+		let point: egret.Point = self._path[0];  //下一个节点
+		let targetSpeed: egret.Point = App.CommonUtils.getSpeed(point, new egret.Point(self.x, self.y), self._monsterVO.speed);
+		let xDistance: number = 10 * targetSpeed.x;
+		let yDistance: number = 10 * targetSpeed.y;
+		if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
+			self.x = point.x;
+			self.y = point.y;
+			self._path.shift();
 			//已经达到终点
-			if (this._path.length == 0) {
-				this._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
-				this.removeSelf();
+			if (self._path.length == 0) {
+				self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
+				self.removeSelf();
 				return;
 			}
-			this.setDirection(this._path[0]);
+			self.setDirection(self._path[0]);
 		}
 		else {
-			this.x = this.x + xDistance;
-			this.y = this.y + yDistance;
+			self.x = self.x + xDistance;
+			self.y = self.y + yDistance;
 		}
 	}
 
@@ -94,31 +95,36 @@ class Monster extends BaseRole {
 
 	/** 解析数据 */
 	public Parse(info: MonsterInfo): void {
-		this._hp = info.hp
-		this.hpMax = info.hp;
-		this.moveSpeed = info.moveSpeed;
-		this.type = info.type;
-		this._path = [];
+		let self = this;
+		self._monsterInfo = info;
+		self._monsterVO = self._monsterInfo.monsterVO;
+		self._hp = self._monsterVO.maxHp
+		self._path = [];
 
-		for (var i: number = 0; i < info.path.length; i++) {
+		for (let i: number = 0; i < info.path.length; i++) {
 			let pos: string[] = info.path[i].split(",");
-			this._path.push(new egret.Point(parseInt(pos[0]), parseInt(pos[1])));
+			self._path.push(new egret.Point(Number(pos[0]), Number(pos[1])));
 		}
 
-		let num: number = App.RandomUtils.randrange(0, 6);
-		let img: eui.Image = new eui.Image("role_" + num);
-		this.addChild(img);
+		self._bone = ResourcePool.Intance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+		self._bone.play();
+		self.addChild(self._bone);
 
-		this.x = this._path[0].x;
-		this.y = this._path[0].y;
-		this.setDirection(this._path[1]);
+		self.x = self._path[0].x;
+		self.y = self._path[0].y;
+		self.setDirection(self._path[1]);
+		self._isMove = true;
 	}
 
 	/** 移除自己 */
 	private removeSelf(): void {
 		let self = this;
-		(<BattleModel>self._battleController.getModel()).MonsterDic.Remove(self._id);
+		(<BattleModel>self._battleController.getModel()).monsterDic.Remove(self._id);
+		self._isMove = false;
+		self._path = [];
+		ObjectPool.push(self._monsterInfo);
 		ObjectPool.push(self);
+		ResourcePool.Intance.push(self._bone, ResourcePool.SKE);
 		App.DisplayUtils.removeFromParent(self);
 	}
 
@@ -127,11 +133,20 @@ class Monster extends BaseRole {
 	}
 
 	set HP(value: number) {
-		this._hp = value;
-		if (this._hp <= 0) {
-			this._battleController.applyFunc(BattleConst.MONSTER_DIE);
-			this.removeSelf();
+		let self = this;
+		self._hp = value;
+		if (self._hp <= 0) {
+			self.removeSelf();
+			self._battleController.applyFunc(BattleConst.MONSTER_DIE);
 		}
+	}
+
+	get HP(): number {
+		return this._hp;
+	}
+
+	get point(): egret.Point {
+		return new egret.Point(this.x, this.y);
 	}
 
 }

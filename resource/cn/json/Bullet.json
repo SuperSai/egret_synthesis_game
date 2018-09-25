@@ -1,0 +1,4 @@
+﻿{
+"titles":["id","assetname","assetScale","delay","damage","speed","accSpeed","bombAni","radius","dieSound","startSound"],
+"data":[[101,"100_1","1",1000,10,1,0,"hit_01",10,"1003","1004"]]
+}
