@@ -16,7 +16,7 @@ var BoneManager = (function (_super) {
         return _this;
     }
     BoneManager.prototype.test_showBone = function (resId) {
-        var testBone = ResourcePool.Intance.pop(resId, ResourcePool.SKE);
+        var testBone = ResourcePool.Instance.pop(resId, ResourcePool.SKE);
         testBone.playTimes = 0;
         testBone.removeAtLastFrame = false;
         testBone.play();

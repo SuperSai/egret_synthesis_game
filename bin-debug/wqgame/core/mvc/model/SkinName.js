@@ -13,6 +13,7 @@ var SkinName = (function () {
     SkinName.BattleViewSkin = "resource/skins/battle/BattleViewSkin.exml";
     SkinName.BaseItemSkin = "resource/skins/battle/item/BaseItemSkin.exml";
     SkinName.HeroBaseItemSkin = "resource/skins/battle/item/HeroBaseItemSkin.exml";
+    SkinName.HeroMsgPanelSkin = "resource/skins/battle/panel/HeroMsgPanelSkin.exml";
     return SkinName;
 }());
 __reflect(SkinName.prototype, "SkinName");

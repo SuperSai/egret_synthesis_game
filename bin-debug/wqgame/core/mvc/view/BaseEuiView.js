@@ -164,6 +164,10 @@ var BaseEuiView = (function (_super) {
         for (var _i = 0; _i < arguments.length; _i++) {
             param[_i] = arguments[_i];
         }
+        this.removeEvents();
+        if (this._btnEffect)
+            this._btnEffect.dispose();
+        this._btnEffect = null;
     };
     /**
      /**

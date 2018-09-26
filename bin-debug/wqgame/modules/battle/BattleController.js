@@ -28,6 +28,7 @@ var BattleController = (function (_super) {
         self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
         App.ViewManager.open(ViewConst.Battle);
         App.TimerManager.doFrame(0, 0, self.onBattleUpdate, self);
+        self.initRegisterView();
     };
     /** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
     BattleController.prototype.onBattleUpdate = function () {
@@ -69,6 +70,11 @@ var BattleController = (function (_super) {
         var roleY = pos.y + 10;
         role.setPosition(roleX, roleY);
         self._battleModel.roleDic.Add(baseItem, role);
+    };
+    /** 注册界面才可以打开界面 */
+    BattleController.prototype.initRegisterView = function () {
+        var self = this;
+        App.ViewManager.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerManager.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
     };
     return BattleController;
 }(BaseController));

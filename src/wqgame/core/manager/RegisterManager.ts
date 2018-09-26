@@ -23,5 +23,4 @@ class RegisterManager extends BaseClass {
 		App.ControllerManager.register(ControllerConst.Hall, new HallController());
 		App.ControllerManager.register(ControllerConst.Battle, new BattleController());
 	}
-
 }

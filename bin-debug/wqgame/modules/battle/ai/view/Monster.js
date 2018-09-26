@@ -96,7 +96,7 @@ var Monster = (function (_super) {
             var pos = info.path[i].split(",");
             self._path.push(new egret.Point(Number(pos[0]), Number(pos[1])));
         }
-        self._bone = ResourcePool.Intance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+        self._bone = ResourcePool.Instance.pop(self._monsterVO.assetname, ResourcePool.SKE);
         self._bone.play();
         self.addChild(self._bone);
         self.x = self._path[0].x;
@@ -112,10 +112,11 @@ var Monster = (function (_super) {
         self._path = [];
         ObjectPool.push(self._monsterInfo);
         ObjectPool.push(self);
-        ResourcePool.Intance.push(self._bone, ResourcePool.SKE);
+        ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
         App.DisplayUtils.removeFromParent(self);
     };
     Object.defineProperty(Monster.prototype, "ID", {
+        /** 获取怪物唯一ID */
         get: function () {
             return this._id;
         },
@@ -123,20 +124,34 @@ var Monster = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Monster.prototype, "HP", {
+        /** 设置怪物当前血量值 */
         get: function () {
             return this._hp;
         },
+        /** 设置怪物当前血量值 */
         set: function (value) {
             var self = this;
             self._hp = value;
             if (self._hp <= 0) {
-                self.removeSelf();
                 self._battleController.applyFunc(BattleConst.MONSTER_DIE);
+                self.removeSelf();
+                self.bombEffect();
             }
         },
         enumerable: true,
         configurable: true
     });
+    /** 爆炸特效 */
+    Monster.prototype.bombEffect = function () {
+        var self = this;
+        var bombBone = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
+        App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
+        bombBone.x = self.localToGlobal().x;
+        bombBone.y = self.localToGlobal().y;
+        bombBone.play(function () {
+            App.DisplayUtils.removeFromParent(bombBone);
+        }, self);
+    };
     Object.defineProperty(Monster.prototype, "point", {
         get: function () {
             return new egret.Point(this.x, this.y);

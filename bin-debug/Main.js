@@ -100,6 +100,7 @@ var Main = (function (_super) {
         egret.ImageLoader.crossOrigin = "anonymous";
         //适配方式(全屏适配)
         App.StageUtils.startFullscreenAdaptation(720, 1280, null);
+        App.StageUtils.setFrameRate(60);
         App.LayerManager.setup(App.StageUtils.getStage());
     };
     /** 初始化平台 */

@@ -9,7 +9,7 @@ class HallController extends BaseController {
 		let self = this;
 
 		//View初始化
-		self._hall = new HallView(self, LayerManager.GAME_MAP_LAYER);
+		self._hall = new HallView(self, LayerManager.GAME_UI_LAYER);
 		App.ViewManager.register(ViewConst.Hall, self._hall);
 
 		self._hallModel = new HallModel(self);

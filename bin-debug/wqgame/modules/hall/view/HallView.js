@@ -53,7 +53,6 @@ var HallView = (function (_super) {
     /** 进入关卡选择界面 */
     HallView.prototype.onGotoCheckpoint = function () {
         var self = this;
-        App.SceneManager.runScene(SceneConsts.LEVEL, 10000);
     };
     return HallView;
 }(BaseEuiView));

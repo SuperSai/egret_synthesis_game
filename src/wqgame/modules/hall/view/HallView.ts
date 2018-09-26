@@ -48,6 +48,5 @@ class HallView extends BaseEuiView {
 	/** 进入关卡选择界面 */
 	private onGotoCheckpoint(): void {
 		let self = this;
-		App.SceneManager.runScene(SceneConsts.LEVEL, 10000);
 	}
 }

@@ -112,7 +112,7 @@ class BattleMap extends BaseEuiView {
 		if (roleId < 0) return Log.traceError("角色ID错误：" + roleId);
 		let len: number = self._model.roleDic.GetLenght();
 		if (len >= self._model.levelVO.openBaseCount) return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
-		while (len < self._model.levelVO.openBaseCount) {
+		while (len < (self._model.levelVO.openBaseCount + 1)) {
 			//在可以放置的底座中随机一个
 			let random: number = App.RandomUtils.randrange(self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount, self._model.levelVO.maxBaseCount);
 			let baseItem: BaseItem = self.lists.getChildAt(random) as BaseItem;
@@ -232,16 +232,16 @@ class BattleMap extends BaseEuiView {
 
 	/** 创建怪物 */
 	private createMonster(): void {
-		// if (this._starMonsterTime <= egret.getTimer()) {
-		let monster: Monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
-		monster.addToParent();
-		let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
-		//给怪一个行走路径
-		info.path = this._model.levelVO.path;
-		let num: number = App.RandomUtils.randrange(0, 3);
-		info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
-		monster.Parse(info);
-		this._model.monsterDic.Add(monster.ID, monster);
-		// }
+		if (this._starMonsterTime <= egret.getTimer()) {
+			let monster: Monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
+			monster.addToParent();
+			let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
+			//给怪一个行走路径
+			info.path = this._model.levelVO.path;
+			let num: number = App.RandomUtils.randrange(0, 3);
+			info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
+			monster.Parse(info);
+			this._model.monsterDic.Add(monster.ID, monster);
+		}
 	}
 }

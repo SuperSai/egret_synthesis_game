@@ -7,6 +7,4 @@ enum SceneConsts {
     LOADING,
     /** 登陆场景 */
     LOGIN,
-    /** 关卡 */
-    LEVEL,
 }

@@ -106,7 +106,7 @@ class Monster extends BaseRole {
 			self._path.push(new egret.Point(Number(pos[0]), Number(pos[1])));
 		}
 
-		self._bone = ResourcePool.Intance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+		self._bone = ResourcePool.Instance.pop(self._monsterVO.assetname, ResourcePool.SKE);
 		self._bone.play();
 		self.addChild(self._bone);
 
@@ -124,25 +124,41 @@ class Monster extends BaseRole {
 		self._path = [];
 		ObjectPool.push(self._monsterInfo);
 		ObjectPool.push(self);
-		ResourcePool.Intance.push(self._bone, ResourcePool.SKE);
+		ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
 		App.DisplayUtils.removeFromParent(self);
 	}
 
+	/** 获取怪物唯一ID */
 	get ID(): number {
 		return this._id;
 	}
 
+	/** 设置怪物当前血量值 */
 	set HP(value: number) {
 		let self = this;
 		self._hp = value;
 		if (self._hp <= 0) {
-			self.removeSelf();
 			self._battleController.applyFunc(BattleConst.MONSTER_DIE);
+			self.removeSelf();
+			self.bombEffect();
 		}
 	}
-
+	
+	/** 设置怪物当前血量值 */
 	get HP(): number {
 		return this._hp;
+	}
+
+	/** 爆炸特效 */
+	private bombEffect(): void {
+		let self = this;
+		let bombBone: BoneAnimation = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
+		App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
+		bombBone.x = self.localToGlobal().x;
+		bombBone.y = self.localToGlobal().y;
+		bombBone.play(() => {
+			App.DisplayUtils.removeFromParent(bombBone);
+		}, self);
 	}
 
 	get point(): egret.Point {

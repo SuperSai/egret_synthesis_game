@@ -21,6 +21,7 @@
 		"resource/skins/common/component/CurrencyComSkin.exml",
 		"resource/skins/battle/BattleViewSkin.exml",
 		"resource/skins/battle/item/BaseItemSkin.exml",
+		"resource/skins/battle/panel/HeroMsgPanelSkin.exml",
 		"resource/skins/common/component/ButtonComSkin.exml",
 		"resource/skins/eui_skins/ButtonSkin.exml",
 		"resource/skins/eui_skins/CheckBoxSkin.exml",

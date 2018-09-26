@@ -13,9 +13,9 @@ class ResourcePool {
     public static BITMAP: string = "Bitmap";
     //存储所有对象的主容器
     private main: Object;
-
+    
     private static _ins: ResourcePool;
-    public static get Intance(): ResourcePool {
+    public static get Instance(): ResourcePool {
         if (!this._ins) this._ins = new ResourcePool();
         return this._ins;
     }

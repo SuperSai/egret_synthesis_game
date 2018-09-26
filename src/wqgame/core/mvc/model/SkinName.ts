@@ -16,4 +16,6 @@ class SkinName {
 	public static BaseItemSkin: string = "resource/skins/battle/item/BaseItemSkin.exml";
 
 	public static HeroBaseItemSkin: string = "resource/skins/battle/item/HeroBaseItemSkin.exml";
+
+	public static HeroMsgPanelSkin: string = "resource/skins/battle/panel/HeroMsgPanelSkin.exml";
 }

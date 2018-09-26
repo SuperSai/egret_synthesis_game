@@ -88,7 +88,10 @@ class ViewManager extends BaseClass {
 
 		if (view.isInit()) {
 			view.addToParent();
+			view.initUI();
+			view.addEvents();
 			view.open.apply(view, param);
+			view.initData();
 		}
 		else {
 			App.GameLoading.showLoading();

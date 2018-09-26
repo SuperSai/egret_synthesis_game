@@ -105,7 +105,7 @@ var BattleMap = (function (_super) {
         var len = self._model.roleDic.GetLenght();
         if (len >= self._model.levelVO.openBaseCount)
             return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
-        while (len < self._model.levelVO.openBaseCount) {
+        while (len < (self._model.levelVO.openBaseCount + 1)) {
             //在可以放置的底座中随机一个
             var random = App.RandomUtils.randrange(self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount, self._model.levelVO.maxBaseCount);
             var baseItem = self.lists.getChildAt(random);
@@ -220,17 +220,17 @@ var BattleMap = (function (_super) {
     };
     /** 创建怪物 */
     BattleMap.prototype.createMonster = function () {
-        // if (this._starMonsterTime <= egret.getTimer()) {
-        var monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
-        monster.addToParent();
-        var info = ObjectPool.pop(MonsterInfo, "MonsterInfo");
-        //给怪一个行走路径
-        info.path = this._model.levelVO.path;
-        var num = App.RandomUtils.randrange(0, 3);
-        info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
-        monster.Parse(info);
-        this._model.monsterDic.Add(monster.ID, monster);
-        // }
+        if (this._starMonsterTime <= egret.getTimer()) {
+            var monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
+            monster.addToParent();
+            var info = ObjectPool.pop(MonsterInfo, "MonsterInfo");
+            //给怪一个行走路径
+            info.path = this._model.levelVO.path;
+            var num = App.RandomUtils.randrange(0, 3);
+            info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
+            monster.Parse(info);
+            this._model.monsterDic.Add(monster.ID, monster);
+        }
     };
     return BattleMap;
 }(BaseEuiView));

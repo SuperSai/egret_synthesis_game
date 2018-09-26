@@ -122,8 +122,8 @@ var BoneAnimation = (function (_super) {
         this.armature.eventDispatcher.removeDBEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.playComplete, this);
         this.armature.eventDispatcher.removeDBEventListener(dragonBones.EventObject.FRAME_EVENT, this.onFrameEventFired, this);
         this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onBoneRemove, this);
-        if (!ResourcePool.Intance.hasItem(this, ResourcePool.SKE)) {
-            ResourcePool.Intance.push(this, ResourcePool.SKE);
+        if (!ResourcePool.Instance.hasItem(this, ResourcePool.SKE)) {
+            ResourcePool.Instance.push(this, ResourcePool.SKE);
         }
     };
     BoneAnimation.prototype.initBone = function () {

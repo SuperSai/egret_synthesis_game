@@ -22,16 +22,16 @@ var Bullet = (function (_super) {
     Bullet.prototype.setTarget = function (bulletId, $x, $y, $target) {
         var self = this;
         self._bulletVO = GlobleVOData.getData(GlobleVOData.BulletVO, bulletId);
-        self.x = $x;
-        self.y = $y;
         self._target = $target;
         if (self._bulletImg)
             App.DisplayUtils.removeFromParent(self._bulletImg);
         self._bulletImg = ObjectPool.pop(egret.Bitmap, "egret.Bitmap");
         self._bulletImg.texture = RES.getRes(self._bulletVO.assetname);
-        self._bulletImg.x = -self._bulletImg.width / 2;
-        self._bulletImg.y = -self._bulletImg.height / 2;
+        // self._bulletImg.x = -self._bulletImg.width / 2;
+        // self._bulletImg.y = -self._bulletImg.height / 2;
         self.addChild(self._bulletImg);
+        self.x = $x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
+        self.y = $y + self._target.height + (self._bulletImg.height >> 1);
     };
     Bullet.prototype.onUpdate = function () {
         _super.prototype.onUpdate.call(this);
@@ -46,7 +46,7 @@ var Bullet = (function (_super) {
             this.release();
             return;
         }
-        var distance = egret.Point.distance(this.point, this._target.point); // App.MathUtils.getDistance(this.x, this.y, this._target.x, this._target.y);
+        var distance = egret.Point.distance(this.point, this._target.point);
         if (distance <= this._bulletVO.radius) {
             this._target.HP = this._target.HP - this._bulletVO.damage;
             this._target = null;

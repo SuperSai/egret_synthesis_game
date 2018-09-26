@@ -34,7 +34,7 @@ class BaseEuiItem extends eui.ItemRenderer {
 		}
 	}
 
-	protected removeEvents(): void {
+	public removeEvents(): void {
 		let self = this;
 	}
 

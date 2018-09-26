@@ -88,7 +88,10 @@ var ViewManager = (function (_super) {
         }
         if (view.isInit()) {
             view.addToParent();
+            view.initUI();
+            view.addEvents();
             view.open.apply(view, param);
+            view.initData();
         }
         else {
             App.GameLoading.showLoading();

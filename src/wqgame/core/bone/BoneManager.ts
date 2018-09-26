@@ -8,7 +8,7 @@ class BoneManager extends BaseClass {
 	}
 
 	public test_showBone(resId: string) {
-		let testBone: BoneAnimation = ResourcePool.Intance.pop(resId, ResourcePool.SKE);
+		let testBone: BoneAnimation = ResourcePool.Instance.pop(resId, ResourcePool.SKE);
 		testBone.playTimes = 0;
 		testBone.removeAtLastFrame = false;
 		testBone.play();

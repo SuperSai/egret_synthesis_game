@@ -149,7 +149,11 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 面板关闭执行函数，用于子类继承
      * @param param 参数
      */
-    public close(...param: any[]): void { }
+    public close(...param: any[]): void {
+        this.removeEvents();
+        if (this._btnEffect) this._btnEffect.dispose();
+        this._btnEffect = null;
+    }
 
     /**
      /**

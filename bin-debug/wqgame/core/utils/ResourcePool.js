@@ -8,7 +8,7 @@ var ResourcePool = (function () {
         this.main[ResourcePool.BITMAPTEXT] = {};
         this.main[ResourcePool.BITMAP] = {};
     }
-    Object.defineProperty(ResourcePool, "Intance", {
+    Object.defineProperty(ResourcePool, "Instance", {
         get: function () {
             if (!this._ins)
                 this._ins = new ResourcePool();

@@ -14,7 +14,7 @@ var HallController = (function (_super) {
         var _this = _super.call(this) || this;
         var self = _this;
         //View初始化
-        self._hall = new HallView(self, LayerManager.GAME_MAP_LAYER);
+        self._hall = new HallView(self, LayerManager.GAME_UI_LAYER);
         App.ViewManager.register(ViewConst.Hall, self._hall);
         self._hallModel = new HallModel(self);
         //代理 -- 负责接收协议和转发协议
