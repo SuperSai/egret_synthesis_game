@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "buttons_json,frames_json",
+			"keys": "buttons_json,frames_json,chr_image_130131_png",
 			"name": "common"
 		},
 		{
@@ -54,6 +54,11 @@
 			"url": "common/bullet/100_1.png",
 			"type": "image",
 			"name": "100_1"
+		},
+		{
+			"url": "common/heroes/skin/chr_image_130131.png",
+			"type": "image",
+			"name": "chr_image_130131_png"
 		}
 	]
 }

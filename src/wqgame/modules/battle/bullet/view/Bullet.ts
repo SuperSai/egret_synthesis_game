@@ -47,6 +47,7 @@ class Bullet extends BaseBullet {
 			this._target = null;
 			this._bulletVO = null;
 			this.release();
+			App.EffectUtils.bombEffect(this.localToGlobal(), this);
 		}
 		else {
 			var targetSpeed: egret.Point = App.CommonUtils.getSpeed(this._target.point, this.point, this._bulletVO.speed);

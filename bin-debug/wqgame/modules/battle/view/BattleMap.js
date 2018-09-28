@@ -203,19 +203,26 @@ var BattleMap = (function (_super) {
     };
     /** 更新怪物 -- 出怪 */
     BattleMap.prototype.updateMonster = function (passTime) {
-        if (this._initComplete && passTime > this._lastTime) {
-            this._model.currMonsterCount++;
-            this.createMonster();
-            this._lastTime = passTime + this._model.levelVO.monsterDelay;
+        if (!this._model)
+            return;
+        if (this._model.battleMonsterState == BATTLE_MONSTER_STATE.MONSTER) {
+            if (this._initComplete && this._model.currMonsterCount < this._model.maxMonsterCount && passTime > this._lastTime) {
+                this._model.currMonsterCount++;
+                this.createMonster();
+                this._lastTime = passTime + this._model.levelVO.monsterDelay;
+            }
+            /** 当前波数的怪物已经全部出战完毕后就进入生成BOSS怪*/
+            if (this._initComplete && this._model.currMonsterCount >= this._model.maxMonsterCount) {
+                //波数+1
+                this._model.currwaveNum++;
+                //重新设置当前波数的怪物
+                this._model.currMonsterCount = 0;
+                this._model.maxMonsterCount = this._model.monsterWaveNumCount;
+                this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
+            }
         }
-        /** 当前波数的怪物已经全部出战完毕 */
-        if (this._initComplete && this._model.currMonsterCount >= this._model.maxMonsterCount) {
-            //波数+1
-            this._model.currwaveNum++;
-            //重新设置当前波数的怪物
-            this._model.currMonsterCount = 0;
-            this._model.maxMonsterCount = this._model.monsterWaveNumCount;
-            this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
+        else if (this._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
+            //TODO BOSS怪
         }
     };
     /** 创建怪物 */

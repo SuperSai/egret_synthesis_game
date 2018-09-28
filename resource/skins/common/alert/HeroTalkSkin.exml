@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="HeroTalkSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="432" height="432">
+	<e:Group horizontalCenter="0" verticalCenter="0">
+		<e:Image source="chr_image_130131_png" x="0" y="0" scaleX="0.6" scaleY="0.6"/>
+		<e:Group id="talkGroup" x="-31" y="21.08" visible="false">
+			<e:Image source="frames_json.frame_03" y="0" scaleX="-0.7" scaleY="0.7" left="0"/>
+			<e:Label id="txt_talk" text="小怪物来袭啦...\n准备战斗!" fontFamily="Microsoft YaHei" bold="true" stroke="2" textAlign="center" horizontalCenter="0" verticalCenter="0" size="26"/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

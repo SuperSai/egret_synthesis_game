@@ -25,6 +25,7 @@ var BattleView = (function (_super) {
         _super.prototype.initUI.call(this);
         var self = this;
         self.currency.initUI();
+        App.ViewManager.open(ViewConst.HeroTalk);
     };
     /** 对面板数据的初始化，用于子类继承 */
     BattleView.prototype.initData = function () {

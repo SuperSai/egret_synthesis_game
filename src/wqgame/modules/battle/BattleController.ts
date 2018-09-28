@@ -22,6 +22,7 @@ class BattleController extends BaseController {
 
 	private onBattleInit(param: any[]): void {
 		let self = this;
+		self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
 		self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
 		self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
 		App.ViewManager.open(ViewConst.Battle);
@@ -31,8 +32,11 @@ class BattleController extends BaseController {
 
 	/** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
 	private onBattleUpdate(): void {
-		//生成怪物
-		this._battleView.map.updateMonster(egret.getTimer());
+		//判断来控制是否继续生成怪物
+		if (this._battleModel.battleMonsterState != BATTLE_MONSTER_STATE.PAUSE) {
+			//生成怪物
+			this._battleView.map.updateMonster(egret.getTimer());
+		}
 		//怪物移动
 		if (this._battleModel.monsterDic.GetLenght() > 0) {
 			let monsters: Monster[] = this._battleModel.monsterDic.getValues();
@@ -77,6 +81,7 @@ class BattleController extends BaseController {
 	private initRegisterView(): void {
 		let self = this;
 		App.ViewManager.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerManager.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
+		App.ViewManager.register(ViewConst.HeroTalk, new HeroTalk(self, LayerManager.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
 	}
 
 }

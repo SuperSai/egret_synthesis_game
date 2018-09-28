@@ -135,23 +135,12 @@ var Monster = (function (_super) {
             if (self._hp <= 0) {
                 self._battleController.applyFunc(BattleConst.MONSTER_DIE);
                 self.removeSelf();
-                self.bombEffect();
+                App.EffectUtils.bombEffect(self.localToGlobal(), self);
             }
         },
         enumerable: true,
         configurable: true
     });
-    /** 爆炸特效 */
-    Monster.prototype.bombEffect = function () {
-        var self = this;
-        var bombBone = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
-        App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
-        bombBone.x = self.localToGlobal().x;
-        bombBone.y = self.localToGlobal().y;
-        bombBone.play(function () {
-            App.DisplayUtils.removeFromParent(bombBone);
-        }, self);
-    };
     Object.defineProperty(Monster.prototype, "point", {
         get: function () {
             return new egret.Point(this.x, this.y);

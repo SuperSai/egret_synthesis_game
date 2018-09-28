@@ -8,6 +8,8 @@ declare class HeroBaseItemSkin extends eui.Skin{
 }
 declare class HeroMsgPanelSkin extends eui.Skin{
 }
+declare class HeroTalkSkin extends eui.Skin{
+}
 declare class ButtonComSkin extends eui.Skin{
 }
 declare class CurrencyComSkin extends eui.Skin{

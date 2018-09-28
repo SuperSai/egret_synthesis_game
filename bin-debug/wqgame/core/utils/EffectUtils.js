@@ -42,22 +42,71 @@ var EffectUtils = (function (_super) {
         str += ";";
         return str;
     };
-    /**
-     * 开始闪烁
-     * @param obj
-     */
+    /** 开始闪烁 */
     EffectUtils.prototype.startFlicker = function (obj, alphaTime) {
         obj.alpha = 1;
         egret.Tween.get(obj).to({ "alpha": 0 }, alphaTime).to({ "alpha": 1 }, alphaTime).call(this.startFlicker, this, [obj, alphaTime]);
     };
-    /**
-     * 停止闪烁
-     * @param obj
-     */
+    /** 停止闪烁 */
     EffectUtils.prototype.stopFlicker = function (obj) {
         egret.Tween.removeTweens(obj);
+    };
+    /** 爆炸特效 */
+    EffectUtils.prototype.bombEffect = function (pos, obj) {
+        var self = this;
+        var bombBone = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
+        App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
+        bombBone.x = pos.x;
+        bombBone.y = pos.y;
+        bombBone.play(function () {
+            App.DisplayUtils.removeFromParent(bombBone);
+        }, obj);
+    };
+    /** 界面出现特效 */
+    EffectUtils.prototype.viewShowEffect = function (view, type, callback) {
+        if (type === void 0) { type = VIEW_SHOW_TYPE.UP; }
+        if (callback === void 0) { callback = null; }
+        var param = null;
+        switch (type) {
+            case VIEW_SHOW_TYPE.UP:
+                view.anchorOffsetY = App.StageUtils.getHeight();
+                param = { anchorOffsetY: 0 };
+                break;
+            case VIEW_SHOW_TYPE.DOWN:
+                view.anchorOffsetY = -(App.StageUtils.getHeight());
+                param = { anchorOffsetY: 0 };
+                break;
+            case VIEW_SHOW_TYPE.RIGHT:
+                view.anchorOffsetX = App.StageUtils.getWidth();
+                param = { anchorOffsetX: 0 };
+                break;
+            case VIEW_SHOW_TYPE.LEFT:
+                view.anchorOffsetX = -(App.StageUtils.getWidth());
+                param = { anchorOffsetX: 0 };
+                break;
+            default:
+                view.anchorOffsetY = App.StageUtils.getHeight();
+                param = { anchorOffsetY: 0 };
+                break;
+        }
+        egret.Tween.get(view).to(param, 300).call(function () {
+            egret.Tween.removeTweens(view);
+            if (callback)
+                callback();
+        });
     };
     return EffectUtils;
 }(BaseClass));
 __reflect(EffectUtils.prototype, "EffectUtils");
+var VIEW_SHOW_TYPE;
+(function (VIEW_SHOW_TYPE) {
+    /** 从上到下 */
+    VIEW_SHOW_TYPE[VIEW_SHOW_TYPE["UP"] = 0] = "UP";
+    /** 从下到上 */
+    VIEW_SHOW_TYPE[VIEW_SHOW_TYPE["DOWN"] = 1] = "DOWN";
+    /** 从左到右 */
+    VIEW_SHOW_TYPE[VIEW_SHOW_TYPE["RIGHT"] = 2] = "RIGHT";
+    /** 从右到左 */
+    VIEW_SHOW_TYPE[VIEW_SHOW_TYPE["LEFT"] = 3] = "LEFT";
+})(VIEW_SHOW_TYPE || (VIEW_SHOW_TYPE = {}));
 //# sourceMappingURL=EffectUtils.js.map

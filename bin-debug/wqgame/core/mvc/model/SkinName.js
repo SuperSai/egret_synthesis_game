@@ -14,6 +14,7 @@ var SkinName = (function () {
     SkinName.BaseItemSkin = "resource/skins/battle/item/BaseItemSkin.exml";
     SkinName.HeroBaseItemSkin = "resource/skins/battle/item/HeroBaseItemSkin.exml";
     SkinName.HeroMsgPanelSkin = "resource/skins/battle/panel/HeroMsgPanelSkin.exml";
+    SkinName.HeroTalkSkin = "resource/skins/common/alert/HeroTalkSkin.exml";
     return SkinName;
 }());
 __reflect(SkinName.prototype, "SkinName");

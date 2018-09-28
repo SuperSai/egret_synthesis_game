@@ -20,6 +20,10 @@ var BattleModel = (function (_super) {
         _this.hBaseItemCount = 3;
         /** 当前在第几波 */
         _this.currwaveNum = 1;
+        /** 当前波数的怪物数量 */
+        _this.currMonsterCount = 0;
+        /** 战斗怪物状态 */
+        _this.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
         var self = _this;
         self.init();
         return _this;
@@ -126,4 +130,14 @@ var MONSTER_DIR;
     /** 朝右 */
     MONSTER_DIR[MONSTER_DIR["LEFT"] = 3] = "LEFT";
 })(MONSTER_DIR || (MONSTER_DIR = {}));
+/** 战斗中的出怪状态 */
+var BATTLE_MONSTER_STATE;
+(function (BATTLE_MONSTER_STATE) {
+    /** 出小怪 */
+    BATTLE_MONSTER_STATE[BATTLE_MONSTER_STATE["MONSTER"] = 0] = "MONSTER";
+    /** 出BOSS怪 */
+    BATTLE_MONSTER_STATE[BATTLE_MONSTER_STATE["BOSS"] = 1] = "BOSS";
+    /** 暂停出怪 */
+    BATTLE_MONSTER_STATE[BATTLE_MONSTER_STATE["PAUSE"] = 2] = "PAUSE";
+})(BATTLE_MONSTER_STATE || (BATTLE_MONSTER_STATE = {}));
 //# sourceMappingURL=BattleModel.js.map

@@ -18,9 +18,11 @@ class BattleModel extends BaseModel {
 	/** 当前在第几波 */
 	public currwaveNum: number = 1;
 	/** 当前波数的怪物数量 */
-	public currMonsterCount: number;
+	public currMonsterCount: number = 0;
 	/** 最大波数的怪物数量 */
 	public maxMonsterCount: number;
+	/** 战斗怪物状态 */
+	public battleMonsterState: number = BATTLE_MONSTER_STATE.MONSTER;
 
 	public constructor($controller: BaseController) {
 		super($controller)
@@ -108,4 +110,14 @@ enum MONSTER_DIR {
 	RIGHT,
 	/** 朝右 */
 	LEFT
+}
+
+/** 战斗中的出怪状态 */
+enum BATTLE_MONSTER_STATE {
+	/** 出小怪 */
+	MONSTER,
+	/** 出BOSS怪 */
+	BOSS,
+	/** 暂停出怪 */
+	PAUSE,
 }

@@ -27,8 +27,6 @@ var Bullet = (function (_super) {
             App.DisplayUtils.removeFromParent(self._bulletImg);
         self._bulletImg = ObjectPool.pop(egret.Bitmap, "egret.Bitmap");
         self._bulletImg.texture = RES.getRes(self._bulletVO.assetname);
-        // self._bulletImg.x = -self._bulletImg.width / 2;
-        // self._bulletImg.y = -self._bulletImg.height / 2;
         self.addChild(self._bulletImg);
         self.x = $x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
         self.y = $y + self._target.height + (self._bulletImg.height >> 1);
@@ -52,6 +50,7 @@ var Bullet = (function (_super) {
             this._target = null;
             this._bulletVO = null;
             this.release();
+            App.EffectUtils.bombEffect(this.localToGlobal(), this);
         }
         else {
             var targetSpeed = App.CommonUtils.getSpeed(this._target.point, this.point, this._bulletVO.speed);

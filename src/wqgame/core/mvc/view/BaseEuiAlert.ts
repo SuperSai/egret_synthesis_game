@@ -4,11 +4,14 @@ class BaseEuiAlert extends BaseEuiView {
 	public btn_close: eui.Group;
 	protected isMaskTouch: boolean = true;
 	private _layer: number;
+	private _viewShowType: number;
+	public effectCallBack: Function;
 
-	public constructor($controller: BaseController, $layer: number, $skinName: string) {
+	public constructor($controller: BaseController, $layer: number, $skinName: string, $viewShowType: number = VIEW_SHOW_TYPE.UP) {
 		super($controller, $layer);
 		this.skinName = $skinName;
 		this._layer = $layer;
+		this._viewShowType = $viewShowType;
 	}
 
 	/** 对面板进行显示初始化，用于子类继承 */
@@ -22,10 +25,12 @@ class BaseEuiAlert extends BaseEuiView {
 		App.LayerManager.addToLayer(self._maskRect, this._layer);
 		self.myParent.setChildIndex(self._maskRect, 0);
 
-		self.anchorOffsetY = App.StageUtils.getHeight();
-		egret.Tween.get(self).to({ anchorOffsetY: 0 }, 300).call(() => {
-			egret.Tween.removeTweens(self);
-		});
+	}
+
+	public initData(): void {
+		super.initData();
+		let self = this;
+		App.EffectUtils.viewShowEffect(self, self._viewShowType, self.effectCallBack);
 	}
 
 	public addEvents(): void {

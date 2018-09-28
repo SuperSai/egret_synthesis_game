@@ -24,6 +24,7 @@ var BattleController = (function (_super) {
     }
     BattleController.prototype.onBattleInit = function (param) {
         var self = this;
+        self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
         self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
         self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
         App.ViewManager.open(ViewConst.Battle);
@@ -32,8 +33,11 @@ var BattleController = (function (_super) {
     };
     /** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
     BattleController.prototype.onBattleUpdate = function () {
-        //生成怪物
-        this._battleView.map.updateMonster(egret.getTimer());
+        //判断来控制是否继续生成怪物
+        if (this._battleModel.battleMonsterState != BATTLE_MONSTER_STATE.PAUSE) {
+            //生成怪物
+            this._battleView.map.updateMonster(egret.getTimer());
+        }
         //怪物移动
         if (this._battleModel.monsterDic.GetLenght() > 0) {
             var monsters = this._battleModel.monsterDic.getValues();
@@ -75,6 +79,7 @@ var BattleController = (function (_super) {
     BattleController.prototype.initRegisterView = function () {
         var self = this;
         App.ViewManager.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerManager.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
+        App.ViewManager.register(ViewConst.HeroTalk, new HeroTalk(self, LayerManager.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
     };
     return BattleController;
 }(BaseController));

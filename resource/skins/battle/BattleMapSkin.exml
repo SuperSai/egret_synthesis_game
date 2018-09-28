@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="BattleMapSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Image id="mapImg" left="0" right="0" top="0" bottom="0" source=""/>
-	<e:Image source="battle_json.build_spell" horizontalCenter="5" top="0"/>
-	<e:Image source="battle_json.create_soldier_remind" horizontalCenter="70" bottom="64"/>
-	<ns1:HeroBaseItem id="heroBase" skinName="HeroBaseItemSkin" horizontalCenter="9.5" verticalCenter="-269"/>
-	<e:List id="lists" verticalCenter="55" horizontalCenter="0">
-		<e:layout>
+
+
+
+
+
+	<e:Group width="100%" height="100%" horizontalCenter="0" verticalCenter="0">
+		<e:Image id="mapImg" source="" left="0" top="0" locked="true"/>
+		<e:Image source="battle_json.build_spell" y="0" horizontalCenter="8"/>
+		<e:Image id="outMonsterImg" source="battle_json.create_soldier_remind" x="388" bottom="63"/>
+		<ns1:HeroBaseItem id="heroBase" skinName="HeroBaseItemSkin" y="263" horizontalCenter="8.5"/>
+		<e:List id="lists" y="455" horizontalCenter="0">
+			<e:layout>
 			<e:TileLayout requestedRowCount="4" requestedColumnCount="3" rowHeight="120" columnWidth="120" horizontalAlign="center" verticalAlign="middle" verticalGap="0" horizontalGap="0"/>
-		</e:layout>
-	</e:List>
-	<e:Group id="btn_open" x="452" y="567.64" name="btn_open_1#1" touchChildren="false">
-		<e:Image source="battle_json.btn_open_level" scaleX="1" scaleY="1"/>
+			</e:layout>
+		</e:List>
+		<e:Group id="btn_open" y="567.64" name="btn_open_1#1" touchChildren="false" horizontalCenter="134">
+			<e:Image source="battle_json.btn_open_level" scaleX="1" scaleY="1"/>
+		</e:Group>
 	</e:Group>
 </e:Skin>

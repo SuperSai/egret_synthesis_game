@@ -10,11 +10,13 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var BaseEuiAlert = (function (_super) {
     __extends(BaseEuiAlert, _super);
-    function BaseEuiAlert($controller, $layer, $skinName) {
+    function BaseEuiAlert($controller, $layer, $skinName, $viewShowType) {
+        if ($viewShowType === void 0) { $viewShowType = VIEW_SHOW_TYPE.UP; }
         var _this = _super.call(this, $controller, $layer) || this;
         _this.isMaskTouch = true;
         _this.skinName = $skinName;
         _this._layer = $layer;
+        _this._viewShowType = $viewShowType;
         return _this;
     }
     /** 对面板进行显示初始化，用于子类继承 */
@@ -27,10 +29,11 @@ var BaseEuiAlert = (function (_super) {
         }
         App.LayerManager.addToLayer(self._maskRect, this._layer);
         self.myParent.setChildIndex(self._maskRect, 0);
-        self.anchorOffsetY = App.StageUtils.getHeight();
-        egret.Tween.get(self).to({ anchorOffsetY: 0 }, 300).call(function () {
-            egret.Tween.removeTweens(self);
-        });
+    };
+    BaseEuiAlert.prototype.initData = function () {
+        _super.prototype.initData.call(this);
+        var self = this;
+        App.EffectUtils.viewShowEffect(self, self._viewShowType, self.effectCallBack);
     };
     BaseEuiAlert.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);

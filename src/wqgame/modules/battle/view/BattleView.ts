@@ -25,6 +25,7 @@ class BattleView extends BaseEuiView {
 		super.initUI();
 		let self = this;
 		self.currency.initUI();
+		App.ViewManager.open(ViewConst.HeroTalk);
 	}
 
 	/** 对面板数据的初始化，用于子类继承 */

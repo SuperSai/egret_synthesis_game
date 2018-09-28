@@ -140,25 +140,13 @@ class Monster extends BaseRole {
 		if (self._hp <= 0) {
 			self._battleController.applyFunc(BattleConst.MONSTER_DIE);
 			self.removeSelf();
-			self.bombEffect();
+			App.EffectUtils.bombEffect(self.localToGlobal(), self);
 		}
 	}
-	
+
 	/** 设置怪物当前血量值 */
 	get HP(): number {
 		return this._hp;
-	}
-
-	/** 爆炸特效 */
-	private bombEffect(): void {
-		let self = this;
-		let bombBone: BoneAnimation = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
-		App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
-		bombBone.x = self.localToGlobal().x;
-		bombBone.y = self.localToGlobal().y;
-		bombBone.play(() => {
-			App.DisplayUtils.removeFromParent(bombBone);
-		}, self);
 	}
 
 	get point(): egret.Point {
