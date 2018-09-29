@@ -153,4 +153,8 @@ class Monster extends BaseRole {
 		return new egret.Point(this.x, this.y);
 	}
 
+	get isMove(): boolean {
+		return this._isMove;
+	}
+
 }

@@ -4,13 +4,14 @@
 class StageUtils extends BaseClass {
     //UIStage单例
     private static _uiStage: eui.UILayer;
+    private _stageRect: egret.Rectangle;
 
     /**
      * 构造函数
      */
     public constructor() {
         super();
-
+        let self = this;
         if (StageUtils._uiStage == null) {
             StageUtils._uiStage = new eui.UILayer();
             StageUtils._uiStage.percentHeight = 100;
@@ -18,6 +19,11 @@ class StageUtils extends BaseClass {
             StageUtils._uiStage.touchEnabled = false;
             this.getStage().addChild(StageUtils._uiStage);
         }
+        self._stageRect = new egret.Rectangle(0, 0, self.getWidth(), self.getHeight());
+    }
+
+    public getStageRect(): egret.Rectangle {
+        return this._stageRect;
     }
 
     /**

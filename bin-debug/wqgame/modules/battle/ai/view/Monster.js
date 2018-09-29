@@ -148,6 +148,13 @@ var Monster = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Monster.prototype, "isMove", {
+        get: function () {
+            return this._isMove;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Monster;
 }(BaseRole));
 __reflect(Monster.prototype, "Monster");

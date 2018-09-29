@@ -35,7 +35,7 @@ class Bullet extends BaseBullet {
 	}
 
 	private move(): void {
-		if (this._target.HP <= 0) {
+		if (this._target.HP <= 0 || !this._target.isMove) {
 			this._target = null;
 			this._bulletVO = null;
 			this.release();

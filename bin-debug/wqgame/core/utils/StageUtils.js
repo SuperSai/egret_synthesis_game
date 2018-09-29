@@ -18,6 +18,7 @@ var StageUtils = (function (_super) {
      */
     function StageUtils() {
         var _this = _super.call(this) || this;
+        var self = _this;
         if (StageUtils._uiStage == null) {
             StageUtils._uiStage = new eui.UILayer();
             StageUtils._uiStage.percentHeight = 100;
@@ -25,8 +26,12 @@ var StageUtils = (function (_super) {
             StageUtils._uiStage.touchEnabled = false;
             _this.getStage().addChild(StageUtils._uiStage);
         }
+        self._stageRect = new egret.Rectangle(0, 0, self.getWidth(), self.getHeight());
         return _this;
     }
+    StageUtils.prototype.getStageRect = function () {
+        return this._stageRect;
+    };
     /**
      * 获取游戏的高度
      * @returns {number}
