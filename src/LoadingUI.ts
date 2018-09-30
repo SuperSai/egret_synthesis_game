@@ -46,7 +46,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 
         //加载大背景
         this.Bg = new egret.Bitmap();
-        this.Bg.texture = RES.getRes("loadingBg");
+        this.Bg.texture = RES.getRes("loadingBg_jpg");
         this.Bg.width = this.width;
         this.Bg.height = this.height;
         this.addChild(this.Bg);

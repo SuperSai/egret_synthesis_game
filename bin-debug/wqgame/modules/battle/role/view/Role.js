@@ -55,8 +55,9 @@ var Role = (function (_super) {
         var self = this;
         var monsters = this._model.monsterDic.getValues();
         for (var i = 0; i < monsters.length; i++) {
-            if (App.MathUtils.getDistance(this.x, this.y, monsters[i].x, monsters[i].y) <= self._heroVO.distance) {
-                self.createBullet(monsters[i]);
+            var monster = monsters[i];
+            if (monster.HP > 0 && monster.isMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
+                self.createBullet(monster);
                 break;
             }
         }
@@ -64,7 +65,7 @@ var Role = (function (_super) {
     /** 创建子弹 */
     Role.prototype.createBullet = function (monster) {
         var nowTime = egret.getTimer();
-        if (nowTime > this.lastTime) {
+        if (monster.HP > 0 && monster.isMove && nowTime > this.lastTime) {
             this.lastTime = nowTime + this._heroVO.delay; //下次执行时间
             this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, this.x, this.y, monster);
         }

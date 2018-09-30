@@ -31,13 +31,13 @@ var GameLoading = (function (_super) {
         this.uiImageContainer.x = this.content.width * 0.5;
         this.uiImageContainer.y = this.content.height * 0.5;
         this.content.addChild(this.uiImageContainer);
-        RES.getResByUrl("resource/common/atlas/load_Reel.png", function (texture) {
-            var img = new egret.Bitmap();
-            img.texture = texture;
-            img.x = -img.width * 0.5;
-            img.y = -img.height * 0.5;
-            this.uiImageContainer.addChild(img);
-        }, this, RES.ResourceItem.TYPE_IMAGE);
+        // RES.getResByUrl("resource/common/atlas/load_Reel.png", function (texture: egret.Texture): void {
+        var img = new egret.Bitmap();
+        img.texture = RES.getRes("load_Reel_png"); //texture;
+        img.x = -img.width * 0.5;
+        img.y = -img.height * 0.5;
+        this.uiImageContainer.addChild(img);
+        // }, this, RES.ResourceItem.TYPE_IMAGE);
     };
     GameLoading.prototype.showLoading = function () {
         App.StageUtils.getStage().addChild(this.content);

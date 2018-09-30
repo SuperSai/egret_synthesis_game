@@ -9,7 +9,7 @@
 			"name": "global"
 		},
 		{
-			"keys": "loadingBg",
+			"keys": "loadingBg_jpg,load_Reel_png",
 			"name": "loading"
 		},
 		{
@@ -40,11 +40,6 @@
 			"subkeys": "frame_01,frame_03,frame_04,frame_bg_01,frame_bg_02,frame_bg_03,frame_currency"
 		},
 		{
-			"url": "common/atlas/loadingBg.png",
-			"type": "image",
-			"name": "loadingBg"
-		},
-		{
 			"url": "common/atlas/role/roles.json",
 			"type": "sheet",
 			"name": "roles_json",
@@ -59,6 +54,16 @@
 			"url": "common/heroes/skin/chr_image_130131.png",
 			"type": "image",
 			"name": "chr_image_130131_png"
+		},
+		{
+			"url": "common/atlas/loadingBg.jpg",
+			"type": "image",
+			"name": "loadingBg_jpg"
+		},
+		{
+			"url": "common/atlas/load_Reel.png",
+			"type": "image",
+			"name": "load_Reel_png"
 		}
 	]
 }

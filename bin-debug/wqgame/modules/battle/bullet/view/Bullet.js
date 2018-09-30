@@ -38,14 +38,14 @@ var Bullet = (function (_super) {
         this.move();
     };
     Bullet.prototype.move = function () {
-        // if (this._target.HP <= 0 || !this._target.isMove) {
-        // 	this._target = null;
-        // 	this._bulletVO = null;
-        // 	this.release();
-        // 	return;
-        // }
+        if (this._target.HP <= 0 || !this._target.isMove) {
+            this._target = null;
+            this._bulletVO = null;
+            this.release();
+            return;
+        }
         var distance = egret.Point.distance(this.point, this._target.point);
-        if (distance <= this._bulletVO.radius && this._target.HP > 0 && this._target.isMove) {
+        if (distance <= this._bulletVO.radius) {
             this._target.HP = this._target.HP - this._bulletVO.damage;
             this._target = null;
             this._bulletVO = null;
@@ -58,12 +58,6 @@ var Bullet = (function (_super) {
             var yDistance = 10 * targetSpeed.y;
             this.x = this.x + xDistance;
             this.y = this.y + yDistance;
-            //飞去边界
-            if (!ObjectUtils.pointIsInArea(App.StageUtils.getStageRect(), this.x, this.y)) {
-                this._target = null;
-                this._bulletVO = null;
-                this.release();
-            }
         }
     };
     /** 释放 */

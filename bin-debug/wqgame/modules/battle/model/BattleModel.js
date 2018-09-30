@@ -17,7 +17,7 @@ var BattleModel = (function (_super) {
         /** 当前游戏中最高级的角色ID */
         _this.maxRoleId = 0;
         /** 一排的底座数量 */
-        _this.hBaseItemCount = 3;
+        _this.hBaseItemCount = 4;
         /** 当前在第几波 */
         _this.currwaveNum = 1;
         /** 当前波数的怪物数量 */

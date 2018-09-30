@@ -103,7 +103,7 @@ var BattleMap = (function (_super) {
         if (roleId < 0)
             return Log.traceError("角色ID错误：" + roleId);
         var len = self._model.roleDic.GetLenght();
-        if (len >= self._model.levelVO.openBaseCount)
+        if (len >= (self._model.levelVO.openBaseCount + 1))
             return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
         while (len < (self._model.levelVO.openBaseCount + 1)) {
             //在可以放置的底座中随机一个

@@ -14,7 +14,7 @@ class BattleModel extends BaseModel {
 	/** 当前游戏中最高级的角色ID */
 	public maxRoleId: number = 0;
 	/** 一排的底座数量 */
-	public hBaseItemCount: number = 3;
+	public hBaseItemCount: number = 4;
 	/** 当前在第几波 */
 	public currwaveNum: number = 1;
 	/** 当前波数的怪物数量 */

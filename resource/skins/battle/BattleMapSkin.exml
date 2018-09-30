@@ -6,16 +6,16 @@
 
 
 	<e:Group width="100%" height="100%" horizontalCenter="0" verticalCenter="0">
-		<e:Image id="mapImg" source="" left="0" top="0" locked="true"/>
-		<e:Image source="battle_json.build_spell" y="0" horizontalCenter="8"/>
-		<e:Image id="outMonsterImg" source="battle_json.create_soldier_remind" x="388" bottom="63"/>
-		<ns1:HeroBaseItem id="heroBase" skinName="HeroBaseItemSkin" y="263" horizontalCenter="8.5"/>
-		<e:List id="lists" y="455" horizontalCenter="0">
+		<e:Image id="mapImg" left="0" top="0" source="" right="0" bottom="0" locked="true"/>
+
+
+		<ns1:HeroBaseItem id="heroBase" skinName="HeroBaseItemSkin" y="729.64" horizontalCenter="-38.5"/>
+		<e:List id="lists" y="325" horizontalCenter="-52">
 			<e:layout>
-			<e:TileLayout requestedRowCount="4" requestedColumnCount="3" rowHeight="120" columnWidth="120" horizontalAlign="center" verticalAlign="middle" verticalGap="0" horizontalGap="0"/>
+			<e:TileLayout requestedRowCount="3" requestedColumnCount="4" rowHeight="96" columnWidth="96" horizontalAlign="center" verticalAlign="middle" verticalGap="0" horizontalGap="10"/>
 			</e:layout>
 		</e:List>
-		<e:Group id="btn_open" y="567.64" name="btn_open_1#1" touchChildren="false" horizontalCenter="134">
+		<e:Group id="btn_open" y="403.64" name="btn_open_1#1" touchChildren="false" horizontalCenter="104.5" scaleX="0.8" scaleY="0.8">
 			<e:Image source="battle_json.btn_open_level" scaleX="1" scaleY="1"/>
 		</e:Group>
 	</e:Group>

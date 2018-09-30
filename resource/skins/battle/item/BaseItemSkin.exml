@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="BaseItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="battle_json.camp_shadow" left="0" top="0" touchEnabled="false" locked="true"/>
+	<e:Image source="battle_json.camp_shadow" left="0" top="0" touchEnabled="false" scaleX="0.8" scaleY="0.8"/>
 </e:Skin>

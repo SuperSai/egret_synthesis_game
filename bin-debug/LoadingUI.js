@@ -49,7 +49,7 @@ var LoadingUI = (function (_super) {
         self.height = self.stage.stageHeight;
         //加载大背景
         this.Bg = new egret.Bitmap();
-        this.Bg.texture = RES.getRes("loadingBg");
+        this.Bg.texture = RES.getRes("loadingBg_jpg");
         this.Bg.width = this.width;
         this.Bg.height = this.height;
         this.addChild(this.Bg);

@@ -18,7 +18,7 @@
 			"url": "cn/asset/atlas/login/login.json",
 			"type": "sheet",
 			"name": "login_json",
-			"subkeys": "login_name_icon,login_saizi,login_startBtn"
+			"subkeys": "login_bg,login_name_icon,login_saizi,login_startBtn"
 		},
 		{
 			"url": "cn/asset/atlas/battle/battle.json",

@@ -6,7 +6,7 @@ class PathConfig {
 	public static Language: string = PathConfig.Root + GameConfig.Language + "/config/language.txt";
 	public static SoundPath: string = PathConfig.Root + "common/sound/";
 	public static ItemPath: string = PathConfig.Root + "common/item/{0}.png";
-	public static MapPath: string = PathConfig.Root + "common/map/{0}.png";
+	public static MapPath: string = PathConfig.Root + "common/map/{0}.jpg";
 
 	public static get ConfigUrls(): string[] {
 		return [

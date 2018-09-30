@@ -19,7 +19,6 @@ class LoginView extends BaseEuiView {
 	public initUI(): void {
 		super.initUI();
 		let self = this;
-
 	}
 
 	/** 对面板数据的初始化，用于子类继承 */
