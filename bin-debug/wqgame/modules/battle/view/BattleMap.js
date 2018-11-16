@@ -203,41 +203,47 @@ var BattleMap = (function (_super) {
     };
     /** 更新怪物 -- 出怪 */
     BattleMap.prototype.updateMonster = function (passTime) {
-        if (!this._model)
+        var self = this;
+        if (!self._model)
             return;
-        if (this._model.battleMonsterState == BATTLE_MONSTER_STATE.MONSTER) {
-            if (this._initComplete && this._model.currMonsterCount < this._model.maxMonsterCount && passTime > this._lastTime) {
-                this._model.currMonsterCount++;
-                this.createMonster();
-                this._lastTime = passTime + this._model.levelVO.monsterDelay;
+        if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.MONSTER) {
+            if (self._initComplete && self._model.currMonsterCount < self._model.maxMonsterCount && passTime > self._lastTime) {
+                self._model.currMonsterCount++;
+                self.createMonster();
+                self._lastTime = passTime + self._model.levelVO.monsterDelay;
             }
             /** 当前波数的怪物已经全部出战完毕后就进入生成BOSS怪*/
-            if (this._initComplete && this._model.currMonsterCount >= this._model.maxMonsterCount) {
+            if (self._initComplete && self._model.currMonsterCount >= self._model.maxMonsterCount) {
                 //波数+1
-                this._model.currwaveNum++;
+                self._model.currwaveNum++;
                 //重新设置当前波数的怪物
-                this._model.currMonsterCount = 0;
-                this._model.maxMonsterCount = this._model.monsterWaveNumCount;
-                this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
+                self._model.currMonsterCount = 0;
+                self._model.maxMonsterCount = self._model.monsterWaveNumCount;
+                self._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
             }
         }
-        else if (this._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
+        else if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
             //TODO BOSS怪
         }
     };
     /** 创建怪物 */
     BattleMap.prototype.createMonster = function () {
-        if (this._starMonsterTime <= egret.getTimer()) {
-            var monster = ObjectPool.pop(Monster, "Monster", this._battleController, LayerManager.GAME_MAP_LAYER);
+        var self = this;
+        if (self._starMonsterTime <= egret.getTimer()) {
+            var monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerManager.GAME_MAP_LAYER);
             monster.addToParent();
             var info = ObjectPool.pop(MonsterInfo, "MonsterInfo");
             //给怪一个行走路径
-            info.path = this._model.levelVO.path;
+            info.path = self._model.levelVO.path;
             var num = App.RandomUtils.randrange(0, 3);
             info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
             monster.Parse(info);
-            this._model.monsterDic.Add(monster.ID, monster);
+            self._model.monsterDic.Add(monster.ID, monster);
         }
+    };
+    /** 创建Boss */
+    BattleMap.prototype.createBoss = function () {
+        var self = this;
     };
     return BattleMap;
 }(BaseEuiView));

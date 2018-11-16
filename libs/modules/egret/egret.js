@@ -2996,8 +2996,8 @@ var egret;
          * 获取指定像素区域的颜色值
          * @param x  像素区域的X轴坐标
          * @param y  像素区域的Y轴坐标
-         * @param width  像素点的Y轴坐标
-         * @param height  像素点的Y轴坐标
+         * @param width  像素区域的宽度
+         * @param height  像素区域的高度
          * @returns  指定像素区域的颜色值
          * @version Egret 3.2.1
          * @platform Web
@@ -17123,7 +17123,7 @@ var egret;
          * @platform Web,Native
          * @language zh_CN
          */
-        Capabilities.engineVersion = "5.2.10";
+        Capabilities.engineVersion = "5.2.12";
         /***
          * current render mode.
          * @type {string}
