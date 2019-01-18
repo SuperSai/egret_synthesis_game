@@ -30,7 +30,7 @@ var BattleScene = (function (_super) {
         _super.prototype.onEnter.call(this);
         //参数
         var mapId = param[0];
-        App.ControllerManager.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT, mapId);
+        App.ControllerMgr.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT, mapId);
     };
     /**
      * 退出Scene调用

@@ -20,7 +20,7 @@ var BaseScene = (function () {
      * 退出Scene调用
      */
     BaseScene.prototype.onExit = function () {
-        App.ViewManager.closeAll();
+        App.ViewMgr.closeAll();
         this.removeAllLayer();
     };
     /**

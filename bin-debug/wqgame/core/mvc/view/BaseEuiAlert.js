@@ -27,7 +27,7 @@ var BaseEuiAlert = (function (_super) {
             self._maskRect = self.getMask(0);
             self.addChild(self._maskRect);
         }
-        App.LayerManager.addToLayer(self._maskRect, this._layer);
+        App.LayerMgr.addToLayer(self._maskRect, this._layer);
         self.myParent.setChildIndex(self._maskRect, 0);
     };
     BaseEuiAlert.prototype.initData = function () {
@@ -51,13 +51,13 @@ var BaseEuiAlert = (function (_super) {
         var self = this;
         App.DisplayUtils.removeFromParent(self._maskRect);
         self._maskRect = null;
-        App.ViewManager.closeView(self);
+        App.ViewMgr.closeView(self);
     };
     BaseEuiAlert.prototype.onClosePanel = function () {
         var self = this;
         App.DisplayUtils.removeFromParent(self._maskRect);
         self._maskRect = null;
-        App.ViewManager.closeView(self);
+        App.ViewMgr.closeView(self);
     };
     /** 创建遮罩 */
     BaseEuiAlert.prototype.getMask = function (maskAlpha) {

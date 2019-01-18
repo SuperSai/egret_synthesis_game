@@ -41,14 +41,14 @@ var GameLoading = (function (_super) {
     };
     GameLoading.prototype.showLoading = function () {
         App.StageUtils.getStage().addChild(this.content);
-        App.TimerManager.doFrame(1, 0, this.enterFrame, this);
+        App.TimerMgr.doFrame(1, 0, this.enterFrame, this);
     };
     GameLoading.prototype.hideLoading = function () {
         if (this.content && this.content.parent) {
             App.StageUtils.getStage().removeChild(this.content);
             this.uiImageContainer.rotation = 0;
         }
-        App.TimerManager.remove(this.enterFrame, this);
+        App.TimerMgr.remove(this.enterFrame, this);
     };
     GameLoading.prototype.enterFrame = function (time) {
         this.averageUtils.push(this.speed * time);

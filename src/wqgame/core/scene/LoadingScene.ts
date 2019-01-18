@@ -13,7 +13,7 @@ class LoadingScene extends BaseScene {
 		super.onEnter();
 
 		//初始打开Loading页面
-		App.ViewManager.open(ViewConst.Loading);
+		App.ViewMgr.open(ViewConst.Loading);
 	}
 
     /**

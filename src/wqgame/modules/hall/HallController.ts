@@ -9,8 +9,8 @@ class HallController extends BaseController {
 		let self = this;
 
 		//View初始化
-		self._hall = new HallView(self, LayerManager.GAME_UI_LAYER);
-		App.ViewManager.register(ViewConst.Hall, self._hall);
+		self._hall = new HallView(self, LayerMgr.GAME_UI_LAYER);
+		App.ViewMgr.register(ViewConst.Hall, self._hall);
 
 		self._hallModel = new HallModel(self);
 		//代理 -- 负责接收协议和转发协议
@@ -22,6 +22,6 @@ class HallController extends BaseController {
 
 	private onHallInit(param: any[]): void {
 		let self = this;
-		App.ViewManager.open(ViewConst.Hall, self._hallModel);
+		App.ViewMgr.open(ViewConst.Hall, self._hallModel);
 	}
 }

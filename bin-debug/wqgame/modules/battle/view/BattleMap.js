@@ -76,12 +76,12 @@ var BattleMap = (function (_super) {
     /** 角色攻击 */
     BattleMap.prototype.onRoleAttack = function (bulledId, x, y, target) {
         var self = this;
-        var bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerManager.GAME_MAP_LAYER);
+        var bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
         bullet.addToParent();
         bullet.setTarget(bulledId, x, y, target);
         bullet.rotation = App.MathUtils.getAngle(new egret.Point(x, y), target.point);
         self._model.bulletDic.Add(bullet.ID, bullet);
-        var layer = App.LayerManager.getLayerByType(LayerManager.GAME_MAP_LAYER);
+        var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(bullet, layer.numChildren);
     };
     /** 开放新的底座 */
@@ -104,7 +104,7 @@ var BattleMap = (function (_super) {
             return Log.traceError("角色ID错误：" + roleId);
         var len = self._model.roleDic.GetLenght();
         if (len >= (self._model.levelVO.openBaseCount + 1))
-            return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
+            return App.MessageMgr.showText(App.LanguageMgr.getLanguageText("battle.txt.01"));
         while (len < (self._model.levelVO.openBaseCount + 1)) {
             //在可以放置的底座中随机一个
             var random = App.RandomUtils.randrange(self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount, self._model.levelVO.maxBaseCount);
@@ -144,7 +144,7 @@ var BattleMap = (function (_super) {
         self._selectRole.x = evt.stageX;
         self._selectRole.y = evt.stageY;
         //设置拿起来的角色层级一定是最高的
-        var layer = App.LayerManager.getLayerByType(LayerManager.GAME_MAP_LAYER);
+        var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(self._selectRole, layer.numChildren);
     };
     BattleMap.prototype.onTouchMove = function (evt) {
@@ -230,7 +230,7 @@ var BattleMap = (function (_super) {
     BattleMap.prototype.createMonster = function () {
         var self = this;
         if (self._starMonsterTime <= egret.getTimer()) {
-            var monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerManager.GAME_MAP_LAYER);
+            var monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerMgr.GAME_MAP_LAYER);
             monster.addToParent();
             var info = ObjectPool.pop(MonsterInfo, "MonsterInfo");
             //给怪一个行走路径

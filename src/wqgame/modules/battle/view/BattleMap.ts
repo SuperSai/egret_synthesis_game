@@ -83,12 +83,12 @@ class BattleMap extends BaseEuiView {
 	/** 角色攻击 */
 	private onRoleAttack(bulledId: number, x: number, y: number, target: Monster): void {
 		let self = this;
-		let bullet: Bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerManager.GAME_MAP_LAYER);
+		let bullet: Bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
 		bullet.addToParent();
 		bullet.setTarget(bulledId, x, y, target);
 		bullet.rotation = App.MathUtils.getAngle(new egret.Point(x, y), target.point);
 		self._model.bulletDic.Add(bullet.ID, bullet);
-		let layer: DisplayLayer = App.LayerManager.getLayerByType(LayerManager.GAME_MAP_LAYER);
+		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(bullet, layer.numChildren);
 	}
 
@@ -111,7 +111,7 @@ class BattleMap extends BaseEuiView {
 		let self = this;
 		if (roleId < 0) return Log.traceError("角色ID错误：" + roleId);
 		let len: number = self._model.roleDic.GetLenght();
-		if (len >= (self._model.levelVO.openBaseCount + 1)) return App.MessageManger.showText(App.LanguageManager.getLanguageText("battle.txt.01"));
+		if (len >= (self._model.levelVO.openBaseCount + 1)) return App.MessageMgr.showText(App.LanguageMgr.getLanguageText("battle.txt.01"));
 		while (len < (self._model.levelVO.openBaseCount + 1)) {
 			//在可以放置的底座中随机一个
 			let random: number = App.RandomUtils.randrange(self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount, self._model.levelVO.maxBaseCount);
@@ -153,7 +153,7 @@ class BattleMap extends BaseEuiView {
 		self._selectRole.x = evt.stageX;
 		self._selectRole.y = evt.stageY;
 		//设置拿起来的角色层级一定是最高的
-		let layer: DisplayLayer = App.LayerManager.getLayerByType(LayerManager.GAME_MAP_LAYER);
+		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(self._selectRole, layer.numChildren);
 	}
 
@@ -240,7 +240,7 @@ class BattleMap extends BaseEuiView {
 	private createMonster(): void {
 		let self = this;
 		if (self._starMonsterTime <= egret.getTimer()) {
-			let monster: Monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerManager.GAME_MAP_LAYER);
+			let monster: Monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerMgr.GAME_MAP_LAYER);
 			monster.addToParent();
 			let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
 			//给怪一个行走路径

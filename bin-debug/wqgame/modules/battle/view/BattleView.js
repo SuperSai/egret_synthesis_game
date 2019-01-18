@@ -25,7 +25,7 @@ var BattleView = (function (_super) {
         _super.prototype.initUI.call(this);
         var self = this;
         self.currency.initUI();
-        App.ViewManager.open(ViewConst.HeroTalk);
+        App.ViewMgr.open(ViewConst.HeroTalk);
     };
     /** 对面板数据的初始化，用于子类继承 */
     BattleView.prototype.initData = function () {
@@ -42,7 +42,7 @@ var BattleView = (function (_super) {
         self._model = self.controller.getModel();
         //初始化地图数据
         self.map.open(self.controller);
-        self.txt_level.text = App.LanguageManager.getLanguageText("battle.txt.02", self._model.currwaveNum);
+        self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.currwaveNum);
     };
     BattleView.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
@@ -61,7 +61,7 @@ var BattleView = (function (_super) {
     /** 每波怪完成后的处理 */
     BattleView.prototype.onUpdateView = function () {
         var self = this;
-        self.txt_level.text = App.LanguageManager.getLanguageText("battle.txt.02", self._model.currwaveNum);
+        self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.currwaveNum);
         //当当前波数大于当前关卡的最大波数后进入下一关卡
         if (self._model.currwaveNum >= self._model.levelVO.waveNum) {
             //TODO 进入一下关卡
@@ -75,7 +75,7 @@ var BattleView = (function (_super) {
     };
     /** 返回大厅界面 */
     BattleView.prototype.onBackHallHandler = function () {
-        App.SceneManager.runScene(SceneConsts.HALL);
+        App.SceneMgr.runScene(SceneConsts.HALL);
     };
     return BattleView;
 }(BaseEuiView));

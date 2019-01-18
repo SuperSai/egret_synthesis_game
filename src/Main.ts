@@ -54,7 +54,7 @@ class Main extends eui.UILayer {
         //适配方式(全屏适配)
         App.StageUtils.startFullscreenAdaptation(720, 1280, null);
         App.StageUtils.setFrameRate(60);
-        App.LayerManager.setup(App.StageUtils.getStage());
+        App.LayerMgr.setup(App.StageUtils.getStage());
     }
     /** 初始化平台 */
     private initPlatform() {
@@ -135,7 +135,7 @@ class Main extends eui.UILayer {
             theme.addEventListener(eui.UIEvent.COMPLETE, () => {
                 GlobleVOData.getInstance.setup();
                 RES.getResByUrl(PathConfig.Language, (data: string, url: string) => {
-                    App.LanguageManager.setup(data);
+                    App.LanguageMgr.setup(data);
                     resolve();
                 }, this, RES.ResourceItem.TYPE_TEXT);
             }, this);
@@ -148,12 +148,12 @@ class Main extends eui.UILayer {
         let self = this;
         App.Init();
         //注册所有场景
-        App.RegisterManager.initScene();
+        App.RegisterMgr.initScene();
         //注册所有模块控制器
-        App.RegisterManager.initModules();
+        App.RegisterMgr.initModules();
         //音乐音效处理
-        App.SoundManager.setBgOn(true);
-        App.SoundManager.setEffectOn(true);
-        App.SceneManager.runScene(SceneConsts.LOGIN);
+        App.SoundMgr.setBgOn(true);
+        App.SoundMgr.setEffectOn(true);
+        App.SceneMgr.runScene(SceneConsts.LOGIN);
     }
 }

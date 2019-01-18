@@ -22,7 +22,7 @@ class HeroBaseItem extends BaseEuiItem {
 
 	private initRole(): void {
 		let self = this;
-		self._heroRole = new Role(self._battleController, LayerManager.GAME_MAP_LAYER);
+		self._heroRole = new Role(self._battleController, LayerMgr.GAME_MAP_LAYER);
 		self._heroRole.touchEnabled = true;
 		self._heroRole.addToParent();
 		self._heroRole.isMove = true;
@@ -51,6 +51,6 @@ class HeroBaseItem extends BaseEuiItem {
 	/** 显示英雄信息面板 */
 	private onShowHeroMsgPanel(): void {
 		let self = this;
-		App.ViewManager.open(ViewConst.HeroMsgPanel, self._heroRole);
+		App.ViewMgr.open(ViewConst.HeroMsgPanel, self._heroRole);
 	}
 }

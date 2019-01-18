@@ -18,7 +18,7 @@ class MessageCenter extends BaseClass {
 		this.eVec = new Array<MessageVo>();
 		this.lastRunTime = 0;
 		if (this.type == 0) {
-			App.TimerManager.doFrame(1, 0, this.run, this);
+			App.TimerMgr.doFrame(1, 0, this.run, this);
 		}
 	}
 

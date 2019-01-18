@@ -24,66 +24,66 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "MessageManger", {
+    Object.defineProperty(App, "MessageMgr", {
         /** 消息提示类 */
         get: function () {
-            return MessageManger.Instance();
+            return MessageMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "LayerManager", {
+    Object.defineProperty(App, "LayerMgr", {
         /** 层级管理类 */
         get: function () {
-            return LayerManager.Instance();
+            return LayerMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ControllerManager", {
+    Object.defineProperty(App, "ControllerMgr", {
         /** 模块管理类 */
         get: function () {
-            return ControllerManager.Instance();
+            return ControllerMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RegisterManager", {
+    Object.defineProperty(App, "RegisterMgr", {
         /** 注册控制器管理类 */
         get: function () {
-            return RegisterManager.Instance();
+            return RegisterMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SocketManager", {
+    Object.defineProperty(App, "SocketMgr", {
         /** Socket管理类 */
         get: function () {
-            return SocketManager.Instance();
+            return SocketMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "PlayerInfoManager", {
+    Object.defineProperty(App, "PlayerMgr", {
         /** 人物信息管理类 */
         get: function () {
-            return PlayerInfoManager.Instance();
+            return PlayerMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "LanguageManager", {
+    Object.defineProperty(App, "LanguageMgr", {
         /** 语言包管理类 */
         get: function () {
-            return LanguageManager.Instance();
+            return LanguageMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "GameEnterManager", {
+    Object.defineProperty(App, "GameEnterMgr", {
         /** manager初始化类 */
         get: function () {
-            return GameEnterManager.Instance();
+            return GameEnterMgr.Instance();
         },
         enumerable: true,
         configurable: true
@@ -104,10 +104,10 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SoundManager", {
+    Object.defineProperty(App, "SoundMgr", {
         /** 声音管理类 */
         get: function () {
-            return SoundManager.Instance();
+            return SoundMgr.Instance();
         },
         enumerable: true,
         configurable: true
@@ -152,10 +152,10 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "TimerManager", {
+    Object.defineProperty(App, "TimerMgr", {
         /** 统一的计时器和帧刷管理类 */
         get: function () {
-            return TimerManager.Instance();
+            return TimerMgr.Instance();
         },
         enumerable: true,
         configurable: true
@@ -208,42 +208,42 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ViewManager", {
+    Object.defineProperty(App, "ViewMgr", {
         /** View管理类 */
         get: function () {
-            return ViewManager.Instance();
+            return ViewMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RenderTextureManager", {
+    Object.defineProperty(App, "RenderTextureMgr", {
         /** 渲染纹理管理类 */
         get: function () {
-            return RenderTextureManager.Instance();
+            return RenderTextureMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SceneManager", {
+    Object.defineProperty(App, "SceneMgr", {
         /** 场景管理类 */
         get: function () {
-            return SceneManager.Instance();
+            return SceneMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "DelayOptManager", {
+    Object.defineProperty(App, "DelayOptMgr", {
         /** 分帧处理类 */
         get: function () {
-            return DelayOptManager.Instance();
+            return DelayOptMgr.Instance();
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "BoneManager", {
+    Object.defineProperty(App, "BoneMgr", {
         /** 龙骨管理类 */
         get: function () {
-            return BoneManager.Instance();
+            return BoneMgr.Instance();
         },
         enumerable: true,
         configurable: true

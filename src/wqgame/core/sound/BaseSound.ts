@@ -12,7 +12,7 @@ class BaseSound {
 	public constructor() {
 		this._cache = {};
 		this._loadingCache = new Array<string>();
-		App.TimerManager.doTimer(1 * 60 * 1000, 0, this.dealSoundTimer, this);
+		App.TimerMgr.doTimer(1 * 60 * 1000, 0, this.dealSoundTimer, this);
 	}
 
     /**
@@ -25,7 +25,7 @@ class BaseSound {
 			let key = keys[i];
 			if (!this.checkCanClear(key))
 				continue;
-			if (currTime - this._cache[key] >= SoundManager.CLEAR_TIME) {
+			if (currTime - this._cache[key] >= SoundMgr.CLEAR_TIME) {
 				delete this._cache[key];
 				RES.destroyRes(key);
 			}

@@ -21,7 +21,7 @@ var BaseEuiItem = (function (_super) {
     BaseEuiItem.prototype.childrenCreated = function () {
         _super.prototype.childrenCreated.call(this);
         var self = this;
-        App.LanguageManager.setModuleLanguage(self);
+        App.LanguageMgr.setModuleLanguage(self);
     };
     BaseEuiItem.prototype.dataChanged = function () {
         _super.prototype.dataChanged.call(this);

@@ -13,8 +13,8 @@ var BattleController = (function (_super) {
     function BattleController() {
         var _this = _super.call(this) || this;
         var self = _this;
-        self._battleView = new BattleView(self, LayerManager.GAME_MAP_LAYER);
-        App.ViewManager.register(ViewConst.Battle, self._battleView);
+        self._battleView = new BattleView(self, LayerMgr.GAME_MAP_LAYER);
+        App.ViewMgr.register(ViewConst.Battle, self._battleView);
         self._battleModel = new BattleModel(self);
         self.setModel(self._battleModel);
         self._battleProxy = new BattleProxy(self);
@@ -27,8 +27,8 @@ var BattleController = (function (_super) {
         self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
         self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
         self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
-        App.ViewManager.open(ViewConst.Battle);
-        App.TimerManager.doFrame(0, 0, self.onBattleUpdate, self);
+        App.ViewMgr.open(ViewConst.Battle);
+        App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
         self.initRegisterView();
     };
     /** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
@@ -63,7 +63,7 @@ var BattleController = (function (_super) {
     /** 添加角色在地图上 */
     BattleController.prototype.pushRoleToMap = function (roleId, baseItem) {
         var self = this;
-        var role = ObjectPool.pop(Role, "Role", self, LayerManager.GAME_MAP_LAYER);
+        var role = ObjectPool.pop(Role, "Role", self, LayerMgr.GAME_MAP_LAYER);
         role.addToParent();
         role.open(roleId);
         role.isMove = false;
@@ -78,8 +78,8 @@ var BattleController = (function (_super) {
     /** 注册界面才可以打开界面 */
     BattleController.prototype.initRegisterView = function () {
         var self = this;
-        App.ViewManager.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerManager.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
-        App.ViewManager.register(ViewConst.HeroTalk, new HeroTalk(self, LayerManager.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
+        App.ViewMgr.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
+        App.ViewMgr.register(ViewConst.HeroTalk, new HeroTalk(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
     };
     return BattleController;
 }(BaseController));

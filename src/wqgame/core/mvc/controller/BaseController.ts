@@ -53,7 +53,7 @@ class BaseController {
      *
      */
 	public applyControllerFunc(controllerKey: number, key: any, ...param: any[]): any {
-		return App.ControllerManager.applyFunc.apply(App.ControllerManager, arguments);
+		return App.ControllerMgr.applyFunc.apply(App.ControllerMgr, arguments);
 	}
 
     /**
@@ -78,6 +78,6 @@ class BaseController {
      * @returns {BaseModel}
      */
 	public getControllerModel(controllerD: number): BaseModel {
-		return App.ControllerManager.getControllerModel(controllerD);
+		return App.ControllerMgr.getControllerModel(controllerD);
 	}
 }

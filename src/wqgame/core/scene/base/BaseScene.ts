@@ -23,7 +23,7 @@ class BaseScene {
      * 退出Scene调用
      */
 	public onExit(): void {
-		App.ViewManager.closeAll();
+		App.ViewMgr.closeAll();
 		this.removeAllLayer();
 	}
 

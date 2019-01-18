@@ -17,7 +17,7 @@ var starlingswf;
             updateManager._removeQueue = [];
             updateManager._currentTime = 0;
             updateManager.setFps(fps);
-            App.TimerManager.doFrame(1, 0, updateManager.update, updateManager);
+            App.TimerMgr.doFrame(1, 0, updateManager.update, updateManager);
             return updateManager;
         };
         SwfUpdateManager.prototype.clear = function () {
@@ -27,10 +27,10 @@ var starlingswf;
         };
         SwfUpdateManager.prototype.stop = function () {
             this.clear();
-            App.TimerManager.remove(this.update, this);
+            App.TimerMgr.remove(this.update, this);
         };
         SwfUpdateManager.prototype.play = function () {
-            App.TimerManager.doFrame(1, 0, this.update, this);
+            App.TimerMgr.doFrame(1, 0, this.update, this);
         };
         SwfUpdateManager.prototype.setFps = function (fps) {
             this._fps = fps;

@@ -38,7 +38,7 @@ class GameLoading extends BaseClass {
 
 	public showLoading(): void {
 		App.StageUtils.getStage().addChild(this.content);
-		App.TimerManager.doFrame(1, 0, this.enterFrame, this);
+		App.TimerMgr.doFrame(1, 0, this.enterFrame, this);
 	}
 
 	public hideLoading(): void {
@@ -46,7 +46,7 @@ class GameLoading extends BaseClass {
 			App.StageUtils.getStage().removeChild(this.content);
 			this.uiImageContainer.rotation = 0;
 		}
-		App.TimerManager.remove(this.enterFrame, this);
+		App.TimerMgr.remove(this.enterFrame, this);
 	}
 
 	private enterFrame(time: number) {

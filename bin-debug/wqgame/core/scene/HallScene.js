@@ -22,7 +22,7 @@ var HallScene = (function (_super) {
     HallScene.prototype.onEnter = function () {
         _super.prototype.onEnter.call(this);
         //初始打开大厅页面
-        App.ViewManager.open(ViewConst.Hall);
+        App.ViewMgr.open(ViewConst.Hall);
         //播放背景音乐
         // App.SoundManager.playBg("sound_bg");
     };

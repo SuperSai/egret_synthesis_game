@@ -69,7 +69,7 @@ var LoginView = (function (_super) {
             params: { x: 10, y: 0.8, z: 0.1 },
             time: 0
         });
-        App.TimerManager.doFrame(0, 0, function () {
+        App.TimerMgr.doFrame(0, 0, function () {
             customFilter3.uniforms.time += 0.01;
             if (customFilter3.uniforms.time > 1) {
                 customFilter3.uniforms.time = 0.0;
@@ -112,8 +112,8 @@ var LoginView = (function (_super) {
         if (self.txt_input.text == "") {
             return;
         }
-        App.SceneManager.clear();
-        App.SceneManager.runScene(SceneConsts.BATTLE, [10000]);
+        App.SceneMgr.clear();
+        App.SceneMgr.runScene(SceneConsts.BATTLE, [10000]);
         // this.applyFunc(LoginConst.LOGIN_SEND_SERVER, self.txt_input.text);
     };
     /** 随机用户名 */

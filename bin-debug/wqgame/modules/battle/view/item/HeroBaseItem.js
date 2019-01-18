@@ -25,7 +25,7 @@ var HeroBaseItem = (function (_super) {
     };
     HeroBaseItem.prototype.initRole = function () {
         var self = this;
-        self._heroRole = new Role(self._battleController, LayerManager.GAME_MAP_LAYER);
+        self._heroRole = new Role(self._battleController, LayerMgr.GAME_MAP_LAYER);
         self._heroRole.touchEnabled = true;
         self._heroRole.addToParent();
         self._heroRole.isMove = true;
@@ -52,7 +52,7 @@ var HeroBaseItem = (function (_super) {
     /** 显示英雄信息面板 */
     HeroBaseItem.prototype.onShowHeroMsgPanel = function () {
         var self = this;
-        App.ViewManager.open(ViewConst.HeroMsgPanel, self._heroRole);
+        App.ViewMgr.open(ViewConst.HeroMsgPanel, self._heroRole);
     };
     return HeroBaseItem;
 }(BaseEuiItem));

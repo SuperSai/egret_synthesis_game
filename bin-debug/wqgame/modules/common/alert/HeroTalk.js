@@ -32,7 +32,7 @@ var HeroTalk = (function (_super) {
         var _this = this;
         _super.prototype.initData.call(this);
         var self = this;
-        App.TimerManager.doTimer(1000, 1, function () {
+        App.TimerMgr.doTimer(1000, 1, function () {
             self.controller.getModel().battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
             _super.prototype.onClosePanel.call(_this);
         }, self);

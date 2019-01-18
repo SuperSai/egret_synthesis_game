@@ -17,36 +17,36 @@ class App {
 		return StageUtils.Instance();
 	}
 	/** 消息提示类 */
-	public static get MessageManger(): MessageManger {
-		return MessageManger.Instance();
+	public static get MessageMgr(): MessageMgr {
+		return MessageMgr.Instance();
 	}
 	/** 层级管理类 */
-	public static get LayerManager(): LayerManager {
-		return LayerManager.Instance();
+	public static get LayerMgr(): LayerMgr {
+		return LayerMgr.Instance();
 	}
 	/** 模块管理类 */
-	public static get ControllerManager(): ControllerManager {
-		return ControllerManager.Instance();
+	public static get ControllerMgr(): ControllerMgr {
+		return ControllerMgr.Instance();
 	}
 	/** 注册控制器管理类 */
-	public static get RegisterManager(): RegisterManager {
-		return RegisterManager.Instance();
+	public static get RegisterMgr(): RegisterMgr {
+		return RegisterMgr.Instance();
 	}
 	/** Socket管理类 */
-	public static get SocketManager(): SocketManager {
-		return SocketManager.Instance();
+	public static get SocketMgr(): SocketMgr {
+		return SocketMgr.Instance();
 	}
 	/** 人物信息管理类 */
-	public static get PlayerInfoManager(): PlayerInfoManager {
-		return PlayerInfoManager.Instance();
+	public static get PlayerMgr(): PlayerMgr {
+		return PlayerMgr.Instance();
 	}
 	/** 语言包管理类 */
-	public static get LanguageManager(): LanguageManager {
-		return LanguageManager.Instance();
+	public static get LanguageMgr(): LanguageMgr {
+		return LanguageMgr.Instance();
 	}
 	/** manager初始化类 */
-	public static get GameEnterManager(): GameEnterManager {
-		return GameEnterManager.Instance();
+	public static get GameEnterMgr(): GameEnterMgr {
+		return GameEnterMgr.Instance();
 	}
 	/** Effect工具类 */
 	public static get EffectUtils(): EffectUtils {
@@ -57,8 +57,8 @@ class App {
 		return StringUtils.Instance();
 	}
 	/** 声音管理类 */
-	public static get SoundManager(): SoundManager {
-		return SoundManager.Instance();
+	public static get SoundMgr(): SoundMgr {
+		return SoundMgr.Instance();
 	}
 	/** 通过工具类 */
 	public static get CommonUtils(): CommonUtils {
@@ -81,8 +81,8 @@ class App {
 		return MathUtils.Instance();
 	}
 	/** 统一的计时器和帧刷管理类 */
-	public static get TimerManager(): TimerManager {
-		return TimerManager.Instance();
+	public static get TimerMgr(): TimerMgr {
+		return TimerMgr.Instance();
 	}
 	/** 调试工具 */
 	public static get DebugUtils(): DebugUtils {
@@ -109,24 +109,24 @@ class App {
 		return DisplayUtils.Instance();
 	}
 	/** View管理类 */
-	public static get ViewManager(): ViewManager {
-		return ViewManager.Instance();
+	public static get ViewMgr(): ViewMgr {
+		return ViewMgr.Instance();
 	}
 	/** 渲染纹理管理类 */
-	public static get RenderTextureManager(): RenderTextureManager {
-		return RenderTextureManager.Instance();
+	public static get RenderTextureMgr(): RenderTextureMgr {
+		return RenderTextureMgr.Instance();
 	}
 	/** 场景管理类 */
-	public static get SceneManager(): SceneManager {
-		return SceneManager.Instance();
+	public static get SceneMgr(): SceneMgr {
+		return SceneMgr.Instance();
 	}
 	/** 分帧处理类 */
-	public static get DelayOptManager(): DelayOptManager {
-		return DelayOptManager.Instance();
+	public static get DelayOptMgr(): DelayOptMgr {
+		return DelayOptMgr.Instance();
 	}
 	/** 龙骨管理类 */
-	public static get BoneManager(): BoneManager {
-		return BoneManager.Instance();
+	public static get BoneMgr(): BoneMgr {
+		return BoneMgr.Instance();
 	}
 	/** StarlingSwf工厂类 */
 	public static get StarlingSwfFactory(): StarlingSwfFactory {

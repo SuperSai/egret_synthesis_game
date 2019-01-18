@@ -206,7 +206,7 @@ var RockerUtils = (function (_super) {
     RockerUtils.prototype.startCheckKey = function () {
         if (!this.checkKeying) {
             this.checkKeying = true;
-            App.TimerManager.doFrame(1, 0, this.delKeys, this);
+            App.TimerMgr.doFrame(1, 0, this.delKeys, this);
         }
     };
     /**
@@ -216,7 +216,7 @@ var RockerUtils = (function (_super) {
         this.keys[0] = 0;
         this.keys[1] = 0;
         if (this.checkKeying) {
-            App.TimerManager.remove(this.delKeys, this);
+            App.TimerMgr.remove(this.delKeys, this);
             this.checkKeying = false;
         }
     };

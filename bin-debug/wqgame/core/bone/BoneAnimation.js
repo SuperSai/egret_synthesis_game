@@ -76,7 +76,7 @@ var BoneAnimation = (function (_super) {
     BoneAnimation.prototype.loadComplete = function () {
         if (this._skeName == BoneAnimation.traceID)
             Log.trace("LoadBone loadComplete start {0}", BoneAnimation.traceID);
-        this.armature = App.BoneManager.getArmature(this._skeName);
+        this.armature = App.BoneMgr.getArmature(this._skeName);
         this._isLoadComplete = true;
         this.addChild(this.armature.display);
         this.initBone();

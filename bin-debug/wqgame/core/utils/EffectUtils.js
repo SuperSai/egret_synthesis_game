@@ -55,7 +55,7 @@ var EffectUtils = (function (_super) {
     EffectUtils.prototype.bombEffect = function (pos, obj) {
         var self = this;
         var bombBone = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
-        App.LayerManager.addToLayer(bombBone, LayerManager.GAME_EFFECT_LAYER);
+        App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
         bombBone.x = pos.x;
         bombBone.y = pos.y;
         bombBone.play(function () {

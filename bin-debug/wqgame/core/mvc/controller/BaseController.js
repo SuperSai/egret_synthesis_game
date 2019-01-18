@@ -52,7 +52,7 @@ var BaseController = (function () {
         for (var _i = 2; _i < arguments.length; _i++) {
             param[_i - 2] = arguments[_i];
         }
-        return App.ControllerManager.applyFunc.apply(App.ControllerManager, arguments);
+        return App.ControllerMgr.applyFunc.apply(App.ControllerMgr, arguments);
     };
     /**
      * 设置该模块使用的Model对象
@@ -74,7 +74,7 @@ var BaseController = (function () {
      * @returns {BaseModel}
      */
     BaseController.prototype.getControllerModel = function (controllerD) {
-        return App.ControllerManager.getControllerModel(controllerD);
+        return App.ControllerMgr.getControllerModel(controllerD);
     };
     return BaseController;
 }());

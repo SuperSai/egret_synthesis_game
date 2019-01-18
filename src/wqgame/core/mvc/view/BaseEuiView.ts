@@ -16,7 +16,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
     public constructor($controller: BaseController, $layer: number) {
         super();
         this._controller = $controller;
-        this._myParent = App.LayerManager.getLayerByType($layer);
+        this._myParent = App.LayerMgr.getLayerByType($layer);
         this._isInit = false;
 
         this.percentHeight = 100;

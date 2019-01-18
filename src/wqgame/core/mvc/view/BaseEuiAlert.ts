@@ -22,7 +22,7 @@ class BaseEuiAlert extends BaseEuiView {
 			self._maskRect = self.getMask(0);
 			self.addChild(self._maskRect);
 		}
-		App.LayerManager.addToLayer(self._maskRect, this._layer);
+		App.LayerMgr.addToLayer(self._maskRect, this._layer);
 		self.myParent.setChildIndex(self._maskRect, 0);
 
 	}
@@ -51,14 +51,14 @@ class BaseEuiAlert extends BaseEuiView {
 		let self = this;
 		App.DisplayUtils.removeFromParent(self._maskRect);
 		self._maskRect = null;
-		App.ViewManager.closeView(self);
+		App.ViewMgr.closeView(self);
 	}
 
 	protected onClosePanel(): void {
 		let self = this;
 		App.DisplayUtils.removeFromParent(self._maskRect);
 		self._maskRect = null;
-		App.ViewManager.closeView(self);
+		App.ViewMgr.closeView(self);
 	}
 
 	/** 创建遮罩 */

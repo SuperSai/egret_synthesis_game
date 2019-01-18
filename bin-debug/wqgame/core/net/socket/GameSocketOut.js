@@ -17,7 +17,7 @@ var GameSocketOut = (function () {
         msg.strPar1 = nickName;
         msg.strPar2 = headUrl;
         var data = protocol.CommonMsg.encode(msg).finish();
-        App.SocketManager.socket.sendProtobuffer(packageOut, data);
+        App.SocketMgr.socket.sendProtobuffer(packageOut, data);
     };
     return GameSocketOut;
 }());

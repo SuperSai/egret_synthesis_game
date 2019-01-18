@@ -25,7 +25,7 @@ var LoginScene = (function (_super) {
     LoginScene.prototype.onEnter = function () {
         _super.prototype.onEnter.call(this);
         //初始打开Login页面
-        App.ViewManager.open(ViewConst.Login);
+        App.ViewMgr.open(ViewConst.Login);
     };
     /**
      * 退出Scene调用

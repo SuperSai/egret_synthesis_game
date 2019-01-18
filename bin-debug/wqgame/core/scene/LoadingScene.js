@@ -22,7 +22,7 @@ var LoadingScene = (function (_super) {
     LoadingScene.prototype.onEnter = function () {
         _super.prototype.onEnter.call(this);
         //初始打开Loading页面
-        App.ViewManager.open(ViewConst.Loading);
+        App.ViewMgr.open(ViewConst.Loading);
     };
     /**
      * 退出Scene调用
