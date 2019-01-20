@@ -18,7 +18,7 @@ var GameEnterMgr = (function (_super) {
     }
     /** 初始化 */
     GameEnterMgr.prototype.init = function () {
-        App.BoneMgr.start();
+        App.Bone.start();
         App.PlayerMgr.setup();
     };
     return GameEnterMgr;

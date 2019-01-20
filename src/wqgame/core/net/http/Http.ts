@@ -94,7 +94,7 @@ class Http extends BaseClass {
         var t_obj: any = JSON.parse(this._urlLoader.data);
         if (!t_obj.hasOwnProperty("s") || t_obj["s"] == 0) {
             this._data.pUpdate.update(this._type, t_obj);
-            App.MessageCenter.dispatch(this._type, t_obj);
+            App.MsgCenter.dispatch(this._type, t_obj);
         }
         else {
             Log.trace("Http错误:" + t_obj["s"]);

@@ -72,10 +72,11 @@ var ViewMgr = (function (_super) {
      * @param param 参数
      *
      */
-    ViewMgr.prototype.open = function (key) {
+    ViewMgr.prototype.open = function (key, openComplete) {
+        if (openComplete === void 0) { openComplete = null; }
         var param = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            param[_i - 1] = arguments[_i];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            param[_i - 2] = arguments[_i];
         }
         var view = this.getView(key);
         if (view == null) {
@@ -84,6 +85,7 @@ var ViewMgr = (function (_super) {
         }
         if (view.isShow()) {
             view.open.apply(view, param);
+            openComplete && openComplete();
             return view;
         }
         if (view.isInit()) {
@@ -92,6 +94,7 @@ var ViewMgr = (function (_super) {
             view.addEvents();
             view.open.apply(view, param);
             view.initData();
+            openComplete && openComplete();
         }
         else {
             App.GameLoading.showLoading();
@@ -105,6 +108,7 @@ var ViewMgr = (function (_super) {
                 view.initData();
                 view.setVisible(true);
                 App.GameLoading.hideLoading();
+                openComplete && openComplete();
             }.bind(this));
         }
         this._opens.push(key);

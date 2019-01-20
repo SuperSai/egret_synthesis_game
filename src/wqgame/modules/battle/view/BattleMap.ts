@@ -21,8 +21,6 @@ class BattleMap extends BaseEuiView {
 	private _oX: number;
 	// 选中的底座上角色的原始Y坐标
 	private _oY: number;
-	/** 是否界面初始化完毕 */
-	private _initComplete: boolean = false;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -39,7 +37,6 @@ class BattleMap extends BaseEuiView {
 		self.initMap();
 		self.addEvents();
 		self.updateAllBaseItem();
-		self._initComplete = true;
 	}
 	/** 初始化 */
 	private init(): void {
@@ -54,7 +51,7 @@ class BattleMap extends BaseEuiView {
 	private initMap(): void {
 		let self = this;
 		let path: string = PathConfig.MapPath.replace("{0}", self._model.levelVO.icon + "");
-		App.DisplayUtils.addAsyncBitmapToImage(path, self.mapImg);
+		App.Display.addAsyncBitmapToImage(path, self.mapImg);
 	}
 
 	public addEvents(): void {
@@ -63,7 +60,8 @@ class BattleMap extends BaseEuiView {
 		self.btn_open.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
 		self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
 		self._battleController.registerFunc(BattleConst.ROLE_ATTACK, self.onRoleAttack, self);
-		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		self._battleController.registerFunc(BattleConst.MONSTER_DIE, self.onMonsterDie, self);
+		App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
 		// App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);
 		self.setBtnEffect(["btn_open"]);
 	}
@@ -72,7 +70,7 @@ class BattleMap extends BaseEuiView {
 		super.removeEvents();
 		let self = this;
 		self.btn_open.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
-		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		App.Stage.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
 	}
 
 	/** 获取怪物行走路径的坐标点 */
@@ -81,12 +79,12 @@ class BattleMap extends BaseEuiView {
 	}
 
 	/** 角色攻击 */
-	private onRoleAttack(bulledId: number, x: number, y: number, target: Monster): void {
+	private onRoleAttack(bulledId: number, currPos: { x: number, y: number }, target: Monster): void {
 		let self = this;
 		let bullet: Bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
 		bullet.addToParent();
-		bullet.setTarget(bulledId, x, y, target);
-		bullet.rotation = App.MathUtils.getAngle(new egret.Point(x, y), target.point);
+		bullet.setTarget(bulledId, currPos, target);
+		bullet.rotation = App.MathUtils.getAngle(currPos, target.point);
 		self._model.bulletDic.Add(bullet.ID, bullet);
 		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(bullet, layer.numChildren);
@@ -96,13 +94,13 @@ class BattleMap extends BaseEuiView {
 	private onOpenNewBase(): void {
 		let self = this;
 		self._model.levelVO.openBaseCount += self._model.hBaseItemCount;
-		if (self._model.levelVO.openBaseCount >= self._model.levelVO.maxBaseCount) {
-			self._model.levelVO.openBaseCount = self._model.levelVO.maxBaseCount;
+		if (self._model.levelVO.openBaseCount >= self._model.maxBaseCount) {
+			self._model.levelVO.openBaseCount = self._model.maxBaseCount;
 			self.btn_open.visible = self.btn_open.touchEnabled = false;
 			self.doNeedUpdateBaseItem();
 			return;
 		}
-		self.btn_open.y -= ((self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.levelVO.baseH);
+		self.btn_open.y -= ((self._model.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.levelVO.baseH);
 		self.doNeedUpdateBaseItem();
 	}
 
@@ -114,7 +112,7 @@ class BattleMap extends BaseEuiView {
 		if (len >= (self._model.levelVO.openBaseCount + 1)) return App.MessageMgr.showText(App.LanguageMgr.getLanguageText("battle.txt.01"));
 		while (len < (self._model.levelVO.openBaseCount + 1)) {
 			//在可以放置的底座中随机一个
-			let random: number = App.RandomUtils.randrange(self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount, self._model.levelVO.maxBaseCount);
+			let random: number = App.Random.randrange(self._model.maxBaseCount - self._model.levelVO.openBaseCount, self._model.maxBaseCount);
 			let baseItem: BaseItem = self.lists.getChildAt(random) as BaseItem;
 			if (!self._model.roleDic.ContainsKey(baseItem) && baseItem.state == BASE_STATE.OPEN) {
 				self.updateHeroBase(roleId);
@@ -133,7 +131,7 @@ class BattleMap extends BaseEuiView {
 	/** 处理需要更新的底座 */
 	private doNeedUpdateBaseItem(): void {
 		let self = this;
-		let startI: number = self._model.levelVO.maxBaseCount - self._model.levelVO.openBaseCount;
+		let startI: number = self._model.maxBaseCount - self._model.levelVO.openBaseCount;
 		let len: number = startI + self._model.hBaseItemCount;
 		for (let i: number = startI; i < len; i++) {
 			(self.lists.getChildAt(i) as BaseItem).state = BASE_STATE.OPEN;
@@ -143,11 +141,11 @@ class BattleMap extends BaseEuiView {
 	private onTouchBegin(evt: egret.TouchEvent): void {
 		let self = this;
 		if (!evt.target || !(evt.target instanceof BaseItem)) return;
-		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
-		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
-		App.StageUtils.getStage().once(egret.TouchEvent.TOUCH_END, self.onTouchEnd, self, true);
+		App.Stage.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
+		App.Stage.getStage().once(egret.TouchEvent.TOUCH_END, self.onTouchEnd, self, true);
 		self._selectRole = self._model.roleDic.TryGetValue(evt.target);
-		self._selectRole.isMove = true;
+		self._selectRole.isDrop = true;
 		self._oX = self._selectRole.x;
 		self._oY = self._selectRole.y;
 		self._selectRole.x = evt.stageX;
@@ -165,10 +163,10 @@ class BattleMap extends BaseEuiView {
 
 	private onTouchEnd(evt: egret.TouchEvent): void {
 		let self = this;
-		App.StageUtils.getStage().removeEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
-		App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
+		App.Stage.getStage().removeEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
+		App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
 		let baseItem: BaseItem = evt.target;
-		self._selectRole.isMove = false;
+		self._selectRole.isDrop = false;
 		if (!(evt.target instanceof BaseItem) || !baseItem || baseItem.state == BASE_STATE.CLOSE || baseItem.hashCode == self._selectRole.baseItem.hashCode) {
 			self._selectRole.x = self._oX;
 			self._selectRole.y = self._oY;
@@ -184,7 +182,7 @@ class BattleMap extends BaseEuiView {
 				moveRole.baseItem.state = BASE_STATE.OPEN;
 				moveRole.reset();
 				ObjectPool.push(moveRole);
-				App.DisplayUtils.removeFromParent(moveRole);
+				App.Display.removeFromParent(moveRole);
 				self.createRole(role, baseItem, role.roleId + 1);
 			} else {
 				self.createRole(role, self._selectRole.baseItem, role.roleId);
@@ -199,7 +197,7 @@ class BattleMap extends BaseEuiView {
 		self._model.roleDic.Remove(selectRole.baseItem);
 		selectRole.reset();
 		ObjectPool.push(selectRole);
-		App.DisplayUtils.removeFromParent(selectRole);
+		App.Display.removeFromParent(selectRole);
 		self.updateHeroBase(roleId);
 		self._battleController.pushRoleToMap(roleId, baseItem);
 	}
@@ -216,44 +214,58 @@ class BattleMap extends BaseEuiView {
 	public updateMonster(passTime: number): void {
 		let self = this;
 		if (!self._model) return;
-		if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.MONSTER) {	//生成普通小怪
-			if (self._initComplete && self._model.currMonsterCount < self._model.maxMonsterCount && passTime > self._lastTime) {
-				self._model.currMonsterCount++;
-				self.createMonster();
-				self._lastTime = passTime + self._model.levelVO.monsterDelay;
+		if (self._model.currMonsterCount < self._model.maxMonsterCount && passTime > self._lastTime) {
+			self._model.currMonsterCount++;
+			if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.MONSTER) {	//生成普通小怪
+				self.createSmallMonster(passTime);
+			} else if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {	//生成BOSS怪
+				self.createBoss();
 			}
-			/** 当前波数的怪物已经全部出战完毕后就进入生成BOSS怪*/
-			if (self._initComplete && self._model.currMonsterCount >= self._model.maxMonsterCount) {
-				//波数+1
-				self._model.currwaveNum++;
-				//重新设置当前波数的怪物
-				self._model.currMonsterCount = 0;
-				self._model.maxMonsterCount = self._model.monsterWaveNumCount;
-				self._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
+			self._lastTime = passTime + self._model.levelVO.monsterDelay;
+		}
+
+		/** 当前波数的怪物已经全部出战完毕*/
+		if (self._model.currMonsterCount >= self._model.maxMonsterCount) {
+			if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
+				//重新设置当前波数
+				self._model.currwaveNum = 1;
+				//进入下一个关卡
+				self._model.currMission++;
+				self._model.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, self._model.currMission);
+			} else {
+				self._model.currwaveNum++;//波数+1
 			}
-		} else if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {	//生成BOSS怪
-			//TODO BOSS怪
+			self._model.maxMonsterCount = self._model.monsterWaveNumCount;
+			self._model.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
+			self._lastTime += self._model.levelVO.waveNumDelay;
+			//重新设置当前波数的怪物
+			self._model.currMonsterCount = 0;
 		}
 	}
 
-	/** 创建怪物 */
-	private createMonster(): void {
+	/** 怪物死亡 */
+	private onMonsterDie(): void {
 		let self = this;
-		if (self._starMonsterTime <= egret.getTimer()) {
-			let monster: Monster = ObjectPool.pop(Monster, "Monster", self._battleController, LayerMgr.GAME_MAP_LAYER);
-			monster.addToParent();
-			let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
-			//给怪一个行走路径
-			info.path = self._model.levelVO.path;
-			let num: number = App.RandomUtils.randrange(0, 3);
-			info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, num);
-			monster.Parse(info);
-			self._model.monsterDic.Add(monster.ID, monster);
+		if (this._model.monsterDic.GetLenght() > 0) return;
+		if (self._model.currwaveNum > self._model.levelVO.waveNum) {
+			self._model.maxMonsterCount = 1;
+			self._model.battleMonsterState = BATTLE_MONSTER_STATE.BOSS;
+		} else {
+			self._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
 		}
+		self._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
+	}
+
+	/** 创建小怪 */
+	private createSmallMonster(passTime: number): void {
+		let self = this;
+		let num: number = App.Random.randrange(0, self._model.levelVO.monstersId.length);
+		self._battleController.createMonster(self._model.levelVO.monstersId[num]);
 	}
 
 	/** 创建Boss */
 	private createBoss(): void {
 		let self = this;
+		self._battleController.createMonster(self._model.levelVO.bossId);
 	}
 }

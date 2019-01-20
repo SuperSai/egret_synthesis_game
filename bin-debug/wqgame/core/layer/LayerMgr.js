@@ -58,7 +58,8 @@ var LayerMgr = (function (_super) {
     };
     LayerMgr.prototype.createAllLayers = function () {
         for (var i = 0; i < LayerMgr.layerCount; i++) {
-            this._layers.push(this.createOnLayer(i));
+            var layer = this.createOnLayer(i);
+            this._layers[layer.layerType] = layer;
         }
     };
     LayerMgr.prototype.createOnLayer = function (layerType) {
@@ -68,20 +69,21 @@ var LayerMgr = (function (_super) {
         return layer;
     };
     LayerMgr.prototype.addToLayer = function (display, layerType) {
-        var layer = this.getLayerByType(layerType);
+        var layer = this._layers[layerType]; //this.getLayerByType(layerType);
         layer.addChild(display);
     };
     LayerMgr.prototype.getLayerByType = function (layerType) {
-        for (var i = 0; i < this._layers.length; i++) {
-            if (this._layers[i].layerType == layerType) {
-                return this._layers[i];
-            }
-        }
+        return this._layers[layerType];
+        // for (let i: number = 0; i < this._layers.length; i++) {
+        // 	if (this._layers[i].layerType == layerType) {
+        // 		return this._layers[i];
+        // 	}
+        // }
     };
     LayerMgr.prototype.resize = function () {
         Log.trace("【 LayerManager 】stageResized-------------");
-        var width = App.StageUtils.getWidth();
-        var height = App.StageUtils.getHeight();
+        var width = App.Stage.getWidth();
+        var height = App.Stage.getHeight();
         for (var i = 0; i < this._layers.length; i++) {
             var layer = this._layers[i];
             for (var i_1 = 0; i_1 < layer.numChildren; i_1++) {

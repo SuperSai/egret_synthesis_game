@@ -60,7 +60,7 @@ class BoneAnimation extends egret.Sprite {
 
     public load() {
         if (this._skeName == BoneAnimation.traceID) Log.trace("LoadBone load start {0}", BoneAnimation.traceID);
-        App.ResUtil.loadGroup(this._skeName, this.loadComplete, this, ResUtil.PRIORITY_H);
+        App.Res.loadGroup(this._skeName, this.loadComplete, this, ResUtil.PRIORITY_H);
     }
 
     private onFrameEventFired(event: egret.Event): void {
@@ -70,7 +70,7 @@ class BoneAnimation extends egret.Sprite {
 
     private loadComplete(): void {
         if (this._skeName == BoneAnimation.traceID) Log.trace("LoadBone loadComplete start {0}", BoneAnimation.traceID);
-        this.armature = App.BoneMgr.getArmature(this._skeName);
+        this.armature = App.Bone.getArmature(this._skeName);
         this._isLoadComplete = true;
         this.addChild(this.armature.display);
         this.initBone();
@@ -88,8 +88,8 @@ class BoneAnimation extends egret.Sprite {
         this.armature.animation.timeScale = this._timeScale = 1;
         this.armature.display.scaleX = this._direction = 1;
         dragonBones.WorldClock.clock.remove(this.armature);
-        App.DisplayUtils.resetDisplay(this);
-        App.DisplayUtils.resetDisplay(this.armature.display);
+        App.Display.resetDisplay(this);
+        App.Display.resetDisplay(this.armature.display);
     }
 
     private playComplete() {

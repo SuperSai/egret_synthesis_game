@@ -128,7 +128,7 @@ var ByteSocket = (function (_super) {
     };
     ByteSocket.prototype.connect = function () {
         var self = this;
-        if (App.DeviceUtils.IsHtml5) {
+        if (App.Device.IsHtml5) {
             if (!window["WebSocket"]) {
                 Log.trace("不支持WebSocket");
                 return;
@@ -167,7 +167,7 @@ var ByteSocket = (function (_super) {
             this.reconnect();
         }
         else {
-            App.MessageCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
+            App.MsgCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
         }
         this._isConnecting = false;
     };
@@ -176,11 +176,11 @@ var ByteSocket = (function (_super) {
         Log.trace("服务器断开连接");
         this._isConnecting = false;
         if (this._needReconnect) {
-            App.MessageCenter.dispatch(SocketConsts.SOCKET_START_RECONNECT);
+            App.MsgCenter.dispatch(SocketConsts.SOCKET_START_RECONNECT);
             this.reconnect();
         }
         else {
-            App.MessageCenter.dispatch(SocketConsts.SOCKET_CLOSE);
+            App.MsgCenter.dispatch(SocketConsts.SOCKET_CLOSE);
         }
     };
     /** 服务器连接成功 */
@@ -190,10 +190,10 @@ var ByteSocket = (function (_super) {
         self._reconnectCount = 0;
         self._isConnecting = true;
         if (this._connectFlag && this._needReconnect) {
-            App.MessageCenter.dispatch(SocketConsts.SOCKET_RECONNECT);
+            App.MsgCenter.dispatch(SocketConsts.SOCKET_RECONNECT);
         }
         else {
-            App.MessageCenter.dispatch(SocketConsts.SOCKET_CONNECT);
+            App.MsgCenter.dispatch(SocketConsts.SOCKET_CONNECT);
         }
         this._connectFlag = true;
     };
@@ -356,7 +356,7 @@ var ByteSocket = (function (_super) {
                 }
                 handlerCount++;
                 var pkg = self._m_PackageQueue.shift();
-                App.MessageCenter.dispatch(SocketConsts.SOCKET_DATA, pkg);
+                App.MsgCenter.dispatch(SocketConsts.SOCKET_DATA, pkg);
             }
         }
     };
@@ -370,10 +370,10 @@ var ByteSocket = (function (_super) {
         else {
             this._reconnectCount = 0;
             if (this._connectFlag) {
-                App.MessageCenter.dispatch(SocketConsts.SOCKET_CLOSE);
+                App.MsgCenter.dispatch(SocketConsts.SOCKET_CLOSE);
             }
             else {
-                App.MessageCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
+                App.MsgCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
             }
         }
     };

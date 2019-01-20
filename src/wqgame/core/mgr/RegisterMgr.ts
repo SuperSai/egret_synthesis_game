@@ -8,10 +8,10 @@ class RegisterMgr extends BaseClass {
 
 	/** 初始化场景 */
 	public initScene(): void {
-		App.SceneMgr.register(SceneConsts.LOADING, new LoadingScene());
-		App.SceneMgr.register(SceneConsts.LOGIN, new LoginScene());
-		App.SceneMgr.register(SceneConsts.HALL, new HallScene());
-		App.SceneMgr.register(SceneConsts.BATTLE, new BattleScene());
+		App.Scene.register(SceneConsts.LOADING, new LoadingScene());
+		App.Scene.register(SceneConsts.LOGIN, new LoginScene());
+		App.Scene.register(SceneConsts.HALL, new HallScene());
+		App.Scene.register(SceneConsts.BATTLE, new BattleScene());
 	}
 
 	/** 

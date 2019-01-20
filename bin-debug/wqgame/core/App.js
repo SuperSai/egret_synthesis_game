@@ -16,7 +16,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "StageUtils", {
+    Object.defineProperty(App, "Stage", {
         /** Stage操作相关工具类 */
         get: function () {
             return StageUtils.Instance();
@@ -88,7 +88,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "EffectUtils", {
+    Object.defineProperty(App, "Effect", {
         /** Effect工具类 */
         get: function () {
             return EffectUtils.Instance();
@@ -96,7 +96,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "StringUtils", {
+    Object.defineProperty(App, "StringU", {
         /** 字符串工具类 */
         get: function () {
             return StringUtils.Instance();
@@ -104,7 +104,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SoundMgr", {
+    Object.defineProperty(App, "Sound", {
         /** 声音管理类 */
         get: function () {
             return SoundMgr.Instance();
@@ -112,7 +112,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "CommonUtils", {
+    Object.defineProperty(App, "Common", {
         /** 通过工具类 */
         get: function () {
             return CommonUtils.Instance();
@@ -120,7 +120,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "KeyboardUtils", {
+    Object.defineProperty(App, "Keyboard", {
         /** 键盘操作工具类 */
         get: function () {
             return KeyboardUtils.Instance();
@@ -128,7 +128,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "DeviceUtils", {
+    Object.defineProperty(App, "Device", {
         /** 设备工具类 */
         get: function () {
             return DeviceUtils.Instance();
@@ -136,7 +136,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RockerUtils", {
+    Object.defineProperty(App, "Rocker", {
         /** 摇杆操作工具类 */
         get: function () {
             return RockerUtils.Instance();
@@ -160,7 +160,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "DebugUtils", {
+    Object.defineProperty(App, "Debug", {
         /** 调试工具 */
         get: function () {
             return DebugUtils.Instance();
@@ -168,7 +168,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RandomUtils", {
+    Object.defineProperty(App, "Random", {
         /** 随机数工具类 */
         get: function () {
             return RandomUtils.Instance();
@@ -176,7 +176,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ShockUtils", {
+    Object.defineProperty(App, "Shake", {
         /** 震动类 */
         get: function () {
             return ShakeUtils.Instance();
@@ -184,7 +184,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "MessageCenter", {
+    Object.defineProperty(App, "MsgCenter", {
         /** 服务器返回的消息处理中心 */
         get: function () {
             return MessageCenter.Instance(0);
@@ -200,7 +200,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "DisplayUtils", {
+    Object.defineProperty(App, "Display", {
         /** 显示对象工具类 */
         get: function () {
             return DisplayUtils.Instance();
@@ -208,7 +208,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ViewMgr", {
+    Object.defineProperty(App, "View", {
         /** View管理类 */
         get: function () {
             return ViewMgr.Instance();
@@ -216,7 +216,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RenderTextureMgr", {
+    Object.defineProperty(App, "RenderTexture", {
         /** 渲染纹理管理类 */
         get: function () {
             return RenderTextureMgr.Instance();
@@ -224,7 +224,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SceneMgr", {
+    Object.defineProperty(App, "Scene", {
         /** 场景管理类 */
         get: function () {
             return SceneMgr.Instance();
@@ -232,7 +232,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "DelayOptMgr", {
+    Object.defineProperty(App, "DelayOpt", {
         /** 分帧处理类 */
         get: function () {
             return DelayOptMgr.Instance();
@@ -240,7 +240,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "BoneMgr", {
+    Object.defineProperty(App, "Bone", {
         /** 龙骨管理类 */
         get: function () {
             return BoneMgr.Instance();
@@ -256,7 +256,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "EgretExpandUtils", {
+    Object.defineProperty(App, "Expand", {
         /** 引擎扩展类 */
         get: function () {
             return ExpandUtils.Instance();
@@ -264,7 +264,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ResUtil", {
+    Object.defineProperty(App, "Res", {
         /** 资源加载类 */
         get: function () {
             return ResUtil.Instance();
@@ -288,10 +288,10 @@ var App = (function () {
         //全局配置数据
         App.GlobalData = RES.getRes("global");
         //开启调试
-        App.DebugUtils.isOpen(App.GlobalData.IsDebug);
-        App.DebugUtils.setThreshold(5);
+        App.Debug.isOpen(App.GlobalData.IsDebug);
+        App.Debug.setThreshold(5);
         //扩展功能初始化
-        App.EgretExpandUtils.init();
+        App.Expand.init();
         //实例化Http请求
         // App.Http.initServer(App.GlobalData.HttpSerever);
     };

@@ -104,7 +104,7 @@ var BaseEuiView = (function (_super) {
      * 从父级移除
      */
     BaseEuiView.prototype.removeFromParent = function () {
-        App.DisplayUtils.removeFromParent(this);
+        App.Display.removeFromParent(this);
     };
     /**
      *对面板进行显示初始化，用于子类继承
@@ -175,7 +175,7 @@ var BaseEuiView = (function (_super) {
      */
     BaseEuiView.prototype.loadResource = function (loadComplete, initComplete) {
         if (this._resources && this._resources.length > 0) {
-            App.ResUtil.loadGroup(this._resources, loadComplete, this);
+            App.Res.loadGroup(this._resources, loadComplete, this);
             this.once(eui.UIEvent.CREATION_COMPLETE, initComplete, this);
         }
         else {

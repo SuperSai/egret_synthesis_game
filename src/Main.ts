@@ -52,9 +52,9 @@ class Main extends eui.UILayer {
         //允许支持跨域加载图片
         egret.ImageLoader.crossOrigin = "anonymous";
         //适配方式(全屏适配)
-        App.StageUtils.startFullscreenAdaptation(720, 1280, null);
-        App.StageUtils.setFrameRate(60);
-        App.LayerMgr.setup(App.StageUtils.getStage());
+        App.Stage.startFullscreenAdaptation(720, 1280, null);
+        App.Stage.setFrameRate(60);
+        App.LayerMgr.setup(App.Stage.getStage());
     }
     /** 初始化平台 */
     private initPlatform() {
@@ -100,8 +100,8 @@ class Main extends eui.UILayer {
 
     private loadGameComConfig() {
         return new Promise((resolve, reject) => {
-            App.ResUtil.addConfig(PathConfig.GameComPath, PathConfig.Root);
-            App.ResUtil.loadConfig(() => {
+            App.Res.addConfig(PathConfig.GameComPath, PathConfig.Root);
+            App.Res.loadConfig(() => {
                 resolve();
             }, this);
         })
@@ -112,9 +112,9 @@ class Main extends eui.UILayer {
         return new Promise((resolve, reject) => {
             let configs: Array<string> = PathConfig.ConfigUrls;
             for (let i: number = 0; i < configs.length; i++) {
-                App.ResUtil.addConfig(configs[i], PathConfig.Root);
+                App.Res.addConfig(configs[i], PathConfig.Root);
             }
-            App.ResUtil.loadConfig(() => {
+            App.Res.loadConfig(() => {
                 resolve();
             }, this);
         })
@@ -122,7 +122,7 @@ class Main extends eui.UILayer {
     /** 加载公共资源组 */
     private loadCommonGroup(loadingView: any) {
         return new Promise((resolve, reject) => {
-            App.ResUtil.loadGroup(["common", "global"], () => {
+            App.Res.loadGroup(["common", "global"], () => {
                 resolve();
             }, this, 0, loadingView);
         })
@@ -152,8 +152,8 @@ class Main extends eui.UILayer {
         //注册所有模块控制器
         App.RegisterMgr.initModules();
         //音乐音效处理
-        App.SoundMgr.setBgOn(true);
-        App.SoundMgr.setEffectOn(true);
-        App.SceneMgr.runScene(SceneConsts.LOGIN);
+        App.Sound.setBgOn(true);
+        App.Sound.setEffectOn(true);
+        App.Scene.runScene(SceneConsts.LOGIN);
     }
 }

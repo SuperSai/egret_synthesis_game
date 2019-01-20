@@ -79,7 +79,7 @@ var CommonUtils = (function (_super) {
      * 锁屏
      */
     CommonUtils.prototype.lock = function () {
-        var stage = App.StageUtils.getStage();
+        var stage = App.Stage.getStage();
         stage.$children.forEach(function (child) {
             if (child instanceof egret.DisplayObjectContainer) {
                 child.touchEnabled = child.touchChildren = false;
@@ -90,7 +90,7 @@ var CommonUtils = (function (_super) {
      * 解屏
      */
     CommonUtils.prototype.unlock = function () {
-        var stage = App.StageUtils.getStage();
+        var stage = App.Stage.getStage();
         stage.$children.forEach(function (child) {
             if (child instanceof egret.DisplayObjectContainer) {
                 child.touchEnabled = child.touchChildren = true;
@@ -107,16 +107,10 @@ var CommonUtils = (function (_super) {
     };
     /** 获取2点之间的移动速度 */
     CommonUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
-        var speed = new egret.Point();
-        var hypotenuse = egret.Point.distance(targetP2, currentP1); // App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
-        if (hypotenuse == 0) {
-            speed.x = 0;
-            speed.y = 0;
-            return speed;
-        }
-        speed.x = SpeedNum * (targetP2.x - currentP1.x) / hypotenuse;
-        speed.y = SpeedNum * (targetP2.y - currentP1.y) / hypotenuse;
-        return speed;
+        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+        if (hypotenuse == 0)
+            return { x: 0, y: 0 };
+        return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
     };
     CommonUtils.prototype.numPrecentage = function (cint, mint, countCop) {
         var value = Math.floor(cint / mint * countCop);

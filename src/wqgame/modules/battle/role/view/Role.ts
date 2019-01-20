@@ -2,11 +2,13 @@ class Role extends BaseRole {
 
 	private _roleId: number;
 	private _roleImg: eui.Image;
-	private _baseItem: BaseItem; // 角色当前对应的底座
+	/** 角色当前对应的底座 */
+	private _baseItem: BaseItem;
 	private lastTime: number = 0;
 	private _model: BattleModel;
 	private _heroVO: HeroVO;
-	private _isMove: boolean = false;
+	/** 是否正在拖拽中 */
+	private _isDrop: boolean = false;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -27,14 +29,14 @@ class Role extends BaseRole {
 	/** 初始化角色 */
 	private initRole(): void {
 		let self = this;
-		App.DisplayUtils.removeFromParent(self._roleImg);
+		App.Display.removeFromParent(self._roleImg);
 		self._roleImg = new eui.Image(self._heroVO.assetname);
 		self.addChild(self._roleImg);
 	}
 
 	public onUpdate(passTime: number): void {
 		super.onUpdate(passTime);
-		if (this._isMove) return;
+		if (this._isDrop) return;
 		this.searchTarget();
 	}
 
@@ -63,7 +65,7 @@ class Role extends BaseRole {
 		let nowTime: number = egret.getTimer();
 		if (monster.HP > 0 && monster.isMove && nowTime > this.lastTime) {
 			this.lastTime = nowTime + this._heroVO.delay;//下次执行时间
-			this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, this.x, this.y, monster);
+			this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, { x: this.x, y: this.y }, monster);
 		}
 	}
 
@@ -73,35 +75,20 @@ class Role extends BaseRole {
 		self._baseItem = null;
 	}
 
-	set heroVO(value: HeroVO) {
-		this._heroVO = value;
-	}
+	set heroVO(value: HeroVO) { this._heroVO = value; }
+	/** 角色数据信息 */
+	get heroVO(): HeroVO { return this._heroVO; }
 
-	get heroVO(): HeroVO {
-		return this._heroVO;
-	}
+	get roleImg(): eui.Image { return this._roleImg; }
+	/** 角色ID */
+	get roleId(): number { return this._roleId; }
 
-	get roleImg(): eui.Image {
-		return this._roleImg;
-	}
+	set baseItem(value: BaseItem) { this._baseItem = value; }
+	/** 角色当前对应的底座 */
+	get baseItem(): BaseItem { return this._baseItem; }
 
-	get roleId(): number {
-		return this._roleId;
-	}
+	set isDrop(value: boolean) { this._isDrop = value; }
 
-	set baseItem(value: BaseItem) {
-		this._baseItem = value;
-	}
-
-	get baseItem(): BaseItem {
-		return this._baseItem;
-	}
-
-	set isMove(value: boolean) {
-		this._isMove = value;
-	}
 	/** 是否在移动合成中 */
-	get isMove(): boolean {
-		return this._isMove;
-	}
+	get isDrop(): boolean { return this._isDrop; }
 }

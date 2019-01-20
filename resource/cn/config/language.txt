@@ -9,4 +9,5 @@ lock:停用
 out:退出
 
 battle.txt.01:没有多余的底座,请拖动合成新角色!
-battle.txt.02:第{0}波
+battle.txt.02:第{0}-{1}波
+battle.txt.03:BOSS战

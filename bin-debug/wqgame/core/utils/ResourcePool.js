@@ -102,7 +102,7 @@ var ResourcePool = (function () {
         if (container != null)
             container.removeChild(obj);
         //reset item
-        App.DisplayUtils.resetDisplay(obj);
+        App.Display.resetDisplay(obj);
         if (obj["resetForPool"]) {
             obj["resetForPool"]();
         }

@@ -99,9 +99,9 @@ var Main = (function (_super) {
         //允许支持跨域加载图片
         egret.ImageLoader.crossOrigin = "anonymous";
         //适配方式(全屏适配)
-        App.StageUtils.startFullscreenAdaptation(720, 1280, null);
-        App.StageUtils.setFrameRate(60);
-        App.LayerMgr.setup(App.StageUtils.getStage());
+        App.Stage.startFullscreenAdaptation(720, 1280, null);
+        App.Stage.setFrameRate(60);
+        App.LayerMgr.setup(App.Stage.getStage());
     };
     /** 初始化平台 */
     Main.prototype.initPlatform = function () {
@@ -178,8 +178,8 @@ var Main = (function (_super) {
     Main.prototype.loadGameComConfig = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            App.ResUtil.addConfig(PathConfig.GameComPath, PathConfig.Root);
-            App.ResUtil.loadConfig(function () {
+            App.Res.addConfig(PathConfig.GameComPath, PathConfig.Root);
+            App.Res.loadConfig(function () {
                 resolve();
             }, _this);
         });
@@ -190,9 +190,9 @@ var Main = (function (_super) {
         return new Promise(function (resolve, reject) {
             var configs = PathConfig.ConfigUrls;
             for (var i = 0; i < configs.length; i++) {
-                App.ResUtil.addConfig(configs[i], PathConfig.Root);
+                App.Res.addConfig(configs[i], PathConfig.Root);
             }
-            App.ResUtil.loadConfig(function () {
+            App.Res.loadConfig(function () {
                 resolve();
             }, _this);
         });
@@ -201,7 +201,7 @@ var Main = (function (_super) {
     Main.prototype.loadCommonGroup = function (loadingView) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            App.ResUtil.loadGroup(["common", "global"], function () {
+            App.Res.loadGroup(["common", "global"], function () {
                 resolve();
             }, _this, 0, loadingView);
         });
@@ -232,9 +232,9 @@ var Main = (function (_super) {
         //注册所有模块控制器
         App.RegisterMgr.initModules();
         //音乐音效处理
-        App.SoundMgr.setBgOn(true);
-        App.SoundMgr.setEffectOn(true);
-        App.SceneMgr.runScene(SceneConsts.LOGIN);
+        App.Sound.setBgOn(true);
+        App.Sound.setEffectOn(true);
+        App.Scene.runScene(SceneConsts.LOGIN);
     };
     return Main;
 }(eui.UILayer));

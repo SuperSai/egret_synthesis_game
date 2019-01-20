@@ -16,7 +16,7 @@ var Log = (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             optionalParams[_i] = arguments[_i];
         }
-        if (App.DebugUtils.isDebug) {
+        if (App.Debug.isDebug) {
             optionalParams[0] = "[DebugLog]" + optionalParams[0];
             console.log.apply(console, optionalParams);
         }

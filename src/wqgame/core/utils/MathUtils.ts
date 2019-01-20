@@ -50,7 +50,7 @@ class MathUtils extends BaseClass {
 		startPoint.y = resultY;
 	}
 
-	public getAngle(starPos: egret.Point, endPos: egret.Point): number {
+	public getAngle(starPos: { x: number, y: number }, endPos: { x: number, y: number }): number {
 		// let vx = endPos.x - starPos.x;
 		// let vy = endPos.y - starPos.y;
 		// let hyp = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));

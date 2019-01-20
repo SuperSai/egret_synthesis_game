@@ -35,18 +35,18 @@ var RockerUtils = (function (_super) {
         this.moveFlagGoY = this.moveFlagY;
         this.moveFlagWidthHelf = moveBg.width * 0.5;
         this.moveFlagRec = new egret.Rectangle(this.moveFlagX - moveBg.width * 0.5, this.moveFlagY - moveBg.height * 0.5, moveBg.width, moveBg.height);
-        this.moveFlagCheckRec = new egret.Rectangle(0, 0, App.StageUtils.getWidth() * 0.5, App.StageUtils.getHeight());
+        this.moveFlagCheckRec = new egret.Rectangle(0, 0, App.Stage.getWidth() * 0.5, App.Stage.getHeight());
         this.dealKeyFunc = dealKeyFunc;
         this.dealKeyTarget = dealKeyTarget;
         this.moveFlag.touchEnabled = true;
         this.moveFlag.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.startMove, this);
         this.moveFlag.addEventListener(egret.TouchEvent.TOUCH_END, this.stopMove, this);
         this.moveFlag.addEventListener(egret.TouchEvent.TOUCH_TAP, this.stopEvent, this);
-        App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_END, this.leaveStateEvent, this);
-        App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_MOVE, this.heroMoveEvent, this);
+        App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_END, this.leaveStateEvent, this);
+        App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_MOVE, this.heroMoveEvent, this);
         //键盘控制
-        App.KeyboardUtils.addKeyDown(this.onKeyDown, this);
-        App.KeyboardUtils.addKeyUp(this.onKeyUp, this);
+        App.Keyboard.addKeyDown(this.onKeyDown, this);
+        App.Keyboard.addKeyUp(this.onKeyUp, this);
     };
     /**
      * 键盘按下处理

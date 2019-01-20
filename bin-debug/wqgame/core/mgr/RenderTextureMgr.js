@@ -33,7 +33,7 @@ var RenderTextureMgr = (function (_super) {
      * @returns {boolean}
      */
     RenderTextureMgr.prototype.isLowerQQBrowser = function () {
-        if (App.DeviceUtils.IsQQBrowser) {
+        if (App.Device.IsQQBrowser) {
             //判定机型，因为拿不到内存信息，现在只能根据机型进行判定
             var arr = [
                 "2013022",

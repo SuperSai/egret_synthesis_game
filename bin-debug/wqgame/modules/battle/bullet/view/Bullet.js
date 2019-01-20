@@ -15,21 +15,21 @@ var Bullet = (function (_super) {
     __extends(Bullet, _super);
     function Bullet($controller, $layer) {
         var _this = _super.call(this, $controller, $layer) || this;
-        _this._id = App.CommonUtils.Token;
+        _this._id = App.Common.Token;
         return _this;
     }
     /** 设置子弹攻击的目标 */
-    Bullet.prototype.setTarget = function (bulletId, $x, $y, $target) {
+    Bullet.prototype.setTarget = function (bulletId, currPos, $target) {
         var self = this;
         self._bulletVO = GlobleVOData.getData(GlobleVOData.BulletVO, bulletId);
         self._target = $target;
         if (self._bulletImg)
-            App.DisplayUtils.removeFromParent(self._bulletImg);
+            App.Display.removeFromParent(self._bulletImg);
         self._bulletImg = ObjectPool.pop(egret.Bitmap, "egret.Bitmap");
         self._bulletImg.texture = RES.getRes(self._bulletVO.assetname);
         self.addChild(self._bulletImg);
-        self.x = $x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
-        self.y = $y + self._target.height + (self._bulletImg.height >> 1);
+        self.x = currPos.x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
+        self.y = currPos.y + self._target.height + (self._bulletImg.height >> 1);
     };
     Bullet.prototype.onUpdate = function () {
         _super.prototype.onUpdate.call(this);
@@ -44,16 +44,16 @@ var Bullet = (function (_super) {
             this.release();
             return;
         }
-        var distance = egret.Point.distance(this.point, this._target.point);
+        var distance = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.point.x, this._target.point.y);
         if (distance <= this._bulletVO.radius) {
             this._target.HP = this._target.HP - this._bulletVO.damage;
             this._target = null;
             this._bulletVO = null;
             this.release();
-            App.EffectUtils.bombEffect(this.localToGlobal(), this);
+            App.Effect.bombEffect(this.localToGlobal(), this);
         }
         else {
-            var targetSpeed = App.CommonUtils.getSpeed(this._target.point, this.point, this._bulletVO.speed);
+            var targetSpeed = App.Common.getSpeed(this._target.point, this.point, this._bulletVO.speed);
             var xDistance = 10 * targetSpeed.x;
             var yDistance = 10 * targetSpeed.y;
             this.x = this.x + xDistance;
@@ -66,12 +66,12 @@ var Bullet = (function (_super) {
         self.controller.getModel().bulletDic.Remove(self._id);
         ObjectPool.push(self._bulletImg);
         ObjectPool.push(self);
-        App.DisplayUtils.removeFromParent(self._bulletImg);
-        App.DisplayUtils.removeFromParent(self);
+        App.Display.removeFromParent(self._bulletImg);
+        App.Display.removeFromParent(self);
     };
     Object.defineProperty(Bullet.prototype, "point", {
         get: function () {
-            return new egret.Point(this.x, this.y);
+            return { x: this.x, y: this.y };
         },
         enumerable: true,
         configurable: true

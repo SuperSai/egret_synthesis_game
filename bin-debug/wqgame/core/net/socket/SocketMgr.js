@@ -27,13 +27,13 @@ var SocketMgr = (function (_super) {
         if (self._hasInitEvents) {
             return;
         }
-        App.MessageCenter.addListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
+        App.MsgCenter.addListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
         self._hasInitEvents = true;
     };
     SocketMgr.prototype.removeEvents = function () {
         var self = this;
         self._hasInitEvents = false;
-        App.MessageCenter.removeListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
+        App.MsgCenter.removeListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
     };
     /** 接受到的服务器数据 */
     SocketMgr.prototype.onSocketDataHandler = function (evt) {
@@ -42,7 +42,7 @@ var SocketMgr = (function (_super) {
         if (pkg != null) {
             var code = pkg.code;
             var by = pkg.readBody();
-            App.MessageCenter.dispatch(SocketConsts.format(code), by.bytes);
+            App.MsgCenter.dispatch(SocketConsts.format(code), by.bytes);
         }
     };
     Object.defineProperty(SocketMgr.prototype, "socket", {

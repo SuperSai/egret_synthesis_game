@@ -22,8 +22,10 @@ var BattleModel = (function (_super) {
         _this.currwaveNum = 1;
         /** 当前波数的怪物数量 */
         _this.currMonsterCount = 0;
+        /** 最大的底座数量 */
+        _this.maxBaseCount = 0;
         /** 战斗怪物状态 */
-        _this.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
+        _this.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
         var self = _this;
         self.init();
         return _this;
@@ -38,7 +40,10 @@ var BattleModel = (function (_super) {
     Object.defineProperty(BattleModel.prototype, "monsterWaveNumCount", {
         /** 获取当前波数的怪物数量 */
         get: function () {
-            return App.RandomUtils.randrange(this._levelVO.monsterNumRange[0], this._levelVO.monsterNumRange[1]);
+            if (this._levelVO.monsterCount.length <= 1) {
+                return this._levelVO.monsterCount[0];
+            }
+            return this._levelVO.monsterCount[this.currwaveNum - 1];
         },
         enumerable: true,
         configurable: true
@@ -48,7 +53,7 @@ var BattleModel = (function (_super) {
         get: function () {
             var self = this;
             var lists = [];
-            for (var i = self._levelVO.maxBaseCount; i > 0; i--) {
+            for (var i = self.maxBaseCount; i > 0; i--) {
                 if (i > self._levelVO.openBaseCount) {
                     lists.push(BASE_STATE.CLOSE);
                 }

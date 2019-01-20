@@ -181,8 +181,8 @@ class DisplayUtils extends BaseClass {
             width = com.parent.width;
             height = com.parent.height;
         } else if (width == -1 && height == -1) {
-            width = App.StageUtils.getWidth();
-            height = App.StageUtils.getHeight();
+            width = App.Stage.getWidth();
+            height = App.Stage.getHeight();
         }
         var rect: egret.Rectangle = innerRect.getInnerRect(width, height);
         com.x = rect.x;

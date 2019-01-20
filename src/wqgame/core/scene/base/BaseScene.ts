@@ -23,7 +23,7 @@ class BaseScene {
      * 退出Scene调用
      */
 	public onExit(): void {
-		App.ViewMgr.closeAll();
+		App.View.closeAll();
 		this.removeAllLayer();
 	}
 
@@ -32,11 +32,11 @@ class BaseScene {
      */
 	public addLayer(layer: egret.DisplayObjectContainer): void {
 		if (layer instanceof BaseSpriteLayer) {
-			App.StageUtils.getStage().addChild(layer);
+			App.Stage.getStage().addChild(layer);
 			this._layers.push(layer);
 		}
 		else if (layer instanceof BaseEuiLayer) {
-			App.StageUtils.getUIStage().addChild(layer);
+			App.Stage.getUIStage().addChild(layer);
 			this._layers.push(layer);
 		}
 	}
@@ -46,11 +46,11 @@ class BaseScene {
      */
 	public addLayerAt(layer: egret.DisplayObjectContainer, index: number): void {
 		if (layer instanceof BaseSpriteLayer) {
-			App.StageUtils.getStage().addChildAt(layer, index);
+			App.Stage.getStage().addChildAt(layer, index);
 			this._layers.push(layer);
 		}
 		else if (layer instanceof BaseEuiLayer) {
-			App.StageUtils.getUIStage().addChildAt(layer, index);
+			App.Stage.getUIStage().addChildAt(layer, index);
 			this._layers.push(layer);
 		}
 	}
@@ -60,11 +60,11 @@ class BaseScene {
      */
 	public removeLayer(layer: egret.DisplayObjectContainer): void {
 		if (layer instanceof BaseSpriteLayer) {
-			App.StageUtils.getStage().removeChild(layer);
+			App.Stage.getStage().removeChild(layer);
 			this._layers.splice(this._layers.indexOf(layer), 1);
 		}
 		else if (layer instanceof BaseEuiLayer) {
-			App.StageUtils.getUIStage().removeChild(layer);
+			App.Stage.getUIStage().removeChild(layer);
 			this._layers.splice(this._layers.indexOf(layer), 1);
 		}
 	}

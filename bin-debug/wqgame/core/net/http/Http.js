@@ -90,7 +90,7 @@ var Http = (function (_super) {
         var t_obj = JSON.parse(this._urlLoader.data);
         if (!t_obj.hasOwnProperty("s") || t_obj["s"] == 0) {
             this._data.pUpdate.update(this._type, t_obj);
-            App.MessageCenter.dispatch(this._type, t_obj);
+            App.MsgCenter.dispatch(this._type, t_obj);
         }
         else {
             Log.trace("Http错误:" + t_obj["s"]);

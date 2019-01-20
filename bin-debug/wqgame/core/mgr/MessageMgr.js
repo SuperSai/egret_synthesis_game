@@ -26,10 +26,10 @@ var MessageMgr = (function (_super) {
         label.horizontalCenter = 0;
         label.verticalCenter = 0;
         label.touchEnabled = false;
-        label.width = App.StageUtils.getWidth();
+        label.width = App.Stage.getWidth();
         label.wordWrap = true;
         label.textAlign = "center";
-        label.y = App.StageUtils.getHeight() / 2;
+        label.y = App.Stage.getHeight() / 2;
         return label;
     };
     MessageMgr.prototype.showText = function (message) {
@@ -49,7 +49,7 @@ var MessageMgr = (function (_super) {
             ObjectPool.push(label);
             label.alpha = 1;
             label.verticalCenter = 0;
-            App.DisplayUtils.removeFromParent(label);
+            App.Display.removeFromParent(label);
             _this.onAnimationComplete(message);
         });
     };

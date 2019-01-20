@@ -16,7 +16,7 @@ class LoginScene extends BaseScene {
 		super.onEnter();
 
 		//初始打开Login页面
-		App.ViewMgr.open(ViewConst.Login);
+		App.View.open(ViewConst.Login);
 	}
 
     /**

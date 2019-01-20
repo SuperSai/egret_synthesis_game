@@ -41,14 +41,14 @@ var TimerMgr = (function (_super) {
     TimerMgr.prototype.onEnterFrame = function () {
         this._currFrame++;
         this._currTime = egret.getTimer();
-        App.DebugUtils.start("TimerManager:");
+        App.Debug.start("TimerManager:");
         for (var i = 0; i < this._count; i++) {
             var handler = this._handlers[i];
             var t = handler.userFrame ? this._currFrame : this._currTime;
             if (t >= handler.exeTime) {
-                App.DebugUtils.start(handler.method.toString());
+                App.Debug.start(handler.method.toString());
                 handler.method.call(handler.methodObj, (this._currTime - handler.dealTime) * this._timeScale);
-                App.DebugUtils.stop(handler.method.toString());
+                App.Debug.stop(handler.method.toString());
                 handler.dealTime = this._currTime;
                 handler.exeTime += handler.delay;
                 if (!handler.repeat) {
@@ -68,7 +68,7 @@ var TimerMgr = (function (_super) {
             var handler = this._delHandlers.pop();
             this.remove(handler.method, handler.methodObj);
         }
-        App.DebugUtils.stop("TimerManager:");
+        App.Debug.stop("TimerManager:");
     };
     TimerMgr.prototype.create = function (useFrame, delay, repeatCount, method, methodObj, complateMethod, complateMethodObj) {
         //参数监测

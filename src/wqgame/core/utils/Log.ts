@@ -7,7 +7,7 @@ class Log {
      * @param messsage 内容
      */
 	public static trace(...optionalParams: any[]): void {
-		if (App.DebugUtils.isDebug) {
+		if (App.Debug.isDebug) {
 			optionalParams[0] = "[DebugLog]" + optionalParams[0];
 			console.log.apply(console, optionalParams);
 		}

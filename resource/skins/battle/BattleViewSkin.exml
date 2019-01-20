@@ -20,7 +20,7 @@
 		</e:Group>
 		<e:Group right="0" top="0" scaleX="0.8" scaleY="0.8">
 			<e:Image source="frames_json.frame_04" x="0" y="0"/>
-			<e:Label id="txt_level" text="第1关" verticalCenter="0" fontFamily="Microsoft YaHei" bold="true" textAlign="center" horizontalCenter="0" strokeColor="0x4c2a2a" stroke="2" textColor="0xffffff"/>
+			<e:Label id="txt_level" text="第1-1波" verticalCenter="0" fontFamily="Microsoft YaHei" bold="true" textAlign="center" horizontalCenter="0" strokeColor="0x4c2a2a" stroke="2" textColor="0xffffff"/>
 		</e:Group>
 		<ns1:CurrencyCom id="currency" skinName="CurrencyComSkin" left="0" top="0"/>
 	</e:Group>

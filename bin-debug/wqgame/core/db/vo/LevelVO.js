@@ -18,13 +18,13 @@ var LevelVO = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LevelVO.prototype, "monsterNumRange", {
-        /** 怪物数量范围 */
+    Object.defineProperty(LevelVO.prototype, "monsterCount", {
+        /** 每波怪物数量 */
         get: function () {
-            return this._monsterNumRange;
+            return this._monsterCount;
         },
         set: function (value) {
-            this._monsterNumRange = ObjectUtils.splitToNumber(value);
+            this._monsterCount = ObjectUtils.splitToNumber(value);
         },
         enumerable: true,
         configurable: true

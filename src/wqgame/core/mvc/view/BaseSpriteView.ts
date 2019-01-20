@@ -18,7 +18,7 @@ class BaseSpriteView extends egret.DisplayObjectContainer implements IBaseView {
         this._controller = $controller;
         this._myParent = App.LayerMgr.getLayerByType($layer);
         this._isInit = false;
-        App.StageUtils.getStage().addEventListener(egret.Event.RESIZE, this.onResize, this);
+        App.Stage.getStage().addEventListener(egret.Event.RESIZE, this.onResize, this);
     }
 
     /**
@@ -96,7 +96,7 @@ class BaseSpriteView extends egret.DisplayObjectContainer implements IBaseView {
      * 从父级移除
      */
     public removeFromParent(): void {
-        App.DisplayUtils.removeFromParent(this);
+        App.Display.removeFromParent(this);
     }
 
     /**
@@ -166,7 +166,7 @@ class BaseSpriteView extends egret.DisplayObjectContainer implements IBaseView {
      */
     public loadResource(loadComplete: Function, initComplete: Function): void {
         if (this._resources && this._resources.length > 0) {
-            App.ResUtil.loadGroup(this._resources, () => {
+            App.Res.loadGroup(this._resources, () => {
                 loadComplete();
                 initComplete();
             }, this);

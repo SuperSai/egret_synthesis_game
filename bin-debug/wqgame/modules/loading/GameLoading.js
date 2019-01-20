@@ -24,7 +24,7 @@ var GameLoading = (function (_super) {
         this.averageUtils = new AverageUtils();
         this.content = new egret.Sprite();
         this.content.graphics.beginFill(0x000000, 0.2);
-        this.content.graphics.drawRect(0, 0, App.StageUtils.getWidth(), App.StageUtils.getHeight());
+        this.content.graphics.drawRect(0, 0, App.Stage.getWidth(), App.Stage.getHeight());
         this.content.graphics.endFill();
         this.content.touchEnabled = true;
         this.uiImageContainer = new egret.DisplayObjectContainer();
@@ -40,12 +40,12 @@ var GameLoading = (function (_super) {
         // }, this, RES.ResourceItem.TYPE_IMAGE);
     };
     GameLoading.prototype.showLoading = function () {
-        App.StageUtils.getStage().addChild(this.content);
+        App.Stage.getStage().addChild(this.content);
         App.TimerMgr.doFrame(1, 0, this.enterFrame, this);
     };
     GameLoading.prototype.hideLoading = function () {
         if (this.content && this.content.parent) {
-            App.StageUtils.getStage().removeChild(this.content);
+            App.Stage.getStage().removeChild(this.content);
             this.uiImageContainer.rotation = 0;
         }
         App.TimerMgr.remove(this.enterFrame, this);

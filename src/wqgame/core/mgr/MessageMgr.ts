@@ -14,10 +14,10 @@ class MessageMgr extends BaseClass {
         label.horizontalCenter = 0;
         label.verticalCenter = 0;
         label.touchEnabled = false;
-        label.width = App.StageUtils.getWidth();
+        label.width = App.Stage.getWidth();
         label.wordWrap = true;
         label.textAlign = "center";
-        label.y = App.StageUtils.getHeight() / 2;
+        label.y = App.Stage.getHeight() / 2;
         return label;
     }
 
@@ -38,7 +38,7 @@ class MessageMgr extends BaseClass {
             ObjectPool.push(label);
             label.alpha = 1;
             label.verticalCenter = 0;
-            App.DisplayUtils.removeFromParent(label);
+            App.Display.removeFromParent(label);
             this.onAnimationComplete(message);
         })
     }

@@ -49,7 +49,7 @@ class CommonUtils extends BaseClass {
      * 锁屏
      */
 	public lock(): void {
-		var stage: egret.Stage = App.StageUtils.getStage();
+		var stage: egret.Stage = App.Stage.getStage();
 		stage.$children.forEach(child => {
 			if (child instanceof egret.DisplayObjectContainer) {
 				child.touchEnabled = child.touchChildren = false;
@@ -61,7 +61,7 @@ class CommonUtils extends BaseClass {
      * 解屏
      */
 	public unlock(): void {
-		var stage: egret.Stage = App.StageUtils.getStage();
+		var stage: egret.Stage = App.Stage.getStage();
 		stage.$children.forEach(child => {
 			if (child instanceof egret.DisplayObjectContainer) {
 				child.touchEnabled = child.touchChildren = true;
@@ -98,18 +98,10 @@ class CommonUtils extends BaseClass {
 	}
 
 	/** 获取2点之间的移动速度 */
-	public getSpeed(targetP2: egret.Point, currentP1: egret.Point, SpeedNum: number): egret.Point {
-
-		var speed: egret.Point = new egret.Point();
-		var hypotenuse: number = egret.Point.distance(targetP2, currentP1);// App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
-		if (hypotenuse == 0) {
-			speed.x = 0;
-			speed.y = 0;
-			return speed;
-		}
-		speed.x = SpeedNum * (targetP2.x - currentP1.x) / hypotenuse;
-		speed.y = SpeedNum * (targetP2.y - currentP1.y) / hypotenuse;
-		return speed;
+	public getSpeed(targetP2: { x: number, y: number }, currentP1: { x: number, y: number }, SpeedNum: number): { x: number, y: number } {
+		var hypotenuse: number = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+		if (hypotenuse == 0) return { x: 0, y: 0 };
+		return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
 	}
 
 	public numPrecentage(cint: number, mint: number, countCop: number): number {

@@ -14,7 +14,7 @@ var LoadingController = (function (_super) {
         var _this = _super.call(this) || this;
         //初始化UI
         _this.loadingView = new LoadingView(_this, LayerMgr.GAME_UI_LAYER);
-        App.ViewMgr.register(ViewConst.Loading, _this.loadingView);
+        App.View.register(ViewConst.Loading, _this.loadingView);
         //注册事件监听
         _this.registerFunc(LoadingConst.SetProgress, _this.setProgress, _this);
         return _this;

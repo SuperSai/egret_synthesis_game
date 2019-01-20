@@ -146,7 +146,7 @@ class ByteSocket extends egret.EventDispatcher {
 
 	public connect(): void {
 		let self = this;
-		if (App.DeviceUtils.IsHtml5) {
+		if (App.Device.IsHtml5) {
 			if (!window["WebSocket"]) {
 				Log.trace("不支持WebSocket");
 				return;
@@ -188,7 +188,7 @@ class ByteSocket extends egret.EventDispatcher {
 		if (this._needReconnect) {
 			this.reconnect();
 		} else {
-			App.MessageCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
+			App.MsgCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
 		}
 		this._isConnecting = false;
 	}
@@ -199,10 +199,10 @@ class ByteSocket extends egret.EventDispatcher {
 		this._isConnecting = false;
 
 		if (this._needReconnect) {
-			App.MessageCenter.dispatch(SocketConsts.SOCKET_START_RECONNECT);
+			App.MsgCenter.dispatch(SocketConsts.SOCKET_START_RECONNECT);
 			this.reconnect();
 		} else {
-			App.MessageCenter.dispatch(SocketConsts.SOCKET_CLOSE);
+			App.MsgCenter.dispatch(SocketConsts.SOCKET_CLOSE);
 		}
 	}
 
@@ -214,9 +214,9 @@ class ByteSocket extends egret.EventDispatcher {
 		self._isConnecting = true;
 
 		if (this._connectFlag && this._needReconnect) {
-			App.MessageCenter.dispatch(SocketConsts.SOCKET_RECONNECT);
+			App.MsgCenter.dispatch(SocketConsts.SOCKET_RECONNECT);
 		} else {
-			App.MessageCenter.dispatch(SocketConsts.SOCKET_CONNECT);
+			App.MsgCenter.dispatch(SocketConsts.SOCKET_CONNECT);
 		}
 
 		this._connectFlag = true;
@@ -401,7 +401,7 @@ class ByteSocket extends egret.EventDispatcher {
 				}
 				handlerCount++;
 				let pkg: PackageIn = self._m_PackageQueue.shift();
-				App.MessageCenter.dispatch(SocketConsts.SOCKET_DATA, pkg);
+				App.MsgCenter.dispatch(SocketConsts.SOCKET_DATA, pkg);
 			}
 		}
 	}
@@ -415,9 +415,9 @@ class ByteSocket extends egret.EventDispatcher {
 		} else {
 			this._reconnectCount = 0;
 			if (this._connectFlag) {
-				App.MessageCenter.dispatch(SocketConsts.SOCKET_CLOSE);
+				App.MsgCenter.dispatch(SocketConsts.SOCKET_CLOSE);
 			} else {
-				App.MessageCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
+				App.MsgCenter.dispatch(SocketConsts.SOCKET_NOCONNECT);
 			}
 		}
 	}

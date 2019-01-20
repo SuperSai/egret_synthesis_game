@@ -15,10 +15,10 @@ class BoneMgr extends BaseClass {
 	}
 
 	public start(): void {
-		App.StageUtils.getStage().addEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
+		App.Stage.getStage().addEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
 	}
 	public stop() {
-		App.StageUtils.getStage().removeEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
+		App.Stage.getStage().removeEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
 	}
 
 	private onUpdate(event: Event): void {

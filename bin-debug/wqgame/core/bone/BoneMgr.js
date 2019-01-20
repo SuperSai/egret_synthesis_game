@@ -22,10 +22,10 @@ var BoneMgr = (function (_super) {
         testBone.play();
     };
     BoneMgr.prototype.start = function () {
-        App.StageUtils.getStage().addEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
+        App.Stage.getStage().addEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
     };
     BoneMgr.prototype.stop = function () {
-        App.StageUtils.getStage().removeEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
+        App.Stage.getStage().removeEventListener(egret.Event.ENTER_FRAME, this.onUpdate, this);
     };
     BoneMgr.prototype.onUpdate = function (event) {
         dragonBones.WorldClock.clock.advanceTime(-1);

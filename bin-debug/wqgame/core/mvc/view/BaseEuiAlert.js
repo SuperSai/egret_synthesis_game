@@ -33,7 +33,7 @@ var BaseEuiAlert = (function (_super) {
     BaseEuiAlert.prototype.initData = function () {
         _super.prototype.initData.call(this);
         var self = this;
-        App.EffectUtils.viewShowEffect(self, self._viewShowType, self.effectCallBack);
+        App.Effect.viewShowEffect(self, self._viewShowType, self.effectCallBack);
     };
     BaseEuiAlert.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
@@ -49,15 +49,15 @@ var BaseEuiAlert = (function (_super) {
     };
     BaseEuiAlert.prototype.onMaskHandler = function () {
         var self = this;
-        App.DisplayUtils.removeFromParent(self._maskRect);
+        App.Display.removeFromParent(self._maskRect);
         self._maskRect = null;
-        App.ViewMgr.closeView(self);
+        App.View.closeView(self);
     };
     BaseEuiAlert.prototype.onClosePanel = function () {
         var self = this;
-        App.DisplayUtils.removeFromParent(self._maskRect);
+        App.Display.removeFromParent(self._maskRect);
         self._maskRect = null;
-        App.ViewMgr.closeView(self);
+        App.View.closeView(self);
     };
     /** 创建遮罩 */
     BaseEuiAlert.prototype.getMask = function (maskAlpha) {

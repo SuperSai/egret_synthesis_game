@@ -25,7 +25,7 @@ var BaseSpriteView = (function (_super) {
         _this._controller = $controller;
         _this._myParent = App.LayerMgr.getLayerByType($layer);
         _this._isInit = false;
-        App.StageUtils.getStage().addEventListener(egret.Event.RESIZE, _this.onResize, _this);
+        App.Stage.getStage().addEventListener(egret.Event.RESIZE, _this.onResize, _this);
         return _this;
     }
     /**
@@ -107,7 +107,7 @@ var BaseSpriteView = (function (_super) {
      * 从父级移除
      */
     BaseSpriteView.prototype.removeFromParent = function () {
-        App.DisplayUtils.removeFromParent(this);
+        App.Display.removeFromParent(this);
     };
     /**
      *对面板进行显示初始化，用于子类继承
@@ -172,7 +172,7 @@ var BaseSpriteView = (function (_super) {
      */
     BaseSpriteView.prototype.loadResource = function (loadComplete, initComplete) {
         if (this._resources && this._resources.length > 0) {
-            App.ResUtil.loadGroup(this._resources, function () {
+            App.Res.loadGroup(this._resources, function () {
                 loadComplete();
                 initComplete();
             }, this);

@@ -13,7 +13,7 @@ class HallScene extends BaseScene {
 		super.onEnter();
 
 		//初始打开大厅页面
-		App.ViewMgr.open(ViewConst.Hall);
+		App.View.open(ViewConst.Hall);
 
 		//播放背景音乐
 		// App.SoundManager.playBg("sound_bg");

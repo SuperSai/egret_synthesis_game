@@ -46,7 +46,7 @@ var BaseProxy = (function () {
      * @param callbackObj 处理函数所属对象
      */
     BaseProxy.prototype.receiveServerMsg = function (key, callbackFunc, callbackObj) {
-        App.MessageCenter.addListener(key, callbackFunc, callbackObj);
+        App.MsgCenter.addListener(key, callbackFunc, callbackObj);
     };
     /**
      * 注册从服务器返回消息的监听，仅一次，执行完成后删除
@@ -86,7 +86,7 @@ var BaseProxy = (function () {
      * @param callbackObj 处理函数所属对象
      */
     BaseProxy.prototype.removeServerMsg = function (key, callbackFunc, callbackObj) {
-        App.MessageCenter.removeListener(key, callbackFunc, callbackObj);
+        App.MsgCenter.removeListener(key, callbackFunc, callbackObj);
     };
     /**
      * 移除从Http服务端返回的Update消息

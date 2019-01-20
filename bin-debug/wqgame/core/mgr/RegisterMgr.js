@@ -18,10 +18,10 @@ var RegisterMgr = (function (_super) {
     }
     /** 初始化场景 */
     RegisterMgr.prototype.initScene = function () {
-        App.SceneMgr.register(SceneConsts.LOADING, new LoadingScene());
-        App.SceneMgr.register(SceneConsts.LOGIN, new LoginScene());
-        App.SceneMgr.register(SceneConsts.HALL, new HallScene());
-        App.SceneMgr.register(SceneConsts.BATTLE, new BattleScene());
+        App.Scene.register(SceneConsts.LOADING, new LoadingScene());
+        App.Scene.register(SceneConsts.LOGIN, new LoginScene());
+        App.Scene.register(SceneConsts.HALL, new HallScene());
+        App.Scene.register(SceneConsts.BATTLE, new BattleScene());
     };
     /**
      * 初始化所有模块控制器

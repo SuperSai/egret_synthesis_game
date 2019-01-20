@@ -20,7 +20,7 @@ var BaseScene = (function () {
      * 退出Scene调用
      */
     BaseScene.prototype.onExit = function () {
-        App.ViewMgr.closeAll();
+        App.View.closeAll();
         this.removeAllLayer();
     };
     /**
@@ -28,11 +28,11 @@ var BaseScene = (function () {
      */
     BaseScene.prototype.addLayer = function (layer) {
         if (layer instanceof BaseSpriteLayer) {
-            App.StageUtils.getStage().addChild(layer);
+            App.Stage.getStage().addChild(layer);
             this._layers.push(layer);
         }
         else if (layer instanceof BaseEuiLayer) {
-            App.StageUtils.getUIStage().addChild(layer);
+            App.Stage.getUIStage().addChild(layer);
             this._layers.push(layer);
         }
     };
@@ -41,11 +41,11 @@ var BaseScene = (function () {
      */
     BaseScene.prototype.addLayerAt = function (layer, index) {
         if (layer instanceof BaseSpriteLayer) {
-            App.StageUtils.getStage().addChildAt(layer, index);
+            App.Stage.getStage().addChildAt(layer, index);
             this._layers.push(layer);
         }
         else if (layer instanceof BaseEuiLayer) {
-            App.StageUtils.getUIStage().addChildAt(layer, index);
+            App.Stage.getUIStage().addChildAt(layer, index);
             this._layers.push(layer);
         }
     };
@@ -54,11 +54,11 @@ var BaseScene = (function () {
      */
     BaseScene.prototype.removeLayer = function (layer) {
         if (layer instanceof BaseSpriteLayer) {
-            App.StageUtils.getStage().removeChild(layer);
+            App.Stage.getStage().removeChild(layer);
             this._layers.splice(this._layers.indexOf(layer), 1);
         }
         else if (layer instanceof BaseEuiLayer) {
-            App.StageUtils.getUIStage().removeChild(layer);
+            App.Stage.getUIStage().removeChild(layer);
             this._layers.splice(this._layers.indexOf(layer), 1);
         }
     };

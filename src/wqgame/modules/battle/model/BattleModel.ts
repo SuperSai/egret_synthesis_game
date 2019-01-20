@@ -21,8 +21,10 @@ class BattleModel extends BaseModel {
 	public currMonsterCount: number = 0;
 	/** 最大波数的怪物数量 */
 	public maxMonsterCount: number;
+	/** 最大的底座数量 */
+	public maxBaseCount: number = 0;
 	/** 战斗怪物状态 */
-	public battleMonsterState: number = BATTLE_MONSTER_STATE.MONSTER;
+	public battleMonsterState: number = BATTLE_MONSTER_STATE.PAUSE;
 
 	public constructor($controller: BaseController) {
 		super($controller)
@@ -39,14 +41,17 @@ class BattleModel extends BaseModel {
 
 	/** 获取当前波数的怪物数量 */
 	get monsterWaveNumCount(): number {
-		return App.RandomUtils.randrange(this._levelVO.monsterNumRange[0], this._levelVO.monsterNumRange[1]);
+		if (this._levelVO.monsterCount.length <= 1) {
+			return this._levelVO.monsterCount[0];
+		}
+		return this._levelVO.monsterCount[this.currwaveNum - 1];
 	}
 
 	/** 获取所有底座的状态 */
 	get allBaseState(): any[] {
 		let self = this;
 		let lists: any[] = [];
-		for (let i: number = self._levelVO.maxBaseCount; i > 0; i--) {
+		for (let i: number = self.maxBaseCount; i > 0; i--) {
 			if (i > self._levelVO.openBaseCount) {
 				lists.push(BASE_STATE.CLOSE);
 			} else {

@@ -92,7 +92,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 从父级移除
      */
     public removeFromParent(): void {
-        App.DisplayUtils.removeFromParent(this);
+        App.Display.removeFromParent(this);
     }
 
     /**
@@ -161,7 +161,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      */
     public loadResource(loadComplete: Function, initComplete: Function): void {
         if (this._resources && this._resources.length > 0) {
-            App.ResUtil.loadGroup(this._resources, loadComplete, this);
+            App.Res.loadGroup(this._resources, loadComplete, this);
             this.once(eui.UIEvent.CREATION_COMPLETE, initComplete, this);
         }
         else {

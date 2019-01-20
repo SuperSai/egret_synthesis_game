@@ -30,7 +30,7 @@ class BaseEuiAlert extends BaseEuiView {
 	public initData(): void {
 		super.initData();
 		let self = this;
-		App.EffectUtils.viewShowEffect(self, self._viewShowType, self.effectCallBack);
+		App.Effect.viewShowEffect(self, self._viewShowType, self.effectCallBack);
 	}
 
 	public addEvents(): void {
@@ -49,16 +49,16 @@ class BaseEuiAlert extends BaseEuiView {
 
 	protected onMaskHandler() {
 		let self = this;
-		App.DisplayUtils.removeFromParent(self._maskRect);
+		App.Display.removeFromParent(self._maskRect);
 		self._maskRect = null;
-		App.ViewMgr.closeView(self);
+		App.View.closeView(self);
 	}
 
 	protected onClosePanel(): void {
 		let self = this;
-		App.DisplayUtils.removeFromParent(self._maskRect);
+		App.Display.removeFromParent(self._maskRect);
 		self._maskRect = null;
-		App.ViewMgr.closeView(self);
+		App.View.closeView(self);
 	}
 
 	/** 创建遮罩 */

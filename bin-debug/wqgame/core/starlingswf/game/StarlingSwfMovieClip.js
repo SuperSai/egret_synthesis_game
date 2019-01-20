@@ -96,7 +96,7 @@ var StarlingSwfMovieClip = (function (_super) {
         this.stop();
         this.removeEventListener(egret.Event.COMPLETE, this.onPlayend, this);
         this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
-        App.DisplayUtils.removeFromParent(this);
+        App.Display.removeFromParent(this);
         this.complateFunc = null;
         this.complateObj = null;
         this.frameActions = null;

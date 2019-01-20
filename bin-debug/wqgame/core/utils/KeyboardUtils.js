@@ -21,7 +21,7 @@ var KeyboardUtils = (function (_super) {
         var _this = _super.call(this) || this;
         _this.key_ups = new Array();
         _this.key_downs = new Array();
-        if (App.DeviceUtils.IsHtml5) {
+        if (App.Device.IsHtml5) {
             var self = _this;
             document.addEventListener("keyup", function (e) {
                 for (var i = 0, len = self.key_ups.length; i < len; i++) {

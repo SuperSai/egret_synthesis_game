@@ -15,7 +15,7 @@ class LayerMgr extends BaseClass {
 	public static GAME_MAP_LAYER: number = 9;
 
 	private static layerCount: number = 11;
-	private _layers: Array<DisplayLayer> = [];
+	private _layers: Object[] = [];
 
 	private _sceneContainer: eui.UILayer = new eui.UILayer();
 	private _gameContainer: eui.UILayer = new eui.UILayer();
@@ -60,7 +60,8 @@ class LayerMgr extends BaseClass {
 
 	private createAllLayers(): void {
 		for (let i: number = 0; i < LayerMgr.layerCount; i++) {
-			this._layers.push(this.createOnLayer(i));
+			let layer: DisplayLayer = this.createOnLayer(i);
+			this._layers[layer.layerType] = layer;
 		}
 	}
 
@@ -72,24 +73,25 @@ class LayerMgr extends BaseClass {
 	}
 
 	public addToLayer(display: egret.DisplayObject, layerType: number): void {
-		let layer: DisplayLayer = this.getLayerByType(layerType);
+		let layer: DisplayLayer = this._layers[layerType] as DisplayLayer;//this.getLayerByType(layerType);
 		layer.addChild(display);
 	}
 
 	public getLayerByType(layerType: number): DisplayLayer {
-		for (let i: number = 0; i < this._layers.length; i++) {
-			if (this._layers[i].layerType == layerType) {
-				return this._layers[i];
-			}
-		}
+		return this._layers[layerType] as DisplayLayer;
+		// for (let i: number = 0; i < this._layers.length; i++) {
+		// 	if (this._layers[i].layerType == layerType) {
+		// 		return this._layers[i];
+		// 	}
+		// }
 	}
 
 	public resize(): void {
 		Log.trace("【 LayerManager 】stageResized-------------");
-		let width: number = App.StageUtils.getWidth();
-		let height: number = App.StageUtils.getHeight();
+		let width: number = App.Stage.getWidth();
+		let height: number = App.Stage.getHeight();
 		for (let i: number = 0; i < this._layers.length; i++) {
-			let layer: DisplayLayer = this._layers[i];
+			let layer: DisplayLayer = this._layers[i] as DisplayLayer;
 			for (let i: number = 0; i < layer.numChildren; i++) {
 				let child = layer.getChildAt(i);
 				if (instanceOfIStageResizeable(child)) {

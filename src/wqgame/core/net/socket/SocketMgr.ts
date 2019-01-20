@@ -20,14 +20,14 @@ class SocketMgr extends BaseClass {
 		if (self._hasInitEvents) {
 			return;
 		}
-		App.MessageCenter.addListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
+		App.MsgCenter.addListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
 		self._hasInitEvents = true;
 	}
 
 	public removeEvents(): void {
 		let self = this;
 		self._hasInitEvents = false;
-		App.MessageCenter.removeListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
+		App.MsgCenter.removeListener(SocketConsts.SOCKET_DATA, self.onSocketDataHandler, self);
 	}
 
 	/** 接受到的服务器数据 */
@@ -37,7 +37,7 @@ class SocketMgr extends BaseClass {
 		if (pkg != null) {
 			let code: number = pkg.code;
 			let by: egret.ByteArray = pkg.readBody();
-			App.MessageCenter.dispatch(SocketConsts.format(code), by.bytes);
+			App.MsgCenter.dispatch(SocketConsts.format(code), by.bytes);
 		}
 	}
 

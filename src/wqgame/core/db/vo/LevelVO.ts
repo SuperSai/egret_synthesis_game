@@ -3,18 +3,16 @@
  */
 class LevelVO {
 
-	/** 地图ID */
-	public mapId: number;
+	/** 关卡ID */
+	public missionId: number;
 	/** 地图的Icon */
 	public icon: number;
 	/** 波数 */
 	public waveNum: number;
-	/** 数量范围 */
-	public range: number;
+	/** BOSSId */
+	public bossId: number;
 	/** 开放的底座数量 */
 	public openBaseCount: number;
-	/** 最大的底座数量 */
-	public maxBaseCount: number;
 	/** 每波怪之间延迟 */
 	public waveNumDelay: number;
 	/** 刷怪延迟 */
@@ -34,13 +32,13 @@ class LevelVO {
 		return this._path;
 	}
 
-	private _monsterNumRange: number[];
-	set monsterNumRange(value) {
-		this._monsterNumRange = ObjectUtils.splitToNumber(value);
+	private _monsterCount: number[];
+	set monsterCount(value) {
+		this._monsterCount = ObjectUtils.splitToNumber(value);
 	}
-	/** 怪物数量范围 */
-	get monsterNumRange(): number[] {
-		return this._monsterNumRange;
+	/** 每波怪物数量 */
+	get monsterCount(): number[] {
+		return this._monsterCount;
 	}
 
 	private _monstersId: number[];

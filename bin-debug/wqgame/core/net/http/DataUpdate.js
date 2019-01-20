@@ -118,7 +118,7 @@ var ProxyUpdate = (function () {
                 var k1 = keys[i];
                 if (this._cache[k1]) {
                     this._update(this._cache[k1], cdata[k1]);
-                    App.MessageCenter.dispatch(k1 + "_HttpUpdate");
+                    App.MsgCenter.dispatch(k1 + "_HttpUpdate");
                 }
             }
         }

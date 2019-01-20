@@ -9,7 +9,7 @@ class BattleController extends BaseController {
 		let self = this;
 
 		self._battleView = new BattleView(self, LayerMgr.GAME_MAP_LAYER);
-		App.ViewMgr.register(ViewConst.Battle, self._battleView);
+		App.View.register(ViewConst.Battle, self._battleView);
 
 		self._battleModel = new BattleModel(self);
 		self.setModel(self._battleModel);
@@ -20,14 +20,17 @@ class BattleController extends BaseController {
 		self.registerFunc(BattleConst.BATTLE_INIT, self.onBattleInit, self);
 	}
 
-	private onBattleInit(param: any[]): void {
+	private onBattleInit(): void {
 		let self = this;
 		self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
-		self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+		self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, self._battleModel.currMission);
 		self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
-		App.ViewMgr.open(ViewConst.Battle);
-		App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
-		self.initRegisterView();
+		self._battleModel.maxBaseCount = Number(GlobleVOData.getDataByFilter(GlobleVOData.ServerConfigVO, "id", "MAX_OPEN_COUNT")[0].value);
+		App.View.open(ViewConst.Battle, () => {
+			App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
+			self.initRegisterView();
+			self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
+		});
 	}
 
 	/** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
@@ -66,7 +69,7 @@ class BattleController extends BaseController {
 		let role: Role = ObjectPool.pop(Role, "Role", self, LayerMgr.GAME_MAP_LAYER);
 		role.addToParent();
 		role.open(roleId);
-		role.isMove = false;
+		role.isDrop = false;
 		baseItem.state = BASE_STATE.HAVE;
 		role.baseItem = baseItem;
 		let pos: egret.Point = baseItem.localToGlobal();
@@ -76,12 +79,24 @@ class BattleController extends BaseController {
 		self._battleModel.roleDic.Add(baseItem, role);
 	}
 
+	/** 创建怪物 */
+	public createMonster(monsterId: number): void {
+		let self = this;
+		let monster: Monster = ObjectPool.pop(Monster, "Monster", self, LayerMgr.GAME_MAP_LAYER);
+		monster.addToParent();
+		let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
+		//给怪一个行走路径
+		info.path = self._battleModel.levelVO.path;
+		info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, monsterId);
+		monster.Parse(info);
+		self._battleModel.monsterDic.Add(monster.MonsterId, monster);
+	}
+
 
 	/** 注册界面才可以打开界面 */
 	private initRegisterView(): void {
 		let self = this;
-		App.ViewMgr.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
-		App.ViewMgr.register(ViewConst.HeroTalk, new HeroTalk(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
+		App.View.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
 	}
 
 }

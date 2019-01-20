@@ -105,7 +105,7 @@ class ResourcePool {
         let container: egret.DisplayObjectContainer = obj.parent as egret.DisplayObjectContainer;
         if (container != null) container.removeChild(obj);
         //reset item
-        App.DisplayUtils.resetDisplay(obj);
+        App.Display.resetDisplay(obj);
         if (obj["resetForPool"]) {
             obj["resetForPool"]();
         }

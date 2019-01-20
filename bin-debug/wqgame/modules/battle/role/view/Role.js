@@ -13,7 +13,8 @@ var Role = (function (_super) {
     function Role($controller, $layer) {
         var _this = _super.call(this, $controller, $layer) || this;
         _this.lastTime = 0;
-        _this._isMove = false;
+        /** 是否正在拖拽中 */
+        _this._isDrop = false;
         var self = _this;
         self.touchChildren = self.touchEnabled = false;
         self._model = self.controller.getModel();
@@ -34,13 +35,13 @@ var Role = (function (_super) {
     /** 初始化角色 */
     Role.prototype.initRole = function () {
         var self = this;
-        App.DisplayUtils.removeFromParent(self._roleImg);
+        App.Display.removeFromParent(self._roleImg);
         self._roleImg = new eui.Image(self._heroVO.assetname);
         self.addChild(self._roleImg);
     };
     Role.prototype.onUpdate = function (passTime) {
         _super.prototype.onUpdate.call(this, passTime);
-        if (this._isMove)
+        if (this._isDrop)
             return;
         this.searchTarget();
     };
@@ -67,7 +68,7 @@ var Role = (function (_super) {
         var nowTime = egret.getTimer();
         if (monster.HP > 0 && monster.isMove && nowTime > this.lastTime) {
             this.lastTime = nowTime + this._heroVO.delay; //下次执行时间
-            this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, this.x, this.y, monster);
+            this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, { x: this.x, y: this.y }, monster);
         }
     };
     /** 重置 */
@@ -76,47 +77,34 @@ var Role = (function (_super) {
         self._baseItem = null;
     };
     Object.defineProperty(Role.prototype, "heroVO", {
-        get: function () {
-            return this._heroVO;
-        },
-        set: function (value) {
-            this._heroVO = value;
-        },
+        /** 角色数据信息 */
+        get: function () { return this._heroVO; },
+        set: function (value) { this._heroVO = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Role.prototype, "roleImg", {
-        get: function () {
-            return this._roleImg;
-        },
+        get: function () { return this._roleImg; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Role.prototype, "roleId", {
-        get: function () {
-            return this._roleId;
-        },
+        /** 角色ID */
+        get: function () { return this._roleId; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Role.prototype, "baseItem", {
-        get: function () {
-            return this._baseItem;
-        },
-        set: function (value) {
-            this._baseItem = value;
-        },
+        /** 角色当前对应的底座 */
+        get: function () { return this._baseItem; },
+        set: function (value) { this._baseItem = value; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Role.prototype, "isMove", {
+    Object.defineProperty(Role.prototype, "isDrop", {
         /** 是否在移动合成中 */
-        get: function () {
-            return this._isMove;
-        },
-        set: function (value) {
-            this._isMove = value;
-        },
+        get: function () { return this._isDrop; },
+        set: function (value) { this._isDrop = value; },
         enumerable: true,
         configurable: true
     });

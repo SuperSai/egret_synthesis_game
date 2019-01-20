@@ -27,7 +27,7 @@ class RenderTextureMgr extends BaseClass {
      * @returns {boolean}
      */
 	private isLowerQQBrowser(): boolean {
-		if (App.DeviceUtils.IsQQBrowser) {
+		if (App.Device.IsQQBrowser) {
 			//判定机型，因为拿不到内存信息，现在只能根据机型进行判定
 			var arr: Array<string> = [
 				"2013022",

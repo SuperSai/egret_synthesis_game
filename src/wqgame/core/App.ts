@@ -13,7 +13,7 @@ class App {
 		return Http.Instance();
 	}
 	/** Stage操作相关工具类 */
-	public static get StageUtils(): StageUtils {
+	public static get Stage(): StageUtils {
 		return StageUtils.Instance();
 	}
 	/** 消息提示类 */
@@ -49,31 +49,31 @@ class App {
 		return GameEnterMgr.Instance();
 	}
 	/** Effect工具类 */
-	public static get EffectUtils(): EffectUtils {
+	public static get Effect(): EffectUtils {
 		return EffectUtils.Instance();
 	}
 	/** 字符串工具类 */
-	public static get StringUtils(): StringUtils {
+	public static get StringU(): StringUtils {
 		return StringUtils.Instance();
 	}
 	/** 声音管理类 */
-	public static get SoundMgr(): SoundMgr {
+	public static get Sound(): SoundMgr {
 		return SoundMgr.Instance();
 	}
 	/** 通过工具类 */
-	public static get CommonUtils(): CommonUtils {
+	public static get Common(): CommonUtils {
 		return CommonUtils.Instance();
 	}
 	/** 键盘操作工具类 */
-	public static get KeyboardUtils(): KeyboardUtils {
+	public static get Keyboard(): KeyboardUtils {
 		return KeyboardUtils.Instance();
 	}
 	/** 设备工具类 */
-	public static get DeviceUtils(): DeviceUtils {
+	public static get Device(): DeviceUtils {
 		return DeviceUtils.Instance();
 	}
 	/** 摇杆操作工具类 */
-	public static get RockerUtils(): RockerUtils {
+	public static get Rocker(): RockerUtils {
 		return RockerUtils.Instance();
 	}
 	/** 数学计算工具类 */
@@ -85,19 +85,19 @@ class App {
 		return TimerMgr.Instance();
 	}
 	/** 调试工具 */
-	public static get DebugUtils(): DebugUtils {
+	public static get Debug(): DebugUtils {
 		return DebugUtils.Instance();
 	}
 	/** 随机数工具类 */
-	public static get RandomUtils(): RandomUtils {
+	public static get Random(): RandomUtils {
 		return RandomUtils.Instance();
 	}
 	/** 震动类 */
-	public static get ShockUtils(): ShakeUtils {
+	public static get Shake(): ShakeUtils {
 		return ShakeUtils.Instance();
 	}
 	/** 服务器返回的消息处理中心 */
-	public static get MessageCenter(): MessageCenter {
+	public static get MsgCenter(): MessageCenter {
 		return MessageCenter.Instance(0);
 	}
 	/** 通用Loading动画 */
@@ -105,27 +105,27 @@ class App {
 		return GameLoading.Instance();
 	}
 	/** 显示对象工具类 */
-	public static get DisplayUtils(): DisplayUtils {
+	public static get Display(): DisplayUtils {
 		return DisplayUtils.Instance();
 	}
 	/** View管理类 */
-	public static get ViewMgr(): ViewMgr {
+	public static get View(): ViewMgr {
 		return ViewMgr.Instance();
 	}
 	/** 渲染纹理管理类 */
-	public static get RenderTextureMgr(): RenderTextureMgr {
+	public static get RenderTexture(): RenderTextureMgr {
 		return RenderTextureMgr.Instance();
 	}
 	/** 场景管理类 */
-	public static get SceneMgr(): SceneMgr {
+	public static get Scene(): SceneMgr {
 		return SceneMgr.Instance();
 	}
 	/** 分帧处理类 */
-	public static get DelayOptMgr(): DelayOptMgr {
+	public static get DelayOpt(): DelayOptMgr {
 		return DelayOptMgr.Instance();
 	}
 	/** 龙骨管理类 */
-	public static get BoneMgr(): BoneMgr {
+	public static get Bone(): BoneMgr {
 		return BoneMgr.Instance();
 	}
 	/** StarlingSwf工厂类 */
@@ -133,11 +133,11 @@ class App {
 		return StarlingSwfFactory.Instance();
 	}
 	/** 引擎扩展类 */
-	public static get EgretExpandUtils(): ExpandUtils {
+	public static get Expand(): ExpandUtils {
 		return ExpandUtils.Instance();
 	}
 	/** 资源加载类 */
-	public static get ResUtil(): ResUtil {
+	public static get Res(): ResUtil {
 		return ResUtil.Instance();
 	}
 	private static _notificationCenter: MessageCenter;
@@ -154,10 +154,10 @@ class App {
 		//全局配置数据
 		App.GlobalData = RES.getRes("global");
 		//开启调试
-		App.DebugUtils.isOpen(App.GlobalData.IsDebug);
-		App.DebugUtils.setThreshold(5);
+		App.Debug.isOpen(App.GlobalData.IsDebug);
+		App.Debug.setThreshold(5);
 		//扩展功能初始化
-		App.EgretExpandUtils.init();
+		App.Expand.init();
 		//实例化Http请求
 		// App.Http.initServer(App.GlobalData.HttpSerever);
 	}

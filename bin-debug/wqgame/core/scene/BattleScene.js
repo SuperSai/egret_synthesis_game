@@ -28,9 +28,7 @@ var BattleScene = (function (_super) {
             param[_i] = arguments[_i];
         }
         _super.prototype.onEnter.call(this);
-        //参数
-        var mapId = param[0];
-        App.ControllerMgr.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT, mapId);
+        App.ControllerMgr.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT);
     };
     /**
      * 退出Scene调用

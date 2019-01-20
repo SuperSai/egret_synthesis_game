@@ -15,7 +15,7 @@ var Monster = (function (_super) {
         /** 方向 -- 默认朝上*/
         _this._direction = MONSTER_DIR.UP;
         _this._isMove = false;
-        _this._id = App.CommonUtils.Token;
+        _this._id = App.Common.Token;
         _this._battleController = $controller;
         return _this;
     }
@@ -31,7 +31,7 @@ var Monster = (function (_super) {
         if (self._path.length == 0)
             return;
         var point = self._path[0]; //下一个节点
-        var targetSpeed = App.CommonUtils.getSpeed(point, new egret.Point(self.x, self.y), self._monsterVO.speed);
+        var targetSpeed = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterVO.speed);
         var xDistance = 10 * targetSpeed.x;
         var yDistance = 10 * targetSpeed.y;
         if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
@@ -94,7 +94,7 @@ var Monster = (function (_super) {
         self._path = [];
         for (var i = 0; i < info.path.length; i++) {
             var pos = info.path[i].split(",");
-            self._path.push(new egret.Point(Number(pos[0]), Number(pos[1])));
+            self._path.push({ x: Number(pos[0]), y: Number(pos[1]) });
         }
         self._bone = ResourcePool.Instance.pop(self._monsterVO.assetname, ResourcePool.SKE);
         self._bone.play();
@@ -113,45 +113,38 @@ var Monster = (function (_super) {
         ObjectPool.push(self._monsterInfo);
         ObjectPool.push(self);
         ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
-        App.DisplayUtils.removeFromParent(self);
+        App.Display.removeFromParent(self);
     };
-    Object.defineProperty(Monster.prototype, "ID", {
-        /** 获取怪物唯一ID */
-        get: function () {
-            return this._id;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Monster.prototype, "HP", {
         /** 设置怪物当前血量值 */
-        get: function () {
-            return this._hp;
-        },
+        get: function () { return this._hp; },
         /** 设置怪物当前血量值 */
         set: function (value) {
             var self = this;
             self._hp = value;
             if (self._hp <= 0) {
-                self._battleController.applyFunc(BattleConst.MONSTER_DIE);
                 self.removeSelf();
-                App.EffectUtils.bombEffect(self.localToGlobal(), self);
+                App.Effect.bombEffect(self.localToGlobal(), self);
+                self._battleController.applyFunc(BattleConst.MONSTER_DIE);
             }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Monster.prototype, "point", {
-        get: function () {
-            return new egret.Point(this.x, this.y);
-        },
+        get: function () { return { x: this.x, y: this.y }; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Monster.prototype, "isMove", {
-        get: function () {
-            return this._isMove;
-        },
+        /** 是否移动中 */
+        get: function () { return this._isMove; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Monster.prototype, "MonsterId", {
+        /** 获取怪物唯一ID */
+        get: function () { return this._id; },
         enumerable: true,
         configurable: true
     });

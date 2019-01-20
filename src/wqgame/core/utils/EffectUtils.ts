@@ -53,7 +53,7 @@ class EffectUtils extends BaseClass {
 		bombBone.x = pos.x;
 		bombBone.y = pos.y;
 		bombBone.play(() => {
-			App.DisplayUtils.removeFromParent(bombBone);
+			App.Display.removeFromParent(bombBone);
 		}, obj);
 	}
 
@@ -62,23 +62,23 @@ class EffectUtils extends BaseClass {
 		let param: any = null;
 		switch (type) {
 			case VIEW_SHOW_TYPE.UP:
-				view.anchorOffsetY = App.StageUtils.getHeight();
+				view.anchorOffsetY = App.Stage.getHeight();
 				param = { anchorOffsetY: 0 };
 				break;
 			case VIEW_SHOW_TYPE.DOWN:
-				view.anchorOffsetY = -(App.StageUtils.getHeight());
+				view.anchorOffsetY = -(App.Stage.getHeight());
 				param = { anchorOffsetY: 0 };
 				break;
 			case VIEW_SHOW_TYPE.RIGHT:
-				view.anchorOffsetX = App.StageUtils.getWidth();
+				view.anchorOffsetX = App.Stage.getWidth();
 				param = { anchorOffsetX: 0 };
 				break;
 			case VIEW_SHOW_TYPE.LEFT:
-				view.anchorOffsetX = -(App.StageUtils.getWidth());
+				view.anchorOffsetX = -(App.Stage.getWidth());
 				param = { anchorOffsetX: 0 };
 				break;
 			default:
-				view.anchorOffsetY = App.StageUtils.getHeight();
+				view.anchorOffsetY = App.Stage.getHeight();
 				param = { anchorOffsetY: 0 };
 				break;
 		}

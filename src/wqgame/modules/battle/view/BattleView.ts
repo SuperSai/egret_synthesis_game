@@ -25,7 +25,6 @@ class BattleView extends BaseEuiView {
 		super.initUI();
 		let self = this;
 		self.currency.initUI();
-		App.ViewMgr.open(ViewConst.HeroTalk);
 	}
 
 	/** 对面板数据的初始化，用于子类继承 */
@@ -40,7 +39,7 @@ class BattleView extends BaseEuiView {
 		self._model = <BattleModel>self.controller.getModel();
 		//初始化地图数据
 		self.map.open(self.controller);
-		self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.currwaveNum);
+		self.onUpdateView();
 	}
 
 	public addEvents(): void {
@@ -62,22 +61,22 @@ class BattleView extends BaseEuiView {
 	/** 每波怪完成后的处理 */
 	private onUpdateView(): void {
 		let self = this;
-		self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.currwaveNum);
-		//当当前波数大于当前关卡的最大波数后进入下一关卡
-		if (self._model.currwaveNum >= self._model.levelVO.waveNum) {
-			//TODO 进入一下关卡
+		if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
+			self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.03");
+		} else {
+			self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.levelVO.missionId, self._model.currwaveNum);
 		}
 	}
 
 	/** 购买角色 */
 	private onBuyRoleHandler(): void {
 		let self = this;
-		let roleId: number = App.RandomUtils.randrange(1, 3);
+		let roleId: number = App.Random.randrange(1, 3);
 		self.applyFunc(BattleConst.CREATE_ROLE, roleId);
 	}
 
 	/** 返回大厅界面 */
 	private onBackHallHandler(): void {
-		App.SceneMgr.runScene(SceneConsts.HALL);
+		App.Scene.runScene(SceneConsts.HALL);
 	}
 }

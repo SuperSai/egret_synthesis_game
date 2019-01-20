@@ -14,7 +14,7 @@ class KeyboardUtils extends BaseClass {
 		this.key_ups = new Array<any>();
 		this.key_downs = new Array<any>();
 
-		if (App.DeviceUtils.IsHtml5) {
+		if (App.Device.IsHtml5) {
 			var self: any = this;
 			document.addEventListener("keyup", function (e): void {
 				for (var i: number = 0, len = self.key_ups.length; i < len; i++) {

@@ -25,7 +25,7 @@ class HeroBaseItem extends BaseEuiItem {
 		self._heroRole = new Role(self._battleController, LayerMgr.GAME_MAP_LAYER);
 		self._heroRole.touchEnabled = true;
 		self._heroRole.addToParent();
-		self._heroRole.isMove = true;
+		self._heroRole.isDrop = true;
 		(<BattleModel>self._battleController.getModel()).roleDic.Add(self, self._heroRole);
 		self._heroRole.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onShowHeroMsgPanel, self);
 	}
@@ -45,12 +45,12 @@ class HeroBaseItem extends BaseEuiItem {
 		let gPos: egret.Point = self.pos.localToGlobal();
 		self._heroRole.x = gPos.x - self._heroRole.roleImg.width / 2;
 		self._heroRole.y = gPos.y - self._heroRole.roleImg.height;
-		self._heroRole.isMove = false;
+		self._heroRole.isDrop = false;
 	}
 
 	/** 显示英雄信息面板 */
 	private onShowHeroMsgPanel(): void {
 		let self = this;
-		App.ViewMgr.open(ViewConst.HeroMsgPanel, self._heroRole);
+		App.View.open(ViewConst.HeroMsgPanel,null, self._heroRole);
 	}
 }

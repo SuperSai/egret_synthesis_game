@@ -67,7 +67,7 @@ var BoneAnimation = (function (_super) {
     BoneAnimation.prototype.load = function () {
         if (this._skeName == BoneAnimation.traceID)
             Log.trace("LoadBone load start {0}", BoneAnimation.traceID);
-        App.ResUtil.loadGroup(this._skeName, this.loadComplete, this, ResUtil.PRIORITY_H);
+        App.Res.loadGroup(this._skeName, this.loadComplete, this, ResUtil.PRIORITY_H);
     };
     BoneAnimation.prototype.onFrameEventFired = function (event) {
         //要去实现
@@ -76,7 +76,7 @@ var BoneAnimation = (function (_super) {
     BoneAnimation.prototype.loadComplete = function () {
         if (this._skeName == BoneAnimation.traceID)
             Log.trace("LoadBone loadComplete start {0}", BoneAnimation.traceID);
-        this.armature = App.BoneMgr.getArmature(this._skeName);
+        this.armature = App.Bone.getArmature(this._skeName);
         this._isLoadComplete = true;
         this.addChild(this.armature.display);
         this.initBone();
@@ -97,8 +97,8 @@ var BoneAnimation = (function (_super) {
         this.armature.animation.timeScale = this._timeScale = 1;
         this.armature.display.scaleX = this._direction = 1;
         dragonBones.WorldClock.clock.remove(this.armature);
-        App.DisplayUtils.resetDisplay(this);
-        App.DisplayUtils.resetDisplay(this.armature.display);
+        App.Display.resetDisplay(this);
+        App.Display.resetDisplay(this.armature.display);
     };
     BoneAnimation.prototype.playComplete = function () {
         if (this._skeName == BoneAnimation.traceID)

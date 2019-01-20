@@ -74,7 +74,7 @@ class ViewMgr extends BaseClass {
      * @param param 参数
      *
      */
-	public open(key: number, ...param: any[]): IBaseView {
+	public open(key: number, openComplete: Function = null, ...param: any[]): IBaseView {
 		var view: IBaseView = this.getView(key);
 		if (view == null) {
 			Log.trace("UI_" + key + "不存在");
@@ -83,6 +83,7 @@ class ViewMgr extends BaseClass {
 
 		if (view.isShow()) {
 			view.open.apply(view, param);
+			openComplete && openComplete();
 			return view;
 		}
 
@@ -92,6 +93,7 @@ class ViewMgr extends BaseClass {
 			view.addEvents();
 			view.open.apply(view, param);
 			view.initData();
+			openComplete && openComplete();
 		}
 		else {
 			App.GameLoading.showLoading();
@@ -105,6 +107,7 @@ class ViewMgr extends BaseClass {
 				view.initData();
 				view.setVisible(true);
 				App.GameLoading.hideLoading();
+				openComplete && openComplete();
 			}.bind(this));
 		}
 

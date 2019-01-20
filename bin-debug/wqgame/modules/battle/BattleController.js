@@ -14,7 +14,7 @@ var BattleController = (function (_super) {
         var _this = _super.call(this) || this;
         var self = _this;
         self._battleView = new BattleView(self, LayerMgr.GAME_MAP_LAYER);
-        App.ViewMgr.register(ViewConst.Battle, self._battleView);
+        App.View.register(ViewConst.Battle, self._battleView);
         self._battleModel = new BattleModel(self);
         self.setModel(self._battleModel);
         self._battleProxy = new BattleProxy(self);
@@ -22,14 +22,17 @@ var BattleController = (function (_super) {
         self.registerFunc(BattleConst.BATTLE_INIT, self.onBattleInit, self);
         return _this;
     }
-    BattleController.prototype.onBattleInit = function (param) {
+    BattleController.prototype.onBattleInit = function () {
         var self = this;
         self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
-        self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, param[0]);
+        self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, self._battleModel.currMission);
         self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
-        App.ViewMgr.open(ViewConst.Battle);
-        App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
-        self.initRegisterView();
+        self._battleModel.maxBaseCount = Number(GlobleVOData.getDataByFilter(GlobleVOData.ServerConfigVO, "id", "MAX_OPEN_COUNT")[0].value);
+        App.View.open(ViewConst.Battle, function () {
+            App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
+            self.initRegisterView();
+            self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
+        });
     };
     /** 更新战斗中的数据信息	比如：怪物的生产、移动等 */
     BattleController.prototype.onBattleUpdate = function () {
@@ -66,7 +69,7 @@ var BattleController = (function (_super) {
         var role = ObjectPool.pop(Role, "Role", self, LayerMgr.GAME_MAP_LAYER);
         role.addToParent();
         role.open(roleId);
-        role.isMove = false;
+        role.isDrop = false;
         baseItem.state = BASE_STATE.HAVE;
         role.baseItem = baseItem;
         var pos = baseItem.localToGlobal();
@@ -75,11 +78,22 @@ var BattleController = (function (_super) {
         role.setPosition(roleX, roleY);
         self._battleModel.roleDic.Add(baseItem, role);
     };
+    /** 创建怪物 */
+    BattleController.prototype.createMonster = function (monsterId) {
+        var self = this;
+        var monster = ObjectPool.pop(Monster, "Monster", self, LayerMgr.GAME_MAP_LAYER);
+        monster.addToParent();
+        var info = ObjectPool.pop(MonsterInfo, "MonsterInfo");
+        //给怪一个行走路径
+        info.path = self._battleModel.levelVO.path;
+        info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, monsterId);
+        monster.Parse(info);
+        self._battleModel.monsterDic.Add(monster.MonsterId, monster);
+    };
     /** 注册界面才可以打开界面 */
     BattleController.prototype.initRegisterView = function () {
         var self = this;
-        App.ViewMgr.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
-        App.ViewMgr.register(ViewConst.HeroTalk, new HeroTalk(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroTalkSkin, VIEW_SHOW_TYPE.LEFT));
+        App.View.register(ViewConst.HeroMsgPanel, new HeroMsgPanel(self, LayerMgr.GAME_UI_LAYER, SkinName.HeroMsgPanelSkin));
     };
     return BattleController;
 }(BaseController));
