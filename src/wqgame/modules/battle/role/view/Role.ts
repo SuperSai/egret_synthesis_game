@@ -4,7 +4,7 @@ class Role extends BaseRole {
 	private _roleImg: eui.Image;
 	/** 角色当前对应的底座 */
 	private _baseItem: BaseItem;
-	private lastTime: number = 0;
+	private _lastTime: number = 0;
 	private _model: BattleModel;
 	private _heroVO: HeroVO;
 	/** 是否正在拖拽中 */
@@ -29,7 +29,7 @@ class Role extends BaseRole {
 	/** 初始化角色 */
 	private initRole(): void {
 		let self = this;
-		App.Display.removeFromParent(self._roleImg);
+		if (self._roleImg) App.Display.removeFromParent(self._roleImg);
 		self._roleImg = new eui.Image(self._heroVO.assetname);
 		self.addChild(self._roleImg);
 	}
@@ -52,7 +52,7 @@ class Role extends BaseRole {
 		let self = this;
 		let monsters: Monster[] = this._model.monsterDic.getValues();
 		for (let i: number = 0; i < monsters.length; i++) {
-			let monster: Monster = monsters[i];
+			let monster: Monster = monsters[App.Random.randint(0, monsters.length - 1)];
 			if (monster.HP > 0 && monster.isMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
 				self.createBullet(monster);
 				break;
@@ -63,9 +63,9 @@ class Role extends BaseRole {
 	/** 创建子弹 */
 	private createBullet(monster: Monster): void {
 		let nowTime: number = egret.getTimer();
-		if (monster.HP > 0 && monster.isMove && nowTime > this.lastTime) {
-			this.lastTime = nowTime + this._heroVO.delay;//下次执行时间
+		if (monster.HP > 0 && monster.isMove && nowTime > this._lastTime) {
 			this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, { x: this.x, y: this.y }, monster);
+			this._lastTime = nowTime + this._heroVO.delay;//下次执行时间
 		}
 	}
 

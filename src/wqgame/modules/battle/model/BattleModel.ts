@@ -23,6 +23,8 @@ class BattleModel extends BaseModel {
 	public maxMonsterCount: number;
 	/** 最大的底座数量 */
 	public maxBaseCount: number = 0;
+	/** 底座的高度 */
+	public baseH: number = 96;
 	/** 战斗怪物状态 */
 	public battleMonsterState: number = BATTLE_MONSTER_STATE.PAUSE;
 

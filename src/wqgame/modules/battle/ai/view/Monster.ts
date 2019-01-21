@@ -1,3 +1,6 @@
+/**
+ * 怪物类
+ */
 class Monster extends BaseRole {
 
 	/** 怪物唯一ID */
@@ -13,9 +16,10 @@ class Monster extends BaseRole {
 	/** 行走路径 */
 	private _path: { x: number, y: number }[];
 	private _battleController: BattleController;
+	/** 怪物龙骨 */
 	private _bone: BoneAnimation;
+	/** 是否移动 */
 	private _isMove: boolean = false;
-	private _monsterVO: MonsterVO;
 	private _monsterInfo: MonsterInfo;
 
 	public constructor($controller: BaseController, $layer: number) {
@@ -35,7 +39,7 @@ class Monster extends BaseRole {
 		let self = this;
 		if (self._path.length == 0) return;
 		let point: { x: number, y: number } = self._path[0];  //下一个节点
-		let targetSpeed: { x: number, y: number } = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterVO.speed);
+		let targetSpeed: { x: number, y: number } = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
 		let xDistance: number = 10 * targetSpeed.x;
 		let yDistance: number = 10 * targetSpeed.y;
 		if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
@@ -97,16 +101,15 @@ class Monster extends BaseRole {
 	public Parse(info: MonsterInfo): void {
 		let self = this;
 		self._monsterInfo = info;
-		self._monsterVO = self._monsterInfo.monsterVO;
-		self._hp = self._monsterVO.maxHp
+		self._hp = self._monsterInfo.monsterVO.maxHp;
 		self._path = [];
-
+		//解析怪物行走路径点
 		for (let i: number = 0; i < info.path.length; i++) {
 			let pos: string[] = info.path[i].split(",");
 			self._path.push({ x: Number(pos[0]), y: Number(pos[1]) });
 		}
 
-		self._bone = ResourcePool.Instance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+		self._bone = ResourcePool.Instance.pop(self._monsterInfo.monsterVO.assetname, ResourcePool.SKE);
 		self._bone.play();
 		self.addChild(self._bone);
 
@@ -127,7 +130,7 @@ class Monster extends BaseRole {
 		ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
 		App.Display.removeFromParent(self);
 	}
-	/** 设置怪物当前血量值 */
+
 	set HP(value: number) {
 		let self = this;
 		self._hp = value;
@@ -141,10 +144,10 @@ class Monster extends BaseRole {
 	/** 设置怪物当前血量值 */
 	get HP(): number { return this._hp; }
 
-	get point(): { x: number, y: number } { return { x: this.x, y: this.y }; }
+	get Point(): { x: number, y: number } { return { x: this.x, y: this.y }; }
 
 	/** 是否移动中 */
-	get isMove(): boolean { return this._isMove; }
+	get IsMove(): boolean { return this._isMove; }
 
 	/** 获取怪物唯一ID */
 	get MonsterId(): number { return this._id; }

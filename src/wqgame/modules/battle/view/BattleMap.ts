@@ -62,7 +62,7 @@ class BattleMap extends BaseEuiView {
 		self._battleController.registerFunc(BattleConst.ROLE_ATTACK, self.onRoleAttack, self);
 		self._battleController.registerFunc(BattleConst.MONSTER_DIE, self.onMonsterDie, self);
 		App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
-		// App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);
+		// App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);	//设置行走路径点
 		self.setBtnEffect(["btn_open"]);
 	}
 
@@ -74,8 +74,10 @@ class BattleMap extends BaseEuiView {
 	}
 
 	/** 获取怪物行走路径的坐标点 */
+	private _paths: string = "";
 	private onTestHandler(evt: egret.TouchEvent): void {
-		Log.trace("坐标：" + evt.stageX + "," + evt.stageY);
+		this._paths += (evt.stageX + "," + evt.stageY + "#");
+		Log.trace("坐标：" + this._paths);
 	}
 
 	/** 角色攻击 */
@@ -84,7 +86,7 @@ class BattleMap extends BaseEuiView {
 		let bullet: Bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
 		bullet.addToParent();
 		bullet.setTarget(bulledId, currPos, target);
-		bullet.rotation = App.MathUtils.getAngle(currPos, target.point);
+		bullet.rotation = App.MathUtils.getAngle(currPos, target.Point);
 		self._model.bulletDic.Add(bullet.ID, bullet);
 		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(bullet, layer.numChildren);
@@ -100,7 +102,7 @@ class BattleMap extends BaseEuiView {
 			self.doNeedUpdateBaseItem();
 			return;
 		}
-		self.btn_open.y -= ((self._model.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.levelVO.baseH);
+		self.btn_open.y -= ((self._model.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.baseH);
 		self.doNeedUpdateBaseItem();
 	}
 

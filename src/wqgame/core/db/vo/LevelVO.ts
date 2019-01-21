@@ -17,11 +17,6 @@ class LevelVO {
 	public waveNumDelay: number;
 	/** 刷怪延迟 */
 	public monsterDelay: number;
-	/** 底座宽度 */
-	public baseW: number;
-	/** 底座高度 */
-	public baseH: number;
-
 
 	private _path: string[];
 	set path(value) {

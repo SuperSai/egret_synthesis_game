@@ -24,6 +24,8 @@ var BattleModel = (function (_super) {
         _this.currMonsterCount = 0;
         /** 最大的底座数量 */
         _this.maxBaseCount = 0;
+        /** 底座的高度 */
+        _this.baseH = 96;
         /** 战斗怪物状态 */
         _this.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
         var self = _this;

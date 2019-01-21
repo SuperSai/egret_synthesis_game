@@ -17,6 +17,8 @@ var BattleMap = (function (_super) {
         var _this = _super.call(this, $controller, $layer) || this;
         /** 每只怪的出现时间 */
         _this._lastTime = 0;
+        /** 获取怪物行走路径的坐标点 */
+        _this._paths = "";
         _this.skinName = SkinName.BattleMapSkin;
         return _this;
     }
@@ -58,7 +60,7 @@ var BattleMap = (function (_super) {
         self._battleController.registerFunc(BattleConst.ROLE_ATTACK, self.onRoleAttack, self);
         self._battleController.registerFunc(BattleConst.MONSTER_DIE, self.onMonsterDie, self);
         App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
-        // App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);
+        // App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);	//设置行走路径点
         self.setBtnEffect(["btn_open"]);
     };
     BattleMap.prototype.removeEvents = function () {
@@ -67,9 +69,9 @@ var BattleMap = (function (_super) {
         self.btn_open.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onOpenNewBase, self);
         App.Stage.getStage().removeEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
     };
-    /** 获取怪物行走路径的坐标点 */
     BattleMap.prototype.onTestHandler = function (evt) {
-        Log.trace("坐标：" + evt.stageX + "," + evt.stageY);
+        this._paths += (evt.stageX + "," + evt.stageY + "#");
+        Log.trace("坐标：" + this._paths);
     };
     /** 角色攻击 */
     BattleMap.prototype.onRoleAttack = function (bulledId, currPos, target) {
@@ -92,7 +94,7 @@ var BattleMap = (function (_super) {
             self.doNeedUpdateBaseItem();
             return;
         }
-        self.btn_open.y -= ((self._model.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.levelVO.baseH);
+        self.btn_open.y -= ((self._model.maxBaseCount - self._model.levelVO.openBaseCount) / self._model.hBaseItemCount * self._model.baseH);
         self.doNeedUpdateBaseItem();
     };
     /** 创建角色 */

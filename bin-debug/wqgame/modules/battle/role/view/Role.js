@@ -12,7 +12,7 @@ var Role = (function (_super) {
     __extends(Role, _super);
     function Role($controller, $layer) {
         var _this = _super.call(this, $controller, $layer) || this;
-        _this.lastTime = 0;
+        _this._lastTime = 0;
         /** 是否正在拖拽中 */
         _this._isDrop = false;
         var self = _this;
@@ -35,7 +35,8 @@ var Role = (function (_super) {
     /** 初始化角色 */
     Role.prototype.initRole = function () {
         var self = this;
-        App.Display.removeFromParent(self._roleImg);
+        if (self._roleImg)
+            App.Display.removeFromParent(self._roleImg);
         self._roleImg = new eui.Image(self._heroVO.assetname);
         self.addChild(self._roleImg);
     };
@@ -56,7 +57,7 @@ var Role = (function (_super) {
         var self = this;
         var monsters = this._model.monsterDic.getValues();
         for (var i = 0; i < monsters.length; i++) {
-            var monster = monsters[i];
+            var monster = monsters[App.Random.randint(0, monsters.length - 1)];
             if (monster.HP > 0 && monster.isMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
                 self.createBullet(monster);
                 break;
@@ -66,9 +67,9 @@ var Role = (function (_super) {
     /** 创建子弹 */
     Role.prototype.createBullet = function (monster) {
         var nowTime = egret.getTimer();
-        if (monster.HP > 0 && monster.isMove && nowTime > this.lastTime) {
-            this.lastTime = nowTime + this._heroVO.delay; //下次执行时间
+        if (monster.HP > 0 && monster.isMove && nowTime > this._lastTime) {
             this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, { x: this.x, y: this.y }, monster);
+            this._lastTime = nowTime + this._heroVO.delay; //下次执行时间
         }
     };
     /** 重置 */

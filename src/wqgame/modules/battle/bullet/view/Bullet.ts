@@ -18,7 +18,6 @@ class Bullet extends BaseBullet {
 		let self = this;
 		self._bulletVO = GlobleVOData.getData(GlobleVOData.BulletVO, bulletId);
 		self._target = $target;
-
 		if (self._bulletImg) App.Display.removeFromParent(self._bulletImg);
 		self._bulletImg = ObjectPool.pop(egret.Bitmap, "egret.Bitmap");
 		self._bulletImg.texture = RES.getRes(self._bulletVO.assetname);
@@ -41,7 +40,7 @@ class Bullet extends BaseBullet {
 			this.release();
 			return;
 		}
-		var distance: number = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.point.x, this._target.point.y);
+		var distance: number = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
 		if (distance <= this._bulletVO.radius) {
 			this._target.HP = this._target.HP - this._bulletVO.damage;
 			this._target = null;
@@ -50,7 +49,7 @@ class Bullet extends BaseBullet {
 			App.Effect.bombEffect(this.localToGlobal(), this);
 		}
 		else {
-			var targetSpeed: any = App.Common.getSpeed(this._target.point, this.point, this._bulletVO.speed);
+			var targetSpeed: any = App.Common.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
 			var xDistance: number = 10 * targetSpeed.x;
 			var yDistance: number = 10 * targetSpeed.y;
 			this.x = this.x + xDistance;
