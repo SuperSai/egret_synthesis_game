@@ -83,3 +83,4 @@ var BaseSound = (function () {
     return BaseSound;
 }());
 __reflect(BaseSound.prototype, "BaseSound");
+//# sourceMappingURL=BaseSound.js.map

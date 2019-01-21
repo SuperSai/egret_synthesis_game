@@ -57,3 +57,4 @@ var HeroBaseItem = (function (_super) {
     return HeroBaseItem;
 }(BaseEuiItem));
 __reflect(HeroBaseItem.prototype, "HeroBaseItem");
+//# sourceMappingURL=HeroBaseItem.js.map

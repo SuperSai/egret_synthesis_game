@@ -7,3 +7,4 @@ var SoundVO = (function () {
     return SoundVO;
 }());
 __reflect(SoundVO.prototype, "SoundVO");
+//# sourceMappingURL=SoundVO.js.map

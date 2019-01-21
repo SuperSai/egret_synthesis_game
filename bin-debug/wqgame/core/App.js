@@ -292,6 +292,13 @@ var App = (function () {
         App.Debug.setThreshold(5);
         //扩展功能初始化
         App.Expand.init();
+        //注册所有场景
+        App.RegisterMgr.initScene();
+        //注册所有模块控制器
+        App.RegisterMgr.initModules();
+        //音乐音效处理
+        App.Sound.setBgOn(true);
+        App.Sound.setEffectOn(true);
         //实例化Http请求
         // App.Http.initServer(App.GlobalData.HttpSerever);
     };
@@ -302,3 +309,4 @@ var App = (function () {
     return App;
 }());
 __reflect(App.prototype, "App");
+//# sourceMappingURL=App.js.map

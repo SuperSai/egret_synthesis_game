@@ -13,7 +13,7 @@ var LoadingController = (function (_super) {
     function LoadingController() {
         var _this = _super.call(this) || this;
         //初始化UI
-        _this.loadingView = new LoadingView(_this, LayerMgr.GAME_UI_LAYER);
+        _this.loadingView = new LoadingView(_this, LayerMgr.GAME_POP_LAYER, SkinName.LoadingUISkin);
         App.View.register(ViewConst.Loading, _this.loadingView);
         //注册事件监听
         _this.registerFunc(LoadingConst.SetProgress, _this.setProgress, _this);
@@ -25,3 +25,4 @@ var LoadingController = (function (_super) {
     return LoadingController;
 }(BaseController));
 __reflect(LoadingController.prototype, "LoadingController");
+//# sourceMappingURL=LoadingController.js.map

@@ -109,3 +109,4 @@ var LayerMgr = (function (_super) {
     return LayerMgr;
 }(BaseClass));
 __reflect(LayerMgr.prototype, "LayerMgr");
+//# sourceMappingURL=LayerMgr.js.map

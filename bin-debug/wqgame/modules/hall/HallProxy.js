@@ -18,3 +18,4 @@ var HallProxy = (function (_super) {
     return HallProxy;
 }(BaseProxy));
 __reflect(HallProxy.prototype, "HallProxy");
+//# sourceMappingURL=HallProxy.js.map

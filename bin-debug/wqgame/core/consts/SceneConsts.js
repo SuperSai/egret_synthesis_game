@@ -9,3 +9,4 @@ var SceneConsts;
     /** 登陆场景 */
     SceneConsts[SceneConsts["LOGIN"] = 4] = "LOGIN";
 })(SceneConsts || (SceneConsts = {}));
+//# sourceMappingURL=SceneConsts.js.map

@@ -42,3 +42,4 @@ var BaseItem = (function (_super) {
     return BaseItem;
 }(BaseEuiItem));
 __reflect(BaseItem.prototype, "BaseItem");
+//# sourceMappingURL=BaseItem.js.map

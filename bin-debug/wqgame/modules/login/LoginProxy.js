@@ -36,3 +36,4 @@ var LoginProxy = (function (_super) {
     return LoginProxy;
 }(BaseProxy));
 __reflect(LoginProxy.prototype, "LoginProxy");
+//# sourceMappingURL=LoginProxy.js.map

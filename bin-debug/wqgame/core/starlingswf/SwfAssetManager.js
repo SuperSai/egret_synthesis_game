@@ -47,3 +47,4 @@ var starlingswf;
     starlingswf.SwfAssetManager = SwfAssetManager;
     __reflect(SwfAssetManager.prototype, "starlingswf.SwfAssetManager");
 })(starlingswf || (starlingswf = {}));
+//# sourceMappingURL=SwfAssetManager.js.map

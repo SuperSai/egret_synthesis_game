@@ -35,3 +35,4 @@ var HallScene = (function (_super) {
     return HallScene;
 }(BaseScene));
 __reflect(HallScene.prototype, "HallScene");
+//# sourceMappingURL=HallScene.js.map

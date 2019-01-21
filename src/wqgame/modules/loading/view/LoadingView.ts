@@ -1,12 +1,17 @@
-class LoadingView extends BaseEuiView {
-	public constructor($controller: BaseController, $layer: number) {
-		super($controller, $layer);
-		this.skinName = SkinName.LoadingUISkin;
+/**
+ * smallLoading
+ */
+class LoadingView extends BaseEuiAlert {
+
+	private txtMsg: eui.Label;
+
+	public constructor($controller: BaseController, $layer: number, $skinName: string) {
+		super($controller, $layer, $skinName, 0);
+		this.isMaskTouch = false;
+		this.setResources(["loading"]);
 	}
 
-	public txtMsg: eui.Label;
-
 	public setProgress(current: number, total: number): void {
-		this.txtMsg.text = "资源加载中..." + current + "/" + total;
+		this.txtMsg.text = "客官亲稍等..." + current + "/" + total;
 	}
 }

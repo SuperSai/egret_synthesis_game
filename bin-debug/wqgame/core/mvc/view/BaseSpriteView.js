@@ -199,3 +199,4 @@ var BaseSpriteView = (function (_super) {
     return BaseSpriteView;
 }(egret.DisplayObjectContainer));
 __reflect(BaseSpriteView.prototype, "BaseSpriteView", ["IBaseView"]);
+//# sourceMappingURL=BaseSpriteView.js.map

@@ -112,3 +112,4 @@ var Role = (function (_super) {
     return Role;
 }(BaseRole));
 __reflect(Role.prototype, "Role");
+//# sourceMappingURL=Role.js.map

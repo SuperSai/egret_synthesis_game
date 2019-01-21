@@ -73,3 +73,4 @@ var BoneAnimationVO = (function () {
     return BoneAnimationVO;
 }());
 __reflect(BoneAnimationVO.prototype, "BoneAnimationVO");
+//# sourceMappingURL=BoneAnimationVO.js.map

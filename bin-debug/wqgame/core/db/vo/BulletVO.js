@@ -7,3 +7,4 @@ var BulletVO = (function () {
     return BulletVO;
 }());
 __reflect(BulletVO.prototype, "BulletVO");
+//# sourceMappingURL=BulletVO.js.map

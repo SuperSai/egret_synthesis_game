@@ -21,3 +21,4 @@ var BaseBullet = (function (_super) {
     return BaseBullet;
 }(BaseSpriteView));
 __reflect(BaseBullet.prototype, "BaseBullet");
+//# sourceMappingURL=BaseBullet.js.map

@@ -72,3 +72,4 @@ var SceneMgr = (function (_super) {
     return SceneMgr;
 }(BaseClass));
 __reflect(SceneMgr.prototype, "SceneMgr");
+//# sourceMappingURL=SceneMgr.js.map

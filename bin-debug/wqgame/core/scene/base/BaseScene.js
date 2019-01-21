@@ -86,3 +86,4 @@ var BaseScene = (function () {
     return BaseScene;
 }());
 __reflect(BaseScene.prototype, "BaseScene");
+//# sourceMappingURL=BaseScene.js.map

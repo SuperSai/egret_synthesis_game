@@ -79,3 +79,4 @@ var BaseController = (function () {
     return BaseController;
 }());
 __reflect(BaseController.prototype, "BaseController");
+//# sourceMappingURL=BaseController.js.map

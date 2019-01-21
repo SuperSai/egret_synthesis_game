@@ -107,3 +107,4 @@ var Http = (function (_super) {
     return Http;
 }(BaseClass));
 __reflect(Http.prototype, "Http");
+//# sourceMappingURL=Http.js.map

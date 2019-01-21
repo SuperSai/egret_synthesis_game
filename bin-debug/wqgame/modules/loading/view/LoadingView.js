@@ -8,16 +8,21 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
+/**
+ * smallLoading
+ */
 var LoadingView = (function (_super) {
     __extends(LoadingView, _super);
-    function LoadingView($controller, $layer) {
-        var _this = _super.call(this, $controller, $layer) || this;
-        _this.skinName = SkinName.LoadingUISkin;
+    function LoadingView($controller, $layer, $skinName) {
+        var _this = _super.call(this, $controller, $layer, $skinName, 0) || this;
+        _this.isMaskTouch = false;
+        _this.setResources(["loading"]);
         return _this;
     }
     LoadingView.prototype.setProgress = function (current, total) {
-        this.txtMsg.text = "资源加载中..." + current + "/" + total;
+        this.txtMsg.text = "客官亲稍等..." + current + "/" + total;
     };
     return LoadingView;
-}(BaseEuiView));
+}(BaseEuiAlert));
 __reflect(LoadingView.prototype, "LoadingView");
+//# sourceMappingURL=LoadingView.js.map

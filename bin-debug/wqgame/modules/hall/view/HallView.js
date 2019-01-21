@@ -28,6 +28,7 @@ var HallView = (function (_super) {
     /** 对面板数据的初始化，用于子类继承 */
     HallView.prototype.initData = function () {
         _super.prototype.initData.call(this);
+        App.View.open(ViewConst.Loading);
     };
     /** 面板开启执行函数，用于子类继承 */
     HallView.prototype.open = function () {
@@ -57,3 +58,4 @@ var HallView = (function (_super) {
     return HallView;
 }(BaseEuiView));
 __reflect(HallView.prototype, "HallView");
+//# sourceMappingURL=HallView.js.map

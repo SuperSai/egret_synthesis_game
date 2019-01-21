@@ -11,6 +11,10 @@
 		{
 			"keys": "hall_bg,hallIcons_json",
 			"name": "hall"
+		},
+		{
+			"keys": "loading_json",
+			"name": "loading"
 		}
 	],
 	"resources": [
@@ -24,7 +28,7 @@
 			"url": "cn/asset/atlas/battle/battle.json",
 			"type": "sheet",
 			"name": "battle_json",
-			"subkeys": "btn_function_back,btn_open_level,build_spell,camp_shadow,create_soldier_remind,post"
+			"subkeys": "btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,create_soldier_remind,post"
 		},
 		{
 			"url": "cn/asset/atlas/hall/hall_bg.png",
@@ -36,6 +40,12 @@
 			"type": "sheet",
 			"name": "hallIcons_json",
 			"subkeys": "activity_icon,bag_icon,battle_icon,black_icon,copy_icon,firstCharge_icon,heros_icon,jade_icon,luckDraw_icon,more_icon,rank_icon,recharge_icon,shop_icon,sign_icon,task_icon"
+		},
+		{
+			"url": "cn/asset/atlas/loading/loading.json",
+			"type": "sheet",
+			"name": "loading_json",
+			"subkeys": "loading_player"
 		}
 	]
 }

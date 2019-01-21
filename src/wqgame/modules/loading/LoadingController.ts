@@ -4,9 +4,8 @@ class LoadingController extends BaseController {
 
 	public constructor() {
 		super();
-
 		//初始化UI
-		this.loadingView = new LoadingView(this, LayerMgr.GAME_UI_LAYER);
+		this.loadingView = new LoadingView(this, LayerMgr.GAME_POP_LAYER, SkinName.LoadingUISkin);
 		App.View.register(ViewConst.Loading, this.loadingView);
 
 		//注册事件监听

@@ -39,3 +39,4 @@ var BattleScene = (function (_super) {
     return BattleScene;
 }(BaseScene));
 __reflect(BattleScene.prototype, "BattleScene");
+//# sourceMappingURL=BattleScene.js.map

@@ -63,3 +63,4 @@ var PackageOut = (function (_super) {
     return PackageOut;
 }(egret.ByteArray));
 __reflect(PackageOut.prototype, "PackageOut");
+//# sourceMappingURL=PackageOut.js.map

@@ -8,3 +8,4 @@ var PackageOutTypeConsts = (function () {
     return PackageOutTypeConsts;
 }());
 __reflect(PackageOutTypeConsts.prototype, "PackageOutTypeConsts");
+//# sourceMappingURL=PackageOutTypeConsts.js.map

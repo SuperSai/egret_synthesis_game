@@ -77,3 +77,4 @@ var MessageMgr = (function (_super) {
     return MessageMgr;
 }(BaseClass));
 __reflect(MessageMgr.prototype, "MessageMgr");
+//# sourceMappingURL=MessageMgr.js.map

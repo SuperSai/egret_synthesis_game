@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LoadingUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Label id="txtMsg" text="资源加载中..." horizontalCenter="0" verticalCenter="0" fontFamily="Microsoft YaHei" bold="true" textAlign="center"/>
+<e:Skin class="LoadingUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group x="0" y="0" width="246" height="72">
+		<e:Label id="txtMsg" text="客官请稍等..." fontFamily="Microsoft YaHei" bold="true" textAlign="left" size="28" left="81" bottom="1"/>
+		<e:Image source="loading_json.loading_player" scaleX="0.5" scaleY="0.5" left="0" verticalCenter="0"/>
+	</e:Group>
 </e:Skin>

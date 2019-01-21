@@ -33,3 +33,4 @@ var LoadingScene = (function (_super) {
     return LoadingScene;
 }(BaseScene));
 __reflect(LoadingScene.prototype, "LoadingScene");
+//# sourceMappingURL=LoadingScene.js.map

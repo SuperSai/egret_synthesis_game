@@ -36,3 +36,4 @@ var starlingswf;
     starlingswf.SwfSprite = SwfSprite;
     __reflect(SwfSprite.prototype, "starlingswf.SwfSprite");
 })(starlingswf || (starlingswf = {}));
+//# sourceMappingURL=SwfSprite.js.map

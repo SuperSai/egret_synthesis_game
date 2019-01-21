@@ -20,3 +20,4 @@ var LoginModel = (function (_super) {
     return LoginModel;
 }(BaseModel));
 __reflect(LoginModel.prototype, "LoginModel");
+//# sourceMappingURL=LoginModel.js.map

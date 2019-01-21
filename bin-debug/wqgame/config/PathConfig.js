@@ -28,3 +28,4 @@ var PathConfig = (function () {
     return PathConfig;
 }());
 __reflect(PathConfig.prototype, "PathConfig");
+//# sourceMappingURL=PathConfig.js.map

@@ -10,13 +10,14 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var BaseEuiAlert = (function (_super) {
     __extends(BaseEuiAlert, _super);
-    function BaseEuiAlert($controller, $layer, $skinName, $viewShowType) {
-        if ($viewShowType === void 0) { $viewShowType = VIEW_SHOW_TYPE.UP; }
+    function BaseEuiAlert($controller, $layer, $skinName, maskAlpha) {
+        if (maskAlpha === void 0) { maskAlpha = 1; }
         var _this = _super.call(this, $controller, $layer) || this;
         _this.isMaskTouch = true;
+        _this._maskAlpha = 1;
         _this.skinName = $skinName;
         _this._layer = $layer;
-        _this._viewShowType = $viewShowType;
+        _this._maskAlpha = maskAlpha;
         return _this;
     }
     /** 对面板进行显示初始化，用于子类继承 */
@@ -24,7 +25,7 @@ var BaseEuiAlert = (function (_super) {
         _super.prototype.initUI.call(this);
         var self = this;
         if (!self._maskRect) {
-            self._maskRect = self.getMask(0);
+            self._maskRect = self.getMask(this._maskAlpha);
             self.addChild(self._maskRect);
         }
         App.LayerMgr.addToLayer(self._maskRect, this._layer);
@@ -33,7 +34,6 @@ var BaseEuiAlert = (function (_super) {
     BaseEuiAlert.prototype.initData = function () {
         _super.prototype.initData.call(this);
         var self = this;
-        App.Effect.viewShowEffect(self, self._viewShowType, self.effectCallBack);
     };
     BaseEuiAlert.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
@@ -82,3 +82,4 @@ var BaseEuiAlert = (function (_super) {
     return BaseEuiAlert;
 }(BaseEuiView));
 __reflect(BaseEuiAlert.prototype, "BaseEuiAlert");
+//# sourceMappingURL=BaseEuiAlert.js.map

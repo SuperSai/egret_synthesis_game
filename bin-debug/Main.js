@@ -111,10 +111,6 @@ var Main = (function (_super) {
     Main.prototype.initPlatform = function () {
         var self = this;
         switch (ext.getPlatform()) {
-            case "wan83":
-                break;
-            case "facebook":
-                break;
             case "wx":
                 ext.getLogin(function (data, self) {
                     // PlayerInfoManager.getInstance.nickName = data.data.content;
@@ -231,15 +227,9 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         var self = this;
         App.Init();
-        //注册所有场景
-        App.RegisterMgr.initScene();
-        //注册所有模块控制器
-        App.RegisterMgr.initModules();
-        //音乐音效处理
-        App.Sound.setBgOn(true);
-        App.Sound.setEffectOn(true);
         App.Scene.runScene(SceneConsts.LOGIN);
     };
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map

@@ -26,3 +26,4 @@ var ButtonCom = (function (_super) {
     return ButtonCom;
 }(BaseEuiItem));
 __reflect(ButtonCom.prototype, "ButtonCom");
+//# sourceMappingURL=ButtonCom.js.map

@@ -11,3 +11,4 @@ var ControllerConst;
     ControllerConst[ControllerConst["Battle"] = 10008] = "Battle";
     ControllerConst[ControllerConst["Level"] = 10009] = "Level";
 })(ControllerConst || (ControllerConst = {}));
+//# sourceMappingURL=ControllerConst.js.map

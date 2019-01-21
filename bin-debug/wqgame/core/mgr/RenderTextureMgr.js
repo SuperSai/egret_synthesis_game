@@ -86,3 +86,4 @@ var RenderTextureMgr = (function (_super) {
     return RenderTextureMgr;
 }(BaseClass));
 __reflect(RenderTextureMgr.prototype, "RenderTextureMgr");
+//# sourceMappingURL=RenderTextureMgr.js.map

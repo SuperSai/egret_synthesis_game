@@ -254,3 +254,4 @@ var UI;
     UI.BtnEffectComponent = BtnEffectComponent;
     __reflect(BtnEffectComponent.prototype, "UI.BtnEffectComponent");
 })(UI || (UI = {}));
+//# sourceMappingURL=BtnEffectComponent.js.map

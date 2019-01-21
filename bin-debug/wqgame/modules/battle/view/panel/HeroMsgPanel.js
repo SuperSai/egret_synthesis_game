@@ -48,3 +48,4 @@ var HeroMsgPanel = (function (_super) {
     return HeroMsgPanel;
 }(BaseEuiAlert));
 __reflect(HeroMsgPanel.prototype, "HeroMsgPanel");
+//# sourceMappingURL=HeroMsgPanel.js.map
