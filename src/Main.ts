@@ -66,10 +66,6 @@ class Main extends eui.UILayer {
     private initPlatform() {
         let self = this;
         switch (ext.getPlatform()) {
-            case "wan83":
-                break;
-            case "facebook":
-                break;
             case "wx":
                 ext.getLogin((data, self) => {
                     // PlayerInfoManager.getInstance.nickName = data.data.content;
@@ -153,13 +149,6 @@ class Main extends eui.UILayer {
     protected createGameScene(): void {
         let self = this;
         App.Init();
-        //注册所有场景
-        App.RegisterMgr.initScene();
-        //注册所有模块控制器
-        App.RegisterMgr.initModules();
-        //音乐音效处理
-        App.Sound.setBgOn(true);
-        App.Sound.setEffectOn(true);
         App.Scene.runScene(SceneConsts.LOGIN);
     }
 }
