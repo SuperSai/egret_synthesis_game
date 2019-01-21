@@ -80,4 +80,3 @@ var BattleView = (function (_super) {
     return BattleView;
 }(BaseEuiView));
 __reflect(BattleView.prototype, "BattleView");
-//# sourceMappingURL=BattleView.js.map

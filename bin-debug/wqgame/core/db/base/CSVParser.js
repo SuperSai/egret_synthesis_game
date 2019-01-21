@@ -40,4 +40,3 @@ var CSVParser = (function () {
     return CSVParser;
 }());
 __reflect(CSVParser.prototype, "CSVParser");
-//# sourceMappingURL=CSVParser.js.map

@@ -7,4 +7,3 @@ var HeroVO = (function () {
     return HeroVO;
 }());
 __reflect(HeroVO.prototype, "HeroVO");
-//# sourceMappingURL=HeroVO.js.map

@@ -18,4 +18,3 @@ var MonsterInfo = (function () {
     return MonsterInfo;
 }());
 __reflect(MonsterInfo.prototype, "MonsterInfo");
-//# sourceMappingURL=MonsterInfo.js.map

@@ -71,6 +71,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+//全局
+window["CurrencyCom"] = CurrencyCom;
+window["BattleMap"] = BattleMap;
+window["HeroBaseItem"] = HeroBaseItem;
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
@@ -239,4 +243,3 @@ var Main = (function (_super) {
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

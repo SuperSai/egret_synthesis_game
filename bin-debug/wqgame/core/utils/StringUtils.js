@@ -57,4 +57,3 @@ var StringUtils = (function (_super) {
     return StringUtils;
 }(BaseClass));
 __reflect(StringUtils.prototype, "StringUtils");
-//# sourceMappingURL=StringUtils.js.map

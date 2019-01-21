@@ -17,4 +17,3 @@ var BoneConfig = (function () {
     return BoneConfig;
 }());
 __reflect(BoneConfig.prototype, "BoneConfig");
-//# sourceMappingURL=BoneConfig.js.map

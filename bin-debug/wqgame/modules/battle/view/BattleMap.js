@@ -79,7 +79,7 @@ var BattleMap = (function (_super) {
         var bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
         bullet.addToParent();
         bullet.setTarget(bulledId, currPos, target);
-        bullet.rotation = App.MathUtils.getAngle(currPos, target.point);
+        bullet.rotation = App.MathUtils.getAngle(currPos, target.Point);
         self._model.bulletDic.Add(bullet.ID, bullet);
         var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(bullet, layer.numChildren);
@@ -263,4 +263,3 @@ var BattleMap = (function (_super) {
     return BattleMap;
 }(BaseEuiView));
 __reflect(BattleMap.prototype, "BattleMap");
-//# sourceMappingURL=BattleMap.js.map

@@ -7,4 +7,3 @@ var ServerConfigVO = (function () {
     return ServerConfigVO;
 }());
 __reflect(ServerConfigVO.prototype, "ServerConfigVO");
-//# sourceMappingURL=ServerConfigVO.js.map

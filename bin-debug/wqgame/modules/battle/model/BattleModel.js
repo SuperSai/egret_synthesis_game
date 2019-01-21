@@ -147,4 +147,3 @@ var BATTLE_MONSTER_STATE;
     /** 暂停出怪 */
     BATTLE_MONSTER_STATE[BATTLE_MONSTER_STATE["PAUSE"] = 2] = "PAUSE";
 })(BATTLE_MONSTER_STATE || (BATTLE_MONSTER_STATE = {}));
-//# sourceMappingURL=BattleModel.js.map

@@ -16,4 +16,3 @@ var HallModel = (function (_super) {
     return HallModel;
 }(BaseModel));
 __reflect(HallModel.prototype, "HallModel");
-//# sourceMappingURL=HallModel.js.map

@@ -25,4 +25,3 @@ var LoadingController = (function (_super) {
     return LoadingController;
 }(BaseController));
 __reflect(LoadingController.prototype, "LoadingController");
-//# sourceMappingURL=LoadingController.js.map

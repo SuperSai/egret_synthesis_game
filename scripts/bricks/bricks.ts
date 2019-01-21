@@ -55,7 +55,7 @@ export class BricksPlugin implements plugins.Command {
         mainJSContent = mainJSContent.replace(/contentWidth: 640/gm, `contentWidth: ${projectConfig.contentWidth}`);
         mainJSContent = mainJSContent.replace(/contentHeight: 1136/gm, `contentHeight: ${projectConfig.contentHeight}`);
         mainJSContent = mainJSContent.replace(/entryClassName: "Main"/gm, `entryClassName: ${projectConfig.entryClassName}`);
-        mainJSContent = mainJSContent.replace(/scaleMode: "showAll"/gm, `scaleMode: ${projectConfig.scaleMode}`);
+        mainJSContent = mainJSContent.replace(/scaleMode: "fixedWidth"/gm, `scaleMode: ${projectConfig.scaleMode}`);
         mainJSContent = mainJSContent.replace(/orientation: "auto"/gm, `orientation: ${projectConfig.orientation}`);
         fs.writeFileSync(mainJSPath, mainJSContent);
     }

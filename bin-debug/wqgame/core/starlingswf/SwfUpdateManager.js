@@ -99,4 +99,3 @@ var starlingswf;
     starlingswf.SwfUpdateManager = SwfUpdateManager;
     __reflect(SwfUpdateManager.prototype, "starlingswf.SwfUpdateManager");
 })(starlingswf || (starlingswf = {}));
-//# sourceMappingURL=SwfUpdateManager.js.map

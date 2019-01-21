@@ -9,4 +9,3 @@ var ViewConst;
     ViewConst[ViewConst["HeroTalk"] = 20002] = "HeroTalk";
     /***************** 战斗相关 end *****************/
 })(ViewConst || (ViewConst = {}));
-//# sourceMappingURL=ViewConst.js.map

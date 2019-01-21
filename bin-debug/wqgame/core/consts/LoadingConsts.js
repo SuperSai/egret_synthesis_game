@@ -8,4 +8,3 @@ var LoadingConst = (function () {
     return LoadingConst;
 }());
 __reflect(LoadingConst.prototype, "LoadingConst");
-//# sourceMappingURL=LoadingConsts.js.map

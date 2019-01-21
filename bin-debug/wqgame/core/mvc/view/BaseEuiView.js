@@ -200,4 +200,3 @@ var BaseEuiView = (function (_super) {
     return BaseEuiView;
 }(eui.Component));
 __reflect(BaseEuiView.prototype, "BaseEuiView", ["IBaseView"]);
-//# sourceMappingURL=BaseEuiView.js.map

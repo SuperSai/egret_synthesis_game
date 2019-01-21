@@ -8,4 +8,3 @@ var HttpConst = (function () {
     return HttpConst;
 }());
 __reflect(HttpConst.prototype, "HttpConst");
-//# sourceMappingURL=HttpConst.js.map

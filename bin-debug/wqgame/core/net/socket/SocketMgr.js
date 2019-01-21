@@ -64,4 +64,3 @@ var SocketMgr = (function (_super) {
     return SocketMgr;
 }(BaseClass));
 __reflect(SocketMgr.prototype, "SocketMgr");
-//# sourceMappingURL=SocketMgr.js.map

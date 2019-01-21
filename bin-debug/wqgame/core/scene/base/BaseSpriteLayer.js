@@ -18,4 +18,3 @@ var BaseSpriteLayer = (function (_super) {
     return BaseSpriteLayer;
 }(egret.DisplayObjectContainer));
 __reflect(BaseSpriteLayer.prototype, "BaseSpriteLayer");
-//# sourceMappingURL=BaseSpriteLayer.js.map

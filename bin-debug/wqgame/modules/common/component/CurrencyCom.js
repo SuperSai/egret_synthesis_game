@@ -39,4 +39,3 @@ var CurrencyCom = (function (_super) {
     return CurrencyCom;
 }(BaseEuiView));
 __reflect(CurrencyCom.prototype, "CurrencyCom");
-//# sourceMappingURL=CurrencyCom.js.map

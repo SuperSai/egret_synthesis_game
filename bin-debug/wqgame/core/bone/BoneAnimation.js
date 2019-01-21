@@ -363,4 +363,3 @@ var BoneAnimation = (function (_super) {
     return BoneAnimation;
 }(egret.Sprite));
 __reflect(BoneAnimation.prototype, "BoneAnimation");
-//# sourceMappingURL=BoneAnimation.js.map

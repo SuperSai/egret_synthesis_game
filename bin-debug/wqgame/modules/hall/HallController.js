@@ -30,4 +30,3 @@ var HallController = (function (_super) {
     return HallController;
 }(BaseController));
 __reflect(HallController.prototype, "HallController");
-//# sourceMappingURL=HallController.js.map

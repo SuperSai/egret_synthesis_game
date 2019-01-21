@@ -36,4 +36,3 @@ var LoginScene = (function (_super) {
     return LoginScene;
 }(BaseScene));
 __reflect(LoginScene.prototype, "LoginScene");
-//# sourceMappingURL=LoginScene.js.map

@@ -21,4 +21,3 @@ var LoadingView = (function (_super) {
     return LoadingView;
 }(BaseEuiView));
 __reflect(LoadingView.prototype, "LoadingView");
-//# sourceMappingURL=LoadingView.js.map

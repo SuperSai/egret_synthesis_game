@@ -18,4 +18,3 @@ var SkinName = (function () {
     return SkinName;
 }());
 __reflect(SkinName.prototype, "SkinName");
-//# sourceMappingURL=SkinName.js.map

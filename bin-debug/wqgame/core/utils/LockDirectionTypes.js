@@ -122,4 +122,3 @@ var LockDirectionTypes = (function () {
     return LockDirectionTypes;
 }());
 __reflect(LockDirectionTypes.prototype, "LockDirectionTypes");
-//# sourceMappingURL=LockDirectionTypes.js.map

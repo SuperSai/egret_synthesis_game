@@ -21,4 +21,3 @@ var BaseRole = (function (_super) {
     return BaseRole;
 }(BaseSpriteView));
 __reflect(BaseRole.prototype, "BaseRole");
-//# sourceMappingURL=BaseRole.js.map

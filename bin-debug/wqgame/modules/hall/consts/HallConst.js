@@ -8,4 +8,3 @@ var HallConst = (function () {
     return HallConst;
 }());
 __reflect(HallConst.prototype, "HallConst");
-//# sourceMappingURL=HallConst.js.map

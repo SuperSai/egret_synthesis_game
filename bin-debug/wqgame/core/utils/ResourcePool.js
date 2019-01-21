@@ -212,4 +212,3 @@ var ResourcePool = (function () {
     return ResourcePool;
 }());
 __reflect(ResourcePool.prototype, "ResourcePool");
-//# sourceMappingURL=ResourcePool.js.map

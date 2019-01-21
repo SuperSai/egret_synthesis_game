@@ -27,6 +27,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
+
+//全局
+window["CurrencyCom"] = CurrencyCom;
+window["BattleMap"] = BattleMap;
+window["HeroBaseItem"] = HeroBaseItem;
+
 class Main extends eui.UILayer {
 
     protected createChildren(): void {

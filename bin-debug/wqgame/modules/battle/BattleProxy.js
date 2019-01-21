@@ -18,4 +18,3 @@ var BattleProxy = (function (_super) {
     return BattleProxy;
 }(BaseProxy));
 __reflect(BattleProxy.prototype, "BattleProxy");
-//# sourceMappingURL=BattleProxy.js.map

@@ -186,4 +186,3 @@ var MessageVo = (function () {
     return MessageVo;
 }());
 __reflect(MessageVo.prototype, "MessageVo");
-//# sourceMappingURL=MessageCenter.js.map

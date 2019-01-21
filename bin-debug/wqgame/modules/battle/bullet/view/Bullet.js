@@ -38,13 +38,13 @@ var Bullet = (function (_super) {
         this.move();
     };
     Bullet.prototype.move = function () {
-        if (this._target.HP <= 0 || !this._target.isMove) {
+        if (this._target.HP <= 0 || !this._target.IsMove) {
             this._target = null;
             this._bulletVO = null;
             this.release();
             return;
         }
-        var distance = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.point.x, this._target.point.y);
+        var distance = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
         if (distance <= this._bulletVO.radius) {
             this._target.HP = this._target.HP - this._bulletVO.damage;
             this._target = null;
@@ -53,7 +53,7 @@ var Bullet = (function (_super) {
             App.Effect.bombEffect(this.localToGlobal(), this);
         }
         else {
-            var targetSpeed = App.Common.getSpeed(this._target.point, this.point, this._bulletVO.speed);
+            var targetSpeed = App.Common.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
             var xDistance = 10 * targetSpeed.x;
             var yDistance = 10 * targetSpeed.y;
             this.x = this.x + xDistance;
@@ -87,4 +87,3 @@ var Bullet = (function (_super) {
     return Bullet;
 }(BaseBullet));
 __reflect(Bullet.prototype, "Bullet");
-//# sourceMappingURL=Bullet.js.map

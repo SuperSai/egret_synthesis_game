@@ -167,4 +167,3 @@ var PackageIn = (function (_super) {
     return PackageIn;
 }(egret.ByteArray));
 __reflect(PackageIn.prototype, "PackageIn");
-//# sourceMappingURL=PackageIn.js.map

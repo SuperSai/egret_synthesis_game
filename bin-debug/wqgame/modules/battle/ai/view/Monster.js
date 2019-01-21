@@ -8,12 +8,16 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
+/**
+ * 怪物类
+ */
 var Monster = (function (_super) {
     __extends(Monster, _super);
     function Monster($controller, $layer) {
         var _this = _super.call(this, $controller, $layer) || this;
         /** 方向 -- 默认朝上*/
         _this._direction = MONSTER_DIR.UP;
+        /** 是否移动 */
         _this._isMove = false;
         _this._id = App.Common.Token;
         _this._battleController = $controller;
@@ -31,7 +35,7 @@ var Monster = (function (_super) {
         if (self._path.length == 0)
             return;
         var point = self._path[0]; //下一个节点
-        var targetSpeed = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterVO.speed);
+        var targetSpeed = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
         var xDistance = 10 * targetSpeed.x;
         var yDistance = 10 * targetSpeed.y;
         if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
@@ -89,14 +93,14 @@ var Monster = (function (_super) {
     Monster.prototype.Parse = function (info) {
         var self = this;
         self._monsterInfo = info;
-        self._monsterVO = self._monsterInfo.monsterVO;
-        self._hp = self._monsterVO.maxHp;
+        self._hp = self._monsterInfo.monsterVO.maxHp;
         self._path = [];
+        //解析怪物行走路径点
         for (var i = 0; i < info.path.length; i++) {
             var pos = info.path[i].split(",");
             self._path.push({ x: Number(pos[0]), y: Number(pos[1]) });
         }
-        self._bone = ResourcePool.Instance.pop(self._monsterVO.assetname, ResourcePool.SKE);
+        self._bone = ResourcePool.Instance.pop(self._monsterInfo.monsterVO.assetname, ResourcePool.SKE);
         self._bone.play();
         self.addChild(self._bone);
         self.x = self._path[0].x;
@@ -118,7 +122,6 @@ var Monster = (function (_super) {
     Object.defineProperty(Monster.prototype, "HP", {
         /** 设置怪物当前血量值 */
         get: function () { return this._hp; },
-        /** 设置怪物当前血量值 */
         set: function (value) {
             var self = this;
             self._hp = value;
@@ -131,12 +134,12 @@ var Monster = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Monster.prototype, "point", {
+    Object.defineProperty(Monster.prototype, "Point", {
         get: function () { return { x: this.x, y: this.y }; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Monster.prototype, "isMove", {
+    Object.defineProperty(Monster.prototype, "IsMove", {
         /** 是否移动中 */
         get: function () { return this._isMove; },
         enumerable: true,
@@ -151,4 +154,3 @@ var Monster = (function (_super) {
     return Monster;
 }(BaseRole));
 __reflect(Monster.prototype, "Monster");
-//# sourceMappingURL=Monster.js.map

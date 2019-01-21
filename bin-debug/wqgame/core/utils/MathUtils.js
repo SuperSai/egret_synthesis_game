@@ -166,4 +166,3 @@ var MathUtils = (function (_super) {
     return MathUtils;
 }(BaseClass));
 __reflect(MathUtils.prototype, "MathUtils");
-//# sourceMappingURL=MathUtils.js.map

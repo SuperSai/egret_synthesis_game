@@ -245,4 +245,3 @@ var starlingswf;
     starlingswf.SwfMovieClip = SwfMovieClip;
     __reflect(SwfMovieClip.prototype, "starlingswf.SwfMovieClip", ["starlingswf.ISwfAnimation"]);
 })(starlingswf || (starlingswf = {}));
-//# sourceMappingURL=SwfMovieClip.js.map

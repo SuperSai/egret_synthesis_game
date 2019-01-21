@@ -21,4 +21,3 @@ var PlayerMgr = (function (_super) {
     return PlayerMgr;
 }(BaseClass));
 __reflect(PlayerMgr.prototype, "PlayerMgr");
-//# sourceMappingURL=PlayerMgr.js.map

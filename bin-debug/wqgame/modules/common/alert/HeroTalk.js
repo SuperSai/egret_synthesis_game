@@ -62,4 +62,3 @@ var HeroTalk = (function (_super) {
     return HeroTalk;
 }(BaseEuiAlert));
 __reflect(HeroTalk.prototype, "HeroTalk");
-//# sourceMappingURL=HeroTalk.js.map

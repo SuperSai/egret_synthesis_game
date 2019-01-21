@@ -17,4 +17,3 @@ var BaseModel = (function () {
     return BaseModel;
 }());
 __reflect(BaseModel.prototype, "BaseModel");
-//# sourceMappingURL=BaseModel.js.map

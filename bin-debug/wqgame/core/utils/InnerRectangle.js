@@ -149,4 +149,3 @@ var InnerRectangle = (function () {
     return InnerRectangle;
 }());
 __reflect(InnerRectangle.prototype, "InnerRectangle");
-//# sourceMappingURL=InnerRectangle.js.map

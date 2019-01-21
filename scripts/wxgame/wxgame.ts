@@ -32,6 +32,16 @@ export class WxgamePlugin implements plugins.Command {
                 if (filename == 'libs/modules/dragonBones/dragonBones.js' || filename == 'libs/modules/dragonBones/dragonBones.min.js') {
                     content += ';window.dragonBones = dragonBones';
                 }
+
+                //greensock对象定义位置修改
+                if (filename == 'modules/greensock/bin/greensock/greensock.js' || filename == 'modules/greensock/bin/greensock/greensock.min.js') {
+                    content += ';Object.assign(window,window.global);';
+                }
+
+                if (filename == "modules/jszip/bin/jszip/jszip.js" || filename == 'modules/jszip/bin/jszip/jszip.min.js') {
+                    content += ";if(!window.JSZip){window.JSZip = module.exports;}"
+                }
+                
                 content = "var egret = window.egret;" + content;
                 if (filename == 'main.js') {
                     content += ";window.Main = Main;"

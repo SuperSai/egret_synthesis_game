@@ -57,4 +57,3 @@ var GameLoading = (function (_super) {
     return GameLoading;
 }(BaseClass));
 __reflect(GameLoading.prototype, "GameLoading");
-//# sourceMappingURL=GameLoading.js.map

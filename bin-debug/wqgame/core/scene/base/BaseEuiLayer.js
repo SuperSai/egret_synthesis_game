@@ -20,4 +20,3 @@ var BaseEuiLayer = (function (_super) {
     return BaseEuiLayer;
 }(eui.Group));
 __reflect(BaseEuiLayer.prototype, "BaseEuiLayer");
-//# sourceMappingURL=BaseEuiLayer.js.map

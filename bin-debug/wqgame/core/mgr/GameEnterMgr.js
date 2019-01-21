@@ -24,4 +24,3 @@ var GameEnterMgr = (function (_super) {
     return GameEnterMgr;
 }(BaseClass));
 __reflect(GameEnterMgr.prototype, "GameEnterMgr");
-//# sourceMappingURL=GameEnterMgr.js.map

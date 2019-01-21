@@ -19,4 +19,3 @@ var BattleConst = (function () {
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");
-//# sourceMappingURL=BattleConst.js.map

@@ -53,7 +53,7 @@ class Role extends BaseRole {
 		let monsters: Monster[] = this._model.monsterDic.getValues();
 		for (let i: number = 0; i < monsters.length; i++) {
 			let monster: Monster = monsters[App.Random.randint(0, monsters.length - 1)];
-			if (monster.HP > 0 && monster.isMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
+			if (monster.HP > 0 && monster.IsMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
 				self.createBullet(monster);
 				break;
 			}
@@ -63,7 +63,7 @@ class Role extends BaseRole {
 	/** 创建子弹 */
 	private createBullet(monster: Monster): void {
 		let nowTime: number = egret.getTimer();
-		if (monster.HP > 0 && monster.isMove && nowTime > this._lastTime) {
+		if (monster.HP > 0 && monster.IsMove && nowTime > this._lastTime) {
 			this.controller.applyFunc(BattleConst.ROLE_ATTACK, this._heroVO.bulletId, { x: this.x, y: this.y }, monster);
 			this._lastTime = nowTime + this._heroVO.delay;//下次执行时间
 		}

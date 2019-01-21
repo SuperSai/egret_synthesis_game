@@ -114,4 +114,3 @@ var SoundMgr = (function (_super) {
     return SoundMgr;
 }(BaseClass));
 __reflect(SoundMgr.prototype, "SoundMgr");
-//# sourceMappingURL=SoundMgr.js.map

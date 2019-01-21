@@ -53,4 +53,3 @@ var BoneMgr = (function (_super) {
     return BoneMgr;
 }(BaseClass));
 __reflect(BoneMgr.prototype, "BoneMgr");
-//# sourceMappingURL=BoneMgr.js.map

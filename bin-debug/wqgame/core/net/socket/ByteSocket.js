@@ -398,4 +398,3 @@ var ByteSocket = (function (_super) {
     return ByteSocket;
 }(egret.EventDispatcher));
 __reflect(ByteSocket.prototype, "ByteSocket");
-//# sourceMappingURL=ByteSocket.js.map

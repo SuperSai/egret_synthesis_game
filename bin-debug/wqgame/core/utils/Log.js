@@ -36,4 +36,3 @@ var Log = (function () {
     return Log;
 }());
 __reflect(Log.prototype, "Log");
-//# sourceMappingURL=Log.js.map

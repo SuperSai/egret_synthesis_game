@@ -7,4 +7,3 @@ var MonsterVO = (function () {
     return MonsterVO;
 }());
 __reflect(MonsterVO.prototype, "MonsterVO");
-//# sourceMappingURL=MonsterVO.js.map

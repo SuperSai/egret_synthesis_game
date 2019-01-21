@@ -35,4 +35,3 @@ var RegisterMgr = (function (_super) {
     return RegisterMgr;
 }(BaseClass));
 __reflect(RegisterMgr.prototype, "RegisterMgr");
-//# sourceMappingURL=RegisterMgr.js.map

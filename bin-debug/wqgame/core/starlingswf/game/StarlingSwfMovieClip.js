@@ -104,4 +104,3 @@ var StarlingSwfMovieClip = (function (_super) {
     return StarlingSwfMovieClip;
 }(starlingswf.SwfMovieClip));
 __reflect(StarlingSwfMovieClip.prototype, "StarlingSwfMovieClip");
-//# sourceMappingURL=StarlingSwfMovieClip.js.map

@@ -192,4 +192,3 @@ var ViewMgr = (function (_super) {
     return ViewMgr;
 }(BaseClass));
 __reflect(ViewMgr.prototype, "ViewMgr");
-//# sourceMappingURL=ViewMgr.js.map
