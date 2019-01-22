@@ -158,6 +158,8 @@ var BattleMap = (function (_super) {
         App.Stage.getStage().removeEventListener(egret.TouchEvent.TOUCH_MOVE, self.onTouchMove, self);
         App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
         var baseItem = evt.target;
+        if (!self._selectRole)
+            return;
         self._selectRole.isDrop = false;
         if (!(evt.target instanceof BaseItem) || !baseItem || baseItem.state == BASE_STATE.CLOSE || baseItem.hashCode == self._selectRole.baseItem.hashCode) {
             self._selectRole.x = self._oX;
@@ -219,35 +221,31 @@ var BattleMap = (function (_super) {
         }
         /** 当前波数的怪物已经全部出战完毕*/
         if (self._model.currMonsterCount >= self._model.maxMonsterCount) {
-            if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
-                //重新设置当前波数
-                self._model.currwaveNum = 1;
-                //进入下一个关卡
-                self._model.currMission++;
-                self._model.levelVO = GlobleData.getData(GlobleData.LevelVO, self._model.currMission);
-            }
-            else {
-                self._model.currwaveNum++; //波数+1
-            }
-            self._model.maxMonsterCount = self._model.monsterWaveNumCount;
             self._model.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
             self._lastTime += self._model.levelVO.waveNumDelay;
-            //重新设置当前波数的怪物
-            self._model.currMonsterCount = 0;
         }
     };
-    /** 怪物死亡 */
+    /** 所有怪物死亡 */
     BattleMap.prototype.onMonsterDie = function () {
         var self = this;
         if (this._model.monsterDic.GetLenght() > 0)
             return;
         if (self._model.currwaveNum > self._model.levelVO.waveNum) {
             self._model.maxMonsterCount = 1;
+            //重新设置当前波数
+            self._model.currwaveNum = 1;
+            //进入下一个关卡
+            self._model.currMission++;
+            self._model.levelVO = GlobleData.getData(GlobleData.LevelVO, self._model.currMission);
             self._model.battleMonsterState = BATTLE_MONSTER_STATE.BOSS;
         }
         else {
+            self._model.currwaveNum++; //波数+1
             self._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
         }
+        self._model.maxMonsterCount = self._model.monsterWaveNumCount;
+        //重新设置当前波数的怪物
+        self._model.currMonsterCount = 0;
         self._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
     };
     /** 创建小怪 */

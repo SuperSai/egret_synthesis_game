@@ -29,8 +29,9 @@ var Bullet = (function (_super) {
         self._bulletImg.texture = RES.getRes(self._bulletVO.assetname);
         self.addChild(self._bulletImg);
         self.x = currPos.x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
-        self.y = currPos.y + self._target.height + (self._bulletImg.height >> 1);
+        self.y = currPos.y + self._target.height; // + (self._bulletImg.height >> 1);
         App.Sound.playEffect(self._bulletVO.startSound);
+        this.scaleX = this.scaleY = 0.6;
     };
     Bullet.prototype.onUpdate = function () {
         _super.prototype.onUpdate.call(this);

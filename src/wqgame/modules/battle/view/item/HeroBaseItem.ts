@@ -41,7 +41,6 @@ class HeroBaseItem extends BaseEuiItem {
 		let self = this;
 		if (!self._heroRole) return Log.traceError("HeroBaseItem -- updateHeroStyle -- 英雄角色初始化后再赋值!");
 		self._heroRole.open(roleId);
-		self._heroRole.heroVO.distance = 9999;
 		let gPos: egret.Point = self.pos.localToGlobal();
 		self._heroRole.x = gPos.x - self._heroRole.roleImg.width / 2;
 		self._heroRole.y = gPos.y - self._heroRole.roleImg.height;

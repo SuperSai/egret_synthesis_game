@@ -120,7 +120,7 @@ class Monster extends BaseRole {
 	}
 
 	/** 移除自己 */
-	private removeSelf(): void {
+	public removeSelf(): void {
 		let self = this;
 		(<BattleModel>self._battleController.getModel()).monsterDic.Remove(self._id);
 		self._isMove = false;
