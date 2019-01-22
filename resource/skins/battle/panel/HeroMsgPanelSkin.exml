@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="HeroMsgPanelSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Group horizontalCenter="0" verticalCenter="0" width="600" height="836">
+	<e:Group horizontalCenter="0" verticalCenter="0" width="610" height="836">
 		<e:Image source="frames_json.frame_bg_01" x="0" y="40"/>
 		<e:Group x="152" y="0">
 			<e:Image source="frames_json.frame_04" x="0" y="0"/>
 			<e:Label id="txt_title" text="Label" horizontalCenter="0" verticalCenter="0" fontFamily="Microsoft YaHei" bold="true"/>
 		</e:Group>
-		<e:Button id="btn_close" label="" right="-22" top="12" name="btn_close_1#1" touchChildren="false">
+		<e:Button id="btn_close" label="" name="btn_close_1#1" touchChildren="false" right="0" top="20">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="buttons_json.btn_close" source.down="buttons_json.btn_close" source.disabled="buttons_json.btn_close"/>

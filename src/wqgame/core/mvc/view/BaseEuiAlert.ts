@@ -4,11 +4,11 @@ class BaseEuiAlert extends BaseEuiView {
 	public btn_close: eui.Group;
 	protected isMaskTouch: boolean = true;
 	private _layer: number;
-	private _maskAlpha: number = 1;
+	private _maskAlpha: number = 0.3;
 	public effectCallBack: Function;
 
 
-	public constructor($controller: BaseController, $layer: number, $skinName: string, maskAlpha: number = 1) {
+	public constructor($controller: BaseController, $layer: number, $skinName: string, maskAlpha: number = 0.3) {
 		super($controller, $layer);
 		this.skinName = $skinName;
 		this._layer = $layer;
@@ -25,7 +25,6 @@ class BaseEuiAlert extends BaseEuiView {
 		}
 		App.LayerMgr.addToLayer(self._maskRect, this._layer);
 		self.myParent.setChildIndex(self._maskRect, 0);
-		App.Align.setToScreenCenter(self);
 	}
 
 	public initData(): void {

@@ -48,8 +48,8 @@ class Monster extends BaseRole {
 			self._path.shift();
 			//已经达到终点
 			if (self._path.length == 0) {
-				self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
 				self.removeSelf();
+				self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
 				return;
 			}
 			self.setDirection(self._path[0]);
@@ -129,6 +129,8 @@ class Monster extends BaseRole {
 		ObjectPool.push(self);
 		ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
 		App.Display.removeFromParent(self);
+		App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
+		App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
 	}
 
 	set HP(value: number) {
@@ -136,9 +138,18 @@ class Monster extends BaseRole {
 		self._hp = value;
 		if (self._hp <= 0) {
 			self.removeSelf();
-			App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
-			App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
-			self._battleController.applyFunc(BattleConst.MONSTER_DIE);
+			self.canDropGoods();
+			self._battleController.applyFunc(BattleConst.MONSTER_DIE, self._monsterInfo.monsterVO);
+		}
+	}
+
+	/** 是否掉落物品 */
+	private canDropGoods(): void {
+		if (this._monsterInfo && this._monsterInfo.monsterVO && this._monsterInfo.monsterVO.dropCount > 0) {
+			let dropItem: DropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
+			dropItem.initItem(Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND, this.localToGlobal());
+			dropItem.addToParent();
+			dropItem.parent.setChildIndex(dropItem, 1);
 		}
 	}
 

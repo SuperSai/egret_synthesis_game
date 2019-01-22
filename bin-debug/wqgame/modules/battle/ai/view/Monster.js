@@ -44,8 +44,8 @@ var Monster = (function (_super) {
             self._path.shift();
             //已经达到终点
             if (self._path.length == 0) {
-                self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
                 self.removeSelf();
+                self._battleController.applyFunc(BattleConst.MONSTER_MOVE_END);
                 return;
             }
             self.setDirection(self._path[0]);
@@ -119,6 +119,8 @@ var Monster = (function (_super) {
         ObjectPool.push(self);
         ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
         App.Display.removeFromParent(self);
+        App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
+        App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
     };
     Object.defineProperty(Monster.prototype, "HP", {
         /** 设置怪物当前血量值 */
@@ -128,14 +130,22 @@ var Monster = (function (_super) {
             self._hp = value;
             if (self._hp <= 0) {
                 self.removeSelf();
-                App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
-                App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
-                self._battleController.applyFunc(BattleConst.MONSTER_DIE);
+                self.canDropGoods();
+                self._battleController.applyFunc(BattleConst.MONSTER_DIE, self._monsterInfo.monsterVO);
             }
         },
         enumerable: true,
         configurable: true
     });
+    /** 是否掉落物品 */
+    Monster.prototype.canDropGoods = function () {
+        if (this._monsterInfo && this._monsterInfo.monsterVO && this._monsterInfo.monsterVO.dropCount > 0) {
+            var dropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
+            dropItem.initItem(Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND, this.localToGlobal());
+            dropItem.addToParent();
+            dropItem.parent.setChildIndex(dropItem, 1);
+        }
+    };
     Object.defineProperty(Monster.prototype, "Point", {
         get: function () { return { x: this.x, y: this.y }; },
         enumerable: true,

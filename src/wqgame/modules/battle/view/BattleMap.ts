@@ -61,6 +61,7 @@ class BattleMap extends BaseEuiView {
 		self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
 		self._battleController.registerFunc(BattleConst.ROLE_ATTACK, self.onRoleAttack, self);
 		self._battleController.registerFunc(BattleConst.MONSTER_DIE, self.onMonsterDie, self);
+		self._battleController.registerFunc(BattleConst.MONSTER_MOVE_END, self.onMonsterMoveEnd, self);
 		App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
 		// App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);	//设置行走路径点
 		self.setBtnEffect(["btn_open"]);
@@ -269,25 +270,21 @@ class BattleMap extends BaseEuiView {
 		let self = this;
 		self._battleController.createMonster(self._model.levelVO.bossId);
 	}
-	/** 检查当前的游戏状态 */
-	public checkGameState(): void {
-		if (this._model.monsterDic.GetLenght() > 0) {
-			let monster: Monster = this._model.monsterDic.getValueByIndex(0);
-			let sprintArea: egret.Rectangle = new egret.Rectangle(this.overImg.x, this.overImg.y, this.overImg.width, this.overImg.height);
-			//失败
-			if (sprintArea.contains(monster.x, monster.y)) {
-				for (let i: number = 0; i < this._model.monsterDic.GetLenght(); i++) {
-					let monster: Monster = this._model.monsterDic.getValueByIndex(i);
-					if (monster) {
-						monster.removeSelf();
-					}
+	/** 有怪物到达终点 -- 失败了咯 */
+	private onMonsterMoveEnd(): void {
+		let len: number = this._model.monsterDic.GetLenght();
+		if (len > 0) {
+			for (let i: number = 0; i < len; i++) {
+				let monster: Monster = this._model.monsterDic.getValueByIndex(i);
+				if (monster) {
+					monster.removeSelf();
 				}
-				//重新设置当前波数
-				this._model.currwaveNum = 1;
-				this._model.maxMonsterCount = this._model.monsterWaveNumCount;
-				this._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
-				this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
 			}
 		}
+		//重新设置当前波数
+		this._model.currwaveNum = 1;
+		this._model.maxMonsterCount = this._model.monsterWaveNumCount;
+		this._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
+		this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
 	}
 }

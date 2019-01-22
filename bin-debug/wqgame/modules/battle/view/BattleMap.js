@@ -59,6 +59,7 @@ var BattleMap = (function (_super) {
         self._battleController.registerFunc(BattleConst.CREATE_ROLE, self.onCreateRole, self);
         self._battleController.registerFunc(BattleConst.ROLE_ATTACK, self.onRoleAttack, self);
         self._battleController.registerFunc(BattleConst.MONSTER_DIE, self.onMonsterDie, self);
+        self._battleController.registerFunc(BattleConst.MONSTER_MOVE_END, self.onMonsterMoveEnd, self);
         App.Stage.getStage().addEventListener(egret.TouchEvent.TOUCH_BEGIN, self.onTouchBegin, self);
         // App.StageUtils.getStage().addEventListener(egret.TouchEvent.TOUCH_TAP, self.onTestHandler, self);	//设置行走路径点
         self.setBtnEffect(["btn_open"]);
@@ -222,6 +223,8 @@ var BattleMap = (function (_super) {
         /** 当前波数的怪物已经全部出战完毕*/
         if (self._model.currMonsterCount >= self._model.maxMonsterCount) {
             self._model.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
+            //重新设置当前波数的怪物
+            self._model.currMonsterCount = 0;
             self._lastTime += self._model.levelVO.waveNumDelay;
         }
     };
@@ -244,8 +247,6 @@ var BattleMap = (function (_super) {
             self._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
         }
         self._model.maxMonsterCount = self._model.monsterWaveNumCount;
-        //重新设置当前波数的怪物
-        self._model.currMonsterCount = 0;
         self._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
     };
     /** 创建小怪 */
@@ -258,6 +259,23 @@ var BattleMap = (function (_super) {
     BattleMap.prototype.createBoss = function () {
         var self = this;
         self._battleController.createMonster(self._model.levelVO.bossId);
+    };
+    /** 有怪物到达终点 -- 失败了咯 */
+    BattleMap.prototype.onMonsterMoveEnd = function () {
+        var len = this._model.monsterDic.GetLenght();
+        if (len > 0) {
+            for (var i = 0; i < len; i++) {
+                var monster = this._model.monsterDic.getValueByIndex(i);
+                if (monster) {
+                    monster.removeSelf();
+                }
+            }
+        }
+        //重新设置当前波数
+        this._model.currwaveNum = 1;
+        this._model.maxMonsterCount = this._model.monsterWaveNumCount;
+        this._model.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
+        this._battleController.applyFunc(BattleConst.MONSTER_WAVENUM_COMPLETE);
     };
     return BattleMap;
 }(BaseEuiView));

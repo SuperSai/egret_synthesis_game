@@ -11,10 +11,10 @@ r.prototype = e.prototype, t.prototype = new r();
 var BaseEuiAlert = (function (_super) {
     __extends(BaseEuiAlert, _super);
     function BaseEuiAlert($controller, $layer, $skinName, maskAlpha) {
-        if (maskAlpha === void 0) { maskAlpha = 1; }
+        if (maskAlpha === void 0) { maskAlpha = 0.3; }
         var _this = _super.call(this, $controller, $layer) || this;
         _this.isMaskTouch = true;
-        _this._maskAlpha = 1;
+        _this._maskAlpha = 0.3;
         _this.skinName = $skinName;
         _this._layer = $layer;
         _this._maskAlpha = maskAlpha;
@@ -30,7 +30,6 @@ var BaseEuiAlert = (function (_super) {
         }
         App.LayerMgr.addToLayer(self._maskRect, this._layer);
         self.myParent.setChildIndex(self._maskRect, 0);
-        App.Align.setToScreenCenter(self);
     };
     BaseEuiAlert.prototype.initData = function () {
         _super.prototype.initData.call(this);
