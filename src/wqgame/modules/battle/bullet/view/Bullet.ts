@@ -16,7 +16,7 @@ class Bullet extends BaseBullet {
 	/** 设置子弹攻击的目标 */
 	public setTarget(bulletId: number, currPos: { x: number, y: number }, $target: Monster): void {
 		let self = this;
-		self._bulletVO = GlobleVOData.getData(GlobleVOData.BulletVO, bulletId);
+		self._bulletVO = GlobleData.getData(GlobleData.BulletVO, bulletId);
 		self._target = $target;
 		if (self._bulletImg) App.Display.removeFromParent(self._bulletImg);
 		self._bulletImg = ObjectPool.pop(egret.Bitmap, "egret.Bitmap");
@@ -25,6 +25,7 @@ class Bullet extends BaseBullet {
 
 		self.x = currPos.x + (self._target.width >> 1) + (self._bulletImg.width >> 1);
 		self.y = currPos.y + self._target.height + (self._bulletImg.height >> 1);
+		App.Sound.playEffect(self._bulletVO.startSound);
 	}
 
 	public onUpdate(): void {
@@ -43,13 +44,14 @@ class Bullet extends BaseBullet {
 		var distance: number = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
 		if (distance <= this._bulletVO.radius) {
 			this._target.HP = this._target.HP - this._bulletVO.damage;
+			App.Effect.bombEffect(this._bulletVO.bombAni, this.localToGlobal(), this);
+			App.Sound.playEffect(this._bulletVO.dieSound);
 			this._target = null;
 			this._bulletVO = null;
 			this.release();
-			App.Effect.bombEffect(this.localToGlobal(), this);
 		}
 		else {
-			var targetSpeed: any = App.Common.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
+			var targetSpeed: any = App.MathUtils.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
 			var xDistance: number = 10 * targetSpeed.x;
 			var yDistance: number = 10 * targetSpeed.y;
 			this.x = this.x + xDistance;

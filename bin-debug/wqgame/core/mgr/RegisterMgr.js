@@ -18,7 +18,6 @@ var RegisterMgr = (function (_super) {
     }
     /** 初始化场景 */
     RegisterMgr.prototype.initScene = function () {
-        App.Scene.register(SceneConsts.LOADING, new LoadingScene());
         App.Scene.register(SceneConsts.LOGIN, new LoginScene());
         App.Scene.register(SceneConsts.HALL, new HallScene());
         App.Scene.register(SceneConsts.BATTLE, new BattleScene());
@@ -27,7 +26,6 @@ var RegisterMgr = (function (_super) {
      * 初始化所有模块控制器
      */
     RegisterMgr.prototype.initModules = function () {
-        App.ControllerMgr.register(ControllerConst.Loading, new LoadingController());
         App.ControllerMgr.register(ControllerConst.Login, new LoginController());
         App.ControllerMgr.register(ControllerConst.Hall, new HallController());
         App.ControllerMgr.register(ControllerConst.Battle, new BattleController());

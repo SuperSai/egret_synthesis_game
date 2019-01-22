@@ -6,10 +6,7 @@ class BaseClass {
 
 	}
 
-    /**
-     * 获取一个单例
-     * @returns {any}
-     */
+	/** 获取一个单例 */
 	public static Instance(...args: any[]): any {
 		var Class: any = this;
 		if (!Class._instance) {

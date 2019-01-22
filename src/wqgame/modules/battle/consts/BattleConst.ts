@@ -11,4 +11,6 @@ class BattleConst {
 	public static MONSTER_WAVENUM_COMPLETE: number = 11004;
 	/** 角色攻击 */
 	public static ROLE_ATTACK: number = 11005;
+	/** 更新购买英雄数据 */
+	public static UPDATE_BUY_HERO: number = 11006;
 }

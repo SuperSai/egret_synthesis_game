@@ -7,10 +7,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var BaseClass = (function () {
     function BaseClass() {
     }
-    /**
-     * 获取一个单例
-     * @returns {any}
-     */
+    /** 获取一个单例 */
     BaseClass.Instance = function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {

@@ -39,7 +39,7 @@ class Monster extends BaseRole {
 		let self = this;
 		if (self._path.length == 0) return;
 		let point: { x: number, y: number } = self._path[0];  //下一个节点
-		let targetSpeed: { x: number, y: number } = App.Common.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
+		let targetSpeed: { x: number, y: number } = App.MathUtils.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
 		let xDistance: number = 10 * targetSpeed.x;
 		let yDistance: number = 10 * targetSpeed.y;
 		if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {
@@ -112,7 +112,7 @@ class Monster extends BaseRole {
 		self._bone = ResourcePool.Instance.pop(self._monsterInfo.monsterVO.assetname, ResourcePool.SKE);
 		self._bone.play();
 		self.addChild(self._bone);
-
+		App.Sound.playEffect(self._monsterInfo.monsterVO.bornSound);
 		self.x = self._path[0].x;
 		self.y = self._path[0].y;
 		self.setDirection(self._path[1]);
@@ -136,7 +136,8 @@ class Monster extends BaseRole {
 		self._hp = value;
 		if (self._hp <= 0) {
 			self.removeSelf();
-			App.Effect.bombEffect(self.localToGlobal(), self);
+			App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
+			App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
 			self._battleController.applyFunc(BattleConst.MONSTER_DIE);
 		}
 	}

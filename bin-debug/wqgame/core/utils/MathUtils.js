@@ -163,6 +163,21 @@ var MathUtils = (function (_super) {
             return angle + 360;
         return angle;
     };
+    /**
+     * int64转number
+     * @param obj
+     * @returns {number}
+     */
+    MathUtils.prototype.int64ToNumber = function (obj) {
+        return parseInt(obj.toString());
+    };
+    /** 获取2点之间的移动速度 */
+    MathUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
+        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+        if (hypotenuse == 0)
+            return { x: 0, y: 0 };
+        return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
+    };
     return MathUtils;
 }(BaseClass));
 __reflect(MathUtils.prototype, "MathUtils");

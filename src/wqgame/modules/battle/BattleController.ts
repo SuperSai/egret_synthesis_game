@@ -23,9 +23,9 @@ class BattleController extends BaseController {
 	private onBattleInit(): void {
 		let self = this;
 		self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
-		self._battleModel.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, self._battleModel.currMission);
+		self._battleModel.levelVO = GlobleData.getData(GlobleData.LevelVO, self._battleModel.currMission);
 		self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
-		self._battleModel.maxBaseCount = Number(GlobleVOData.getDataByFilter(GlobleVOData.ServerConfigVO, "id", "MAX_OPEN_COUNT")[0].value);
+		self._battleModel.maxBaseCount = Number(GlobleData.getDataByFilter(GlobleData.ServerConfigVO, "id", "MAX_OPEN_COUNT")[0].value);
 		App.View.open(ViewConst.Battle, () => {
 			App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
 			self.initRegisterView();
@@ -87,11 +87,17 @@ class BattleController extends BaseController {
 		let info: MonsterInfo = ObjectPool.pop(MonsterInfo, "MonsterInfo");
 		//给怪一个行走路径
 		info.path = self._battleModel.levelVO.path;
-		info.monsterVO = GlobleVOData.getData(GlobleVOData.MonsterVO, monsterId);
+		info.monsterVO = GlobleData.getData(GlobleData.MonsterVO, monsterId);
 		monster.Parse(info);
 		self._battleModel.monsterDic.Add(monster.MonsterId, monster);
 	}
 
+	/** 获取购买英雄的价格 */
+	public getHeroBuyGold(heroId: number): number {
+		let heroVO: HeroVO = GlobleData.getData(GlobleData.HeroVO, heroId);
+		if (heroVO) return heroVO.gold;
+		return -1;
+	}
 
 	/** 注册界面才可以打开界面 */
 	private initRegisterView(): void {

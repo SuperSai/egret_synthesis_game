@@ -1,4 +1,8 @@
 ﻿{
 "titles":["musicID","type","desc","file","loop","volume"],
-"data":[[10001,1,"发射！","se/se_storage_001.mp3",1,1]]
+"data":[[10001,1,"发射01","se/se_beam_001.mp3",1,1],
+[10002,1,"死亡","se/se_death_001.mp3",1,1],
+[10003,1,"出生","se/se_emerge_001.mp3",1,1],
+[10004,1,"点击","se/se_swipe_001.mp3",1,1],
+[10005,1,"bgm","bgm/bgm001.mp3",0,1]]
 }

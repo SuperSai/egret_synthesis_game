@@ -36,21 +36,32 @@ var BaseSound = (function () {
      * @returns {egret.Sound}
      */
     BaseSound.prototype.getSound = function (key) {
-        var vo = GlobleVOData.getData(GlobleVOData.SoundVO, Number(key));
+        var _this = this;
+        this._key = key;
+        var vo = GlobleData.getData(GlobleData.SoundVO, Number(key));
         if (vo == null)
             return null;
-        var sound = RES.getRes(PathConfig.SoundPath + vo.file);
+        var soundPath = PathConfig.SoundPath + vo.file;
+        var sound = RES.getRes(soundPath);
         if (sound) {
-            if (this._cache[key]) {
-                this._cache[key] = egret.getTimer();
+            if (this._cache[soundPath]) {
+                this._cache[soundPath] = egret.getTimer();
             }
         }
         else {
-            if (this._loadingCache.indexOf(key) != -1) {
+            if (this._loadingCache.indexOf(soundPath) != -1) {
                 return null;
             }
-            this._loadingCache.push(key);
-            RES.getResAsync(key, this.onResourceLoadComplete, this);
+            this._loadingCache.push(soundPath);
+            App.Res.loadAsyncSound(vo.file, function () {
+                var index = _this._loadingCache.indexOf(soundPath);
+                if (index != -1) {
+                    _this._loadingCache.splice(index, 1);
+                    _this._cache[soundPath] = egret.getTimer();
+                    _this.loadedPlay(_this._key, soundPath);
+                }
+            });
+            // RES.getResAsync(soundPath, this.onResourceLoadComplete, this);
         }
         return sound;
     };
@@ -58,19 +69,19 @@ var BaseSound = (function () {
      * 资源加载完成
      * @param event
      */
-    BaseSound.prototype.onResourceLoadComplete = function (data, key) {
-        var index = this._loadingCache.indexOf(key);
+    BaseSound.prototype.onResourceLoadComplete = function (soundPath) {
+        var index = this._loadingCache.indexOf(soundPath);
         if (index != -1) {
             this._loadingCache.splice(index, 1);
-            this._cache[key] = egret.getTimer();
-            this.loadedPlay(key);
+            this._cache[soundPath] = egret.getTimer();
+            this.loadedPlay(this._key, soundPath);
         }
     };
     /**
      * 资源加载完成后处理播放，子类重写
      * @param key
      */
-    BaseSound.prototype.loadedPlay = function (key) {
+    BaseSound.prototype.loadedPlay = function (key, soundPath) {
     };
     /**
      * 检测一个文件是否要清除，子类重写

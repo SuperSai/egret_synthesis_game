@@ -183,6 +183,25 @@ var ObjectUtils = (function () {
         }
         return result;
     };
+    /** 深度复制 */
+    ObjectUtils.prototype.copyDataHandler = function (obj) {
+        var newObj;
+        if (obj instanceof Array) {
+            newObj = [];
+        }
+        else if (obj instanceof Object) {
+            newObj = {};
+        }
+        else {
+            return obj;
+        }
+        var keys = Object.keys(obj);
+        for (var i = 0, len = keys.length; i < len; i++) {
+            var key = keys[i];
+            newObj[key] = this.copyDataHandler(obj[key]);
+        }
+        return newObj;
+    };
     /** 点是否在区域中 */
     ObjectUtils.pointIsInArea = function (rect, x, y) {
         return rect.contains(x, y);

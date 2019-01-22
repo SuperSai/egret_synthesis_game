@@ -1,12 +1,13 @@
 /**
- * 游戏Loading 转圈圈
+ *	small loading
  */
 class GameLoading extends BaseClass {
 
-	private content: egret.Sprite = null;
-	private speed: number = 10 / (1000 / 60);
-	private averageUtils: AverageUtils;
-	private uiImageContainer: egret.DisplayObjectContainer;
+	private _content: egret.Sprite;
+	private _uiContainer: egret.DisplayObjectContainer;
+	private _img: egret.Bitmap;
+	private _text: egret.TextField;
+	private _symbol: string = "";
 
 	constructor() {
 		super();
@@ -14,43 +15,52 @@ class GameLoading extends BaseClass {
 	}
 
 	private init(): void {
-		this.averageUtils = new AverageUtils();
+		this._content = new egret.Sprite();
+		this._content.graphics.beginFill(0x000000, 0.2);
+		this._content.graphics.drawRect(0, 0, App.Stage.getWidth(), App.Stage.getHeight());
+		this._content.graphics.endFill();
+		this._content.touchEnabled = true;
 
-		this.content = new egret.Sprite();
-		this.content.graphics.beginFill(0x000000, 0.2);
-		this.content.graphics.drawRect(0, 0, App.Stage.getWidth(), App.Stage.getHeight());
-		this.content.graphics.endFill();
-		this.content.touchEnabled = true;
+		this._uiContainer = new egret.DisplayObjectContainer();
+		this._uiContainer.x = this._content.width * 0.5;
+		this._uiContainer.y = this._content.height * 0.5;
+		this._content.addChild(this._uiContainer);
 
-		this.uiImageContainer = new egret.DisplayObjectContainer();
-		this.uiImageContainer.x = this.content.width * 0.5;
-		this.uiImageContainer.y = this.content.height * 0.5;
-		this.content.addChild(this.uiImageContainer);
+		this._img = new egret.Bitmap();
+		this._img.texture = RES.getRes("loading_player_png");
+		this._img.x = -this._img.width * 0.5 - 80;
+		this._img.y = -this._img.height * 0.5;
 
-		// RES.getResByUrl("resource/common/atlas/load_Reel.png", function (texture: egret.Texture): void {
-		var img: egret.Bitmap = new egret.Bitmap();
-		img.texture = RES.getRes("load_Reel_png");//texture;
-		img.x = -img.width * 0.5;
-		img.y = -img.height * 0.5;
-		this.uiImageContainer.addChild(img);
-		// }, this, RES.ResourceItem.TYPE_IMAGE);
+		this._text = new egret.TextField();
+		this._text.stroke = 2;
+		this._text.strokeColor = 0x946430;
+		this._text.fontFamily = "Microsoft YaHei";
+		this._text.size = 28;
+		this._text.x = -this._text.width * 0.5;
+		this._text.y = -this._text.height * 0.5 + 40;
+		this._text.text = "客官亲稍等...";
+		
+		this._uiContainer.addChild(this._img);
+		this._uiContainer.addChild(this._text);
 	}
 
 	public showLoading(): void {
-		App.Stage.getStage().addChild(this.content);
-		App.TimerMgr.doFrame(1, 0, this.enterFrame, this);
+		App.Stage.getStage().addChild(this._content);
+		App.TimerMgr.doFrame(20, 0, this.enterFrame, this);
 	}
 
 	public hideLoading(): void {
-		if (this.content && this.content.parent) {
-			App.Stage.getStage().removeChild(this.content);
-			this.uiImageContainer.rotation = 0;
+		if (this._content && this._content.parent) {
+			App.Stage.getStage().removeChild(this._content);
 		}
 		App.TimerMgr.remove(this.enterFrame, this);
 	}
 
 	private enterFrame(time: number) {
-		this.averageUtils.push(this.speed * time);
-		this.uiImageContainer.rotation += this.averageUtils.getValue();
+		this._text.text = "客官亲稍等" + this._symbol;
+		this._symbol += ".";
+		if (this._symbol.length > 3) {
+			this._symbol = "";
+		}
 	}
 }

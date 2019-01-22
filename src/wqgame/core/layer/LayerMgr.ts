@@ -73,17 +73,12 @@ class LayerMgr extends BaseClass {
 	}
 
 	public addToLayer(display: egret.DisplayObject, layerType: number): void {
-		let layer: DisplayLayer = this._layers[layerType] as DisplayLayer;//this.getLayerByType(layerType);
+		let layer: DisplayLayer = this._layers[layerType] as DisplayLayer;
 		layer.addChild(display);
 	}
 
 	public getLayerByType(layerType: number): DisplayLayer {
 		return this._layers[layerType] as DisplayLayer;
-		// for (let i: number = 0; i < this._layers.length; i++) {
-		// 	if (this._layers[i].layerType == layerType) {
-		// 		return this._layers[i];
-		// 	}
-		// }
 	}
 
 	public resize(): void {

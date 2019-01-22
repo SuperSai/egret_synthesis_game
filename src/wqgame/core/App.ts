@@ -128,6 +128,10 @@ class App {
 	public static get Bone(): BoneMgr {
 		return BoneMgr.Instance();
 	}
+	/** 排列工具类 */
+	public static get Align(): AlignUtils {
+		return AlignUtils.Instance();
+	}
 	/** StarlingSwf工厂类 */
 	public static get StarlingSwfFactory(): StarlingSwfFactory {
 		return StarlingSwfFactory.Instance();

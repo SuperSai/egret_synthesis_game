@@ -70,9 +70,9 @@ var SoundBG = (function (_super) {
      * 资源加载完成后处理播放
      * @param key
      */
-    SoundBG.prototype.loadedPlay = function (key) {
+    SoundBG.prototype.loadedPlay = function (key, soundPath) {
         if (this._currBg == key) {
-            this.playSound(RES.getRes(key));
+            this.playSound(RES.getRes(soundPath));
         }
     };
     /**

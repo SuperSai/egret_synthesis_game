@@ -29,6 +29,7 @@ var BattleView = (function (_super) {
     /** 对面板数据的初始化，用于子类继承 */
     BattleView.prototype.initData = function () {
         _super.prototype.initData.call(this);
+        this.refreshBuyHeroBtn();
     };
     /** 面板开启执行函数，用于子类继承 */
     BattleView.prototype.open = function () {
@@ -42,6 +43,7 @@ var BattleView = (function (_super) {
         //初始化地图数据
         self.map.open(self.controller);
         self.onUpdateView();
+        App.Sound.playBg("10005");
     };
     BattleView.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
@@ -50,6 +52,7 @@ var BattleView = (function (_super) {
         self.btn_buyRole.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onBuyRoleHandler, self);
         self.setBtnEffect(["btn_buyRole", "btn_hall"]);
         self.controller.registerFunc(BattleConst.MONSTER_WAVENUM_COMPLETE, self.onUpdateView, self);
+        self.controller.registerFunc(BattleConst.UPDATE_BUY_HERO, self.onUpdateBuyHeroView, self);
     };
     BattleView.prototype.removeEvents = function () {
         _super.prototype.removeEvents.call(this);
@@ -70,8 +73,21 @@ var BattleView = (function (_super) {
     /** 购买角色 */
     BattleView.prototype.onBuyRoleHandler = function () {
         var self = this;
-        var roleId = App.Random.randrange(1, 3);
-        self.applyFunc(BattleConst.CREATE_ROLE, roleId);
+        if (App.PlayerMgr.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
+            App.MessageMgr.showText(App.LanguageMgr.getLanguageText("label.01"));
+            return;
+        }
+        self.applyFunc(BattleConst.CREATE_ROLE, self._buyHeroId);
+    };
+    BattleView.prototype.onUpdateBuyHeroView = function () {
+        App.NotificationCenter.dispatch(CommonEvent.UPDATE_CURRENCY, -this._buyHeroGold, ITEM_TYPE.GOLD);
+        this.refreshBuyHeroBtn();
+    };
+    /** 刷新英雄购买按钮 */
+    BattleView.prototype.refreshBuyHeroBtn = function () {
+        this._buyHeroId = App.Random.randrange(0, 3);
+        this._buyHeroGold = this.controller.getHeroBuyGold(this._buyHeroId);
+        this.txt_money.text = this._buyHeroGold + "";
     };
     /** 返回大厅界面 */
     BattleView.prototype.onBackHallHandler = function () {

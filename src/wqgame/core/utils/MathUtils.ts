@@ -163,4 +163,21 @@ class MathUtils extends BaseClass {
 		if (angle < 0) return angle + 360;
 		return angle;
 	}
+
+	/**
+	 * int64转number
+	 * @param obj
+	 * @returns {number}
+	 */
+	public int64ToNumber(obj) {
+		return parseInt(obj.toString());
+	}
+
+	/** 获取2点之间的移动速度 */
+	public getSpeed(targetP2: { x: number, y: number }, currentP1: { x: number, y: number }, SpeedNum: number): { x: number, y: number } {
+		var hypotenuse: number = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+		if (hypotenuse == 0) return { x: 0, y: 0 };
+		return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
+	}
+
 }

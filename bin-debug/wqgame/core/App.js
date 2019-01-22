@@ -248,6 +248,14 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(App, "Align", {
+        /** 排列工具类 */
+        get: function () {
+            return AlignUtils.Instance();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(App, "StarlingSwfFactory", {
         /** StarlingSwf工厂类 */
         get: function () {

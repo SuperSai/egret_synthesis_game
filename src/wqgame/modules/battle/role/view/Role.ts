@@ -22,7 +22,7 @@ class Role extends BaseRole {
 		super.open(param);
 		let self = this;
 		self._roleId = param[0];
-		self._heroVO = GlobleVOData.getData(GlobleVOData.HeroVO, self._roleId);
+		self._heroVO = GlobleData.getData(GlobleData.HeroVO, self._roleId);
 		self.initRole();
 	}
 
@@ -32,6 +32,7 @@ class Role extends BaseRole {
 		if (self._roleImg) App.Display.removeFromParent(self._roleImg);
 		self._roleImg = new eui.Image(self._heroVO.assetname);
 		self.addChild(self._roleImg);
+		App.Sound.playEffect(self._heroVO.bornSound);
 	}
 
 	public onUpdate(passTime: number): void {

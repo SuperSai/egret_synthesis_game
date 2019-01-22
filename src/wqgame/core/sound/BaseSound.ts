@@ -3,8 +3,9 @@
  * Sound基类
  */
 class BaseSound {
-	public _cache: any;
-	public _loadingCache: Array<string>;
+	private _cache: any;
+	private _loadingCache: Array<string>;
+	private _key: string;
 
     /**
      * 构造函数
@@ -38,20 +39,29 @@ class BaseSound {
      * @returns {egret.Sound}
      */
 	public getSound(key: string): egret.Sound {
-		let vo: SoundVO = GlobleVOData.getData(GlobleVOData.SoundVO, Number(key));
+		this._key = key;
+		let vo: SoundVO = GlobleData.getData(GlobleData.SoundVO, Number(key));
 		if (vo == null) return null;
-		let sound: egret.Sound = RES.getRes(PathConfig.SoundPath + vo.file);
+		let soundPath: string = PathConfig.SoundPath + vo.file;
+		let sound: egret.Sound = RES.getRes(soundPath);
 		if (sound) {
-			if (this._cache[key]) {
-				this._cache[key] = egret.getTimer();
+			if (this._cache[soundPath]) {
+				this._cache[soundPath] = egret.getTimer();
 			}
 		} else {
-			if (this._loadingCache.indexOf(key) != -1) {
+			if (this._loadingCache.indexOf(soundPath) != -1) {
 				return null;
 			}
-
-			this._loadingCache.push(key);
-			RES.getResAsync(key, this.onResourceLoadComplete, this);
+			this._loadingCache.push(soundPath);
+			App.Res.loadAsyncSound(vo.file, () => {
+				let index: number = this._loadingCache.indexOf(soundPath);
+				if (index != -1) {
+					this._loadingCache.splice(index, 1);
+					this._cache[soundPath] = egret.getTimer();
+					this.loadedPlay(this._key, soundPath);
+				}
+			});
+			// RES.getResAsync(soundPath, this.onResourceLoadComplete, this);
 		}
 		return sound;
 	}
@@ -60,12 +70,12 @@ class BaseSound {
      * 资源加载完成
      * @param event
      */
-	private onResourceLoadComplete(data: any, key: string): void {
-		let index: number = this._loadingCache.indexOf(key);
+	private onResourceLoadComplete(soundPath: string): void {
+		let index: number = this._loadingCache.indexOf(soundPath);
 		if (index != -1) {
 			this._loadingCache.splice(index, 1);
-			this._cache[key] = egret.getTimer();
-			this.loadedPlay(key);
+			this._cache[soundPath] = egret.getTimer();
+			this.loadedPlay(this._key, soundPath);
 		}
 	}
 
@@ -73,7 +83,7 @@ class BaseSound {
      * 资源加载完成后处理播放，子类重写
      * @param key
      */
-	public loadedPlay(key: string): void {
+	public loadedPlay(key: string, soundPath: string): void {
 
 	}
 

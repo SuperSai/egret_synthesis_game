@@ -46,9 +46,9 @@ class EffectUtils extends BaseClass {
 	}
 
 	/** 爆炸特效 */
-	public bombEffect(pos: egret.Point, obj: any): void {
+	public bombEffect(bombName: string, pos: egret.Point, obj: any): void {
 		let self = this;
-		let bombBone: BoneAnimation = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
+		let bombBone: BoneAnimation = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
 		App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
 		bombBone.x = pos.x;
 		bombBone.y = pos.y;

@@ -44,38 +44,6 @@ var CommonUtils = (function (_super) {
         configurable: true
     });
     /**
-     * 给字体添加描边
-     * @param lable      文字
-     * @param color      表示文本的描边颜色
-     * @param width      描边宽度。
-     */
-    CommonUtils.prototype.addLableStrokeColor = function (lable, color, width) {
-        lable.strokeColor = color;
-        lable.stroke = width;
-    };
-    /**
-     * 深度复制
-     * @param _data
-     */
-    CommonUtils.prototype.copyDataHandler = function (obj) {
-        var newObj;
-        if (obj instanceof Array) {
-            newObj = [];
-        }
-        else if (obj instanceof Object) {
-            newObj = {};
-        }
-        else {
-            return obj;
-        }
-        var keys = Object.keys(obj);
-        for (var i = 0, len = keys.length; i < len; i++) {
-            var key = keys[i];
-            newObj[key] = this.copyDataHandler(obj[key]);
-        }
-        return newObj;
-    };
-    /**
      * 锁屏
      */
     CommonUtils.prototype.lock = function () {
@@ -96,28 +64,6 @@ var CommonUtils = (function (_super) {
                 child.touchEnabled = child.touchChildren = true;
             }
         });
-    };
-    /**
-     * int64转number
-     * @param obj
-     * @returns {number}
-     */
-    CommonUtils.prototype.int64ToNumber = function (obj) {
-        return parseInt(obj.toString());
-    };
-    /** 获取2点之间的移动速度 */
-    CommonUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
-        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
-        if (hypotenuse == 0)
-            return { x: 0, y: 0 };
-        return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
-    };
-    CommonUtils.prototype.numPrecentage = function (cint, mint, countCop) {
-        var value = Math.floor(cint / mint * countCop);
-        if (value > countCop) {
-            value = countCop;
-        }
-        return value;
     };
     return CommonUtils;
 }(BaseClass));

@@ -4,12 +4,13 @@
 class BattleView extends BaseEuiView {
 
 	public map: BattleMap;	// 地图
-	public btn_buyRole: eui.Group;
+	public btn_buyRole: eui.Group; // 购买角色按钮
 	public btn_hall: eui.Button; // 返回大厅按钮
-	public btn_buy: eui.Group;	// 购买角色按钮
 	public txt_money: eui.Label; // 角色价格
 	public txt_level: eui.Label; // 当前关卡数
 	public currency: CurrencyCom; // 货币组件
+	private _buyHeroId: number;
+	private _buyHeroGold: number;
 
 	private _model: BattleModel;
 
@@ -30,6 +31,7 @@ class BattleView extends BaseEuiView {
 	/** 对面板数据的初始化，用于子类继承 */
 	public initData(): void {
 		super.initData();
+		this.refreshBuyHeroBtn();
 	}
 
 	/** 面板开启执行函数，用于子类继承 */
@@ -40,6 +42,7 @@ class BattleView extends BaseEuiView {
 		//初始化地图数据
 		self.map.open(self.controller);
 		self.onUpdateView();
+		App.Sound.playBg("10005");
 	}
 
 	public addEvents(): void {
@@ -49,6 +52,7 @@ class BattleView extends BaseEuiView {
 		self.btn_buyRole.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onBuyRoleHandler, self);
 		self.setBtnEffect(["btn_buyRole", "btn_hall"]);
 		self.controller.registerFunc(BattleConst.MONSTER_WAVENUM_COMPLETE, self.onUpdateView, self);
+		self.controller.registerFunc(BattleConst.UPDATE_BUY_HERO, self.onUpdateBuyHeroView, self);
 	}
 
 	public removeEvents(): void {
@@ -71,8 +75,23 @@ class BattleView extends BaseEuiView {
 	/** 购买角色 */
 	private onBuyRoleHandler(): void {
 		let self = this;
-		let roleId: number = App.Random.randrange(1, 3);
-		self.applyFunc(BattleConst.CREATE_ROLE, roleId);
+		if (App.PlayerMgr.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
+			App.MessageMgr.showText(App.LanguageMgr.getLanguageText("label.01"));
+			return;
+		}
+		self.applyFunc(BattleConst.CREATE_ROLE, self._buyHeroId);
+	}
+
+	private onUpdateBuyHeroView(): void {
+		App.NotificationCenter.dispatch(CommonEvent.UPDATE_CURRENCY, -this._buyHeroGold, ITEM_TYPE.GOLD);
+		this.refreshBuyHeroBtn();
+	}
+
+	/** 刷新英雄购买按钮 */
+	private refreshBuyHeroBtn(): void {
+		this._buyHeroId = App.Random.randrange(0, 3);
+		this._buyHeroGold = (this.controller as BattleController).getHeroBuyGold(this._buyHeroId);
+		this.txt_money.text = this._buyHeroGold + "";
 	}
 
 	/** 返回大厅界面 */

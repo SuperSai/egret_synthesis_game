@@ -52,9 +52,9 @@ var EffectUtils = (function (_super) {
         egret.Tween.removeTweens(obj);
     };
     /** 爆炸特效 */
-    EffectUtils.prototype.bombEffect = function (pos, obj) {
+    EffectUtils.prototype.bombEffect = function (bombName, pos, obj) {
         var self = this;
-        var bombBone = ResourcePool.Instance.pop("ui_bao01", ResourcePool.SKE);
+        var bombBone = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
         App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
         bombBone.x = pos.x;
         bombBone.y = pos.y;

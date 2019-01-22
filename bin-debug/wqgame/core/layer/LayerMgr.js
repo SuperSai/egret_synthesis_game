@@ -69,16 +69,11 @@ var LayerMgr = (function (_super) {
         return layer;
     };
     LayerMgr.prototype.addToLayer = function (display, layerType) {
-        var layer = this._layers[layerType]; //this.getLayerByType(layerType);
+        var layer = this._layers[layerType];
         layer.addChild(display);
     };
     LayerMgr.prototype.getLayerByType = function (layerType) {
         return this._layers[layerType];
-        // for (let i: number = 0; i < this._layers.length; i++) {
-        // 	if (this._layers[i].layerType == layerType) {
-        // 		return this._layers[i];
-        // 	}
-        // }
     };
     LayerMgr.prototype.resize = function () {
         Log.trace("【 LayerManager 】stageResized-------------");

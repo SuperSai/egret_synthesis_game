@@ -68,7 +68,5 @@ declare module skins{
 }
 declare class HallViewSkin extends eui.Skin{
 }
-declare class LoadingUISkin extends eui.Skin{
-}
 declare class LoginViewSkin extends eui.Skin{
 }

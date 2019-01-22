@@ -25,7 +25,7 @@ class BaseEuiAlert extends BaseEuiView {
 		}
 		App.LayerMgr.addToLayer(self._maskRect, this._layer);
 		self.myParent.setChildIndex(self._maskRect, 0);
-
+		App.Align.setToScreenCenter(self);
 	}
 
 	public initData(): void {

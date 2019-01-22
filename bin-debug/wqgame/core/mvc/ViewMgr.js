@@ -70,7 +70,6 @@ var ViewMgr = (function (_super) {
      * 开启面板
      * @param key 面板唯一标识
      * @param param 参数
-     *
      */
     ViewMgr.prototype.open = function (key, openComplete) {
         if (openComplete === void 0) { openComplete = null; }
@@ -107,8 +106,8 @@ var ViewMgr = (function (_super) {
                 view.open.apply(view, param);
                 view.initData();
                 view.setVisible(true);
-                App.GameLoading.hideLoading();
                 openComplete && openComplete();
+                App.GameLoading.hideLoading();
             }.bind(this));
         }
         this._opens.push(key);
@@ -118,7 +117,6 @@ var ViewMgr = (function (_super) {
      * 关闭面板
      * @param key 面板唯一标识
      * @param param 参数
-     *
      */
     ViewMgr.prototype.close = function (key) {
         var param = [];

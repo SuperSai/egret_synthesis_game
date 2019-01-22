@@ -30,6 +30,7 @@ var BaseEuiAlert = (function (_super) {
         }
         App.LayerMgr.addToLayer(self._maskRect, this._layer);
         self.myParent.setChildIndex(self._maskRect, 0);
+        App.Align.setToScreenCenter(self);
     };
     BaseEuiAlert.prototype.initData = function () {
         _super.prototype.initData.call(this);

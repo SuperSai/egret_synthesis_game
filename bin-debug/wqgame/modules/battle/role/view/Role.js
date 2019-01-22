@@ -29,7 +29,7 @@ var Role = (function (_super) {
         _super.prototype.open.call(this, param);
         var self = this;
         self._roleId = param[0];
-        self._heroVO = GlobleVOData.getData(GlobleVOData.HeroVO, self._roleId);
+        self._heroVO = GlobleData.getData(GlobleData.HeroVO, self._roleId);
         self.initRole();
     };
     /** 初始化角色 */
@@ -39,6 +39,7 @@ var Role = (function (_super) {
             App.Display.removeFromParent(self._roleImg);
         self._roleImg = new eui.Image(self._heroVO.assetname);
         self.addChild(self._roleImg);
+        App.Sound.playEffect(self._heroVO.bornSound);
     };
     Role.prototype.onUpdate = function (passTime) {
         _super.prototype.onUpdate.call(this, passTime);

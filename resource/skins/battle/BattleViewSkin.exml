@@ -15,8 +15,8 @@
 			</e:skinName>
 		</e:Button>
 		<e:Group id="btn_buyRole" name="btn_buyRole_1#1" touchChildren="false" right="13" bottom="9">
-			<e:Image scaleX="0.5" scaleY="0.5" source="buttons_json.btn_red"/>
-			<e:Label id="txt_money" text="100" horizontalCenter="0" verticalCenter="0" textAlign="center" textColor="0xFFFFFF" stroke="2" strokeColor="0x3e5b5b" size="35"/>
+			<e:Image source="battle_json.btn_create"/>
+			<e:Label id="txt_money" text="100" horizontalCenter="45" verticalCenter="-2" textAlign="center" textColor="0xFFFFFF" stroke="2" strokeColor="0x3e5b5b" size="28" anchorOffsetX="0" width="71" fontFamily="Microsoft YaHei"/>
 		</e:Group>
 		<e:Group right="0" top="0" scaleX="0.8" scaleY="0.8">
 			<e:Image source="frames_json.frame_04" x="0" y="0"/>

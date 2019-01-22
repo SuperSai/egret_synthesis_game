@@ -48,8 +48,8 @@ var SoundEffects = (function (_super) {
      * 资源加载完成后处理播放
      * @param key
      */
-    SoundEffects.prototype.loadedPlay = function (key) {
-        this.playSound(RES.getRes(key));
+    SoundEffects.prototype.loadedPlay = function (key, soundPath) {
+        this.playSound(RES.getRes(soundPath));
     };
     return SoundEffects;
 }(BaseSound));

@@ -1,7 +1,6 @@
 enum ViewConst {
-	Loading = 10000,
 	/** 登陆界面 */
-	Login,
+	Login = 10000,
 	/** 大厅 */
 	Hall,
 	/***************** 战斗相关 start *****************/

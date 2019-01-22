@@ -1,7 +1,7 @@
 /**
  * json数据解析类
  */
-class GlobleVOData extends egret.DisplayObject {
+class GlobleData extends egret.DisplayObject {
 
 	private _hasParasComplete: boolean = false;
 	private _totalStepCsvList: TSDictionary<string, any> = new TSDictionary<string, any>();
@@ -27,16 +27,18 @@ class GlobleVOData extends egret.DisplayObject {
 	public static MonsterVO: string = "Monster_json";
 	public static HeroVO: string = "Hero_json";
 	public static BulletVO: string = "Bullet_json";
+	public static ItemVO: string = "Item_json";
 
 	private initModel(): void {
 		let self = this;
-		self._totalStepCsvList.Add(GlobleVOData.LevelVO, LevelVO);
-		self._totalStepCsvList.Add(GlobleVOData.BoneAnimationVO, BoneAnimationVO);
-		self._totalStepCsvList.Add(GlobleVOData.SoundVO, SoundVO);
-		self._totalStepCsvList.Add(GlobleVOData.MonsterVO, MonsterVO);
-		self._totalStepCsvList.Add(GlobleVOData.ServerConfigVO, ServerConfigVO);
-		self._totalStepCsvList.Add(GlobleVOData.HeroVO, HeroVO);
-		self._totalStepCsvList.Add(GlobleVOData.BulletVO, BulletVO);
+		self._totalStepCsvList.Add(GlobleData.LevelVO, LevelVO);
+		self._totalStepCsvList.Add(GlobleData.BoneAnimationVO, BoneAnimationVO);
+		self._totalStepCsvList.Add(GlobleData.SoundVO, SoundVO);
+		self._totalStepCsvList.Add(GlobleData.MonsterVO, MonsterVO);
+		self._totalStepCsvList.Add(GlobleData.ServerConfigVO, ServerConfigVO);
+		self._totalStepCsvList.Add(GlobleData.HeroVO, HeroVO);
+		self._totalStepCsvList.Add(GlobleData.BulletVO, BulletVO);
+		self._totalStepCsvList.Add(GlobleData.ItemVO, ItemVO);
 	}
 
 	// 解析初始数据表
@@ -46,6 +48,7 @@ class GlobleVOData extends egret.DisplayObject {
 		RES.getResAsync("json_zip", this.onloadDataComplete, self);
 		Log.trace("dataFile is json_zip");
 	}
+	
 	private onloadDataComplete(data: any, key: string): void {
 		let self = this;
 		self._csvZipData = new JSZip(data);
@@ -86,37 +89,37 @@ class GlobleVOData extends egret.DisplayObject {
 		let key: string = self._totalStepCsvList.getKeyByIndex(self._currParseCount);
 		let DataClass: any = self._totalStepCsvList.getValueByIndex(self._currParseCount);
 		let dic: TSDictionary<number, any> = CSVParser.ParseJsonData(DataClass, csvStr);
-		GlobleVOData.AllCacheData.Add(key, dic);
+		GlobleData.AllCacheData.Add(key, dic);
 		self._currParseCount++;
 	}
 
-	private static _instance: GlobleVOData;
+	private static _instance: GlobleData;
 	public constructor() { super(); }
-	public static get getInstance(): GlobleVOData {
+	public static get getInstance(): GlobleData {
 		if (!this._instance) {
-			this._instance = new GlobleVOData();
+			this._instance = new GlobleData();
 		}
 		return this._instance;
 	}
 
 	public static getData(type: string, key: number): any {
-		let dic: TSDictionary<number, any> = GlobleVOData.AllCacheData.TryGetValue(type);
+		let dic: TSDictionary<number, any> = GlobleData.AllCacheData.TryGetValue(type);
 		return dic.TryGetValue(key);
 	}
 
 	public static getDataByFilter(type: string, filterType: any, filterValue: any): any[] {
-		let dic: TSDictionary<number, any> = GlobleVOData.AllCacheData.TryGetValue(type);
+		let dic: TSDictionary<number, any> = GlobleData.AllCacheData.TryGetValue(type);
 		let filterd: any[] = dic.TryGetListByCondition((bean) => bean[filterType] == filterValue);
 		return filterd
 	}
 
 	public static getAllValue(type: string): Array<any> {
-		let dic: TSDictionary<number, any> = GlobleVOData.AllCacheData.TryGetValue(type);
+		let dic: TSDictionary<number, any> = GlobleData.AllCacheData.TryGetValue(type);
 		return dic.getValues();
 	}
 
 	public static getDataByCondition(type: string, value: (value: any) => boolean): Array<any> {
-		let dic: TSDictionary<number, any> = GlobleVOData.AllCacheData.TryGetValue(type);
+		let dic: TSDictionary<number, any> = GlobleData.AllCacheData.TryGetValue(type);
 		let arr: any[] = dic.TryGetListByCondition(value);
 		return arr;
 	}

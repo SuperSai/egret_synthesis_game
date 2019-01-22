@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "buttons_json,frames_json,chr_image_130131_png",
+			"keys": "buttons_json,frames_json",
 			"name": "common"
 		},
 		{
@@ -9,7 +9,7 @@
 			"name": "global"
 		},
 		{
-			"keys": "loadingBg_jpg,load_Reel_png",
+			"keys": "loadingBg_jpg,load_Reel_png,loading_player_png",
 			"name": "loading"
 		},
 		{
@@ -64,6 +64,11 @@
 			"url": "common/atlas/load_Reel.png",
 			"type": "image",
 			"name": "load_Reel_png"
+		},
+		{
+			"url": "common/atlas/loading_player.png",
+			"type": "image",
+			"name": "loading_player_png"
 		}
 	]
 }

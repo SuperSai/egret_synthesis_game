@@ -16,6 +16,8 @@ var BattleConst = (function () {
     BattleConst.MONSTER_WAVENUM_COMPLETE = 11004;
     /** 角色攻击 */
     BattleConst.ROLE_ATTACK = 11005;
+    /** 更新购买英雄数据 */
+    BattleConst.UPDATE_BUY_HERO = 11006;
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");

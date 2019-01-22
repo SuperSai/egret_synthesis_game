@@ -5,7 +5,7 @@ var BoneConfig = (function () {
     function BoneConfig() {
     }
     BoneConfig.copyValueFromTemplate = function (target, id) {
-        var list = GlobleVOData.getDataByFilter(GlobleVOData.BoneAnimationVO, "skename", id);
+        var list = GlobleData.getDataByFilter(GlobleData.BoneAnimationVO, "skename", id);
         if (list.length > 0) {
             var template = list[0];
             ObjectUtils.copyValue(target, template);

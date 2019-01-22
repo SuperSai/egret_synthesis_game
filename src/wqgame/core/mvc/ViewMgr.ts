@@ -72,7 +72,6 @@ class ViewMgr extends BaseClass {
      * 开启面板
      * @param key 面板唯一标识
      * @param param 参数
-     *
      */
 	public open(key: number, openComplete: Function = null, ...param: any[]): IBaseView {
 		var view: IBaseView = this.getView(key);
@@ -106,8 +105,8 @@ class ViewMgr extends BaseClass {
 				view.open.apply(view, param);
 				view.initData();
 				view.setVisible(true);
-				App.GameLoading.hideLoading();
 				openComplete && openComplete();
+				App.GameLoading.hideLoading();
 			}.bind(this));
 		}
 
@@ -119,7 +118,6 @@ class ViewMgr extends BaseClass {
      * 关闭面板
      * @param key 面板唯一标识
      * @param param 参数
-     *
      */
 	public close(key: number, ...param: any[]): void {
 		if (!this.isShow(key)) {

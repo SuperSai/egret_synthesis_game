@@ -213,7 +213,7 @@ var Main = (function (_super) {
             //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
             var theme = new eui.Theme(PathConfig.ThemePath, _this.stage);
             theme.addEventListener(eui.UIEvent.COMPLETE, function () {
-                GlobleVOData.getInstance.setup();
+                GlobleData.getInstance.setup();
                 RES.getResByUrl(PathConfig.Language, function (data, url) {
                     App.LanguageMgr.setup(data);
                     resolve();

@@ -13,4 +13,8 @@ class HeroVO {
 	public delay: number;
 	/** 攻击距离 */
 	public distance: number;
+	/** 购买价格 */
+	public gold: number;
+	/** 出生音效 */
+	public bornSound: string;
 }

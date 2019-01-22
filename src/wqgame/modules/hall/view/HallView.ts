@@ -23,7 +23,6 @@ class HallView extends BaseEuiView {
 	/** 对面板数据的初始化，用于子类继承 */
 	public initData(): void {
 		super.initData();
-		App.View.open(ViewConst.Loading);
 	}
 
 	/** 面板开启执行函数，用于子类继承 */

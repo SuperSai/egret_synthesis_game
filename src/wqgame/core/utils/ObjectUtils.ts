@@ -189,6 +189,26 @@ class ObjectUtils {
         return result;
     }
 
+    /** 深度复制 */
+    public copyDataHandler(obj: any): any {
+        var newObj;
+        if (obj instanceof Array) {
+            newObj = [];
+        }
+        else if (obj instanceof Object) {
+            newObj = {};
+        }
+        else {
+            return obj;
+        }
+        var keys = Object.keys(obj);
+        for (var i: number = 0, len = keys.length; i < len; i++) {
+            var key = keys[i];
+            newObj[key] = this.copyDataHandler(obj[key]);
+        }
+        return newObj;
+    }
+
     /** 点是否在区域中 */
     public static pointIsInArea(rect: egret.Rectangle, x: number, y: number): boolean {
         return rect.contains(x, y);

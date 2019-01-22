@@ -115,6 +115,7 @@ var BattleMap = (function (_super) {
                 break;
             }
         }
+        self._battleController.applyFunc(BattleConst.UPDATE_BUY_HERO);
     };
     /** 更新所有底座数据 */
     BattleMap.prototype.updateAllBaseItem = function () {
@@ -223,7 +224,7 @@ var BattleMap = (function (_super) {
                 self._model.currwaveNum = 1;
                 //进入下一个关卡
                 self._model.currMission++;
-                self._model.levelVO = GlobleVOData.getData(GlobleVOData.LevelVO, self._model.currMission);
+                self._model.levelVO = GlobleData.getData(GlobleData.LevelVO, self._model.currMission);
             }
             else {
                 self._model.currwaveNum++; //波数+1

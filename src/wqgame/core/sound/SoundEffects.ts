@@ -44,7 +44,7 @@ class SoundEffects extends BaseSound {
      * 资源加载完成后处理播放
      * @param key
      */
-	public loadedPlay(key: string): void {
-		this.playSound(RES.getRes(key));
+	public loadedPlay(key: string, soundPath: string): void {
+		this.playSound(RES.getRes(soundPath));
 	}
 }

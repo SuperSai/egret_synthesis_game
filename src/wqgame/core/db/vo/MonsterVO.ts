@@ -12,6 +12,8 @@ class MonsterVO {
 	public type: number;
 	/** 怪物最大血量 */
 	public maxHp: number;
+	/** 爆炸动画 */
+	public bombAni: string;
 	/** 怪物出生音效 */
 	public bornSound: string;
 	/** 怪物死亡音效 */

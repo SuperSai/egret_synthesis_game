@@ -12,40 +12,6 @@ class CommonUtils extends BaseClass {
 	}
 
     /**
-     * 给字体添加描边
-     * @param lable      文字
-     * @param color      表示文本的描边颜色
-     * @param width      描边宽度。
-     */
-	public addLableStrokeColor(lable: eui.Label, color: any, width: any): void {
-		lable.strokeColor = color;
-		lable.stroke = width;
-	}
-
-    /**
-     * 深度复制
-     * @param _data
-     */
-	public copyDataHandler(obj: any): any {
-		var newObj;
-		if (obj instanceof Array) {
-			newObj = [];
-		}
-		else if (obj instanceof Object) {
-			newObj = {};
-		}
-		else {
-			return obj;
-		}
-		var keys = Object.keys(obj);
-		for (var i: number = 0, len = keys.length; i < len; i++) {
-			var key = keys[i];
-			newObj[key] = this.copyDataHandler(obj[key]);
-		}
-		return newObj;
-	}
-
-    /**
      * 锁屏
      */
 	public lock(): void {
@@ -88,27 +54,4 @@ class CommonUtils extends BaseClass {
 		label.text = str;
 	};
 
-    /**
-     * int64转number
-     * @param obj
-     * @returns {number}
-     */
-	public int64ToNumber(obj) {
-		return parseInt(obj.toString());
-	}
-
-	/** 获取2点之间的移动速度 */
-	public getSpeed(targetP2: { x: number, y: number }, currentP1: { x: number, y: number }, SpeedNum: number): { x: number, y: number } {
-		var hypotenuse: number = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
-		if (hypotenuse == 0) return { x: 0, y: 0 };
-		return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };
-	}
-
-	public numPrecentage(cint: number, mint: number, countCop: number): number {
-		var value: number = Math.floor(cint / mint * countCop);
-		if (value > countCop) {
-			value = countCop;
-		}
-		return value;
-	}
 }

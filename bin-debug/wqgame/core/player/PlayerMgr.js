@@ -17,8 +17,22 @@ var PlayerMgr = (function (_super) {
         return _super.call(this) || this;
     }
     PlayerMgr.prototype.setup = function () {
+        this._info = new PlayerInfo();
     };
+    Object.defineProperty(PlayerMgr.prototype, "info", {
+        get: function () { return this._info; },
+        set: function (value) { this._info = value; },
+        enumerable: true,
+        configurable: true
+    });
     return PlayerMgr;
 }(BaseClass));
 __reflect(PlayerMgr.prototype, "PlayerMgr");
+var ITEM_TYPE;
+(function (ITEM_TYPE) {
+    /** 金币 */
+    ITEM_TYPE[ITEM_TYPE["GOLD"] = 1] = "GOLD";
+    /** 钻石 */
+    ITEM_TYPE[ITEM_TYPE["DIAMOND"] = 2] = "DIAMOND";
+})(ITEM_TYPE || (ITEM_TYPE = {}));
 //# sourceMappingURL=PlayerMgr.js.map
