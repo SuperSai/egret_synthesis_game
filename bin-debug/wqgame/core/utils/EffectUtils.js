@@ -26,7 +26,8 @@ var EffectUtils = (function (_super) {
      * @example eval(macIconShake("this.btnIcon", 100));
      * @returns {string} 返回的是一个要执行代码的字符串，通过eval执行
      */
-    EffectUtils.prototype.macIconShake = function (obj, initY) {
+    EffectUtils.prototype.doMacIconShake = function (obj, initY) {
+        if (initY === void 0) { initY = 0; }
         //抖动频率[时间，移动距离]，可修改
         var arr = [
             [20, 300],
@@ -52,7 +53,7 @@ var EffectUtils = (function (_super) {
         egret.Tween.removeTweens(obj);
     };
     /** 爆炸特效 */
-    EffectUtils.prototype.bombEffect = function (bombName, pos, obj) {
+    EffectUtils.prototype.doBombEffect = function (bombName, pos, obj) {
         var self = this;
         var bombBone = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
         App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
@@ -61,6 +62,15 @@ var EffectUtils = (function (_super) {
         bombBone.play(function () {
             App.Display.removeFromParent(bombBone);
         }, obj);
+    };
+    /** 物品飞入的特效 */
+    EffectUtils.prototype.doGoodsFlyEffect = function (obj, starPos, endPos, callback, duration) {
+        if (duration === void 0) { duration = 300; }
+        egret.Tween.get(obj).set({ x: starPos.x, y: starPos.y });
+        egret.Tween.get(obj).to({ x: endPos.x, y: endPos.y }, duration).call(function () {
+            egret.Tween.removeTweens(obj);
+            callback && callback();
+        });
     };
     /** 界面出现特效 */
     EffectUtils.prototype.viewShowEffect = function (view, type, callback) {

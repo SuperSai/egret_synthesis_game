@@ -157,6 +157,8 @@ class BattleMap extends BaseEuiView {
 		//设置拿起来的角色层级一定是最高的
 		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(self._selectRole, layer.numChildren);
+		self._selectRole.baseItem.levelGroup.visible = false;
+		self._battleController.findSameHero(self._selectRole.heroVO.heroId);
 	}
 
 	private onTouchMove(evt: egret.TouchEvent): void {
@@ -175,6 +177,8 @@ class BattleMap extends BaseEuiView {
 		if (!(evt.target instanceof BaseItem) || !baseItem || baseItem.state == BASE_STATE.CLOSE || baseItem.hashCode == self._selectRole.baseItem.hashCode) {
 			self._selectRole.x = self._oX;
 			self._selectRole.y = self._oY;
+			self._selectRole.baseItem.levelGroup.visible = true;
+			self._battleController.findSameHero();
 			return;
 		}
 		if (baseItem.state == BASE_STATE.OPEN) {
@@ -194,6 +198,7 @@ class BattleMap extends BaseEuiView {
 				self.createRole(self._selectRole, baseItem, self._selectRole.roleId);
 			}
 		}
+		self._battleController.findSameHero();
 	}
 
 	/** 创建普通角色 */
@@ -204,6 +209,7 @@ class BattleMap extends BaseEuiView {
 		ObjectPool.push(selectRole);
 		App.Display.removeFromParent(selectRole);
 		self.updateHeroBase(roleId);
+		baseItem.setLevel(roleId + 1);
 		self._battleController.pushRoleToMap(roleId, baseItem);
 	}
 

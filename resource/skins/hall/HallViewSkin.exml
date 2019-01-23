@@ -14,7 +14,7 @@
 			</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<ns1:CurrencyCom id="currency" skinName="CurrencyComSkin" left="12" top="14"/>
+		<ns1:CurrencyCom id="currency" skinName="CurrencyComSkin" top="14" left="3"/>
 	</e:Group>
 	
 </e:Skin>

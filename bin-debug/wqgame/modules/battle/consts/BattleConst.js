@@ -18,6 +18,8 @@ var BattleConst = (function () {
     BattleConst.ROLE_ATTACK = 11005;
     /** 更新购买英雄数据 */
     BattleConst.UPDATE_BUY_HERO = 11006;
+    /** 怪物掉落的物品 */
+    BattleConst.MONSTER_DROP_GOODS = 11007;
     return BattleConst;
 }());
 __reflect(BattleConst.prototype, "BattleConst");

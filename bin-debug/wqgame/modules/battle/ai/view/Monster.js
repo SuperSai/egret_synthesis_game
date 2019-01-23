@@ -120,7 +120,7 @@ var Monster = (function (_super) {
         ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
         App.Display.removeFromParent(self);
         App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
-        App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
+        App.Effect.doBombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
     };
     Object.defineProperty(Monster.prototype, "HP", {
         /** 设置怪物当前血量值 */
@@ -140,10 +140,7 @@ var Monster = (function (_super) {
     /** 是否掉落物品 */
     Monster.prototype.canDropGoods = function () {
         if (this._monsterInfo && this._monsterInfo.monsterVO && this._monsterInfo.monsterVO.dropCount > 0) {
-            var dropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
-            dropItem.initItem(Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND, this.localToGlobal());
-            dropItem.addToParent();
-            dropItem.parent.setChildIndex(dropItem, 1);
+            this._battleController.applyFunc(BattleConst.MONSTER_DROP_GOODS, this.localToGlobal());
         }
     };
     Object.defineProperty(Monster.prototype, "Point", {

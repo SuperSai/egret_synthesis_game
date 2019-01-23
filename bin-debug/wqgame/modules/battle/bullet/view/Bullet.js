@@ -49,7 +49,7 @@ var Bullet = (function (_super) {
         var distance = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
         if (distance <= this._bulletVO.radius) {
             this._target.HP = this._target.HP - this._bulletVO.damage;
-            App.Effect.bombEffect(this._bulletVO.bombAni, this.localToGlobal(), this);
+            App.Effect.doBombEffect(this._bulletVO.bombAni, this.localToGlobal(), this);
             App.Sound.playEffect(this._bulletVO.dieSound);
             this._target = null;
             this._bulletVO = null;

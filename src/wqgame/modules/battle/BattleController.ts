@@ -67,11 +67,13 @@ class BattleController extends BaseController {
 	public pushRoleToMap(roleId: number, baseItem: BaseItem): void {
 		let self = this;
 		let role: Role = ObjectPool.pop(Role, "Role", self, LayerMgr.GAME_MAP_LAYER);
+		role.isGuard = false;
 		role.addToParent();
 		role.open(roleId);
 		role.isDrop = false;
 		baseItem.state = BASE_STATE.HAVE;
 		role.baseItem = baseItem;
+		role.baseItem.setLevel(roleId + 1);
 		let pos: egret.Point = baseItem.localToGlobal();
 		let roleX: number = pos.x + (baseItem.width / 2) - (role.roleImg.width / 2);
 		let roleY: number = pos.y + 10;
@@ -97,6 +99,23 @@ class BattleController extends BaseController {
 		let heroVO: HeroVO = GlobleData.getData(GlobleData.HeroVO, heroId);
 		if (heroVO) return heroVO.gold;
 		return -1;
+	}
+
+	/** 查找一样的英雄 */
+	public findSameHero(heroId: number = -1): void {
+		let len: number = this._battleModel.roleDic.GetLenght();
+		if (len > 0) {
+			for (let i: number = 0; i < len; i++) {
+				let role: Role = this._battleModel.roleDic.getValueByIndex(i);
+				if (role && !role.isGuard) {
+					if (heroId != -1 && role.heroVO.heroId != heroId) {
+						role.alpha = 0.3;
+					} else {
+						role.alpha = 1;
+					}
+				}
+			}
+		}
 	}
 
 	/** 注册界面才可以打开界面 */

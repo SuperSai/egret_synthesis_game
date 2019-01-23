@@ -130,7 +130,7 @@ class Monster extends BaseRole {
 		ResourcePool.Instance.push(self._bone, ResourcePool.SKE);
 		App.Display.removeFromParent(self);
 		App.Sound.playEffect(self._monsterInfo.monsterVO.dieSound);
-		App.Effect.bombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
+		App.Effect.doBombEffect(self._monsterInfo.monsterVO.bombAni, self.localToGlobal(), self);
 	}
 
 	set HP(value: number) {
@@ -146,10 +146,7 @@ class Monster extends BaseRole {
 	/** 是否掉落物品 */
 	private canDropGoods(): void {
 		if (this._monsterInfo && this._monsterInfo.monsterVO && this._monsterInfo.monsterVO.dropCount > 0) {
-			let dropItem: DropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
-			dropItem.initItem(Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND, this.localToGlobal());
-			dropItem.addToParent();
-			dropItem.parent.setChildIndex(dropItem, 1);
+			this._battleController.applyFunc(BattleConst.MONSTER_DROP_GOODS, this.localToGlobal());
 		}
 	}
 

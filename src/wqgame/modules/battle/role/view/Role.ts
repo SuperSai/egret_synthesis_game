@@ -9,6 +9,8 @@ class Role extends BaseRole {
 	private _heroVO: HeroVO;
 	/** 是否正在拖拽中 */
 	private _isDrop: boolean = false;
+	/** 是否守卫 */
+	public isGuard: boolean = false;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);

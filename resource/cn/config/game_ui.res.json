@@ -28,7 +28,7 @@
 			"url": "cn/asset/atlas/battle/battle.json",
 			"type": "sheet",
 			"name": "battle_json",
-			"subkeys": "btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,create_soldier_remind,post"
+			"subkeys": "battle_level_bg,btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,post"
 		},
 		{
 			"url": "cn/asset/atlas/hall/hall_bg.png",

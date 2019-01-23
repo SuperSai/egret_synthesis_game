@@ -5,6 +5,7 @@ class DropItem extends BaseSpriteView {
 
 	private _itemImg: eui.Image;
 	private _itemVO: ItemVO;
+	public callBack: Function;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -44,10 +45,10 @@ class DropItem extends BaseSpriteView {
 				App.NotificationCenter.dispatch(CommonEvent.UPDATE_CURRENCY, 1000, ITEM_TYPE.DIAMOND);
 				break;
 		}
-		this.removeSelf();
+		this.callBack && this.callBack();
 	}
 
-	private removeSelf(): void {
+	public removeSelf(): void {
 		this.destroy();
 		this._itemImg = null;
 		this._itemVO = null;

@@ -53,6 +53,7 @@ var BattleView = (function (_super) {
         self.setBtnEffect(["btn_buyRole", "btn_hall"]);
         self.controller.registerFunc(BattleConst.MONSTER_WAVENUM_COMPLETE, self.onUpdateView, self);
         self.controller.registerFunc(BattleConst.UPDATE_BUY_HERO, self.onUpdateBuyHeroView, self);
+        self.controller.registerFunc(BattleConst.MONSTER_DROP_GOODS, self.onMonsterDropGoods, self);
     };
     BattleView.prototype.removeEvents = function () {
         _super.prototype.removeEvents.call(this);
@@ -88,6 +89,30 @@ var BattleView = (function (_super) {
         this._buyHeroId = App.Random.randrange(0, 3);
         this._buyHeroGold = this.controller.getHeroBuyGold(this._buyHeroId);
         this.txt_money.text = this._buyHeroGold + "";
+    };
+    /** 怪物掉落物品 */
+    BattleView.prototype.onMonsterDropGoods = function (pos) {
+        var _this = this;
+        var dropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
+        var dropType = Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND;
+        dropItem.initItem(dropType, pos);
+        dropItem.addToParent();
+        dropItem.parent.setChildIndex(dropItem, 1);
+        dropItem.callBack = function () {
+            var target = _this.getCurrencyTarget(dropType);
+            App.Effect.doGoodsFlyEffect(dropItem, pos, target.localToGlobal(), function () {
+                dropItem.removeSelf();
+                eval(App.Effect.doMacIconShake("target"));
+            }, 500);
+        };
+    };
+    BattleView.prototype.getCurrencyTarget = function (type) {
+        switch (type) {
+            case ITEM_TYPE.GOLD:
+                return this.currency.goldGroup;
+            case ITEM_TYPE.DIAMOND:
+                return this.currency.diamondGroup;
+        }
     };
     /** 返回大厅界面 */
     BattleView.prototype.onBackHallHandler = function () {

@@ -21,6 +21,7 @@ var BaseItem = (function (_super) {
     BaseItem.prototype.dataChanged = function () {
         _super.prototype.dataChanged.call(this);
         var self = this;
+        self.setLevelVisible();
         //处于关闭状态就不再继续往下处理
         if (self.data == BASE_STATE.CLOSE) {
             self._state = BASE_STATE.CLOSE;
@@ -28,13 +29,21 @@ var BaseItem = (function (_super) {
         }
         self._state = BASE_STATE.OPEN;
     };
+    BaseItem.prototype.setLevelVisible = function () {
+        if (this._state == BASE_STATE.CLOSE || this._state == BASE_STATE.OPEN) {
+            this.levelGroup.visible = false;
+        }
+    };
+    BaseItem.prototype.setLevel = function (level) {
+        this.txtLevel.text = level + "";
+        this.levelGroup.visible = true;
+    };
     Object.defineProperty(BaseItem.prototype, "state", {
         /** 底座的状态 */
-        get: function () {
-            return this._state;
-        },
+        get: function () { return this._state; },
         set: function (value) {
             this._state = value;
+            this.setLevelVisible();
         },
         enumerable: true,
         configurable: true

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BaseItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="BaseItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="96" height="96">
 	<e:Image source="battle_json.camp_shadow" left="0" top="0" touchEnabled="false" scaleX="0.8" scaleY="0.8"/>
+	<e:Group id="levelGroup" x="59.75" y="63">
+		<e:Image source="battle_json.battle_level_bg" x="0" y="0" anchorOffsetX="0" width="37.25" scale9Grid="10,9,7,8"/>
+		<e:Label id="txtLevel" text="1" x="4.25" y="4" fontFamily="Microsoft YaHei" size="20" anchorOffsetX="0" width="28.75" textAlign="center"/>
+	</e:Group>
 </e:Skin>

@@ -148,6 +148,8 @@ var BattleMap = (function (_super) {
         //设置拿起来的角色层级一定是最高的
         var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(self._selectRole, layer.numChildren);
+        self._selectRole.baseItem.levelGroup.visible = false;
+        self._battleController.findSameHero(self._selectRole.heroVO.heroId);
     };
     BattleMap.prototype.onTouchMove = function (evt) {
         var self = this;
@@ -165,6 +167,8 @@ var BattleMap = (function (_super) {
         if (!(evt.target instanceof BaseItem) || !baseItem || baseItem.state == BASE_STATE.CLOSE || baseItem.hashCode == self._selectRole.baseItem.hashCode) {
             self._selectRole.x = self._oX;
             self._selectRole.y = self._oY;
+            self._selectRole.baseItem.levelGroup.visible = true;
+            self._battleController.findSameHero();
             return;
         }
         if (baseItem.state == BASE_STATE.OPEN) {
@@ -186,6 +190,7 @@ var BattleMap = (function (_super) {
                 self.createRole(self._selectRole, baseItem, self._selectRole.roleId);
             }
         }
+        self._battleController.findSameHero();
     };
     /** 创建普通角色 */
     BattleMap.prototype.createRole = function (selectRole, baseItem, roleId) {
@@ -195,6 +200,7 @@ var BattleMap = (function (_super) {
         ObjectPool.push(selectRole);
         App.Display.removeFromParent(selectRole);
         self.updateHeroBase(roleId);
+        baseItem.setLevel(roleId + 1);
         self._battleController.pushRoleToMap(roleId, baseItem);
     };
     /** 更新英雄底座上的英雄角色 */

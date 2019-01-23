@@ -19,7 +19,7 @@ var DropItem = (function (_super) {
     DropItem.prototype.initItem = function (itemId, pos) {
         this._itemVO = GlobleData.getData(GlobleData.ItemVO, itemId);
         if (this._itemVO) {
-            var path = PathConfig.ItemPath.replace("{0}", "10001"); //this._itemVO.icon
+            var path = PathConfig.ItemPath.replace("{0}", this._itemVO.icon);
             this._itemImg = new eui.Image(path);
             this.addChild(this._itemImg);
             this.x = pos.x - 5;
@@ -48,7 +48,7 @@ var DropItem = (function (_super) {
                 App.NotificationCenter.dispatch(CommonEvent.UPDATE_CURRENCY, 1000, ITEM_TYPE.DIAMOND);
                 break;
         }
-        this.removeSelf();
+        this.callBack && this.callBack();
     };
     DropItem.prototype.removeSelf = function () {
         this.destroy();

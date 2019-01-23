@@ -6,13 +6,14 @@
 
 			<e:Label id="txt_gold" text="0000" fontFamily="Microsoft YaHei" bold="true" size="26" right="6" textAlign="right" verticalCenter="0"/>
 		</e:Group>
-		<e:Group id="diamondGroup" x="410" y="0">
+		<e:Group id="diamondGroup" x="164" y="0">
 			<e:Image scaleX="0.8" scaleY="0.8" source="frames_json.frame_currency"/>
 
 			<e:Label id="txt_diamond" text="0000" fontFamily="Microsoft YaHei" bold="true" textAlign="right" size="26" right="6" verticalCenter="0.5"/>
 		</e:Group>
 		<e:layout>
-			<e:HorizontalLayout horizontalAlign="left" verticalAlign="middle" gap="10"/>
+			<e:BasicLayout/>
 		</e:layout>
+
 	</e:Group>
 </e:Skin>

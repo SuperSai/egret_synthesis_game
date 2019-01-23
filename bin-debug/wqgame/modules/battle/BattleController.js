@@ -67,11 +67,13 @@ var BattleController = (function (_super) {
     BattleController.prototype.pushRoleToMap = function (roleId, baseItem) {
         var self = this;
         var role = ObjectPool.pop(Role, "Role", self, LayerMgr.GAME_MAP_LAYER);
+        role.isGuard = false;
         role.addToParent();
         role.open(roleId);
         role.isDrop = false;
         baseItem.state = BASE_STATE.HAVE;
         role.baseItem = baseItem;
+        role.baseItem.setLevel(roleId + 1);
         var pos = baseItem.localToGlobal();
         var roleX = pos.x + (baseItem.width / 2) - (role.roleImg.width / 2);
         var roleY = pos.y + 10;
@@ -96,6 +98,24 @@ var BattleController = (function (_super) {
         if (heroVO)
             return heroVO.gold;
         return -1;
+    };
+    /** 查找一样的英雄 */
+    BattleController.prototype.findSameHero = function (heroId) {
+        if (heroId === void 0) { heroId = -1; }
+        var len = this._battleModel.roleDic.GetLenght();
+        if (len > 0) {
+            for (var i = 0; i < len; i++) {
+                var role = this._battleModel.roleDic.getValueByIndex(i);
+                if (role && !role.isGuard) {
+                    if (heroId != -1 && role.heroVO.heroId != heroId) {
+                        role.alpha = 0.3;
+                    }
+                    else {
+                        role.alpha = 1;
+                    }
+                }
+            }
+        }
     };
     /** 注册界面才可以打开界面 */
     BattleController.prototype.initRegisterView = function () {

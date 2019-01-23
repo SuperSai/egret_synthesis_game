@@ -53,6 +53,7 @@ class BattleView extends BaseEuiView {
 		self.setBtnEffect(["btn_buyRole", "btn_hall"]);
 		self.controller.registerFunc(BattleConst.MONSTER_WAVENUM_COMPLETE, self.onUpdateView, self);
 		self.controller.registerFunc(BattleConst.UPDATE_BUY_HERO, self.onUpdateBuyHeroView, self);
+		self.controller.registerFunc(BattleConst.MONSTER_DROP_GOODS, self.onMonsterDropGoods, self);
 	}
 
 	public removeEvents(): void {
@@ -92,6 +93,31 @@ class BattleView extends BaseEuiView {
 		this._buyHeroId = App.Random.randrange(0, 3);
 		this._buyHeroGold = (this.controller as BattleController).getHeroBuyGold(this._buyHeroId);
 		this.txt_money.text = this._buyHeroGold + "";
+	}
+
+	/** 怪物掉落物品 */
+	private onMonsterDropGoods(pos: egret.Point): void {
+		let dropItem: DropItem = ObjectPool.pop(DropItem, "DropItem", null, LayerMgr.GAME_MAP_LAYER);
+		let dropType: number = Math.random() > 0.5 ? ITEM_TYPE.GOLD : ITEM_TYPE.DIAMOND;
+		dropItem.initItem(dropType, pos);
+		dropItem.addToParent();
+		dropItem.parent.setChildIndex(dropItem, 1);
+		dropItem.callBack = () => {
+			let target: eui.Group = this.getCurrencyTarget(dropType);
+			App.Effect.doGoodsFlyEffect(dropItem, pos, target.localToGlobal(), () => {
+				dropItem.removeSelf();
+				eval(App.Effect.doMacIconShake("target"));
+			}, 500);
+		}
+	}
+
+	private getCurrencyTarget(type: number): eui.Group {
+		switch (type) {
+			case ITEM_TYPE.GOLD:
+				return this.currency.goldGroup;
+			case ITEM_TYPE.DIAMOND:
+				return this.currency.diamondGroup;
+		}
 	}
 
 	/** 返回大厅界面 */

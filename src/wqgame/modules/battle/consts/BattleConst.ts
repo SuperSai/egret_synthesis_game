@@ -13,4 +13,6 @@ class BattleConst {
 	public static ROLE_ATTACK: number = 11005;
 	/** 更新购买英雄数据 */
 	public static UPDATE_BUY_HERO: number = 11006;
+	/** 怪物掉落的物品 */
+	public static MONSTER_DROP_GOODS: number = 11007;
 }

@@ -3,6 +3,8 @@
  */
 class CurrencyCom extends BaseEuiView {
 
+	public goldGroup: eui.Group;
+	public diamondGroup: eui.Group;
 	private txt_gold: eui.Label;
 	private txt_diamond: eui.Label;
 

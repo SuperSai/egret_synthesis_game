@@ -15,6 +15,8 @@ var Role = (function (_super) {
         _this._lastTime = 0;
         /** 是否正在拖拽中 */
         _this._isDrop = false;
+        /** 是否守卫 */
+        _this.isGuard = false;
         var self = _this;
         self.touchChildren = self.touchEnabled = false;
         self._model = self.controller.getModel();

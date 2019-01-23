@@ -16,7 +16,7 @@ class EffectUtils extends BaseClass {
      * @example eval(macIconShake("this.btnIcon", 100));
      * @returns {string} 返回的是一个要执行代码的字符串，通过eval执行
      */
-	public macIconShake(obj: string, initY: number): string {
+	public doMacIconShake(obj: string, initY: number = 0): string {
 		//抖动频率[时间，移动距离]，可修改
 		var arr: Array<any> = [
 			[20, 300],
@@ -46,7 +46,7 @@ class EffectUtils extends BaseClass {
 	}
 
 	/** 爆炸特效 */
-	public bombEffect(bombName: string, pos: egret.Point, obj: any): void {
+	public doBombEffect(bombName: string, pos: egret.Point, obj: any): void {
 		let self = this;
 		let bombBone: BoneAnimation = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
 		App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
@@ -55,6 +55,15 @@ class EffectUtils extends BaseClass {
 		bombBone.play(() => {
 			App.Display.removeFromParent(bombBone);
 		}, obj);
+	}
+
+	/** 物品飞入的特效 */
+	public doGoodsFlyEffect(obj: egret.DisplayObjectContainer, starPos: egret.Point, endPos: egret.Point, callback: Function, duration: number = 300): void {
+		egret.Tween.get(obj).set({ x: starPos.x, y: starPos.y });
+		egret.Tween.get(obj).to({ x: endPos.x, y: endPos.y }, duration).call(() => {
+			egret.Tween.removeTweens(obj);
+			callback && callback();
+		})
 	}
 
 	/** 界面出现特效 */
