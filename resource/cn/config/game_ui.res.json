@@ -9,7 +9,7 @@
 			"name": "battle"
 		},
 		{
-			"keys": "hall_bg,hallIcons_json",
+			"keys": "hall_bg_jpg",
 			"name": "hall"
 		},
 		{
@@ -31,21 +31,15 @@
 			"subkeys": "battle_level_bg,btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,post"
 		},
 		{
-			"url": "cn/asset/atlas/hall/hall_bg.png",
-			"type": "image",
-			"name": "hall_bg"
-		},
-		{
-			"url": "cn/asset/atlas/hall/hallIcons.json",
-			"type": "sheet",
-			"name": "hallIcons_json",
-			"subkeys": "activity_icon,bag_icon,battle_icon,black_icon,copy_icon,firstCharge_icon,heros_icon,jade_icon,luckDraw_icon,more_icon,rank_icon,recharge_icon,shop_icon,sign_icon,task_icon"
-		},
-		{
 			"url": "cn/asset/atlas/loading/loading.json",
 			"type": "sheet",
 			"name": "loading_json",
 			"subkeys": "loading_player"
+		},
+		{
+			"url": "cn/asset/atlas/hall/hall_bg.jpg",
+			"type": "image",
+			"name": "hall_bg_jpg"
 		}
 	]
 }

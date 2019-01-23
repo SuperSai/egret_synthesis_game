@@ -4,7 +4,7 @@
 
 
 	<e:Group height="100%" width="100%" horizontalCenter="0" verticalCenter="0">
-		<e:Image source="hall_bg" left="0" right="0" top="0" bottom="0"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="hall_bg_jpg"/>
 		<e:Image source="hall_json.hall_bg_down" x="360" y="1280"/>
 		<e:Button id="btn_checkpoint" label="" touchChildren="false" name="btn_checkpoint_1#1" horizontalCenter="0" verticalCenter="0">
 			<e:skinName>

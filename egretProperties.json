@@ -7,7 +7,7 @@
   },
   "eui": {
     "exmlRoot": [
-      "resource/skins/eui_skins"
+      "resource/skins"
     ],
     "themes": [
       "resource/config/default.thm.json"
