@@ -17,7 +17,7 @@
 			"name": "role"
 		},
 		{
-			"keys": "100_1",
+			"keys": "100_1,100_2,100_3,100_6,100_4,100_5",
 			"name": "bullet"
 		}
 	],
@@ -69,6 +69,31 @@
 			"url": "common/atlas/loading_player.png",
 			"type": "image",
 			"name": "loading_player_png"
+		},
+		{
+			"url": "common/bullet/100_2.png",
+			"type": "image",
+			"name": "100_2"
+		},
+		{
+			"url": "common/bullet/100_3.png",
+			"type": "image",
+			"name": "100_3"
+		},
+		{
+			"url": "common/bullet/100_6.png",
+			"type": "image",
+			"name": "100_6"
+		},
+		{
+			"url": "common/bullet/100_4.png",
+			"type": "image",
+			"name": "100_4"
+		},
+		{
+			"url": "common/bullet/100_5.png",
+			"type": "image",
+			"name": "100_5"
 		}
 	]
 }

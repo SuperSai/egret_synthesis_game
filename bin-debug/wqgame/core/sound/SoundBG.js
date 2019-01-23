@@ -72,7 +72,10 @@ var SoundBG = (function (_super) {
      */
     SoundBG.prototype.loadedPlay = function (key, soundPath) {
         if (this._currBg == key) {
-            this.playSound(RES.getRes(soundPath));
+            var sound = RES.getRes(soundPath);
+            if (sound) {
+                this.playSound(sound);
+            }
         }
     };
     /**

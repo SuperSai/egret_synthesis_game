@@ -173,7 +173,7 @@ var MathUtils = (function (_super) {
     };
     /** 获取2点之间的移动速度 */
     MathUtils.prototype.getSpeed = function (targetP2, currentP1, SpeedNum) {
-        var hypotenuse = App.MathUtils.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
+        var hypotenuse = App.Math.getDistance(targetP2.x, targetP2.y, currentP1.x, currentP1.y);
         if (hypotenuse == 0)
             return { x: 0, y: 0 };
         return { x: SpeedNum * (targetP2.x - currentP1.x) / hypotenuse, y: SpeedNum * (targetP2.y - currentP1.y) / hypotenuse };

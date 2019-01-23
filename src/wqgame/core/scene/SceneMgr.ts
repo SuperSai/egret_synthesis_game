@@ -39,18 +39,19 @@ class SceneMgr extends BaseClass {
      * @param key 场景唯一标识
 	 * @param isClear 是否清除上一个场景
      */
-	public runScene(key: number, ...param: any[]): void {
-		var nowScene: BaseScene = this._scenes.TryGetValue(key);
+	public runScene(key: number, isClear = false, ...param: any[]): void {
+		let nowScene: BaseScene = this._scenes.TryGetValue(key);
 		if (nowScene == null) {
 			Log.trace("场景" + key + "不存在");
 			return;
 		}
-
-		// var oldScene: BaseScene = this._scenes.TryGetValue(this._currScene);
-		// if (oldScene) {
-		// 	oldScene.onExit();
-		// }
-
+		if (isClear) {
+			let oldScene: BaseScene = this._scenes.TryGetValue(this._currScene);
+			if (oldScene) {
+				oldScene.onExit();
+				oldScene = null;
+			}
+		}
 		nowScene.onEnter.apply(nowScene, param);
 		this._currScene = key;
 	}

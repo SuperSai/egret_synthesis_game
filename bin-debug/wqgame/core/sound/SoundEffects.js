@@ -34,6 +34,8 @@ var SoundEffects = (function (_super) {
      * @param sound
      */
     SoundEffects.prototype.playSound = function (sound) {
+        if (!sound)
+            return;
         var channel = sound.play(0, 1);
         channel.volume = this._volume;
     };
@@ -49,7 +51,10 @@ var SoundEffects = (function (_super) {
      * @param key
      */
     SoundEffects.prototype.loadedPlay = function (key, soundPath) {
-        this.playSound(RES.getRes(soundPath));
+        var sound = RES.getRes(soundPath);
+        if (sound) {
+            this.playSound(sound);
+        }
     };
     return SoundEffects;
 }(BaseSound));

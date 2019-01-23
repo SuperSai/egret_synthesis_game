@@ -1,7 +1,7 @@
 /**
  * Scene基类
  */
-class BaseScene {
+class BaseScene extends egret.DisplayObjectContainer {
 	//当前所有Layer
 	private _layers: Array<egret.DisplayObjectContainer>;
 
@@ -9,6 +9,7 @@ class BaseScene {
      * 构造函数
      */
 	public constructor() {
+		super();
 		this._layers = new Array<egret.DisplayObjectContainer>();
 	}
 

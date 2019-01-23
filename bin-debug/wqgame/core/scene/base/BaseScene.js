@@ -1,15 +1,25 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
+var __extends = this && this.__extends || function __extends(t, e) { 
+ function r() { 
+ this.constructor = t;
+}
+for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
+r.prototype = e.prototype, t.prototype = new r();
+};
 /**
  * Scene基类
  */
-var BaseScene = (function () {
+var BaseScene = (function (_super) {
+    __extends(BaseScene, _super);
     /**
      * 构造函数
      */
     function BaseScene() {
-        this._layers = new Array();
+        var _this = _super.call(this) || this;
+        _this._layers = new Array();
+        return _this;
     }
     /**
      * 进入Scene调用
@@ -84,6 +94,6 @@ var BaseScene = (function () {
         }
     };
     return BaseScene;
-}());
+}(egret.DisplayObjectContainer));
 __reflect(BaseScene.prototype, "BaseScene");
 //# sourceMappingURL=BaseScene.js.map

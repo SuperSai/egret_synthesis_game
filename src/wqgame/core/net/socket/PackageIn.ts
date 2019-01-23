@@ -99,8 +99,8 @@ class PackageIn extends egret.ByteArray {
 		for (i = keyDataBy.position; i < keyDataBy.length; i++) {
 			keyBackup.writeByte(keyDataBy.readByte());
 		}
-		App.SocketMgr.socket.RECEIVE_KEY.clear();
-		App.SocketMgr.socket.RECEIVE_KEY = self.copyByteArray(keyBackup);
+		App.Socket.socket.RECEIVE_KEY.clear();
+		App.Socket.socket.RECEIVE_KEY = self.copyByteArray(keyBackup);
 		keyBackup.clear();
 		keyDataBy.clear();
 		nextKeyDataBy.clear();

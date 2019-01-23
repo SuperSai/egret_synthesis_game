@@ -3,9 +3,9 @@
  */
 class HallView extends BaseEuiView {
 
-	public currency: CurrencyCom;
-	/** 关卡按钮 */
-	public btn_checkpoint: eui.Button;
+	private currency: CurrencyCom;
+	private btn_battle: eui.Button;
+	private btn_menu: eui.Button;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
@@ -25,28 +25,29 @@ class HallView extends BaseEuiView {
 		super.initData();
 	}
 
-	/** 面板开启执行函数，用于子类继承 */
-	public open(...param: any[]): void {
-		super.open(param);
-		let self = this;
-		let model: HallModel = param[0];
-	}
-
 	public addEvents(): void {
 		super.addEvents();
 		let self = this;
-		self.btn_checkpoint.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
-		self.setBtnEffect(["btn_checkpoint"]);
+		self.btn_battle.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onEnterBattle, self);
+		self.btn_menu.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onShowMenu, self);
+		self.setBtnEffect(["btn_battle"]);
 	}
 
 	public removeEvents(): void {
 		super.removeEvents();
 		let self = this;
-		self.btn_checkpoint.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
+		self.btn_battle.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onEnterBattle, self);
+		self.btn_menu.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onShowMenu, self);
 	}
 
-	/** 进入关卡选择界面 */
-	private onGotoCheckpoint(): void {
-		let self = this;
+	/** 进入战斗 */
+	private onEnterBattle(): void {
+		App.Scene.clear();
+		App.Scene.runScene(SceneConsts.BATTLE);
+	}
+
+	/** 显示功能菜单 */
+	private onShowMenu(): void {
+
 	}
 }

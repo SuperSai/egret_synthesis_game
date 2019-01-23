@@ -25,7 +25,7 @@ class HeroTalk extends BaseEuiAlert {
 	public initData(): void {
 		super.initData();
 		let self = this;
-		App.TimerMgr.doTimer(1000, 1, () => {
+		App.Timer.doTimer(1000, 1, () => {
 			(<BattleModel>self.controller.getModel()).battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
 			super.onClosePanel();
 		}, self)

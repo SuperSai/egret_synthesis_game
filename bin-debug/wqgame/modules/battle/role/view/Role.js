@@ -65,7 +65,7 @@ var Role = (function (_super) {
         var monsters = this._model.monsterDic.getValues();
         for (var i = 0; i < monsters.length; i++) {
             var monster = monsters[App.Random.randint(0, monsters.length - 1)];
-            if (monster.HP > 0 && monster.IsMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
+            if (monster.HP > 0 && monster.IsMove && App.Math.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
                 self.bulletLaunch(monster);
                 break;
             }

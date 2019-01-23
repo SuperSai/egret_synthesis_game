@@ -69,7 +69,7 @@ var LoginView = (function (_super) {
             params: { x: 10, y: 0.8, z: 0.1 },
             time: 0
         });
-        App.TimerMgr.doFrame(0, 0, function () {
+        App.Timer.doFrame(0, 0, function () {
             customFilter3.uniforms.time += 0.01;
             if (customFilter3.uniforms.time > 1) {
                 customFilter3.uniforms.time = 0.0;

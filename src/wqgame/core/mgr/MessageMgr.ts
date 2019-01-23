@@ -30,7 +30,7 @@ class MessageMgr extends BaseClass {
     }
 
     private startAnimation(message: string, label: eui.Label): void {
-        App.LayerMgr.addToLayer(label, LayerMgr.GAME_POP_LAYER);
+        App.Layer.addToLayer(label, LayerMgr.GAME_POP_LAYER);
         label.alpha = 1;
         egret.Tween.get(label).wait(1000).to({ alpha: 0 }, 1000);
         egret.Tween.get(label).to({ verticalCenter: -100 }, 2000).call(() => {

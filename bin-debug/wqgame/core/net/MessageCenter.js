@@ -24,7 +24,7 @@ var MessageCenter = (function (_super) {
         _this.eVec = new Array();
         _this.lastRunTime = 0;
         if (_this.type == 0) {
-            App.TimerMgr.doFrame(1, 0, _this.run, _this);
+            App.Timer.doFrame(1, 0, _this.run, _this);
         }
         return _this;
     }

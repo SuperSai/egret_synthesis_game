@@ -87,9 +87,9 @@ class BattleMap extends BaseEuiView {
 		let bullet: Bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
 		bullet.addToParent();
 		bullet.setTarget(bulledId, currPos, target);
-		bullet.rotation = App.MathUtils.getAngle(currPos, target.Point);
+		bullet.rotation = App.Math.getAngle(currPos, target.Point);
 		self._model.bulletDic.Add(bullet.ID, bullet);
-		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
+		let layer: DisplayLayer = App.Layer.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(bullet, layer.numChildren);
 	}
 
@@ -112,7 +112,7 @@ class BattleMap extends BaseEuiView {
 		let self = this;
 		if (roleId < 0) return Log.traceError("角色ID错误：" + roleId);
 		let len: number = self._model.roleDic.GetLenght();
-		if (len >= (self._model.levelVO.openBaseCount + 1)) return App.MessageMgr.showText(App.LanguageMgr.getLanguageText("battle.txt.01"));
+		if (len >= (self._model.levelVO.openBaseCount + 1)) return App.Message.showText(App.Language.getLanguageText("battle.txt.01"));
 		while (len < (self._model.levelVO.openBaseCount + 1)) {
 			//在可以放置的底座中随机一个
 			let random: number = App.Random.randrange(self._model.maxBaseCount - self._model.levelVO.openBaseCount, self._model.maxBaseCount);
@@ -155,7 +155,7 @@ class BattleMap extends BaseEuiView {
 		self._selectRole.x = evt.stageX;
 		self._selectRole.y = evt.stageY;
 		//设置拿起来的角色层级一定是最高的
-		let layer: DisplayLayer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
+		let layer: DisplayLayer = App.Layer.getLayerByType(LayerMgr.GAME_MAP_LAYER);
 		layer.setChildIndex(self._selectRole, layer.numChildren);
 		self._selectRole.baseItem.levelGroup.visible = false;
 		self._battleController.findSameHero(self._selectRole.heroVO.heroId);
@@ -248,7 +248,7 @@ class BattleMap extends BaseEuiView {
 	private onMonsterDie(): void {
 		let self = this;
 		if (this._model.monsterDic.GetLenght() > 0) return;
-		if (self._model.currwaveNum > self._model.levelVO.waveNum) {
+		if (self._model.currwaveNum >= self._model.levelVO.waveNum) {
 			self._model.maxMonsterCount = 1;
 			//重新设置当前波数
 			self._model.currwaveNum = 1;

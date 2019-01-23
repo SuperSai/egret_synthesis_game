@@ -12,7 +12,7 @@ class BaseEuiItem extends eui.ItemRenderer {
 	public childrenCreated() {
 		super.childrenCreated();
 		let self = this;
-		App.LanguageMgr.setModuleLanguage(self);
+		App.Language.setModuleLanguage(self);
 	}
 
 	public dataChanged() {

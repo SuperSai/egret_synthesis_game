@@ -80,9 +80,9 @@ var BattleMap = (function (_super) {
         var bullet = ObjectPool.pop(Bullet, "Bullet", self._battleController, LayerMgr.GAME_MAP_LAYER);
         bullet.addToParent();
         bullet.setTarget(bulledId, currPos, target);
-        bullet.rotation = App.MathUtils.getAngle(currPos, target.Point);
+        bullet.rotation = App.Math.getAngle(currPos, target.Point);
         self._model.bulletDic.Add(bullet.ID, bullet);
-        var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
+        var layer = App.Layer.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(bullet, layer.numChildren);
     };
     /** 开放新的底座 */
@@ -105,7 +105,7 @@ var BattleMap = (function (_super) {
             return Log.traceError("角色ID错误：" + roleId);
         var len = self._model.roleDic.GetLenght();
         if (len >= (self._model.levelVO.openBaseCount + 1))
-            return App.MessageMgr.showText(App.LanguageMgr.getLanguageText("battle.txt.01"));
+            return App.Message.showText(App.Language.getLanguageText("battle.txt.01"));
         while (len < (self._model.levelVO.openBaseCount + 1)) {
             //在可以放置的底座中随机一个
             var random = App.Random.randrange(self._model.maxBaseCount - self._model.levelVO.openBaseCount, self._model.maxBaseCount);
@@ -146,7 +146,7 @@ var BattleMap = (function (_super) {
         self._selectRole.x = evt.stageX;
         self._selectRole.y = evt.stageY;
         //设置拿起来的角色层级一定是最高的
-        var layer = App.LayerMgr.getLayerByType(LayerMgr.GAME_MAP_LAYER);
+        var layer = App.Layer.getLayerByType(LayerMgr.GAME_MAP_LAYER);
         layer.setChildIndex(self._selectRole, layer.numChildren);
         self._selectRole.baseItem.levelGroup.visible = false;
         self._battleController.findSameHero(self._selectRole.heroVO.heroId);
@@ -239,7 +239,7 @@ var BattleMap = (function (_super) {
         var self = this;
         if (this._model.monsterDic.GetLenght() > 0)
             return;
-        if (self._model.currwaveNum > self._model.levelVO.waveNum) {
+        if (self._model.currwaveNum >= self._model.levelVO.waveNum) {
             self._model.maxMonsterCount = 1;
             //重新设置当前波数
             self._model.currwaveNum = 1;

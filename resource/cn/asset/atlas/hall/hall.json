@@ -1,0 +1,5 @@
+{"file":"hall.png","frames":{
+"hall_btn_zhucaidan":{"x":0,"y":245,"w":135,"h":173,"offX":0,"offY":0,"sourceW":135,"sourceH":173},
+"hall_icon_boss":{"x":137,"y":245,"w":112,"h":112,"offX":0,"offY":0,"sourceW":112,"sourceH":112},
+"hall_icon_touxiangdi1":{"x":0,"y":0,"w":182,"h":243,"offX":0,"offY":0,"sourceW":182,"sourceH":244},
+"hall_icon_touxiangdi2":{"x":137,"y":359,"w":103,"h":102,"offX":0,"offY":0,"sourceW":103,"sourceH":102}}}

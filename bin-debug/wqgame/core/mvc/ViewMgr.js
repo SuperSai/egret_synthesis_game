@@ -168,8 +168,10 @@ var ViewMgr = (function (_super) {
      * 关闭所有开启中的UI
      */
     ViewMgr.prototype.closeAll = function () {
-        while (this._opens.length) {
-            this.close(this._opens[0]);
+        for (var i = 0; i < this._opens.length; i++) {
+            if (this._opens[i] != ViewConst.Battle) {
+                this.close(this._opens[i]);
+            }
         }
     };
     /**

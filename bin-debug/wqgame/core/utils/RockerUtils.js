@@ -176,7 +176,7 @@ var RockerUtils = (function (_super) {
             this.moveFlagGoY = this.mouseY;
         }
         else {
-            var radian = App.MathUtils.getRadian2(this.moveFlagX, this.moveFlagY, this.mouseX, this.mouseY);
+            var radian = App.Math.getRadian2(this.moveFlagX, this.moveFlagY, this.mouseX, this.mouseY);
             this.moveFlagGoX = this.moveFlagX + Math.cos(radian) * this.moveFlagWidthHelf;
             this.moveFlagGoY = this.moveFlagY + Math.sin(radian) * this.moveFlagWidthHelf;
         }
@@ -206,7 +206,7 @@ var RockerUtils = (function (_super) {
     RockerUtils.prototype.startCheckKey = function () {
         if (!this.checkKeying) {
             this.checkKeying = true;
-            App.TimerMgr.doFrame(1, 0, this.delKeys, this);
+            App.Timer.doFrame(1, 0, this.delKeys, this);
         }
     };
     /**
@@ -216,7 +216,7 @@ var RockerUtils = (function (_super) {
         this.keys[0] = 0;
         this.keys[1] = 0;
         if (this.checkKeying) {
-            App.TimerMgr.remove(this.delKeys, this);
+            App.Timer.remove(this.delKeys, this);
             this.checkKeying = false;
         }
     };

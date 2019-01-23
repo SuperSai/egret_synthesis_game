@@ -200,7 +200,7 @@ class RockerUtils extends BaseClass {
 			this.moveFlagGoX = this.mouseX;
 			this.moveFlagGoY = this.mouseY;
 		} else {
-			var radian: number = App.MathUtils.getRadian2(this.moveFlagX, this.moveFlagY, this.mouseX, this.mouseY);
+			var radian: number = App.Math.getRadian2(this.moveFlagX, this.moveFlagY, this.mouseX, this.mouseY);
 			this.moveFlagGoX = this.moveFlagX + Math.cos(radian) * this.moveFlagWidthHelf;
 			this.moveFlagGoY = this.moveFlagY + Math.sin(radian) * this.moveFlagWidthHelf;
 		}
@@ -230,7 +230,7 @@ class RockerUtils extends BaseClass {
 	private startCheckKey(): void {
 		if (!this.checkKeying) {
 			this.checkKeying = true;
-			App.TimerMgr.doFrame(1, 0, this.delKeys, this);
+			App.Timer.doFrame(1, 0, this.delKeys, this);
 		}
 	}
 
@@ -241,7 +241,7 @@ class RockerUtils extends BaseClass {
 		this.keys[0] = 0;
 		this.keys[1] = 0;
 		if (this.checkKeying) {
-			App.TimerMgr.remove(this.delKeys, this);
+			App.Timer.remove(this.delKeys, this);
 			this.checkKeying = false;
 		}
 	}

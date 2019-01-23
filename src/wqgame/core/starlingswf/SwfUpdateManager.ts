@@ -21,7 +21,7 @@ module starlingswf {
             updateManager._currentTime = 0;
             updateManager.setFps(fps);
 
-            App.TimerMgr.doFrame(1, 0, updateManager.update, updateManager);
+            App.Timer.doFrame(1, 0, updateManager.update, updateManager);
 
             return updateManager;
         }
@@ -34,11 +34,11 @@ module starlingswf {
 
         public stop():void {
             this.clear();
-            App.TimerMgr.remove(this.update, this);
+            App.Timer.remove(this.update, this);
         }
 
         public play():void {
-            App.TimerMgr.doFrame(1, 0, this.update, this);
+            App.Timer.doFrame(1, 0, this.update, this);
         }
 
         public setFps(fps:number):void {

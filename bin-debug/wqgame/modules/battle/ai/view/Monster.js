@@ -35,7 +35,7 @@ var Monster = (function (_super) {
         if (self._path.length == 0)
             return;
         var point = self._path[0]; //下一个节点
-        var targetSpeed = App.MathUtils.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
+        var targetSpeed = App.Math.getSpeed(point, { x: self.x, y: self.y }, self._monsterInfo.monsterVO.speed);
         var xDistance = 10 * targetSpeed.x;
         var yDistance = 10 * targetSpeed.y;
         if (Math.abs(point.x - self.x) <= Math.abs(xDistance) && Math.abs(point.y - self.y) <= Math.abs(yDistance)) {

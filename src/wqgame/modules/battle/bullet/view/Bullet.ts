@@ -42,7 +42,7 @@ class Bullet extends BaseBullet {
 			this.release();
 			return;
 		}
-		var distance: number = App.MathUtils.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
+		var distance: number = App.Math.getDistance(this.point.x, this.point.y, this._target.Point.x, this._target.Point.y);
 		if (distance <= this._bulletVO.radius) {
 			this._target.HP = this._target.HP - this._bulletVO.damage;
 			App.Effect.doBombEffect(this._bulletVO.bombAni, this.localToGlobal(), this);
@@ -52,7 +52,7 @@ class Bullet extends BaseBullet {
 			this.release();
 		}
 		else {
-			var targetSpeed: any = App.MathUtils.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
+			var targetSpeed: any = App.Math.getSpeed(this._target.Point, this.point, this._bulletVO.speed);
 			var xDistance: number = 10 * targetSpeed.x;
 			var yDistance: number = 10 * targetSpeed.y;
 			this.x = this.x + xDistance;

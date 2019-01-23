@@ -28,7 +28,7 @@ var BattleScene = (function (_super) {
             param[_i] = arguments[_i];
         }
         _super.prototype.onEnter.call(this);
-        App.ControllerMgr.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT);
+        App.Controller.applyFunc(ControllerConst.Battle, BattleConst.BATTLE_INIT);
     };
     /**
      * 退出Scene调用

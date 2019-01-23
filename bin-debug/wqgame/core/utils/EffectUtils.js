@@ -30,10 +30,10 @@ var EffectUtils = (function (_super) {
         if (initY === void 0) { initY = 0; }
         //抖动频率[时间，移动距离]，可修改
         var arr = [
-            [20, 300],
-            [15, 300],
-            [10, 300],
-            [5, 300]
+            [20, 200],
+            [15, 200],
+            [10, 200],
+            [5, 200]
         ];
         var str = "egret.Tween.get(" + obj + ")";
         for (var i = 0, len = arr.length; i < len; i++) {
@@ -56,7 +56,7 @@ var EffectUtils = (function (_super) {
     EffectUtils.prototype.doBombEffect = function (bombName, pos, obj) {
         var self = this;
         var bombBone = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
-        App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
+        App.Layer.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
         bombBone.x = pos.x;
         bombBone.y = pos.y;
         bombBone.play(function () {

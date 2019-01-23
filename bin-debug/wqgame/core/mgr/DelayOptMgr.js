@@ -15,7 +15,7 @@ var DelayOptMgr = (function (_super) {
         //每帧运算逻辑的时间阈值，执行代码超过这个时间就跳过到下一帧继续执行，根据实际情况调整，因为每一帧除了这里的逻辑还有别的逻辑要做对吧
         _this.TIME_THRESHOLD = 2;
         _this._delayOpts = [];
-        App.TimerMgr.doFrame(1, 0, _this.runCachedFun, _this);
+        App.Timer.doFrame(1, 0, _this.runCachedFun, _this);
         return _this;
     }
     DelayOptMgr.prototype.addDelayOptFunction = function (thisObj, fun, funPara, callBack, para) {
@@ -25,7 +25,7 @@ var DelayOptMgr = (function (_super) {
         this._delayOpts.length = 0;
     };
     DelayOptMgr.prototype.stop = function () {
-        App.TimerMgr.remove(this.runCachedFun, this);
+        App.Timer.remove(this.runCachedFun, this);
     };
     DelayOptMgr.prototype.runCachedFun = function (f) {
         if (this._delayOpts.length == 0) {

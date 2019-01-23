@@ -29,30 +29,34 @@ var GameLoading = (function (_super) {
         this._uiContainer.x = this._content.width * 0.5;
         this._uiContainer.y = this._content.height * 0.5;
         this._content.addChild(this._uiContainer);
-        this._img = new egret.Bitmap();
-        this._img.texture = RES.getRes("loading_player_png");
-        this._img.x = -this._img.width * 0.5 - 80;
-        this._img.y = -this._img.height * 0.5;
-        this._text = new egret.TextField();
-        this._text.stroke = 2;
-        this._text.strokeColor = 0x946430;
-        this._text.fontFamily = "Microsoft YaHei";
-        this._text.size = 28;
-        this._text.x = -this._text.width * 0.5;
-        this._text.y = -this._text.height * 0.5 + 40;
-        this._text.text = "客官亲稍等...";
+        if (!this._img) {
+            this._img = new egret.Bitmap();
+            this._img.texture = RES.getRes("loading_player_png");
+            this._img.x = -this._img.width * 0.5 - 80;
+            this._img.y = -this._img.height * 0.5;
+        }
+        if (!this._text) {
+            this._text = new egret.TextField();
+            this._text.stroke = 2;
+            this._text.strokeColor = 0x946430;
+            this._text.fontFamily = "Microsoft YaHei";
+            this._text.size = 28;
+            this._text.x = -this._text.width * 0.5;
+            this._text.y = -this._text.height * 0.5 + 40;
+            this._text.text = "客官亲稍等...";
+        }
         this._uiContainer.addChild(this._img);
         this._uiContainer.addChild(this._text);
     };
     GameLoading.prototype.showLoading = function () {
         App.Stage.getStage().addChild(this._content);
-        App.TimerMgr.doFrame(20, 0, this.enterFrame, this);
+        App.Timer.doFrame(20, 0, this.enterFrame, this);
     };
     GameLoading.prototype.hideLoading = function () {
         if (this._content && this._content.parent) {
             App.Stage.getStage().removeChild(this._content);
         }
-        App.TimerMgr.remove(this.enterFrame, this);
+        App.Timer.remove(this.enterFrame, this);
     };
     GameLoading.prototype.enterFrame = function (time) {
         this._text.text = "客官亲稍等" + this._symbol;

@@ -25,7 +25,7 @@ var DropItem = (function (_super) {
             this.x = pos.x - 5;
             this.y = pos.y - 20;
             this.addEvents();
-            App.TimerMgr.doTimer(3000, 1, this.onClickItem, this);
+            App.Timer.doTimer(3000, 1, this.onClickItem, this);
         }
         else {
             this.removeSelf();

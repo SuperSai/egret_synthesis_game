@@ -19,10 +19,10 @@ class EffectUtils extends BaseClass {
 	public doMacIconShake(obj: string, initY: number = 0): string {
 		//抖动频率[时间，移动距离]，可修改
 		var arr: Array<any> = [
-			[20, 300],
-			[15, 300],
-			[10, 300],
-			[5, 300]
+			[20, 200],
+			[15, 200],
+			[10, 200],
+			[5, 200]
 		];
 
 		var str: string = "egret.Tween.get(" + obj + ")";
@@ -49,7 +49,7 @@ class EffectUtils extends BaseClass {
 	public doBombEffect(bombName: string, pos: egret.Point, obj: any): void {
 		let self = this;
 		let bombBone: BoneAnimation = ResourcePool.Instance.pop(bombName, ResourcePool.SKE);
-		App.LayerMgr.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
+		App.Layer.addToLayer(bombBone, LayerMgr.GAME_EFFECT_LAYER);
 		bombBone.x = pos.x;
 		bombBone.y = pos.y;
 		bombBone.play(() => {

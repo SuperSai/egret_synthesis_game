@@ -23,7 +23,7 @@ class BaseEuiAlert extends BaseEuiView {
 			self._maskRect = self.getMask(this._maskAlpha);
 			self.addChild(self._maskRect);
 		}
-		App.LayerMgr.addToLayer(self._maskRect, this._layer);
+		App.Layer.addToLayer(self._maskRect, this._layer);
 		self.myParent.setChildIndex(self._maskRect, 0);
 	}
 

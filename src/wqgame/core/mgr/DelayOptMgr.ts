@@ -8,7 +8,7 @@ class DelayOptMgr extends BaseClass {
 	public constructor() {
 		super();
 		this._delayOpts = [];
-		App.TimerMgr.doFrame(1, 0, this.runCachedFun, this);
+		App.Timer.doFrame(1, 0, this.runCachedFun, this);
 	}
 
 	public addDelayOptFunction(thisObj: any, fun: Function, funPara?: any, callBack?: Function, para?: any): void {
@@ -20,7 +20,7 @@ class DelayOptMgr extends BaseClass {
 	}
 
 	public stop(): void {
-		App.TimerMgr.remove(this.runCachedFun, this);
+		App.Timer.remove(this.runCachedFun, this);
 	}
 
 	private runCachedFun(f: any): void {

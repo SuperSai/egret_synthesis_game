@@ -16,7 +16,7 @@ class BaseSpriteView extends egret.DisplayObjectContainer implements IBaseView {
     public constructor($controller: BaseController, $layer: number) {
         super();
         this._controller = $controller;
-        this._myParent = App.LayerMgr.getLayerByType($layer);
+        this._myParent = App.Layer.getLayerByType($layer);
         this._isInit = false;
         App.Stage.getStage().addEventListener(egret.Event.RESIZE, this.onResize, this);
     }

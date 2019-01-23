@@ -23,7 +23,7 @@ var BaseSpriteView = (function (_super) {
         var _this = _super.call(this) || this;
         _this._resources = null;
         _this._controller = $controller;
-        _this._myParent = App.LayerMgr.getLayerByType($layer);
+        _this._myParent = App.Layer.getLayerByType($layer);
         _this._isInit = false;
         App.Stage.getStage().addEventListener(egret.Event.RESIZE, _this.onResize, _this);
         return _this;

@@ -29,30 +29,26 @@ var HallView = (function (_super) {
     HallView.prototype.initData = function () {
         _super.prototype.initData.call(this);
     };
-    /** 面板开启执行函数，用于子类继承 */
-    HallView.prototype.open = function () {
-        var param = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            param[_i] = arguments[_i];
-        }
-        _super.prototype.open.call(this, param);
-        var self = this;
-        var model = param[0];
-    };
     HallView.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
         var self = this;
-        self.btn_checkpoint.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
-        self.setBtnEffect(["btn_checkpoint"]);
+        self.btn_battle.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onEnterBattle, self);
+        self.btn_menu.addEventListener(egret.TouchEvent.TOUCH_TAP, self.onShowMenu, self);
+        self.setBtnEffect(["btn_battle"]);
     };
     HallView.prototype.removeEvents = function () {
         _super.prototype.removeEvents.call(this);
         var self = this;
-        self.btn_checkpoint.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onGotoCheckpoint, self);
+        self.btn_battle.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onEnterBattle, self);
+        self.btn_menu.removeEventListener(egret.TouchEvent.TOUCH_TAP, self.onShowMenu, self);
     };
-    /** 进入关卡选择界面 */
-    HallView.prototype.onGotoCheckpoint = function () {
-        var self = this;
+    /** 进入战斗 */
+    HallView.prototype.onEnterBattle = function () {
+        App.Scene.clear();
+        App.Scene.runScene(SceneConsts.BATTLE);
+    };
+    /** 显示功能菜单 */
+    HallView.prototype.onShowMenu = function () {
     };
     return HallView;
 }(BaseEuiView));

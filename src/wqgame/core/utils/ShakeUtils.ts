@@ -52,7 +52,7 @@ class ShakeUtils extends BaseClass {
 				this._rx = this._target.x;
 			}
 			this._ry = this._target.y;
-			App.TimerMgr.doFrame(1, 0, this.onShockEnter, this);
+			App.Timer.doFrame(1, 0, this.onShockEnter, this);
 		}
 	}
 
@@ -62,7 +62,7 @@ class ShakeUtils extends BaseClass {
 				this._target.x = this._rx;
 			}
 			this._target.y = this._ry;
-			App.TimerMgr.remove(this.onShockEnter, this);
+			App.Timer.remove(this.onShockEnter, this);
 		}
 		this._target = null;
 	}

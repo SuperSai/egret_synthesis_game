@@ -61,7 +61,7 @@ class GlobleData extends egret.DisplayObject {
 		if (self._currParseCount >= self._needParseCount) {
 			self.removeEventListener(egret.Event.ENTER_FRAME, self.onEnterFrameLoader, self);
 			this._hasParasComplete = true;
-			App.GameEnterMgr.init();
+			App.GameEnter.init();
 		}
 		else {
 			//一次解析两个文件

@@ -16,8 +16,8 @@ class CurrencyCom extends BaseEuiView {
 	/** 对面板进行显示初始化，用于子类继承 */
 	public initUI(): void {
 		super.initUI();
-		this.txt_gold.text = App.PlayerMgr.info.gold + "";
-		this.txt_diamond.text = App.PlayerMgr.info.diamond + "";
+		this.txt_gold.text = App.Player.info.gold + "";
+		this.txt_diamond.text = App.Player.info.diamond + "";
 		this.removeEvents();
 		this.addEvents();
 	}
@@ -46,20 +46,20 @@ class CurrencyCom extends BaseEuiView {
 		switch (type) {
 			case ITEM_TYPE.GOLD:
 				if (isTotal) {
-					App.PlayerMgr.info.gold = price;
-					this.txt_gold.text = App.PlayerMgr.info.gold + "";
+					App.Player.info.gold = price;
+					this.txt_gold.text = App.Player.info.gold + "";
 				} else {
-					App.PlayerMgr.info.gold += price;
-					this.txt_gold.text = App.PlayerMgr.info.gold + "";
+					App.Player.info.gold += price;
+					this.txt_gold.text = App.Player.info.gold + "";
 				}
 				break;
 			case ITEM_TYPE.DIAMOND:
 				if (isTotal) {
-					App.PlayerMgr.info.diamond = price;
-					this.txt_diamond.text = App.PlayerMgr.info.diamond + "";
+					App.Player.info.diamond = price;
+					this.txt_diamond.text = App.Player.info.diamond + "";
 				} else {
-					App.PlayerMgr.info.diamond += price;
-					this.txt_diamond.text = App.PlayerMgr.info.diamond + "";
+					App.Player.info.diamond += price;
+					this.txt_diamond.text = App.Player.info.diamond + "";
 				}
 				break;
 		}

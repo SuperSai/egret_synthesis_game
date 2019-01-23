@@ -13,7 +13,7 @@ class BaseSound {
 	public constructor() {
 		this._cache = {};
 		this._loadingCache = new Array<string>();
-		App.TimerMgr.doTimer(1 * 60 * 1000, 0, this.dealSoundTimer, this);
+		App.Timer.doTimer(1 * 60 * 1000, 0, this.dealSoundTimer, this);
 	}
 
     /**
@@ -50,7 +50,7 @@ class BaseSound {
 			}
 		} else {
 			if (this._loadingCache.indexOf(soundPath) != -1) {
-				return null;
+				return sound;
 			}
 			this._loadingCache.push(soundPath);
 			App.Res.loadAsyncSound(vo.file, () => {
@@ -61,22 +61,8 @@ class BaseSound {
 					this.loadedPlay(this._key, soundPath);
 				}
 			});
-			// RES.getResAsync(soundPath, this.onResourceLoadComplete, this);
 		}
 		return sound;
-	}
-
-    /**
-     * 资源加载完成
-     * @param event
-     */
-	private onResourceLoadComplete(soundPath: string): void {
-		let index: number = this._loadingCache.indexOf(soundPath);
-		if (index != -1) {
-			this._loadingCache.splice(index, 1);
-			this._cache[soundPath] = egret.getTimer();
-			this.loadedPlay(this._key, soundPath);
-		}
 	}
 
     /**

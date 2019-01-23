@@ -167,8 +167,10 @@ class ViewMgr extends BaseClass {
      * 关闭所有开启中的UI
      */
 	public closeAll(): void {
-		while (this._opens.length) {
-			this.close(this._opens[0]);
+		for (let i: number = 0; i < this._opens.length; i++) {
+			if (this._opens[i] != ViewConst.Battle) {
+				this.close(this._opens[i]);
+			}
 		}
 	}
 

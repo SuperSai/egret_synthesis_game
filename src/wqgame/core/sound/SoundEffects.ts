@@ -27,6 +27,7 @@ class SoundEffects extends BaseSound {
      * @param sound
      */
 	private playSound(sound: egret.Sound): void {
+		if (!sound) return;
 		let channel: egret.SoundChannel = sound.play(0, 1);
 		channel.volume = this._volume;
 	}
@@ -39,12 +40,14 @@ class SoundEffects extends BaseSound {
 		this._volume = volume;
 	}
 
-
     /**
      * 资源加载完成后处理播放
      * @param key
      */
 	public loadedPlay(key: string, soundPath: string): void {
-		this.playSound(RES.getRes(soundPath));
+		let sound: egret.Sound = RES.getRes(soundPath);
+		if (sound) {
+			this.playSound(sound);
+		}
 	}
 }

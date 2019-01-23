@@ -82,7 +82,7 @@ class LoginView extends BaseEuiView {
 				time: 0
 			}
 		);
-		App.TimerMgr.doFrame(0, 0, () => {
+		App.Timer.doFrame(0, 0, () => {
 			customFilter3.uniforms.time += 0.01;
 			if (customFilter3.uniforms.time > 1) {
 				customFilter3.uniforms.time = 0.0;

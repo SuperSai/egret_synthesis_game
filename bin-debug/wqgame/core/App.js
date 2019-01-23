@@ -24,7 +24,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "MessageMgr", {
+    Object.defineProperty(App, "Message", {
         /** 消息提示类 */
         get: function () {
             return MessageMgr.Instance();
@@ -32,7 +32,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "LayerMgr", {
+    Object.defineProperty(App, "Layer", {
         /** 层级管理类 */
         get: function () {
             return LayerMgr.Instance();
@@ -40,7 +40,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "ControllerMgr", {
+    Object.defineProperty(App, "Controller", {
         /** 模块管理类 */
         get: function () {
             return ControllerMgr.Instance();
@@ -48,7 +48,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "RegisterMgr", {
+    Object.defineProperty(App, "Register", {
         /** 注册控制器管理类 */
         get: function () {
             return RegisterMgr.Instance();
@@ -56,7 +56,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "SocketMgr", {
+    Object.defineProperty(App, "Socket", {
         /** Socket管理类 */
         get: function () {
             return SocketMgr.Instance();
@@ -64,7 +64,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "PlayerMgr", {
+    Object.defineProperty(App, "Player", {
         /** 人物信息管理类 */
         get: function () {
             return PlayerMgr.Instance();
@@ -72,7 +72,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "LanguageMgr", {
+    Object.defineProperty(App, "Language", {
         /** 语言包管理类 */
         get: function () {
             return LanguageMgr.Instance();
@@ -80,7 +80,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "GameEnterMgr", {
+    Object.defineProperty(App, "GameEnter", {
         /** manager初始化类 */
         get: function () {
             return GameEnterMgr.Instance();
@@ -144,7 +144,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "MathUtils", {
+    Object.defineProperty(App, "Math", {
         /** 数学计算工具类 */
         get: function () {
             return MathUtils.Instance();
@@ -152,7 +152,7 @@ var App = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(App, "TimerMgr", {
+    Object.defineProperty(App, "Timer", {
         /** 统一的计时器和帧刷管理类 */
         get: function () {
             return TimerMgr.Instance();
@@ -301,9 +301,9 @@ var App = (function () {
         //扩展功能初始化
         App.Expand.init();
         //注册所有场景
-        App.RegisterMgr.initScene();
+        App.Register.initScene();
         //注册所有模块控制器
-        App.RegisterMgr.initModules();
+        App.Register.initModules();
         //音乐音效处理
         App.Sound.setBgOn(true);
         App.Sound.setEffectOn(true);

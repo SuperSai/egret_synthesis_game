@@ -19,7 +19,7 @@ var GameEnterMgr = (function (_super) {
     /** 初始化 */
     GameEnterMgr.prototype.init = function () {
         App.Bone.start();
-        App.PlayerMgr.setup();
+        App.Player.setup();
     };
     return GameEnterMgr;
 }(BaseClass));

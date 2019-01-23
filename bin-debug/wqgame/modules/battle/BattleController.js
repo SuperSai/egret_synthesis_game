@@ -24,12 +24,14 @@ var BattleController = (function (_super) {
     }
     BattleController.prototype.onBattleInit = function () {
         var self = this;
+        if (App.View.isShow(ViewConst.Battle))
+            return;
         self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.PAUSE;
         self._battleModel.levelVO = GlobleData.getData(GlobleData.LevelVO, self._battleModel.currMission);
         self._battleModel.maxMonsterCount = self._battleModel.monsterWaveNumCount;
         self._battleModel.maxBaseCount = Number(GlobleData.getDataByFilter(GlobleData.ServerConfigVO, "id", "MAX_OPEN_COUNT")[0].value);
         App.View.open(ViewConst.Battle, function () {
-            App.TimerMgr.doFrame(0, 0, self.onBattleUpdate, self);
+            App.Timer.doFrame(0, 0, self.onBattleUpdate, self);
             self.initRegisterView();
             self._battleModel.battleMonsterState = BATTLE_MONSTER_STATE.MONSTER;
         });

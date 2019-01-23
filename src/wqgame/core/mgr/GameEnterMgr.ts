@@ -6,6 +6,6 @@ class GameEnterMgr extends BaseClass {
 	/** 初始化 */
 	public init(): void {
 		App.Bone.start();
-		App.PlayerMgr.setup();
+		App.Player.setup();
 	}
 }

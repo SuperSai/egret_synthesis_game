@@ -9,7 +9,7 @@
 			"name": "battle"
 		},
 		{
-			"keys": "hall_bg_jpg",
+			"keys": "hall_bg_jpg,hall_json",
 			"name": "hall"
 		},
 		{
@@ -28,7 +28,7 @@
 			"url": "cn/asset/atlas/battle/battle.json",
 			"type": "sheet",
 			"name": "battle_json",
-			"subkeys": "battle_level_bg,btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,post"
+			"subkeys": "battle_level_bg,btn_create,btn_function_back,btn_open_level,build_spell,camp_shadow,hp_bar_bg,hp_red_bg,post"
 		},
 		{
 			"url": "cn/asset/atlas/loading/loading.json",
@@ -40,6 +40,12 @@
 			"url": "cn/asset/atlas/hall/hall_bg.jpg",
 			"type": "image",
 			"name": "hall_bg_jpg"
+		},
+		{
+			"url": "cn/asset/atlas/hall/hall.json",
+			"type": "sheet",
+			"name": "hall_json",
+			"subkeys": "hall_btn_zhucaidan,hall_icon_boss,hall_icon_touxiangdi1,hall_icon_touxiangdi2"
 		}
 	]
 }

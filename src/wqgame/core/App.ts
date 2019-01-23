@@ -17,35 +17,35 @@ class App {
 		return StageUtils.Instance();
 	}
 	/** 消息提示类 */
-	public static get MessageMgr(): MessageMgr {
+	public static get Message(): MessageMgr {
 		return MessageMgr.Instance();
 	}
 	/** 层级管理类 */
-	public static get LayerMgr(): LayerMgr {
+	public static get Layer(): LayerMgr {
 		return LayerMgr.Instance();
 	}
 	/** 模块管理类 */
-	public static get ControllerMgr(): ControllerMgr {
+	public static get Controller(): ControllerMgr {
 		return ControllerMgr.Instance();
 	}
 	/** 注册控制器管理类 */
-	public static get RegisterMgr(): RegisterMgr {
+	public static get Register(): RegisterMgr {
 		return RegisterMgr.Instance();
 	}
 	/** Socket管理类 */
-	public static get SocketMgr(): SocketMgr {
+	public static get Socket(): SocketMgr {
 		return SocketMgr.Instance();
 	}
 	/** 人物信息管理类 */
-	public static get PlayerMgr(): PlayerMgr {
+	public static get Player(): PlayerMgr {
 		return PlayerMgr.Instance();
 	}
 	/** 语言包管理类 */
-	public static get LanguageMgr(): LanguageMgr {
+	public static get Language(): LanguageMgr {
 		return LanguageMgr.Instance();
 	}
 	/** manager初始化类 */
-	public static get GameEnterMgr(): GameEnterMgr {
+	public static get GameEnter(): GameEnterMgr {
 		return GameEnterMgr.Instance();
 	}
 	/** Effect工具类 */
@@ -77,11 +77,11 @@ class App {
 		return RockerUtils.Instance();
 	}
 	/** 数学计算工具类 */
-	public static get MathUtils(): MathUtils {
+	public static get Math(): MathUtils {
 		return MathUtils.Instance();
 	}
 	/** 统一的计时器和帧刷管理类 */
-	public static get TimerMgr(): TimerMgr {
+	public static get Timer(): TimerMgr {
 		return TimerMgr.Instance();
 	}
 	/** 调试工具 */
@@ -163,9 +163,9 @@ class App {
 		//扩展功能初始化
 		App.Expand.init();
 		//注册所有场景
-		App.RegisterMgr.initScene();
+		App.Register.initScene();
 		//注册所有模块控制器
-		App.RegisterMgr.initModules();
+		App.Register.initModules();
 		//音乐音效处理
 		App.Sound.setBgOn(true);
 		App.Sound.setEffectOn(true);

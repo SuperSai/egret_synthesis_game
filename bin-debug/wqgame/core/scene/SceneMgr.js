@@ -45,20 +45,24 @@ var SceneMgr = (function (_super) {
      * @param key 场景唯一标识
      * @param isClear 是否清除上一个场景
      */
-    SceneMgr.prototype.runScene = function (key) {
+    SceneMgr.prototype.runScene = function (key, isClear) {
+        if (isClear === void 0) { isClear = false; }
         var param = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            param[_i - 1] = arguments[_i];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            param[_i - 2] = arguments[_i];
         }
         var nowScene = this._scenes.TryGetValue(key);
         if (nowScene == null) {
             Log.trace("场景" + key + "不存在");
             return;
         }
-        // var oldScene: BaseScene = this._scenes.TryGetValue(this._currScene);
-        // if (oldScene) {
-        // 	oldScene.onExit();
-        // }
+        if (isClear) {
+            var oldScene = this._scenes.TryGetValue(this._currScene);
+            if (oldScene) {
+                oldScene.onExit();
+                oldScene = null;
+            }
+        }
         nowScene.onEnter.apply(nowScene, param);
         this._currScene = key;
     };

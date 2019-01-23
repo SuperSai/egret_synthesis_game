@@ -70,7 +70,10 @@ class SoundBG extends BaseSound {
      */
     public loadedPlay(key: string, soundPath: string): void {
         if (this._currBg == key) {
-            this.playSound(RES.getRes(soundPath));
+            let sound: egret.Sound = RES.getRes(soundPath);
+            if (sound) {
+                this.playSound(sound);
+            }
         }
     }
 

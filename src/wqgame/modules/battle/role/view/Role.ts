@@ -60,7 +60,7 @@ class Role extends BaseRole {
 		let monsters: Monster[] = this._model.monsterDic.getValues();
 		for (let i: number = 0; i < monsters.length; i++) {
 			let monster: Monster = monsters[App.Random.randint(0, monsters.length - 1)];
-			if (monster.HP > 0 && monster.IsMove && App.MathUtils.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
+			if (monster.HP > 0 && monster.IsMove && App.Math.getDistance(this.x, this.y, monster.x, monster.y) <= self._heroVO.distance) {
 				self.bulletLaunch(monster);
 				break;
 			}

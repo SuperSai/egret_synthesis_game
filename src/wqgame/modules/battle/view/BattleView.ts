@@ -32,16 +32,10 @@ class BattleView extends BaseEuiView {
 	public initData(): void {
 		super.initData();
 		this.refreshBuyHeroBtn();
-	}
-
-	/** 面板开启执行函数，用于子类继承 */
-	public open(...param: any[]): void {
-		super.open(param);
-		let self = this;
-		self._model = <BattleModel>self.controller.getModel();
+		this._model = <BattleModel>this.controller.getModel();
 		//初始化地图数据
-		self.map.open(self.controller);
-		self.onUpdateView();
+		this.map.open(this.controller);
+		this.onUpdateView();
 		App.Sound.playBg("10005");
 	}
 
@@ -67,17 +61,17 @@ class BattleView extends BaseEuiView {
 	private onUpdateView(): void {
 		let self = this;
 		if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
-			self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.03");
+			self.txt_level.text = App.Language.getLanguageText("battle.txt.03");
 		} else {
-			self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.levelVO.missionId, self._model.currwaveNum);
+			self.txt_level.text = App.Language.getLanguageText("battle.txt.02", self._model.levelVO.missionId, self._model.currwaveNum);
 		}
 	}
 
 	/** 购买角色 */
 	private onBuyRoleHandler(): void {
 		let self = this;
-		if (App.PlayerMgr.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
-			App.MessageMgr.showText(App.LanguageMgr.getLanguageText("label.01"));
+		if (App.Player.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
+			App.Message.showText(App.Language.getLanguageText("label.01"));
 			return;
 		}
 		self.applyFunc(BattleConst.CREATE_ROLE, self._buyHeroId);

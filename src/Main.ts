@@ -60,7 +60,7 @@ class Main extends eui.UILayer {
         //适配方式(全屏适配)
         App.Stage.startFullscreenAdaptation(720, 1280, null);
         App.Stage.setFrameRate(60);
-        App.LayerMgr.setup(App.Stage.getStage());
+        App.Layer.setup(App.Stage.getStage());
     }
     /** 初始化平台 */
     private initPlatform() {
@@ -137,7 +137,7 @@ class Main extends eui.UILayer {
             theme.addEventListener(eui.UIEvent.COMPLETE, () => {
                 GlobleData.getInstance.setup();
                 RES.getResByUrl(PathConfig.Language, (data: string, url: string) => {
-                    App.LanguageMgr.setup(data);
+                    App.Language.setup(data);
                     resolve();
                 }, this, RES.ResourceItem.TYPE_TEXT);
             }, this);

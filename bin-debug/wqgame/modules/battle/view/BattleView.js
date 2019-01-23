@@ -30,19 +30,10 @@ var BattleView = (function (_super) {
     BattleView.prototype.initData = function () {
         _super.prototype.initData.call(this);
         this.refreshBuyHeroBtn();
-    };
-    /** 面板开启执行函数，用于子类继承 */
-    BattleView.prototype.open = function () {
-        var param = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            param[_i] = arguments[_i];
-        }
-        _super.prototype.open.call(this, param);
-        var self = this;
-        self._model = self.controller.getModel();
+        this._model = this.controller.getModel();
         //初始化地图数据
-        self.map.open(self.controller);
-        self.onUpdateView();
+        this.map.open(this.controller);
+        this.onUpdateView();
         App.Sound.playBg("10005");
     };
     BattleView.prototype.addEvents = function () {
@@ -65,17 +56,17 @@ var BattleView = (function (_super) {
     BattleView.prototype.onUpdateView = function () {
         var self = this;
         if (self._model.battleMonsterState == BATTLE_MONSTER_STATE.BOSS) {
-            self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.03");
+            self.txt_level.text = App.Language.getLanguageText("battle.txt.03");
         }
         else {
-            self.txt_level.text = App.LanguageMgr.getLanguageText("battle.txt.02", self._model.levelVO.missionId, self._model.currwaveNum);
+            self.txt_level.text = App.Language.getLanguageText("battle.txt.02", self._model.levelVO.missionId, self._model.currwaveNum);
         }
     };
     /** 购买角色 */
     BattleView.prototype.onBuyRoleHandler = function () {
         var self = this;
-        if (App.PlayerMgr.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
-            App.MessageMgr.showText(App.LanguageMgr.getLanguageText("label.01"));
+        if (App.Player.info.gold < this._buyHeroGold || this._buyHeroGold == -1) {
+            App.Message.showText(App.Language.getLanguageText("label.01"));
             return;
         }
         self.applyFunc(BattleConst.CREATE_ROLE, self._buyHeroId);

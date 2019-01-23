@@ -105,7 +105,7 @@ var Main = (function (_super) {
         //适配方式(全屏适配)
         App.Stage.startFullscreenAdaptation(720, 1280, null);
         App.Stage.setFrameRate(60);
-        App.LayerMgr.setup(App.Stage.getStage());
+        App.Layer.setup(App.Stage.getStage());
     };
     /** 初始化平台 */
     Main.prototype.initPlatform = function () {
@@ -215,7 +215,7 @@ var Main = (function (_super) {
             theme.addEventListener(eui.UIEvent.COMPLETE, function () {
                 GlobleData.getInstance.setup();
                 RES.getResByUrl(PathConfig.Language, function (data, url) {
-                    App.LanguageMgr.setup(data);
+                    App.Language.setup(data);
                     resolve();
                 }, _this, RES.ResourceItem.TYPE_TEXT);
             }, _this);
