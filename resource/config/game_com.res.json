@@ -19,6 +19,10 @@
 		{
 			"keys": "100_1,100_2,100_3,100_6,100_4,100_5",
 			"name": "bullet"
+		},
+		{
+			"keys": "leaftexiao_png,leaftexiao_json",
+			"name": "viewParticle"
 		}
 	],
 	"resources": [
@@ -94,6 +98,16 @@
 			"url": "common/bullet/100_5.png",
 			"type": "image",
 			"name": "100_5"
+		},
+		{
+			"url": "common/animation/particle/leaftexiao.png",
+			"type": "image",
+			"name": "leaftexiao_png"
+		},
+		{
+			"url": "common/animation/particle/leaftexiao.json",
+			"type": "json",
+			"name": "leaftexiao_json"
 		}
 	]
 }

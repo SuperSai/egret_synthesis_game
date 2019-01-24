@@ -1,0 +1,15 @@
+{
+	"name": "particle",
+	"version": "5.0.12",
+	"modules": [
+		{
+			"name": "particle",
+			"description": "particle",
+			"files": [
+				"particle.min.js",
+				"particle.d.ts"
+			],
+			"root": "src"
+		}
+	]
+}

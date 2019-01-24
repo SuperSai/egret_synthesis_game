@@ -13,12 +13,13 @@ class BattleView extends BaseEuiView {
 	private _buyHeroGold: number;
 
 	private _model: BattleModel;
+	private systemLeaf: particle.ParticleSystem;
 
 	public constructor($controller: BaseController, $layer: number) {
 		super($controller, $layer);
 		let self = this;
 		self.skinName = SkinName.BattleViewSkin;
-		self.setResources(["battle", "role", "bullet"]);
+		self.setResources(["battle", "role", "bullet", "viewParticle"]);
 	}
 
 	/** 对面板进行显示初始化，用于子类继承 */
@@ -26,6 +27,7 @@ class BattleView extends BaseEuiView {
 		super.initUI();
 		let self = this;
 		self.currency.initUI();
+		self.playParticles();
 	}
 
 	/** 对面板数据的初始化，用于子类继承 */
@@ -37,6 +39,17 @@ class BattleView extends BaseEuiView {
 		this.map.open(this.controller);
 		this.onUpdateView();
 		App.Sound.playBg("10005");
+	}
+
+	/** 播放粒子动画 */
+	private playParticles(): void {
+		let texture = RES.getRes("leaftexiao_png");
+		let config = RES.getRes("leaftexiao_json");
+		if (!this.systemLeaf) {
+			this.systemLeaf = new particle.GravityParticleSystem(texture, config);
+			this.addChild(this.systemLeaf);
+		}
+		this.systemLeaf.start();
 	}
 
 	public addEvents(): void {
@@ -116,6 +129,7 @@ class BattleView extends BaseEuiView {
 
 	/** 返回大厅界面 */
 	private onBackHallHandler(): void {
+		if (this.systemLeaf) this.systemLeaf.stop();
 		App.Scene.runScene(SceneConsts.HALL);
 	}
 }

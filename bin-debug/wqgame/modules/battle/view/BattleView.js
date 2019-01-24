@@ -17,7 +17,7 @@ var BattleView = (function (_super) {
         var _this = _super.call(this, $controller, $layer) || this;
         var self = _this;
         self.skinName = SkinName.BattleViewSkin;
-        self.setResources(["battle", "role", "bullet"]);
+        self.setResources(["battle", "role", "bullet", "viewParticle"]);
         return _this;
     }
     /** 对面板进行显示初始化，用于子类继承 */
@@ -25,6 +25,7 @@ var BattleView = (function (_super) {
         _super.prototype.initUI.call(this);
         var self = this;
         self.currency.initUI();
+        self.playParticles();
     };
     /** 对面板数据的初始化，用于子类继承 */
     BattleView.prototype.initData = function () {
@@ -35,6 +36,16 @@ var BattleView = (function (_super) {
         this.map.open(this.controller);
         this.onUpdateView();
         App.Sound.playBg("10005");
+    };
+    /** 播放粒子动画 */
+    BattleView.prototype.playParticles = function () {
+        var texture = RES.getRes("leaftexiao_png");
+        var config = RES.getRes("leaftexiao_json");
+        if (!this.systemLeaf) {
+            this.systemLeaf = new particle.GravityParticleSystem(texture, config);
+            this.addChild(this.systemLeaf);
+        }
+        this.systemLeaf.start();
     };
     BattleView.prototype.addEvents = function () {
         _super.prototype.addEvents.call(this);
@@ -107,6 +118,8 @@ var BattleView = (function (_super) {
     };
     /** 返回大厅界面 */
     BattleView.prototype.onBackHallHandler = function () {
+        if (this.systemLeaf)
+            this.systemLeaf.stop();
         App.Scene.runScene(SceneConsts.HALL);
     };
     return BattleView;

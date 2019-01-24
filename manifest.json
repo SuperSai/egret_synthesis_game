@@ -10,7 +10,8 @@
 		"libs/modules/game/game.js",
 		"libs/modules/promise/promise.js",
 		"modules/jszip/bin/jszip/jszip.js",
-		"modules/external/bin/external/external.js"
+		"modules/external/bin/external/external.js",
+		"modules/particle/bin/particle/particle.js"
 	],
 	"game": [
 		"bin-debug/wqgame/core/mvc/view/BaseSpriteView.js",

@@ -45,7 +45,11 @@
     },
     {
       "name": "external",
-      "path": "./modules/external"
+      "path": "./modules/external/"
+    },
+    {
+      "name": "particle",
+      "path": "./modules/particle/"
     }
   ]
 }
